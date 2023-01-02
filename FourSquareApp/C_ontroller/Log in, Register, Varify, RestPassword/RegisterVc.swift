@@ -106,7 +106,7 @@ class RegisterVc: UIViewController {
                             
                             vc.emailId = mailIdToSend
                             
-                            self.objectOfOtpvarificationViewModel.sendOtp(emailToSend: mailIdToSend) { status in
+                            self.objectOfOtpvarificationViewModel.sendOtpApiCall(emailToSend: mailIdToSend) { status in
                                 
                                 if status == true{
                                     self.navigationController?.pushViewController(vc, animated: true)

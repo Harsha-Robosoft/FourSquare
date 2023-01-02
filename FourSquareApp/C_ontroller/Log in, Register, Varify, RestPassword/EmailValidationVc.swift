@@ -8,6 +8,9 @@
 import UIKit
 
 class EmailValidationVc: UIViewController {
+    
+    var objectOfOtpvarificationViewModel = OtpvarificationViewModel.objectOfVc
+    
     @IBOutlet weak var emailField: TextFieldBorder!
     @IBOutlet weak var varifyOtpButton: LoginButton!
     
@@ -19,11 +22,37 @@ class EmailValidationVc: UIViewController {
     
     @IBAction func varifyOtpButtonTapped(_ sender: UIButton) {
         
-        let otpVc = self.storyboard?.instantiateViewController(withIdentifier: "VarifyOtpVc") as? VarifyOtpVc
+        var emailIS = ""
         
-        if let vc = otpVc {
-            self.navigationController?.pushViewController(vc, animated: true)
+        if let mail = emailField.text {
+            
+            emailIS = mail
         }
+        
+        objectOfOtpvarificationViewModel.chekMailIdIsValidApiCall(emailIs: emailIS){ status in
+            
+            if status == true{
+                
+                let otpVc = self.storyboard?.instantiateViewController(withIdentifier: "VarifyOtpVc") as? VarifyOtpVc
+                
+                if let vc = otpVc {
+                    vc.emailId = emailIS
+                    vc.forgotPassword = 1
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+                
+            }else{
+                
+                self.alertMessage(message: "Enter a registered mail Id...!")
+            }
+            
+        }
+        
+        
+        
+        
+        
     }
     
 }

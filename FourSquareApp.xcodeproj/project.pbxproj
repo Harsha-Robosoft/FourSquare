@@ -27,6 +27,8 @@
 		7776A3C02962FB7700F6830D /* loginVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3BF2962FB7700F6830D /* loginVm.swift */; };
 		7776A3C4296301A700F6830D /* OtpVarificationVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3C3296301A700F6830D /* OtpVarificationVm.swift */; };
 		7776A3C7296303A700F6830D /* OtpVarificationNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3C6296303A700F6830D /* OtpVarificationNetwork.swift */; };
+		7776A3CA296314D900F6830D /* ForgotPasswordVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3C9296314D900F6830D /* ForgotPasswordVm.swift */; };
+		7776A3CD2963155B00F6830D /* ForgotPasswordNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3CC2963155B00F6830D /* ForgotPasswordNetwork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		7776A3BF2962FB7700F6830D /* loginVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginVm.swift; sourceTree = "<group>"; };
 		7776A3C3296301A700F6830D /* OtpVarificationVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpVarificationVm.swift; sourceTree = "<group>"; };
 		7776A3C6296303A700F6830D /* OtpVarificationNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpVarificationNetwork.swift; sourceTree = "<group>"; };
+		7776A3C9296314D900F6830D /* ForgotPasswordVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVm.swift; sourceTree = "<group>"; };
+		7776A3CC2963155B00F6830D /* ForgotPasswordNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordNetwork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 				7776A3B92962EE3F00F6830D /* RegisterVm.swift */,
 				7776A3BF2962FB7700F6830D /* loginVm.swift */,
 				7776A3C3296301A700F6830D /* OtpVarificationVm.swift */,
+				7776A3C9296314D900F6830D /* ForgotPasswordVm.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 			children = (
 				7776A3BC2962EF3A00F6830D /* Register_login_Netowork.swift */,
 				7776A3C6296303A700F6830D /* OtpVarificationNetwork.swift */,
+				7776A3CC2963155B00F6830D /* ForgotPasswordNetwork.swift */,
 			);
 			path = "Network Manager";
 			sourceTree = "<group>";
@@ -252,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7776A3C02962FB7700F6830D /* loginVm.swift in Sources */,
+				7776A3CD2963155B00F6830D /* ForgotPasswordNetwork.swift in Sources */,
 				7713520A296296CD003CBBFC /* SplashScreenVc.swift in Sources */,
 				77664C7C2962CF5B0056BDBE /* HomeVc.swift in Sources */,
 				77664C752962C35C0056BDBE /* textFieldBorderRemove.swift in Sources */,
@@ -259,6 +266,7 @@
 				7776A3C7296303A700F6830D /* OtpVarificationNetwork.swift in Sources */,
 				77135206296296CD003CBBFC /* AppDelegate.swift in Sources */,
 				7776A3BD2962EF3A00F6830D /* Register_login_Netowork.swift in Sources */,
+				7776A3CA296314D900F6830D /* ForgotPasswordVm.swift in Sources */,
 				7776A3C4296301A700F6830D /* OtpVarificationVm.swift in Sources */,
 				77664C6C2962B5F70056BDBE /* LogInVc.swift in Sources */,
 				7776A3B32962DC5200F6830D /* VarifyOtpVc.swift in Sources */,
