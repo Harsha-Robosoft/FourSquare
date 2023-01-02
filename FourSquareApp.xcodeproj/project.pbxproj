@@ -19,6 +19,14 @@
 		77664C782962C47A0056BDBE /* LogInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77664C772962C47A0056BDBE /* LogInButton.swift */; };
 		77664C7C2962CF5B0056BDBE /* HomeVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77664C7B2962CF5B0056BDBE /* HomeVc.swift */; };
 		77664C802962D54A0056BDBE /* RegisterVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77664C7F2962D54A0056BDBE /* RegisterVc.swift */; };
+		7776A3B02962DAEB00F6830D /* EmailValidationVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3AF2962DAEB00F6830D /* EmailValidationVc.swift */; };
+		7776A3B32962DC5200F6830D /* VarifyOtpVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3B22962DC5200F6830D /* VarifyOtpVc.swift */; };
+		7776A3B62962E03A00F6830D /* ResetPasswordVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3B52962E03A00F6830D /* ResetPasswordVc.swift */; };
+		7776A3BA2962EE3F00F6830D /* RegisterVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3B92962EE3F00F6830D /* RegisterVm.swift */; };
+		7776A3BD2962EF3A00F6830D /* Register_login_Netowork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3BC2962EF3A00F6830D /* Register_login_Netowork.swift */; };
+		7776A3C02962FB7700F6830D /* loginVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3BF2962FB7700F6830D /* loginVm.swift */; };
+		7776A3C4296301A700F6830D /* OtpVarificationVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3C3296301A700F6830D /* OtpVarificationVm.swift */; };
+		7776A3C7296303A700F6830D /* OtpVarificationNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3C6296303A700F6830D /* OtpVarificationNetwork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +44,14 @@
 		77664C772962C47A0056BDBE /* LogInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInButton.swift; sourceTree = "<group>"; };
 		77664C7B2962CF5B0056BDBE /* HomeVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVc.swift; sourceTree = "<group>"; };
 		77664C7F2962D54A0056BDBE /* RegisterVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVc.swift; sourceTree = "<group>"; };
+		7776A3AF2962DAEB00F6830D /* EmailValidationVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationVc.swift; sourceTree = "<group>"; };
+		7776A3B22962DC5200F6830D /* VarifyOtpVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VarifyOtpVc.swift; sourceTree = "<group>"; };
+		7776A3B52962E03A00F6830D /* ResetPasswordVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVc.swift; sourceTree = "<group>"; };
+		7776A3B92962EE3F00F6830D /* RegisterVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVm.swift; sourceTree = "<group>"; };
+		7776A3BC2962EF3A00F6830D /* Register_login_Netowork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register_login_Netowork.swift; sourceTree = "<group>"; };
+		7776A3BF2962FB7700F6830D /* loginVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginVm.swift; sourceTree = "<group>"; };
+		7776A3C3296301A700F6830D /* OtpVarificationVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpVarificationVm.swift; sourceTree = "<group>"; };
+		7776A3C6296303A700F6830D /* OtpVarificationNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpVarificationNetwork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +128,9 @@
 		77664C662962B0020056BDBE /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				7776A3B92962EE3F00F6830D /* RegisterVm.swift */,
+				7776A3BF2962FB7700F6830D /* loginVm.swift */,
+				7776A3C3296301A700F6830D /* OtpVarificationVm.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -119,6 +138,8 @@
 		77664C672962B0150056BDBE /* Network Manager */ = {
 			isa = PBXGroup;
 			children = (
+				7776A3BC2962EF3A00F6830D /* Register_login_Netowork.swift */,
+				7776A3C6296303A700F6830D /* OtpVarificationNetwork.swift */,
 			);
 			path = "Network Manager";
 			sourceTree = "<group>";
@@ -135,6 +156,9 @@
 			children = (
 				77664C6B2962B5F70056BDBE /* LogInVc.swift */,
 				77664C7F2962D54A0056BDBE /* RegisterVc.swift */,
+				7776A3AF2962DAEB00F6830D /* EmailValidationVc.swift */,
+				7776A3B22962DC5200F6830D /* VarifyOtpVc.swift */,
+				7776A3B52962E03A00F6830D /* ResetPasswordVc.swift */,
 			);
 			path = "Log in, Register, Varify, RestPassword";
 			sourceTree = "<group>";
@@ -227,14 +251,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7776A3C02962FB7700F6830D /* loginVm.swift in Sources */,
 				7713520A296296CD003CBBFC /* SplashScreenVc.swift in Sources */,
 				77664C7C2962CF5B0056BDBE /* HomeVc.swift in Sources */,
 				77664C752962C35C0056BDBE /* textFieldBorderRemove.swift in Sources */,
 				77664C782962C47A0056BDBE /* LogInButton.swift in Sources */,
+				7776A3C7296303A700F6830D /* OtpVarificationNetwork.swift in Sources */,
 				77135206296296CD003CBBFC /* AppDelegate.swift in Sources */,
+				7776A3BD2962EF3A00F6830D /* Register_login_Netowork.swift in Sources */,
+				7776A3C4296301A700F6830D /* OtpVarificationVm.swift in Sources */,
 				77664C6C2962B5F70056BDBE /* LogInVc.swift in Sources */,
+				7776A3B32962DC5200F6830D /* VarifyOtpVc.swift in Sources */,
+				7776A3B62962E03A00F6830D /* ResetPasswordVc.swift in Sources */,
 				77135208296296CD003CBBFC /* SceneDelegate.swift in Sources */,
 				77664C722962C1570056BDBE /* orLabel.swift in Sources */,
+				7776A3B02962DAEB00F6830D /* EmailValidationVc.swift in Sources */,
+				7776A3BA2962EE3F00F6830D /* RegisterVm.swift in Sources */,
 				77664C802962D54A0056BDBE /* RegisterVc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

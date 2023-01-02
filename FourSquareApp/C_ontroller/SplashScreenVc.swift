@@ -14,6 +14,13 @@ class SplashScreenVc: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
         
+        let logVc = self.storyboard?.instantiateViewController(identifier: "LogInVc") as? LogInVc
+        
+        if let vc = logVc{
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         var skipStatus = 0
         
         if let status = userDefault.value(forKey: "SkipStatus") as? Int{

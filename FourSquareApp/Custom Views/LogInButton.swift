@@ -18,7 +18,7 @@ class LoginButton: UIButton {
     }
 
     func addChanges() {
-        self.layer.borderWidth = 2.0
+        self.layer.borderWidth = 1.5
         self.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         self.layer.cornerRadius = 5.0
     }
