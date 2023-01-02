@@ -9,21 +9,33 @@
 /* Begin PBXBuildFile section */
 		77135206296296CD003CBBFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77135205296296CD003CBBFC /* AppDelegate.swift */; };
 		77135208296296CD003CBBFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77135207296296CD003CBBFC /* SceneDelegate.swift */; };
-		7713520A296296CD003CBBFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77135209296296CD003CBBFC /* ViewController.swift */; };
+		7713520A296296CD003CBBFC /* SplashScreenVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77135209296296CD003CBBFC /* SplashScreenVc.swift */; };
 		7713520D296296CD003CBBFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7713520B296296CD003CBBFC /* Main.storyboard */; };
 		7713520F296296CE003CBBFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7713520E296296CE003CBBFC /* Assets.xcassets */; };
 		77135212296296CE003CBBFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77135210296296CE003CBBFC /* LaunchScreen.storyboard */; };
+		77664C6C2962B5F70056BDBE /* LogInVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77664C6B2962B5F70056BDBE /* LogInVc.swift */; };
+		77664C722962C1570056BDBE /* orLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77664C712962C1570056BDBE /* orLabel.swift */; };
+		77664C752962C35C0056BDBE /* textFieldBorderRemove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77664C742962C35C0056BDBE /* textFieldBorderRemove.swift */; };
+		77664C782962C47A0056BDBE /* LogInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77664C772962C47A0056BDBE /* LogInButton.swift */; };
+		77664C7C2962CF5B0056BDBE /* HomeVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77664C7B2962CF5B0056BDBE /* HomeVc.swift */; };
+		77664C802962D54A0056BDBE /* RegisterVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77664C7F2962D54A0056BDBE /* RegisterVc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		77135202296296CD003CBBFC /* FourSquareApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourSquareApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77135205296296CD003CBBFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77135207296296CD003CBBFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		77135209296296CD003CBBFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		77135209296296CD003CBBFC /* SplashScreenVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenVc.swift; sourceTree = "<group>"; };
 		7713520C296296CD003CBBFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7713520E296296CE003CBBFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77135211296296CE003CBBFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77135213296296CE003CBBFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77664C6B2962B5F70056BDBE /* LogInVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVc.swift; sourceTree = "<group>"; };
+		77664C712962C1570056BDBE /* orLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orLabel.swift; sourceTree = "<group>"; };
+		77664C742962C35C0056BDBE /* textFieldBorderRemove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldBorderRemove.swift; sourceTree = "<group>"; };
+		77664C772962C47A0056BDBE /* LogInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInButton.swift; sourceTree = "<group>"; };
+		77664C7B2962CF5B0056BDBE /* HomeVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVc.swift; sourceTree = "<group>"; };
+		77664C7F2962D54A0056BDBE /* RegisterVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +68,93 @@
 		77135204296296CD003CBBFC /* FourSquareApp */ = {
 			isa = PBXGroup;
 			children = (
-				77135205296296CD003CBBFC /* AppDelegate.swift */,
-				77135207296296CD003CBBFC /* SceneDelegate.swift */,
-				77135209296296CD003CBBFC /* ViewController.swift */,
-				7713520B296296CD003CBBFC /* Main.storyboard */,
+				77664C6F2962C1290056BDBE /* Custom Views */,
+				77664C632962AFDE0056BDBE /* Delegate file */,
+				77664C672962B0150056BDBE /* Network Manager */,
+				77664C662962B0020056BDBE /* View Model */,
+				77664C642962AFF10056BDBE /* C_ontroller */,
+				77664C622962AFCA0056BDBE /* V_Iew */,
+				77664C682962B02E0056BDBE /* M_odel */,
 				7713520E296296CE003CBBFC /* Assets.xcassets */,
 				77135210296296CE003CBBFC /* LaunchScreen.storyboard */,
 				77135213296296CE003CBBFC /* Info.plist */,
 			);
 			path = FourSquareApp;
+			sourceTree = "<group>";
+		};
+		77664C622962AFCA0056BDBE /* V_Iew */ = {
+			isa = PBXGroup;
+			children = (
+				7713520B296296CD003CBBFC /* Main.storyboard */,
+			);
+			path = V_Iew;
+			sourceTree = "<group>";
+		};
+		77664C632962AFDE0056BDBE /* Delegate file */ = {
+			isa = PBXGroup;
+			children = (
+				77135205296296CD003CBBFC /* AppDelegate.swift */,
+				77135207296296CD003CBBFC /* SceneDelegate.swift */,
+			);
+			path = "Delegate file";
+			sourceTree = "<group>";
+		};
+		77664C642962AFF10056BDBE /* C_ontroller */ = {
+			isa = PBXGroup;
+			children = (
+				77664C7A2962CF410056BDBE /* Home */,
+				77664C6A2962B5D30056BDBE /* Log in, Register, Varify, RestPassword */,
+				77135209296296CD003CBBFC /* SplashScreenVc.swift */,
+			);
+			path = C_ontroller;
+			sourceTree = "<group>";
+		};
+		77664C662962B0020056BDBE /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		77664C672962B0150056BDBE /* Network Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Network Manager";
+			sourceTree = "<group>";
+		};
+		77664C682962B02E0056BDBE /* M_odel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = M_odel;
+			sourceTree = "<group>";
+		};
+		77664C6A2962B5D30056BDBE /* Log in, Register, Varify, RestPassword */ = {
+			isa = PBXGroup;
+			children = (
+				77664C6B2962B5F70056BDBE /* LogInVc.swift */,
+				77664C7F2962D54A0056BDBE /* RegisterVc.swift */,
+			);
+			path = "Log in, Register, Varify, RestPassword";
+			sourceTree = "<group>";
+		};
+		77664C6F2962C1290056BDBE /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				77664C712962C1570056BDBE /* orLabel.swift */,
+				77664C742962C35C0056BDBE /* textFieldBorderRemove.swift */,
+				77664C772962C47A0056BDBE /* LogInButton.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		77664C7A2962CF410056BDBE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				77664C7B2962CF5B0056BDBE /* HomeVc.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +227,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7713520A296296CD003CBBFC /* ViewController.swift in Sources */,
+				7713520A296296CD003CBBFC /* SplashScreenVc.swift in Sources */,
+				77664C7C2962CF5B0056BDBE /* HomeVc.swift in Sources */,
+				77664C752962C35C0056BDBE /* textFieldBorderRemove.swift in Sources */,
+				77664C782962C47A0056BDBE /* LogInButton.swift in Sources */,
 				77135206296296CD003CBBFC /* AppDelegate.swift in Sources */,
+				77664C6C2962B5F70056BDBE /* LogInVc.swift in Sources */,
 				77135208296296CD003CBBFC /* SceneDelegate.swift in Sources */,
+				77664C722962C1570056BDBE /* orLabel.swift in Sources */,
+				77664C802962D54A0056BDBE /* RegisterVc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
