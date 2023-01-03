@@ -37,7 +37,6 @@ class LoginViewModel {
                     completion("Error...!",false)
                 }
             }
-            
         }
     }
 }

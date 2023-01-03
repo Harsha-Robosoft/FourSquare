@@ -50,9 +50,11 @@ class LogInVc: UIViewController {
                 
                 passwordToSend = password
             }
-            
+            let loader =   self.loader()
+
             objectOfLoginViewModel.apiCallForUserLogin(emailIs: emailToSend, passwordIs: passwordToSend){ message, status in
-                
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
                 if status == true{
                     
                     let homeVc = self.storyboard?.instantiateViewController(withIdentifier: "HomeVc") as? HomeVc
@@ -61,16 +63,16 @@ class LogInVc: UIViewController {
                     }
                     
                 }else{
-                    
-                    self.alertMessage(message: message)
-                    
+                    DispatchQueue.main.async {
+                        self.alertMessage(message: message)
+
+                    }
+ 
                 }
+            }
                 
             }
-            
-            
-            
-            
+
             
         }else{
             

@@ -17,7 +17,6 @@ class EmailValidationVc: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func varifyOtpButtonTapped(_ sender: UIButton) {
@@ -28,9 +27,12 @@ class EmailValidationVc: UIViewController {
             
             emailIS = mail
         }
-        
+        let loader =   self.loader()
+
         objectOfOtpvarificationViewModel.chekMailIdIsValidApiCall(emailIs: emailIS){ status in
             
+            DispatchQueue.main.async() {
+                self.stopLoader(loader: loader)
             if status == true{
                 
                 let otpVc = self.storyboard?.instantiateViewController(withIdentifier: "VarifyOtpVc") as? VarifyOtpVc
@@ -38,15 +40,28 @@ class EmailValidationVc: UIViewController {
                 if let vc = otpVc {
                     vc.emailId = emailIS
                     vc.forgotPassword = 1
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self.objectOfOtpvarificationViewModel.sendOtpApiCall(emailToSend: emailIS) { status in
+                        
+                        DispatchQueue.main.async {
+                            if status == true{
+                                self.navigationController?.pushViewController(vc, animated: true)
+
+                            }else{
+                                DispatchQueue.main.async {
+                                    self.alertMessage(message: "Error while sending otp...!")
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{
+                DispatchQueue.main.async {
+                    self.alertMessage(message: "Enter a registered mail Id...!")
+
                 }
                 
-                
-            }else{
-                
-                self.alertMessage(message: "Enter a registered mail Id...!")
             }
-            
+            }
         }
         
         

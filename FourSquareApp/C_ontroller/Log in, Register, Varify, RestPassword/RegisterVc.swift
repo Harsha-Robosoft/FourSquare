@@ -112,16 +112,23 @@ class RegisterVc: UIViewController {
                                     self.navigationController?.pushViewController(vc, animated: true)
 
                                 }else{
+                                    DispatchQueue.main.async {
+                                        self.alertMessage(message: "Error while sending otp...!")
+
+                                    }
                                     
-                                    self.alertMessage(message: "Error while sending otp...!")
                                 }
                             }
                             
                         }
 
                     }else{
+                        
+                        DispatchQueue.main.async {
+                            self.alertMessage(message: messgage)
 
-                        self.alertMessage(message: messgage)
+                        }
+
 
                     }
 

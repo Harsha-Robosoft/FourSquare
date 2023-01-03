@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7712AD0E2963F7AB008E1959 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD0D2963F7AB008E1959 /* HomeCollectionViewCell.swift */; };
+		7712AD1629640B61008E1959 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD1529640B61008E1959 /* HomePageViewController.swift */; };
+		7712AD1929640DDB008E1959 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD1829640DDB008E1959 /* HomePageController.swift */; };
+		7712AD1D296431F0008E1959 /* mapFile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7712AD1C296431F0008E1959 /* mapFile.xib */; };
+		7712AD202964332D008E1959 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD1F2964332D008E1959 /* HomeTableViewCell.swift */; };
+		7712AD2729646E62008E1959 /* Location Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD2629646E62008E1959 /* Location Manager.swift */; };
 		77135206296296CD003CBBFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77135205296296CD003CBBFC /* AppDelegate.swift */; };
 		77135208296296CD003CBBFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77135207296296CD003CBBFC /* SceneDelegate.swift */; };
 		7713520A296296CD003CBBFC /* SplashScreenVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77135209296296CD003CBBFC /* SplashScreenVc.swift */; };
@@ -32,6 +38,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7712AD0D2963F7AB008E1959 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		7712AD1529640B61008E1959 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		7712AD1829640DDB008E1959 /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
+		7712AD1C296431F0008E1959 /* mapFile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mapFile.xib; sourceTree = "<group>"; };
+		7712AD1F2964332D008E1959 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		7712AD2629646E62008E1959 /* Location Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location Manager.swift"; sourceTree = "<group>"; };
 		77135202296296CD003CBBFC /* FourSquareApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourSquareApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77135205296296CD003CBBFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77135207296296CD003CBBFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +81,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7712AD0B2963F768008E1959 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7712AD22296446F6008E1959 /* tableview cell */,
+				7712AD0C2963F77F008E1959 /* collection view cell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		7712AD0C2963F77F008E1959 /* collection view cell */ = {
+			isa = PBXGroup;
+			children = (
+				7712AD0D2963F7AB008E1959 /* HomeCollectionViewCell.swift */,
+			);
+			path = "collection view cell";
+			sourceTree = "<group>";
+		};
+		7712AD1B296431D6008E1959 /* xibfiles */ = {
+			isa = PBXGroup;
+			children = (
+				7712AD1C296431F0008E1959 /* mapFile.xib */,
+				7712AD1F2964332D008E1959 /* HomeTableViewCell.swift */,
+			);
+			path = xibfiles;
+			sourceTree = "<group>";
+		};
+		7712AD22296446F6008E1959 /* tableview cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "tableview cell";
+			sourceTree = "<group>";
+		};
 		771351F9296296CD003CBBFC = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +133,7 @@
 		77135204296296CD003CBBFC /* FourSquareApp */ = {
 			isa = PBXGroup;
 			children = (
+				7712AD1B296431D6008E1959 /* xibfiles */,
 				77664C6F2962C1290056BDBE /* Custom Views */,
 				77664C632962AFDE0056BDBE /* Delegate file */,
 				77664C672962B0150056BDBE /* Network Manager */,
@@ -122,6 +168,7 @@
 		77664C642962AFF10056BDBE /* C_ontroller */ = {
 			isa = PBXGroup;
 			children = (
+				7712AD0B2963F768008E1959 /* Cells */,
 				77664C7A2962CF410056BDBE /* Home */,
 				77664C6A2962B5D30056BDBE /* Log in, Register, Varify, RestPassword */,
 				77135209296296CD003CBBFC /* SplashScreenVc.swift */,
@@ -183,6 +230,9 @@
 			isa = PBXGroup;
 			children = (
 				77664C7B2962CF5B0056BDBE /* HomeVc.swift */,
+				7712AD1529640B61008E1959 /* HomePageViewController.swift */,
+				7712AD1829640DDB008E1959 /* HomePageController.swift */,
+				7712AD2629646E62008E1959 /* Location Manager.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -246,6 +296,7 @@
 			files = (
 				77135212296296CE003CBBFC /* LaunchScreen.storyboard in Resources */,
 				7713520F296296CE003CBBFC /* Assets.xcassets in Resources */,
+				7712AD1D296431F0008E1959 /* mapFile.xib in Resources */,
 				7713520D296296CD003CBBFC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,17 +316,22 @@
 				77664C782962C47A0056BDBE /* LogInButton.swift in Sources */,
 				7776A3C7296303A700F6830D /* OtpVarificationNetwork.swift in Sources */,
 				77135206296296CD003CBBFC /* AppDelegate.swift in Sources */,
+				7712AD1629640B61008E1959 /* HomePageViewController.swift in Sources */,
 				7776A3BD2962EF3A00F6830D /* Register_login_Netowork.swift in Sources */,
 				7776A3CA296314D900F6830D /* ForgotPasswordVm.swift in Sources */,
 				7776A3C4296301A700F6830D /* OtpVarificationVm.swift in Sources */,
 				77664C6C2962B5F70056BDBE /* LogInVc.swift in Sources */,
+				7712AD2729646E62008E1959 /* Location Manager.swift in Sources */,
 				7776A3B32962DC5200F6830D /* VarifyOtpVc.swift in Sources */,
 				7776A3B62962E03A00F6830D /* ResetPasswordVc.swift in Sources */,
 				77135208296296CD003CBBFC /* SceneDelegate.swift in Sources */,
+				7712AD0E2963F7AB008E1959 /* HomeCollectionViewCell.swift in Sources */,
+				7712AD202964332D008E1959 /* HomeTableViewCell.swift in Sources */,
 				77664C722962C1570056BDBE /* orLabel.swift in Sources */,
 				7776A3B02962DAEB00F6830D /* EmailValidationVc.swift in Sources */,
 				7776A3BA2962EE3F00F6830D /* RegisterVm.swift in Sources */,
 				77664C802962D54A0056BDBE /* RegisterVc.swift in Sources */,
+				7712AD1929640DDB008E1959 /* HomePageController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

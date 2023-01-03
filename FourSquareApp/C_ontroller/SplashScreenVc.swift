@@ -40,6 +40,11 @@ class SplashScreenVc: UIViewController {
             }
             
             
+        }else{
+            
+            
+            
+            
         }
         
         

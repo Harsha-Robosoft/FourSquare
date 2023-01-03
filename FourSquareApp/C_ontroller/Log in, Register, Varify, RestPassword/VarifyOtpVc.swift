@@ -25,15 +25,23 @@ class VarifyOtpVc: UIViewController {
  
     @IBAction func resendOTPTapped(_ sender: UIButton) {
         
+        let loader =   self.loader()
+
         objectOfOtpvarificationViewModel.sendOtpApiCall(emailToSend: emailId){ status in
-            
+            DispatchQueue.main.async() {
+                self.stopLoader(loader: loader)
             if status == true{
-                
-                self.alertMessage(message: "New otp sent to the mail Id")
+                DispatchQueue.main.async {
+                    self.alertMessage(message: "New otp sent to the mail Id")
+
+                }
             }else{
-                
-                self.alertMessage(message: "Error while sending the otp...!")
+                DispatchQueue.main.async {
+                    self.alertMessage(message: "Error while sending the otp...!")
+
+                }
             }
+        }
             
         }
         
@@ -49,9 +57,11 @@ class VarifyOtpVc: UIViewController {
                 otpToSend = otpIs
                 
             }
-            
+            let loader =   self.loader()
+
             objectOfOtpvarificationViewModel.varifyOtpApicall(otpIs: otpToSend){ status in
-                
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
                 if status == true{
                     
                     for controller in self.navigationController!.viewControllers as Array {
@@ -63,22 +73,30 @@ class VarifyOtpVc: UIViewController {
 
                     
                 }else{
+                    DispatchQueue.main.async {
+                        self.alertMessage(message: "Entered a wrong OTP...!")
+
+                    }
                     
-                    self.alertMessage(message: "Entered a wrong OTP...!")
                 }
+            }
                 
             }
             
             
-        }else{
+        }
+        else{
             var otpToSend = ""
             if let otpIs = otpField.text{
                 otpToSend = otpIs
-                
             }
             
+            print("otp : \(otpToSend)")
+            
+            let loader =   self.loader()
             objectOfOtpvarificationViewModel.varifyOtpApicall(otpIs: otpToSend){ status in
-                
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
                 if status == true{
                     
                     let createPasswordVc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordVc") as? ResetPasswordVc
@@ -91,17 +109,15 @@ class VarifyOtpVc: UIViewController {
                     
                 }else{
                     
-                    self.alertMessage(message: "Entered a wrong OTP...!")
+                    DispatchQueue.main.async {
+                        self.alertMessage(message: "Entered a wrong OTP...!")
+
+                    }
                 }
+            }
                 
             }
             
-        }
-        
-        
-        let resetVc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordVc") as? ResetPasswordVc
-        if let vc = resetVc{
-            self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }

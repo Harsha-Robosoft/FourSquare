@@ -10,6 +10,8 @@ class OtpVarificationNetwork {
     
     func sendOtp(email: String, completion: @escaping((Bool,Error?) -> ())) {
         
+        print("otp sending mail id : \(email)")
+        
         guard let url = URL(string:"https://four-square-three.vercel.app/api/sendOtp") else{ return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -20,11 +22,11 @@ class OtpVarificationNetwork {
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
             let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
                 guard let data = data, error == nil else{
-                    print("Register Error is: \(String(describing: error?.localizedDescription))")
+                    print("Send otp Error is: \(String(describing: error?.localizedDescription))")
                     return
                 }
                 if let responsIs = responce as? HTTPURLResponse{
-                    print("Register responce : ",responsIs.statusCode)
+                    print("Send otp responce : ",responsIs.statusCode)
                     if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                         do{
                             let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
@@ -45,6 +47,9 @@ class OtpVarificationNetwork {
     
     
     func verifyOtp(otp: String, completion: @escaping((Bool,Error?) -> ()))  {
+        
+        print("otp sending : \(otp)")
+        
         guard let url = URL(string:"https://four-square-three.vercel.app/api/verifyOtp") else{ return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -55,11 +60,11 @@ class OtpVarificationNetwork {
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
             let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
                 guard let data = data, error == nil else{
-                    print("Register Error is: \(String(describing: error?.localizedDescription))")
+                    print("Varify otp Error is: \(String(describing: error?.localizedDescription))")
                     return
                 }
                 if let responsIs = responce as? HTTPURLResponse{
-                    print("Register responce : ",responsIs.statusCode)
+                    print("Varify otp responce : ",responsIs.statusCode)
                     if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                         do{
                             let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
@@ -80,6 +85,8 @@ class OtpVarificationNetwork {
     
     func chechEmailIsValid(email: String, completion: @escaping((Bool,Error?) -> ())) {
         
+        print("main id sending  : \(email)")
+        
         guard let url = URL(string:"https://four-square-three.vercel.app/api/emailExists") else{ return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -90,11 +97,11 @@ class OtpVarificationNetwork {
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
             let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
                 guard let data = data, error == nil else{
-                    print("Register Error is: \(String(describing: error?.localizedDescription))")
+                    print("Check mail id is valid Error is: \(String(describing: error?.localizedDescription))")
                     return
                 }
                 if let responsIs = responce as? HTTPURLResponse{
-                    print("Register responce : ",responsIs.statusCode)
+                    print("Check mail id is valid responce : ",responsIs.statusCode)
                     if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                         do{
                             let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)

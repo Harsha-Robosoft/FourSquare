@@ -65,11 +65,11 @@ class RegisterNetwork {
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
             let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
                 guard let data = data, error == nil else{
-                    print("Register Error is: \(String(describing: error?.localizedDescription))")
+                    print("Login Error is: \(String(describing: error?.localizedDescription))")
                     return
                 }
                 if let responsIs = responce as? HTTPURLResponse{
-                    print("Register responce : ",responsIs.statusCode)
+                    print("login responce : ",responsIs.statusCode)
                     if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                         do{
                             let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)

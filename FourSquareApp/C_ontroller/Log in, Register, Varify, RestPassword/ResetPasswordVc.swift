@@ -45,8 +45,11 @@ class ResetPasswordVc: UIViewController {
             
             if passwordToSend != ""{
                 
+                let loader =   self.loader()
+
                 objectOfForgotPasswordViewModel.forgotPassewordApiCall(emailIs: mailIdToSend, passwordIs: passwordToSend){ status in
-                     
+                    DispatchQueue.main.async() {
+                        self.stopLoader(loader: loader)
                     if status == true{
                         
                         for controller in self.navigationController!.viewControllers as Array {
@@ -57,18 +60,17 @@ class ResetPasswordVc: UIViewController {
                         }
                         
                     }else{
-                        
-                        self.alertMessage(message: "Error while resetting the password...!")
+                        DispatchQueue.main.async {
+                            self.alertMessage(message: "Error while resetting the password...!")
+                        }
                     }
+                }
                     
                 }
             }else{
                 
-                
             }
-            
-            
-            
+
         }
         
     }
