@@ -84,6 +84,15 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         collectionView.selectItem(at: [0,index], animated: true, scrollPosition: UICollectionView.ScrollPosition(rawValue: 0))
     }
     
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+        
+        let searVc = self.storyboard?.instantiateViewController(withIdentifier: "SearchVc") as? SearchVc
+        if let vc = searVc{
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    
 }
 
 extension HomeVc{
@@ -106,11 +115,7 @@ extension HomeVc{
         pageView?.goToPAge(indexIs: indexPath.row)
 
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        let cell = collectionView.cellForItem(at: indexPath) as! HomeCollectionViewCell
-//        cell.labelToUpdate.textColor = #colorLiteral(red: 0.4218871593, green: 0.3081518412, blue: 0.3654187322, alpha: 1)
-//    }
+
     
 }
 

@@ -13,6 +13,7 @@
 		7712AD1D296431F0008E1959 /* mapFile.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7712AD1C296431F0008E1959 /* mapFile.xib */; };
 		7712AD202964332D008E1959 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD1F2964332D008E1959 /* HomeTableViewCell.swift */; };
 		7712AD2729646E62008E1959 /* Location Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD2629646E62008E1959 /* Location Manager.swift */; };
+		7712AD2C296482DB008E1959 /* SearchVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD2B296482DB008E1959 /* SearchVc.swift */; };
 		77135206296296CD003CBBFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77135205296296CD003CBBFC /* AppDelegate.swift */; };
 		77135208296296CD003CBBFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77135207296296CD003CBBFC /* SceneDelegate.swift */; };
 		7713520A296296CD003CBBFC /* SplashScreenVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77135209296296CD003CBBFC /* SplashScreenVc.swift */; };
@@ -44,6 +45,7 @@
 		7712AD1C296431F0008E1959 /* mapFile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = mapFile.xib; sourceTree = "<group>"; };
 		7712AD1F2964332D008E1959 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		7712AD2629646E62008E1959 /* Location Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location Manager.swift"; sourceTree = "<group>"; };
+		7712AD2B296482DB008E1959 /* SearchVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVc.swift; sourceTree = "<group>"; };
 		77135202296296CD003CBBFC /* FourSquareApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourSquareApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77135205296296CD003CBBFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77135207296296CD003CBBFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,14 @@
 			path = "tableview cell";
 			sourceTree = "<group>";
 		};
+		7712AD2A29648295008E1959 /* Search screen */ = {
+			isa = PBXGroup;
+			children = (
+				7712AD2B296482DB008E1959 /* SearchVc.swift */,
+			);
+			path = "Search screen";
+			sourceTree = "<group>";
+		};
 		771351F9296296CD003CBBFC = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +178,7 @@
 		77664C642962AFF10056BDBE /* C_ontroller */ = {
 			isa = PBXGroup;
 			children = (
+				7712AD2A29648295008E1959 /* Search screen */,
 				7712AD0B2963F768008E1959 /* Cells */,
 				77664C7A2962CF410056BDBE /* Home */,
 				77664C6A2962B5D30056BDBE /* Log in, Register, Varify, RestPassword */,
@@ -309,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7776A3C02962FB7700F6830D /* loginVm.swift in Sources */,
+				7712AD2C296482DB008E1959 /* SearchVc.swift in Sources */,
 				7776A3CD2963155B00F6830D /* ForgotPasswordNetwork.swift in Sources */,
 				7713520A296296CD003CBBFC /* SplashScreenVc.swift in Sources */,
 				77664C7C2962CF5B0056BDBE /* HomeVc.swift in Sources */,
