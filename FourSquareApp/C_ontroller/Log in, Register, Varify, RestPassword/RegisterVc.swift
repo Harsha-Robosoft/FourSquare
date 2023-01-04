@@ -94,7 +94,7 @@ class RegisterVc: UIViewController {
 
                 let loader =   self.loader()
 
-                objectOfRegisterViewModel.apiCallForUserRegistration(emailIS: mailIdToSend, mobileNUmberIs: mobilNumberToSend, passwordIs: passwordToSend){ messgage , status in
+                objectOfRegisterViewModel.apiCallForUserRegistration(emailIS: mailIdToSend.lowercased(), mobileNUmberIs: mobilNumberToSend, passwordIs: passwordToSend){ messgage , status in
 
                     DispatchQueue.main.async() {
                         self.stopLoader(loader: loader)

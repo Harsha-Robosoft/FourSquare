@@ -6,14 +6,12 @@
 //
 
 import UIKit
-protocol changeTheindex {
-}
 
 
 class HomePageController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 
 
-    var delegate1: changeTheindex?
+    var delegate1: sendingIndex?
     var currentIndex = 0
     
     var previousIndex = 0
@@ -45,7 +43,7 @@ class HomePageController: UIPageViewController, UIPageViewControllerDataSource, 
 
         var index = (viewController as! HomePageVc).index
 
-        print("index before \(index)")
+//        print("index before \(index)")
         currentIndex = index
         index -= 1
 
@@ -57,7 +55,7 @@ class HomePageController: UIPageViewController, UIPageViewControllerDataSource, 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
 
         var index = (viewController as! HomePageVc).index
-        print("index after \(index)")
+//        print("index after \(index)")
         currentIndex = index
         index += 1
 
@@ -74,7 +72,7 @@ class HomePageController: UIPageViewController, UIPageViewControllerDataSource, 
             
                 pageObj.index = index
             pageObj.delegate2 = delegate1 as! sendingIndex
-                print("index index : \(index)")
+//                print("index index : \(index)")
 
                 return pageObj            
         }

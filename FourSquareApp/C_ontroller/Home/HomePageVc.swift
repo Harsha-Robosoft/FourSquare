@@ -14,6 +14,8 @@ protocol sendingIndex {
 }
 
 class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+    
+    var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
 
     var index = 0
     var manager = CLLocationManager()
@@ -42,7 +44,89 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         manager.startUpdatingLocation()
         delegate2?.gotoIndex(index: index)
         print("index is  : ",index)
+        checkInedxForApicall(index: index)
     }
+    
+    func checkInedxForApicall(index: Int) {
+        
+        let latitude = "13.379162"
+        let longitude = "74.740373"
+        
+        if index == 0{
+            let loader =   self.loader()
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getNearPlace", latToSend: latitude, longToSend: longitude){ status in
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
+                if status == true{
+                    self.tableView01.reloadData()
+                }else{
+                    self.tableView01.isHidden = true
+                }
+                }
+            }
+        }else if index == 1{
+            let loader =   self.loader()
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getTopPlace", latToSend: latitude, longToSend: longitude){ status in
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
+                    if status == true{
+                        self.tableView01.isHidden = false
+                        self.tableView01.reloadData()
+                    }else{
+                        self.tableView01.isHidden = true
+                    }
+                }
+            }
+        }else if index == 2{
+            let loader =   self.loader()
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getPopularPlace", latToSend: latitude, longToSend: longitude){ status in
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
+                    if status == true{
+                        self.tableView01.isHidden = false
+                        self.tableView01.reloadData()
+                    }else{
+                        self.tableView01.isHidden = true
+                    }
+                }
+            }
+        }else if index == 3{
+            let loader =   self.loader()
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getRestaurants", latToSend: latitude, longToSend: longitude){ status in
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
+                    if status == true{
+                        self.tableView01.isHidden = false
+                        self.tableView01.reloadData()
+                    }else{
+                        self.tableView01.isHidden = true
+                    }
+                }
+            }
+        }else if index == 4{
+            let loader =   self.loader()
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getCafe", latToSend: latitude, longToSend: longitude){ status in
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
+                    if status == true{
+                        self.tableView01.isHidden = false
+                        self.tableView01.reloadData()
+                    }else{
+                        self.tableView01.isHidden = true
+                    }
+                }
+            }
+        }else{
+            
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
              print("error:: \(error.localizedDescription)")
@@ -57,7 +141,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             
-            print("Current location: \(location)")
+//            print("Current location: \(location)")
             manager.stopUpdatingLocation()
             
             render(location: location)
@@ -81,7 +165,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return objectOfHomeViewModel.homeDetails.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,12 +177,25 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
         
         let cell = tableView01.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
-        cell.imageIs.image = #imageLiteral(resourceName: "Ferrari-1200-1-1024x683")
-        cell.addresIs.text = "kjhyutyrsaetzfxghcvkgfydtuxcgvhgui"
-        cell.distanceIs.text = "9.0km"
-        cell.nameIs.text = "Attil"
-        cell.rateIs.text = "₹₹₹₹"
-        cell.nationalityIs.text = "indian"
+        cell.imageIs.image = getImage(urlString: objectOfHomeViewModel.homeDetails[indexPath.row].placeImage)
+        cell.addresIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address),\(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
+        cell.distanceIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
+        cell.nameIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].placeName
+        cell.nationalityIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].category
+        cell.ratingIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].rating
+        if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "1"{
+            cell.rateIs.text = "₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "2"{
+            cell.rateIs.text = "₹₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "3"{
+            cell.rateIs.text = "₹₹₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "4"{
+            cell.rateIs.text = "₹₹₹₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "5"{
+            cell.rateIs.text = "₹₹₹₹₹"
+        }
+        cell.setShadow()
+        
         return cell
     }
     
@@ -106,4 +203,32 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         return 135
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print("\(objectOfHomeViewModel.homeDetails[indexPath.row]._id)")
+    }
+    
+}
+
+
+extension UIViewController{
+    
+    func getImage(urlString: String) -> UIImage {
+        
+        guard let imageUrl = URL(string: urlString) else { return #imageLiteral(resourceName: "Ferrari-1200-1-1024x683") }
+        
+        let imageData = try?
+        Data(contentsOf: imageUrl)
+        
+        if let imageData = imageData{
+            
+            guard let image = UIImage(data: imageData) else { return #imageLiteral(resourceName: "Ferrari-1200-1-1024x683") }
+            
+            return image
+        }
+        
+        return #imageLiteral(resourceName: "Ferrari-1200-1-1024x683")
+        
+    }
 }

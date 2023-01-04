@@ -8,8 +8,10 @@
 import UIKit
 
 
-class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, changeTheindex ,sendingIndex {
-
+class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource ,sendingIndex {
+    @IBOutlet weak var burgerWidth: NSLayoutConstraint!
+    @IBOutlet weak var topTapView: UIView!
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var leading: NSLayoutConstraint!
     @IBOutlet weak var trailing: NSLayoutConstraint!
@@ -25,7 +27,8 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var collectionItem = ["Near you","Toppic","Popular","Lunch","Coffee"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        topTapView.isHidden = true
+        burgerWidth.constant = 0
         if navigationController?.responds(to: #selector(getter: UINavigationController.interactivePopGestureRecognizer)) ?? false {
             navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         }
@@ -49,7 +52,8 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBAction func burgerButtonTapped(_ sender: Any) {
         
         if menuOut == false{
-            
+            topTapView.isHidden = false
+            burgerWidth.constant = 300
             leading.constant = 300
             trailing.constant = -300
             top.constant = 50
@@ -57,6 +61,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             menuOut = true
         }
         else{
+            burgerWidth.constant = 0
             leading.constant = 0
             trailing.constant = 0
             top.constant = 0
@@ -90,6 +95,22 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if let vc = searVc{
             self.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    @IBAction func tapGestureTapped(_ sender: Any) {
+        burgerWidth.constant = 0
+        leading.constant = 0
+        trailing.constant = 0
+        top.constant = 0
+        bottom.constant = 0
+        menuOut = false
+        topTapView.isHidden = true
+
+        UIView.animate(withDuration: 0.3 , animations: {
+            self.view.layoutIfNeeded()
+        }) { (status) in
+            
+        }
+        
     }
     
     
