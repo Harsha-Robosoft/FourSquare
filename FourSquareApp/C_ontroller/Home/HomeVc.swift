@@ -8,10 +8,8 @@
 import UIKit
 
 
-class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, changeTheindex {
-    
-    
-   
+class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, changeTheindex ,sendingIndex {
+
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var leading: NSLayoutConstraint!
     @IBOutlet weak var trailing: NSLayoutConstraint!
@@ -40,6 +38,11 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             self.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: UICollectionView.ScrollPosition(rawValue: 0))
         }
         
+    }
+    
+    func gotoIndex(index: Int) {
+        collectionView.scrollToItem(at: [0,index], at: .centeredHorizontally, animated: true)
+        collectionView.selectItem(at: [0,index], animated: true, scrollPosition: UICollectionView.ScrollPosition(rawValue: 0))
     }
 
     
@@ -79,10 +82,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
-    func indexToChange(index: Int) {
-        collectionView.scrollToItem(at: [0,index], at: .centeredHorizontally, animated: true)
-        collectionView.selectItem(at: [0,index], animated: true, scrollPosition: UICollectionView.ScrollPosition(rawValue: 0))
-    }
+
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         

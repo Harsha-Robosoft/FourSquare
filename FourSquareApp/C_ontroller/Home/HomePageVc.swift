@@ -9,7 +9,11 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+protocol sendingIndex {
+    func gotoIndex(index: Int)
+}
+
+class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
     var index = 0
     var manager = CLLocationManager()
@@ -17,6 +21,9 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var mapIs: MKMapView!
     @IBOutlet weak var mapHeight: NSLayoutConstraint!
     @IBOutlet weak var tableView01: UITableView!
+    
+    var delegate2: sendingIndex?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView01.delegate = self
@@ -33,7 +40,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
-        print(index)
+        delegate2?.gotoIndex(index: index)
+        print("index is  : ",index)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

@@ -7,7 +7,6 @@
 
 import UIKit
 protocol changeTheindex {
-    func indexToChange(index: Int)
 }
 
 
@@ -16,6 +15,8 @@ class HomePageController: UIPageViewController, UIPageViewControllerDataSource, 
 
     var delegate1: changeTheindex?
     var currentIndex = 0
+    
+    var previousIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
@@ -29,17 +30,22 @@ class HomePageController: UIPageViewController, UIPageViewControllerDataSource, 
     
     func goToPAge(indexIs: Int) {
         
-        if let nextVc = contentView(at: indexIs) {
-           self.setViewControllers([nextVc], direction: .forward, animated: true, completion: nil)
-       }
+        previousIndex = indexIs
+        
+            if let nextVc = contentView(at: indexIs) {
+               self.setViewControllers([nextVc], direction: .forward, animated: true, completion: nil)
+            }
+    
+        
+        
     }
     
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
 
-        var index = (viewController as! HomePageViewController).index
-        delegate1?.indexToChange(index: index)
+        var index = (viewController as! HomePageVc).index
 
+        print("index before \(index)")
         currentIndex = index
         index -= 1
 
@@ -50,9 +56,8 @@ class HomePageController: UIPageViewController, UIPageViewControllerDataSource, 
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
 
-        var index = (viewController as! HomePageViewController).index
-        delegate1?.indexToChange(index: index)
-
+        var index = (viewController as! HomePageVc).index
+        print("index after \(index)")
         currentIndex = index
         index += 1
 
@@ -60,14 +65,18 @@ class HomePageController: UIPageViewController, UIPageViewControllerDataSource, 
 
     }
 
-    func contentView(at index: Int) -> HomePageViewController? {
+    func contentView(at index: Int) -> HomePageVc? {
         if index < 0 || index >= 5 {
             return nil
         }
 
-        if let pageObj = storyboard?.instantiateViewController(withIdentifier: "HomePageViewController") as? HomePageViewController {
-            pageObj.index = index
-            return pageObj
+        if let pageObj = storyboard?.instantiateViewController(withIdentifier: "HomePageViewController") as? HomePageVc {
+            
+                pageObj.index = index
+            pageObj.delegate2 = delegate1 as! sendingIndex
+                print("index index : \(index)")
+
+                return pageObj            
         }
         return nil
     }

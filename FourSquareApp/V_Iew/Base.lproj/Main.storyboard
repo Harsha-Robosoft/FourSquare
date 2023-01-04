@@ -752,12 +752,36 @@
                                                     <constraint firstAttribute="trailing" secondItem="SJn-Ly-SYs" secondAttribute="trailing" constant="30" id="zLN-vw-vnL"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yyg-Jz-ton">
+                                                <rect key="frame" x="0.0" y="148" width="414" height="588"/>
+                                                <subviews>
+                                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="m21-0f-vES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="588"/>
+                                                    </mapView>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVO-Ff-LpH">
+                                                        <rect key="frame" x="184" y="397" width="46" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" title="Button"/>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="m21-0f-vES" firstAttribute="top" secondItem="Yyg-Jz-ton" secondAttribute="top" id="Xft-Yd-Fgb"/>
+                                                    <constraint firstItem="m21-0f-vES" firstAttribute="leading" secondItem="Yyg-Jz-ton" secondAttribute="leading" id="gHS-a0-Sjd"/>
+                                                    <constraint firstAttribute="bottom" secondItem="m21-0f-vES" secondAttribute="bottom" id="iD4-v5-voF"/>
+                                                    <constraint firstAttribute="trailing" secondItem="m21-0f-vES" secondAttribute="trailing" id="tu3-tD-een"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="4hl-ne-12Q" secondAttribute="trailing" id="2rx-vF-wTS"/>
+                                            <constraint firstItem="Yyg-Jz-ton" firstAttribute="leading" secondItem="T85-Oo-YJj" secondAttribute="leading" id="6nQ-hd-KN7"/>
                                             <constraint firstItem="4hl-ne-12Q" firstAttribute="leading" secondItem="T85-Oo-YJj" secondAttribute="leading" id="9SC-ei-ouW"/>
+                                            <constraint firstAttribute="bottom" secondItem="Yyg-Jz-ton" secondAttribute="bottom" id="M6T-QB-4VF"/>
                                             <constraint firstItem="4hl-ne-12Q" firstAttribute="top" secondItem="T85-Oo-YJj" secondAttribute="top" id="dvU-se-9jt"/>
+                                            <constraint firstAttribute="trailing" secondItem="Yyg-Jz-ton" secondAttribute="trailing" id="gBs-we-srp"/>
+                                            <constraint firstItem="Yyg-Jz-ton" firstAttribute="top" secondItem="4hl-ne-12Q" secondAttribute="bottom" id="k2v-wI-wWq"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1700,10 +1724,10 @@
             </objects>
             <point key="canvasLocation" x="140.57971014492756" y="133.69565217391306"/>
         </scene>
-        <!--Home Page View Controller-->
+        <!--Home Page Vc-->
         <scene sceneID="5rt-e5-Sah">
             <objects>
-                <viewController storyboardIdentifier="HomePageViewController" id="sQb-7r-Jdy" customClass="HomePageViewController" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomePageViewController" id="sQb-7r-Jdy" customClass="HomePageVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="46k-CJ-wxn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1729,6 +1753,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="z8m-DU-99P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Obd-aV-V5E" firstAttribute="leading" secondItem="46k-CJ-wxn" secondAttribute="leading" id="8fC-yg-nh7"/>
