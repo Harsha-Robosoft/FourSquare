@@ -481,7 +481,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jHN-ip-9hZ">
-                                                <rect key="frame" x="20" y="30" width="24" height="24"/>
+                                                <rect key="frame" x="20" y="15" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="Mzq-ap-Iys"/>
                                                     <constraint firstAttribute="height" constant="24" id="zeZ-u6-Df2"/>
@@ -492,14 +492,14 @@
                                                 </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="m9j-o4-EDT">
-                                                <rect key="frame" x="134.66666666666666" y="30" width="144.99999999999997" height="20"/>
+                                                <rect key="frame" x="134.66666666666666" y="17" width="144.99999999999997" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="MmH-uI-BHa"/>
                                                     <constraint firstAttribute="width" constant="145" id="Y7z-XL-EKK"/>
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zzm-Tg-ysk">
-                                                <rect key="frame" x="370" y="30" width="24" height="24"/>
+                                                <rect key="frame" x="370" y="15" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="rY9-pC-J0N"/>
                                                 </constraints>
@@ -509,7 +509,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PZV-19-jRb">
-                                                <rect key="frame" x="326" y="30" width="24" height="24"/>
+                                                <rect key="frame" x="326" y="15" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="GoF-Sg-osQ"/>
                                                     <constraint firstAttribute="width" constant="24" id="Gv0-oO-ezo"/>
@@ -563,17 +563,17 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.21812558169999999" green="0.059228338300000002" blue="0.14172714950000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="m9j-o4-EDT" firstAttribute="top" secondItem="5bk-nI-SjG" secondAttribute="top" constant="30" id="0id-U9-gu6"/>
+                                            <constraint firstItem="m9j-o4-EDT" firstAttribute="top" secondItem="5bk-nI-SjG" secondAttribute="top" constant="17" id="0id-U9-gu6"/>
                                             <constraint firstItem="m9j-o4-EDT" firstAttribute="centerX" secondItem="5bk-nI-SjG" secondAttribute="centerX" id="0ut-Zi-TMK"/>
-                                            <constraint firstItem="PZV-19-jRb" firstAttribute="top" secondItem="5bk-nI-SjG" secondAttribute="top" constant="30" id="9vA-od-Gcf"/>
+                                            <constraint firstItem="PZV-19-jRb" firstAttribute="top" secondItem="5bk-nI-SjG" secondAttribute="top" constant="15" id="9vA-od-Gcf"/>
                                             <constraint firstAttribute="bottom" secondItem="k9x-ik-fmo" secondAttribute="bottom" id="BHS-OD-jNp"/>
                                             <constraint firstAttribute="height" constant="120" id="QRa-qa-Qxo"/>
                                             <constraint firstItem="Zzm-Tg-ysk" firstAttribute="leading" secondItem="PZV-19-jRb" secondAttribute="trailing" constant="20" id="QVN-9s-DKU"/>
                                             <constraint firstAttribute="trailing" secondItem="k9x-ik-fmo" secondAttribute="trailing" id="SeA-xS-LPN"/>
-                                            <constraint firstItem="jHN-ip-9hZ" firstAttribute="top" secondItem="5bk-nI-SjG" secondAttribute="top" constant="30" id="Uce-8l-ehM"/>
+                                            <constraint firstItem="jHN-ip-9hZ" firstAttribute="top" secondItem="5bk-nI-SjG" secondAttribute="top" constant="15" id="Uce-8l-ehM"/>
                                             <constraint firstItem="jHN-ip-9hZ" firstAttribute="leading" secondItem="5bk-nI-SjG" secondAttribute="leading" constant="20" id="aEh-jQ-o6H"/>
                                             <constraint firstItem="k9x-ik-fmo" firstAttribute="leading" secondItem="5bk-nI-SjG" secondAttribute="leading" constant="30" id="gnD-kI-LYo"/>
-                                            <constraint firstItem="Zzm-Tg-ysk" firstAttribute="top" secondItem="5bk-nI-SjG" secondAttribute="top" constant="30" id="kDJ-k8-od8"/>
+                                            <constraint firstItem="Zzm-Tg-ysk" firstAttribute="top" secondItem="5bk-nI-SjG" secondAttribute="top" constant="15" id="kDJ-k8-od8"/>
                                             <constraint firstAttribute="trailing" secondItem="Zzm-Tg-ysk" secondAttribute="trailing" constant="20" id="kHe-9H-rpw"/>
                                         </constraints>
                                     </view>
@@ -799,6 +799,9 @@
                                                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="useMyCurrentLocationButtonTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="VBu-bn-cpG"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot 2023-01-04 at 4.54.19 PM" translatesAutoresizingMaskIntoConstraints="NO" id="wLK-0E-can">
                                                                                 <rect key="frame" x="25" y="11" width="28" height="42"/>
@@ -826,6 +829,9 @@
                                                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="searchInMapButtonTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="bOa-Kf-xBB"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P0O-So-D7r">
                                                                                 <rect key="frame" x="0.0" y="131" width="414" height="1"/>
@@ -1370,6 +1376,9 @@
                                                                                         <state key="normal" title="Popular">
                                                                                             <color key="titleColor" red="0.22529408340000001" green="0.094071365889999994" blue="0.29439276460000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         </state>
+                                                                                        <connections>
+                                                                                            <action selector="popular_Distance_rating_ButtonTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="yy3-yQ-Xw8"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJe-YP-ofe" customClass="SearchScreenButton" customModule="FourSquareApp" customModuleProvider="target">
                                                                                         <rect key="frame" x="138" y="0.0" width="138" height="42"/>
@@ -1380,6 +1389,9 @@
                                                                                         <state key="normal" title="Distance">
                                                                                             <color key="titleColor" red="0.22529408340000001" green="0.094071365889999994" blue="0.29439276460000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         </state>
+                                                                                        <connections>
+                                                                                            <action selector="popular_Distance_rating_ButtonTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="KWi-ex-G3S"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmc-E2-yae" customClass="SearchScreenButton" customModule="FourSquareApp" customModuleProvider="target">
                                                                                         <rect key="frame" x="276" y="0.0" width="138" height="42"/>
@@ -1391,6 +1403,9 @@
                                                                                         <state key="normal" title="Rating">
                                                                                             <color key="titleColor" red="0.22529408340000001" green="0.094071365889999994" blue="0.29439276460000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         </state>
+                                                                                        <connections>
+                                                                                            <action selector="popular_Distance_rating_ButtonTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="VWg-3x-taJ"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <constraints>
@@ -1457,6 +1472,9 @@
                                                                                         <state key="normal" title="₹">
                                                                                             <color key="titleColor" red="0.25270423289999999" green="0.13522017" blue="0.31380760670000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         </state>
+                                                                                        <connections>
+                                                                                            <action selector="priceRangeButtonsTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="Znj-JD-3rP"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3d8-Gf-cI4" customClass="SearchScreenButton" customModule="FourSquareApp" customModuleProvider="target">
                                                                                         <rect key="frame" x="103.66666666666669" y="0.0" width="103.33333333333331" height="42"/>
@@ -1466,6 +1484,9 @@
                                                                                         <state key="normal" title="₹₹">
                                                                                             <color key="titleColor" red="0.27627488970000003" green="0.15903565289999999" blue="0.33742356299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         </state>
+                                                                                        <connections>
+                                                                                            <action selector="priceRangeButtonsTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="f33-xc-hyk"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ChC-oy-rS4" customClass="SearchScreenButton" customModule="FourSquareApp" customModuleProvider="target">
                                                                                         <rect key="frame" x="206.99999999999997" y="0.0" width="103.66666666666666" height="42"/>
@@ -1475,6 +1496,9 @@
                                                                                         <state key="normal" title="₹₹₹">
                                                                                             <color key="titleColor" red="0.26059591770000001" green="0.138800323" blue="0.32574871179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         </state>
+                                                                                        <connections>
+                                                                                            <action selector="priceRangeButtonsTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="M7O-9h-YLf"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tld-sx-gOj" customClass="SearchScreenButton" customModule="FourSquareApp" customModuleProvider="target">
                                                                                         <rect key="frame" x="310.66666666666669" y="0.0" width="103.33333333333331" height="42"/>
@@ -1484,6 +1508,9 @@
                                                                                         <state key="normal" title="₹₹₹₹">
                                                                                             <color key="titleColor" red="0.26059591770000001" green="0.138800323" blue="0.32574871179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                         </state>
+                                                                                        <connections>
+                                                                                            <action selector="priceRangeButtonsTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="6Gc-Eg-Hmq"/>
+                                                                                        </connections>
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <constraints>
@@ -1513,17 +1540,20 @@
                                                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fIK-Cj-uio" secondAttribute="trailing" constant="20" symbolic="YES" id="aYb-QD-apf"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upv-d5-Au3">
+                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upv-d5-Au3" customClass="FilterByButtons" customModule="FourSquareApp" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="272" width="414" height="42"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="42" id="j79-CA-kEe"/>
                                                                                 </constraints>
                                                                                 <color key="tintColor" red="0.74109476799999996" green="0.74122357370000003" blue="0.74108666180000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="190" maxY="0.0"/>
+                                                                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="195" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="190" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                <state key="normal" title="Accepts creadit card" image="plus" catalog="system">
+                                                                                <state key="normal" title="Accepts creadit card">
                                                                                     <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="hhH-6h-RjY"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vef-i6-ScH">
                                                                                 <rect key="frame" x="0.0" y="314" width="414" height="1"/>
@@ -1532,7 +1562,7 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="FKL-Ps-ttG"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Knt-PH-oB8">
+                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Knt-PH-oB8" customClass="FilterByButtons" customModule="FourSquareApp" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="315" width="414" height="42"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="42" id="fKU-7J-1xs"/>
@@ -1540,9 +1570,12 @@
                                                                                 <color key="tintColor" red="0.74109476799999996" green="0.74122357370000003" blue="0.74108666180000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="295" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="292" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                <state key="normal" title="Delivary" image="plus" catalog="system">
+                                                                                <state key="normal" title="Delivary">
                                                                                     <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="bMi-us-nEh"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4S-c4-7Z4">
                                                                                 <rect key="frame" x="0.0" y="357" width="414" height="1"/>
@@ -1551,7 +1584,7 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="7YH-6Q-ddd"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIp-q2-mKH">
+                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIp-q2-mKH" customClass="FilterByButtons" customModule="FourSquareApp" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="358" width="414" height="42"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="42" id="O4P-AU-AVS"/>
@@ -1559,9 +1592,12 @@
                                                                                 <color key="tintColor" red="0.74109476799999996" green="0.74122357370000003" blue="0.74108666180000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="261" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="259" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                <state key="normal" title="Dog friendly" image="plus" catalog="system">
+                                                                                <state key="normal" title="Dog friendly">
                                                                                     <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="i47-tR-tnU"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ULB-I2-4p8">
                                                                                 <rect key="frame" x="0.0" y="400" width="414" height="1"/>
@@ -1570,7 +1606,7 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="e8w-lt-x7T"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcJ-bR-tQW">
+                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcJ-bR-tQW" customClass="FilterByButtons" customModule="FourSquareApp" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="401" width="414" height="42"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="42" id="nSc-uK-eeq"/>
@@ -1578,9 +1614,12 @@
                                                                                 <color key="tintColor" red="0.74109476799999996" green="0.74122357370000003" blue="0.74108666180000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="191" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="190" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                <state key="normal" title="Family-friendly place" image="plus" catalog="system">
+                                                                                <state key="normal" title="Family-friendly place">
                                                                                     <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="rQh-Ai-ffv"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Eg-jv-2KM">
                                                                                 <rect key="frame" x="0.0" y="443" width="414" height="1"/>
@@ -1589,7 +1628,7 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="uSA-YJ-icr"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sv-L2-2F6">
+                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Sv-L2-2F6" customClass="FilterByButtons" customModule="FourSquareApp" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="444" width="414" height="42"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="42" id="gqj-yH-qMO"/>
@@ -1597,9 +1636,12 @@
                                                                                 <color key="tintColor" red="0.74109476799999996" green="0.74122357370000003" blue="0.74108666180000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="206" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="204" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                <state key="normal" title="In walking distance" image="plus" catalog="system">
+                                                                                <state key="normal" title="In walking distance">
                                                                                     <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="KwG-KI-mf1"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DGJ-pl-U3z">
                                                                                 <rect key="frame" x="0.0" y="486" width="414" height="1"/>
@@ -1608,7 +1650,7 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="qju-aX-q8U"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PM7-l4-yuJ">
+                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PM7-l4-yuJ" customClass="FilterByButtons" customModule="FourSquareApp" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="487" width="414" height="42"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="42" id="YUD-c4-20e"/>
@@ -1616,9 +1658,12 @@
                                                                                 <color key="tintColor" red="0.74109476799999996" green="0.74122357370000003" blue="0.74108666180000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="228" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="226" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                <state key="normal" title="Outdoor seating" image="plus" catalog="system">
+                                                                                <state key="normal" title="Outdoor seating">
                                                                                     <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="7If-GO-9o5"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8OW-FP-GQC">
                                                                                 <rect key="frame" x="0.0" y="529" width="414" height="1"/>
@@ -1627,7 +1672,7 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="yrx-fD-mOw"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-bt-ugX">
+                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-bt-ugX" customClass="FilterByButtons" customModule="FourSquareApp" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="530" width="414" height="42"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="42" id="SNP-QI-lDU"/>
@@ -1635,9 +1680,12 @@
                                                                                 <color key="tintColor" red="0.74109476799999996" green="0.74122357370000003" blue="0.74108666180000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="297" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="296" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                <state key="normal" title="Parking" image="plus" catalog="system">
+                                                                                <state key="normal" title="Parking">
                                                                                     <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="J8Q-8Q-Poy"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a50-pV-VIt">
                                                                                 <rect key="frame" x="0.0" y="572" width="414" height="1"/>
@@ -1646,7 +1694,7 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="Iu0-0T-gzj"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blt-b2-iYU">
+                                                                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blt-b2-iYU" customClass="FilterByButtons" customModule="FourSquareApp" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="573" width="414" height="42"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="42" id="f81-6a-RPx"/>
@@ -1654,9 +1702,12 @@
                                                                                 <color key="tintColor" red="0.74109476799999996" green="0.74122357370000003" blue="0.74108666180000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="317" maxY="0.0"/>
                                                                                 <inset key="imageEdgeInsets" minX="318" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                                                <state key="normal" title="Wi-fi" image="plus" catalog="system">
+                                                                                <state key="normal" title="Wi-fi">
                                                                                     <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </state>
+                                                                                <connections>
+                                                                                    <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="DgQ-T0-EWc"/>
+                                                                                </connections>
                                                                             </button>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oKn-cN-4n0">
                                                                                 <rect key="frame" x="0.0" y="615" width="414" height="1"/>
@@ -1665,26 +1716,87 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="W0O-s8-0Tr"/>
                                                                                 </constraints>
                                                                             </view>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot 2023-01-05 at 10.29.44 AM" translatesAutoresizingMaskIntoConstraints="NO" id="x6C-3p-00Y" userLabel="cardIMage">
+                                                                                <rect key="frame" x="372" y="285.66666666666669" width="15" height="15"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="15" id="DVT-HP-Cwc"/>
+                                                                                    <constraint firstAttribute="width" constant="15" id="rrV-kb-pU9"/>
+                                                                                </constraints>
+                                                                            </imageView>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot 2023-01-05 at 10.29.44 AM" translatesAutoresizingMaskIntoConstraints="NO" id="Zvp-Ze-CY3" userLabel="delivaryIMage">
+                                                                                <rect key="frame" x="372" y="328.66666666666669" width="15" height="15"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="15" id="RMd-D2-Klc"/>
+                                                                                    <constraint firstAttribute="width" constant="15" id="bSF-58-bKc"/>
+                                                                                </constraints>
+                                                                            </imageView>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot 2023-01-05 at 10.29.44 AM" translatesAutoresizingMaskIntoConstraints="NO" id="PBo-66-SRN" userLabel="dogFriendlyIMage">
+                                                                                <rect key="frame" x="372" y="371.66666666666669" width="15" height="15"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="15" id="C6p-Oh-VHt"/>
+                                                                                    <constraint firstAttribute="height" constant="15" id="YCV-2V-NhZ"/>
+                                                                                </constraints>
+                                                                            </imageView>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot 2023-01-05 at 10.29.44 AM" translatesAutoresizingMaskIntoConstraints="NO" id="xdO-p6-U0G" userLabel="familyFriendlyImage">
+                                                                                <rect key="frame" x="372" y="414.66666666666663" width="15" height="15"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="15" id="JIx-fN-3dQ"/>
+                                                                                    <constraint firstAttribute="width" constant="15" id="Kqw-5M-v9g"/>
+                                                                                </constraints>
+                                                                            </imageView>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot 2023-01-05 at 10.29.44 AM" translatesAutoresizingMaskIntoConstraints="NO" id="brk-xS-wjF" userLabel="inWalkingImage">
+                                                                                <rect key="frame" x="372" y="457.66666666666663" width="15" height="15"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="15" id="L3U-go-ncT"/>
+                                                                                    <constraint firstAttribute="height" constant="15" id="UPF-x7-za9"/>
+                                                                                </constraints>
+                                                                            </imageView>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot 2023-01-05 at 10.29.44 AM" translatesAutoresizingMaskIntoConstraints="NO" id="YXg-kR-CjF" userLabel="outdoorIMage">
+                                                                                <rect key="frame" x="372" y="500.66666666666663" width="15" height="15"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="15" id="2dc-Sd-tcv"/>
+                                                                                    <constraint firstAttribute="width" constant="15" id="dee-SP-1Xj"/>
+                                                                                </constraints>
+                                                                            </imageView>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot 2023-01-05 at 10.29.44 AM" translatesAutoresizingMaskIntoConstraints="NO" id="a7P-cO-rPs" userLabel="parkingIMage">
+                                                                                <rect key="frame" x="372" y="543.66666666666663" width="15" height="15"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="15" id="3JX-oS-Lcb"/>
+                                                                                    <constraint firstAttribute="width" constant="15" id="orr-pV-X5g"/>
+                                                                                </constraints>
+                                                                            </imageView>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Screenshot 2023-01-05 at 10.29.44 AM" translatesAutoresizingMaskIntoConstraints="NO" id="8Ul-YH-0lu" userLabel="wifiIMage">
+                                                                                <rect key="frame" x="372" y="586.66666666666663" width="15" height="15"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="15" id="HYn-OS-A2u"/>
+                                                                                    <constraint firstAttribute="width" constant="15" id="vHc-wf-Mec"/>
+                                                                                </constraints>
+                                                                            </imageView>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="trailing" secondItem="HjQ-GM-SEc" secondAttribute="trailing" id="04A-D9-BlE"/>
                                                                             <constraint firstItem="U4S-c4-7Z4" firstAttribute="leading" secondItem="Knt-PH-oB8" secondAttribute="leading" id="0II-sJ-TtV"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="xdO-p6-U0G" secondAttribute="trailing" constant="27" id="16l-TX-iOt"/>
                                                                             <constraint firstItem="jnS-eI-WXZ" firstAttribute="top" secondItem="gOS-Qr-bld" secondAttribute="bottom" id="1oz-et-N6O"/>
                                                                             <constraint firstItem="EcJ-bR-tQW" firstAttribute="top" secondItem="ULB-I2-4p8" secondAttribute="bottom" id="1v1-bW-qLf"/>
                                                                             <constraint firstItem="zYE-Bc-RCb" firstAttribute="top" secondItem="FxH-cV-R1C" secondAttribute="bottom" id="3vu-2x-RVw"/>
                                                                             <constraint firstItem="ULB-I2-4p8" firstAttribute="leading" secondItem="EIp-q2-mKH" secondAttribute="leading" id="472-kP-loq"/>
+                                                                            <constraint firstItem="brk-xS-wjF" firstAttribute="centerY" secondItem="7Sv-L2-2F6" secondAttribute="centerY" id="57O-B4-4XP"/>
                                                                             <constraint firstItem="a50-pV-VIt" firstAttribute="leading" secondItem="RtU-bt-ugX" secondAttribute="leading" id="626-AM-Mim"/>
                                                                             <constraint firstItem="a50-pV-VIt" firstAttribute="trailing" secondItem="blt-b2-iYU" secondAttribute="trailing" id="6xU-89-Nzx"/>
                                                                             <constraint firstItem="jnS-eI-WXZ" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" id="75u-Vn-oRT"/>
                                                                             <constraint firstAttribute="trailing" secondItem="zYE-Bc-RCb" secondAttribute="trailing" constant="25" id="85t-ku-VmT"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="8Ul-YH-0lu" secondAttribute="trailing" constant="27" id="8KO-jN-pmX"/>
                                                                             <constraint firstItem="HjQ-GM-SEc" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" id="ALY-w4-8KJ"/>
                                                                             <constraint firstItem="8OW-FP-GQC" firstAttribute="leading" secondItem="PM7-l4-yuJ" secondAttribute="leading" id="Any-Nn-Dbz"/>
                                                                             <constraint firstItem="U4S-c4-7Z4" firstAttribute="top" secondItem="Knt-PH-oB8" secondAttribute="bottom" id="BYj-34-n9s"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="PBo-66-SRN" secondAttribute="trailing" constant="27" id="CfX-xF-5vd"/>
                                                                             <constraint firstAttribute="trailing" secondItem="Upv-d5-Au3" secondAttribute="trailing" id="D6H-4r-TUx"/>
                                                                             <constraint firstItem="FxH-cV-R1C" firstAttribute="top" secondItem="fN3-U3-6uj" secondAttribute="bottom" id="F2l-c1-gSD"/>
                                                                             <constraint firstItem="DGJ-pl-U3z" firstAttribute="trailing" secondItem="RtU-bt-ugX" secondAttribute="trailing" id="FAM-ET-Aei"/>
                                                                             <constraint firstItem="DGJ-pl-U3z" firstAttribute="trailing" secondItem="7Sv-L2-2F6" secondAttribute="trailing" id="FHv-VH-C91"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="Zvp-Ze-CY3" secondAttribute="trailing" constant="27" id="Fw2-z4-12H"/>
                                                                             <constraint firstItem="fN3-U3-6uj" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" constant="25" id="Fzp-b4-yv2"/>
                                                                             <constraint firstItem="DGJ-pl-U3z" firstAttribute="leading" secondItem="PM7-l4-yuJ" secondAttribute="leading" id="Ggv-mz-PWx"/>
                                                                             <constraint firstItem="gOS-Qr-bld" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" id="HvM-PV-QNb"/>
@@ -1692,23 +1804,29 @@
                                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fN3-U3-6uj" secondAttribute="trailing" constant="20" symbolic="YES" id="JXU-Lk-FAo"/>
                                                                             <constraint firstItem="QIV-ss-hfA" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" id="Jbx-2w-RW4"/>
                                                                             <constraint firstItem="Knt-PH-oB8" firstAttribute="top" secondItem="vef-i6-ScH" secondAttribute="bottom" id="K1u-of-ZNm"/>
+                                                                            <constraint firstItem="Zvp-Ze-CY3" firstAttribute="centerY" secondItem="Knt-PH-oB8" secondAttribute="centerY" id="KPH-1i-D0Q"/>
                                                                             <constraint firstItem="Upv-d5-Au3" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" id="KvI-F6-pdQ"/>
                                                                             <constraint firstItem="a50-pV-VIt" firstAttribute="trailing" secondItem="RtU-bt-ugX" secondAttribute="trailing" id="LHv-iV-STv"/>
                                                                             <constraint firstAttribute="trailing" secondItem="EIp-q2-mKH" secondAttribute="trailing" id="MGe-dA-Vp5"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="brk-xS-wjF" secondAttribute="trailing" constant="27" id="O6L-SS-9DJ"/>
                                                                             <constraint firstAttribute="trailing" secondItem="7Sv-L2-2F6" secondAttribute="trailing" id="OZu-Sc-KgT"/>
                                                                             <constraint firstItem="a50-pV-VIt" firstAttribute="top" secondItem="RtU-bt-ugX" secondAttribute="bottom" id="QYR-a5-CqV"/>
                                                                             <constraint firstItem="ULB-I2-4p8" firstAttribute="top" secondItem="EIp-q2-mKH" secondAttribute="bottom" id="QcS-1G-5bY"/>
+                                                                            <constraint firstItem="x6C-3p-00Y" firstAttribute="centerY" secondItem="Upv-d5-Au3" secondAttribute="centerY" id="QeN-Wn-c2z"/>
                                                                             <constraint firstAttribute="trailing" secondItem="gOS-Qr-bld" secondAttribute="trailing" id="QzJ-2Y-gX7"/>
                                                                             <constraint firstAttribute="trailing" secondItem="IeC-eU-fMl" secondAttribute="trailing" id="To9-NX-xsK"/>
                                                                             <constraint firstItem="9Eg-jv-2KM" firstAttribute="trailing" secondItem="EcJ-bR-tQW" secondAttribute="trailing" id="UwW-AJ-wwA"/>
                                                                             <constraint firstItem="gOS-Qr-bld" firstAttribute="top" secondItem="zYE-Bc-RCb" secondAttribute="bottom" id="V4W-jc-NGU"/>
+                                                                            <constraint firstItem="YXg-kR-CjF" firstAttribute="centerY" secondItem="PM7-l4-yuJ" secondAttribute="centerY" id="VQa-xJ-GtX"/>
                                                                             <constraint firstItem="a50-pV-VIt" firstAttribute="leading" secondItem="blt-b2-iYU" secondAttribute="leading" id="WHl-aw-leg"/>
                                                                             <constraint firstItem="ULB-I2-4p8" firstAttribute="trailing" secondItem="EIp-q2-mKH" secondAttribute="trailing" id="WoB-AP-XpB"/>
                                                                             <constraint firstAttribute="trailing" secondItem="jnS-eI-WXZ" secondAttribute="trailing" id="XJh-Lx-0cc"/>
                                                                             <constraint firstAttribute="trailing" secondItem="QIV-ss-hfA" secondAttribute="trailing" id="XKm-su-YLR"/>
                                                                             <constraint firstAttribute="trailing" secondItem="Knt-PH-oB8" secondAttribute="trailing" id="XPV-em-B9X"/>
                                                                             <constraint firstItem="vef-i6-ScH" firstAttribute="top" secondItem="Upv-d5-Au3" secondAttribute="bottom" id="Y3p-c0-biJ"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="x6C-3p-00Y" secondAttribute="trailing" constant="27" id="Yit-P3-fhn"/>
                                                                             <constraint firstItem="U4S-c4-7Z4" firstAttribute="trailing" secondItem="Knt-PH-oB8" secondAttribute="trailing" id="YzB-2A-mgH"/>
+                                                                            <constraint firstItem="a7P-cO-rPs" firstAttribute="centerY" secondItem="RtU-bt-ugX" secondAttribute="centerY" id="ZSB-wj-U7e"/>
                                                                             <constraint firstItem="oKn-cN-4n0" firstAttribute="trailing" secondItem="blt-b2-iYU" secondAttribute="trailing" id="a2R-p3-64O"/>
                                                                             <constraint firstItem="7Sv-L2-2F6" firstAttribute="top" secondItem="9Eg-jv-2KM" secondAttribute="bottom" id="a9g-Xr-FwB"/>
                                                                             <constraint firstItem="9Eg-jv-2KM" firstAttribute="leading" secondItem="EcJ-bR-tQW" secondAttribute="leading" id="aar-Yf-t96"/>
@@ -1716,11 +1834,14 @@
                                                                             <constraint firstItem="7Sv-L2-2F6" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" id="bF8-tu-Xo0"/>
                                                                             <constraint firstItem="blt-b2-iYU" firstAttribute="top" secondItem="a50-pV-VIt" secondAttribute="bottom" id="bpo-Uu-1hA"/>
                                                                             <constraint firstItem="PM7-l4-yuJ" firstAttribute="top" secondItem="DGJ-pl-U3z" secondAttribute="bottom" id="c7Y-9X-eqA"/>
+                                                                            <constraint firstItem="8Ul-YH-0lu" firstAttribute="centerY" secondItem="blt-b2-iYU" secondAttribute="centerY" id="cCU-xq-oWW"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="YXg-kR-CjF" secondAttribute="trailing" constant="27" id="cgN-dd-Zkp"/>
                                                                             <constraint firstItem="RtU-bt-ugX" firstAttribute="top" secondItem="8OW-FP-GQC" secondAttribute="bottom" id="cp4-e8-s6B"/>
                                                                             <constraint firstItem="Knt-PH-oB8" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" id="czM-Rq-hUs"/>
                                                                             <constraint firstItem="vef-i6-ScH" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" id="dal-QJ-d4g"/>
                                                                             <constraint firstItem="oKn-cN-4n0" firstAttribute="top" secondItem="blt-b2-iYU" secondAttribute="bottom" id="f7V-P2-qVu"/>
                                                                             <constraint firstItem="FxH-cV-R1C" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" constant="25" id="hB5-4k-Y31"/>
+                                                                            <constraint firstItem="xdO-p6-U0G" firstAttribute="centerY" secondItem="EcJ-bR-tQW" secondAttribute="centerY" id="iAW-8r-778"/>
                                                                             <constraint firstItem="fN3-U3-6uj" firstAttribute="top" secondItem="HjQ-GM-SEc" secondAttribute="bottom" constant="10" id="iuv-ve-LSW"/>
                                                                             <constraint firstItem="DGJ-pl-U3z" firstAttribute="leading" secondItem="7Sv-L2-2F6" secondAttribute="leading" id="mR6-iA-0JK"/>
                                                                             <constraint firstItem="HjQ-GM-SEc" firstAttribute="top" secondItem="IeC-eU-fMl" secondAttribute="bottom" id="ns1-Cw-d9Q"/>
@@ -1734,9 +1855,11 @@
                                                                             <constraint firstItem="IeC-eU-fMl" firstAttribute="leading" secondItem="0fk-Sc-92I" secondAttribute="leading" id="rQv-II-tyS"/>
                                                                             <constraint firstItem="ULB-I2-4p8" firstAttribute="leading" secondItem="EcJ-bR-tQW" secondAttribute="leading" id="rhz-AE-vio"/>
                                                                             <constraint firstItem="8OW-FP-GQC" firstAttribute="trailing" secondItem="PM7-l4-yuJ" secondAttribute="trailing" id="sIe-jx-hVQ"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="a7P-cO-rPs" secondAttribute="trailing" constant="27" id="sfX-ng-UTO"/>
                                                                             <constraint firstItem="9Eg-jv-2KM" firstAttribute="top" secondItem="EcJ-bR-tQW" secondAttribute="bottom" id="tA1-Ug-oQH"/>
                                                                             <constraint firstItem="DGJ-pl-U3z" firstAttribute="trailing" secondItem="PM7-l4-yuJ" secondAttribute="trailing" id="tBE-c1-hbj"/>
                                                                             <constraint firstItem="Upv-d5-Au3" firstAttribute="top" secondItem="jnS-eI-WXZ" secondAttribute="bottom" id="uze-o7-Zci"/>
+                                                                            <constraint firstItem="PBo-66-SRN" firstAttribute="centerY" secondItem="EIp-q2-mKH" secondAttribute="centerY" id="v2F-4t-K6y"/>
                                                                             <constraint firstItem="QIV-ss-hfA" firstAttribute="top" secondItem="0fk-Sc-92I" secondAttribute="top" id="y8S-qz-i1x"/>
                                                                             <constraint firstAttribute="trailing" secondItem="FxH-cV-R1C" secondAttribute="trailing" constant="25" id="yHE-Bv-Mtt"/>
                                                                             <constraint firstItem="ULB-I2-4p8" firstAttribute="trailing" secondItem="EcJ-bR-tQW" secondAttribute="trailing" id="zwh-GM-aaO"/>
@@ -1834,12 +1957,29 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acceptCreaditcardButton" destination="Upv-d5-Au3" id="Y4Z-p9-YHa"/>
+                        <outlet property="cardImage" destination="x6C-3p-00Y" id="v3C-T0-CUN"/>
+                        <outlet property="delivaryButton" destination="Knt-PH-oB8" id="mZM-Kp-tsb"/>
+                        <outlet property="delivaryIMage" destination="Zvp-Ze-CY3" id="qbs-OP-Lw1"/>
                         <outlet property="distanceButton" destination="hJe-YP-ofe" id="ENt-rW-5EH"/>
+                        <outlet property="dogFriendlyButton" destination="EIp-q2-mKH" id="Ju1-EP-m2Y"/>
+                        <outlet property="dogFriendlyImage" destination="PBo-66-SRN" id="Wk9-ag-H6e"/>
+                        <outlet property="familyFriendlyImage" destination="xdO-p6-U0G" id="cdg-8l-vLg"/>
+                        <outlet property="familyFriendlyPlace" destination="EcJ-bR-tQW" id="RaA-zZ-Y4L"/>
                         <outlet property="filterScreen" destination="0fk-Sc-92I" id="Fot-4i-dDM"/>
+                        <outlet property="inWalkingDistance" destination="7Sv-L2-2F6" id="Q62-sB-d0J"/>
+                        <outlet property="inwalkingImage" destination="brk-xS-wjF" id="VbH-WY-Pdf"/>
+                        <outlet property="listViewButton" destination="xrl-J0-N43" id="a82-0B-xnc"/>
+                        <outlet property="mapAndColectionView" destination="m21-0f-vES" id="cSQ-P1-G7j"/>
                         <outlet property="mapAndCollectionView" destination="Yyg-Jz-ton" id="jMa-Te-tNv"/>
+                        <outlet property="map_CollectionView" destination="UsW-MO-op2" id="gH3-Gn-2xV"/>
                         <outlet property="nearMe" destination="m2n-Xa-k1J" id="I5U-gK-2vG"/>
                         <outlet property="nearMeView" destination="QjK-ht-VaQ" id="D0e-9A-HdA"/>
                         <outlet property="nearYouAndSuggestion" destination="FBv-ac-qPI" id="tQw-8O-A3p"/>
+                        <outlet property="outDoorSeating" destination="PM7-l4-yuJ" id="VM9-hO-zO1"/>
+                        <outlet property="outdoorImage" destination="YXg-kR-CjF" id="fKF-8e-BeJ"/>
+                        <outlet property="parkingImage" destination="a7P-cO-rPs" id="lZf-OF-5Qh"/>
+                        <outlet property="parkingbutton" destination="RtU-bt-ugX" id="8To-tq-wrn"/>
                         <outlet property="popularButton" destination="xvD-hu-L8b" id="opq-kX-Bpc"/>
                         <outlet property="ratingButton" destination="Fmc-E2-yae" id="2gX-JS-lMC"/>
                         <outlet property="rupeesFour" destination="tld-sx-gOj" id="X0C-sN-QAn"/>
@@ -1847,8 +1987,13 @@
                         <outlet property="rupeesThree" destination="ChC-oy-rS4" id="2bK-qv-vWk"/>
                         <outlet property="rupeesTwo" destination="3d8-Gf-cI4" id="CeZ-bK-0kg"/>
                         <outlet property="search" destination="dbT-Gn-FCb" id="U5C-pc-3DM"/>
+                        <outlet property="searchBymap" destination="RP6-Pq-g4a" id="8D8-7h-5ad"/>
+                        <outlet property="setRadiousField" destination="FxH-cV-R1C" id="86X-UB-X3r"/>
                         <outlet property="tableViewAndViewMap" destination="8zn-PK-teW" id="YJz-zo-9VL"/>
+                        <outlet property="useMyCurrentLocationButton" destination="Wyu-Pd-y4p" id="UQg-AE-bZm"/>
                         <outlet property="whiteView" destination="XCn-0c-Kff" id="oAb-jj-m4n"/>
+                        <outlet property="wifiButton" destination="blt-b2-iYU" id="96o-eI-eFd"/>
+                        <outlet property="wifiimage" destination="8Ul-YH-0lu" id="RKg-OP-L0x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="84m-fW-g35" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2827,6 +2972,7 @@
         <image name="Screenshot 2023-01-03 at 9.21.25 PM" width="152" height="150"/>
         <image name="Screenshot 2023-01-04 at 4.54.19 PM" width="151" height="154"/>
         <image name="Screenshot 2023-01-04 at 4.55.09 PM" width="159" height="145"/>
+        <image name="Screenshot 2023-01-05 at 10.29.44 AM" width="79" height="80"/>
         <image name="Search_icon" width="23.333333969116211" height="23.333333969116211"/>
         <image name="Splashscreen" width="414" height="734.66668701171875"/>
         <image name="aboutus" width="24.666666030883789" height="24.666666030883789"/>
@@ -2842,7 +2988,6 @@
         <image name="logout" width="24.666666030883789" height="24.666666030883789"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="menu_icon" width="23.333333969116211" height="23.333333969116211"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="profile_icon" width="71" height="71"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

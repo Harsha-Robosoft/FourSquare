@@ -17,6 +17,8 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
 
+    
+    
     var index = 0
     var manager = CLLocationManager()
     
@@ -49,12 +51,12 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func checkInedxForApicall(index: Int) {
         
-        let latitude = "13.379162"
-        let longitude = "74.740373"
+//        let latitude = "13.379162"
+//        let longitude = "74.740373"
         
         if index == 0{
             let loader =   self.loader()
-            objectOfHomeViewModel.apiCallForData(endPoint: "/getNearPlace", latToSend: latitude, longToSend: longitude){ status in
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getNearPlace", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                 if status == true{
@@ -66,7 +68,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             }
         }else if index == 1{
             let loader =   self.loader()
-            objectOfHomeViewModel.apiCallForData(endPoint: "/getTopPlace", latToSend: latitude, longToSend: longitude){ status in
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getTopPlace", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                     if status == true{
@@ -79,7 +81,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             }
         }else if index == 2{
             let loader =   self.loader()
-            objectOfHomeViewModel.apiCallForData(endPoint: "/getPopularPlace", latToSend: latitude, longToSend: longitude){ status in
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getPopularPlace", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                     if status == true{
@@ -92,7 +94,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             }
         }else if index == 3{
             let loader =   self.loader()
-            objectOfHomeViewModel.apiCallForData(endPoint: "/getRestaurants", latToSend: latitude, longToSend: longitude){ status in
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getRestaurants", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                     if status == true{
@@ -105,7 +107,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             }
         }else if index == 4{
             let loader =   self.loader()
-            objectOfHomeViewModel.apiCallForData(endPoint: "/getCafe", latToSend: latitude, longToSend: longitude){ status in
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getCafe", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                     if status == true{
@@ -140,7 +142,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            
+            objectOfHomeViewModel.updateUserLocation(lat: String(location.coordinate.latitude), long: String(location.coordinate.longitude))
 //            print("Current location: \(location)")
             manager.stopUpdatingLocation()
             

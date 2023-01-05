@@ -14,6 +14,8 @@ class HomeViewModel {
     
     var homeDetails = [HomeDataModel]()
     
+    var userLocation = [UserLocationModel]()
+    
     func apiCallForData(endPoint: String,latToSend: String, longToSend: String, completion: @escaping((Bool) -> ())) {
         objectOfHomeNetwork.callHomeApi(endPoint: endPoint, lat: latToSend, long: longToSend){ dataIs, statusIs, errorIs in
             self.homeDetails.removeAll()
@@ -95,6 +97,16 @@ class HomeViewModel {
             
             
         }
+    }
+    
+    
+    func updateUserLocation(lat: String, long: String) {
+        
+        userLocation.removeAll()
+        
+        let location = UserLocationModel(latitude: lat, longitude: long)
+        
+        userLocation.append(location)
     }
     
 }

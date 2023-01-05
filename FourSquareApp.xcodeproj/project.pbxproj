@@ -38,6 +38,8 @@
 		7776A3C7296303A700F6830D /* OtpVarificationNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3C6296303A700F6830D /* OtpVarificationNetwork.swift */; };
 		7776A3CA296314D900F6830D /* ForgotPasswordVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3C9296314D900F6830D /* ForgotPasswordVm.swift */; };
 		7776A3CD2963155B00F6830D /* ForgotPasswordNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7776A3CC2963155B00F6830D /* ForgotPasswordNetwork.swift */; };
+		77B80475296686AB002D941B /* FilterByButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B80474296686AB002D941B /* FilterByButtons.swift */; };
+		77B804792966AD1C002D941B /* UserLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B804782966AD1C002D941B /* UserLocationModel.swift */; };
 		77C1A4D129656F7500D6ECCC /* HomeDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1A4D029656F7500D6ECCC /* HomeDataModel.swift */; };
 		77C1A4D4296592E500D6ECCC /* SearchHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1A4D3296592E500D6ECCC /* SearchHeaderCell.swift */; };
 		77C1A4D72965932700D6ECCC /* SearchBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1A4D62965932700D6ECCC /* SearchBodyCell.swift */; };
@@ -79,6 +81,8 @@
 		7776A3C6296303A700F6830D /* OtpVarificationNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpVarificationNetwork.swift; sourceTree = "<group>"; };
 		7776A3C9296314D900F6830D /* ForgotPasswordVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVm.swift; sourceTree = "<group>"; };
 		7776A3CC2963155B00F6830D /* ForgotPasswordNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordNetwork.swift; sourceTree = "<group>"; };
+		77B80474296686AB002D941B /* FilterByButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterByButtons.swift; sourceTree = "<group>"; };
+		77B804782966AD1C002D941B /* UserLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationModel.swift; sourceTree = "<group>"; };
 		77C1A4D029656F7500D6ECCC /* HomeDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataModel.swift; sourceTree = "<group>"; };
 		77C1A4D3296592E500D6ECCC /* SearchHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderCell.swift; sourceTree = "<group>"; };
 		77C1A4D62965932700D6ECCC /* SearchBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBodyCell.swift; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				77C1A4D029656F7500D6ECCC /* HomeDataModel.swift */,
+				77B804782966AD1C002D941B /* UserLocationModel.swift */,
 			);
 			path = M_odel;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 				77664C742962C35C0056BDBE /* textFieldBorderRemove.swift */,
 				77664C772962C47A0056BDBE /* LogInButton.swift */,
 				77C1A4DC2965A92100D6ECCC /* Search Button.swift */,
+				77B80474296686AB002D941B /* FilterByButtons.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -377,6 +383,7 @@
 				7712AD2C296482DB008E1959 /* SearchVc.swift in Sources */,
 				7776A3CD2963155B00F6830D /* ForgotPasswordNetwork.swift in Sources */,
 				7713520A296296CD003CBBFC /* SplashScreenVc.swift in Sources */,
+				77B804792966AD1C002D941B /* UserLocationModel.swift in Sources */,
 				77664C7C2962CF5B0056BDBE /* HomeVc.swift in Sources */,
 				77664C752962C35C0056BDBE /* textFieldBorderRemove.swift in Sources */,
 				77664C782962C47A0056BDBE /* LogInButton.swift in Sources */,
@@ -398,6 +405,7 @@
 				77C1A4DA2965A44B00D6ECCC /* SearchCollectionView.swift in Sources */,
 				7712AD0E2963F7AB008E1959 /* HomeCollectionViewCell.swift in Sources */,
 				7712AD202964332D008E1959 /* HomeTableViewCell.swift in Sources */,
+				77B80475296686AB002D941B /* FilterByButtons.swift in Sources */,
 				77664C722962C1570056BDBE /* orLabel.swift in Sources */,
 				7776A3B02962DAEB00F6830D /* EmailValidationVc.swift in Sources */,
 				7776A3BA2962EE3F00F6830D /* RegisterVm.swift in Sources */,
