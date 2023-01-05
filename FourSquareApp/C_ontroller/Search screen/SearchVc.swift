@@ -19,6 +19,14 @@ class SearchVc: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var filterScreen: UIView!
     @IBOutlet weak var whiteView: UIView!
     
+    @IBOutlet weak var popularButton: SearchScreenButton!
+    @IBOutlet weak var distanceButton: SearchScreenButton!
+    @IBOutlet weak var ratingButton: SearchScreenButton!
+    
+    @IBOutlet weak var rupeesOne: SearchScreenButton!
+    @IBOutlet weak var rupeesTwo: SearchScreenButton!
+    @IBOutlet weak var rupeesThree: SearchScreenButton!
+    @IBOutlet weak var rupeesFour: SearchScreenButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

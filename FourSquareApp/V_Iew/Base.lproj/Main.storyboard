@@ -1834,11 +1834,18 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="distanceButton" destination="hJe-YP-ofe" id="ENt-rW-5EH"/>
                         <outlet property="filterScreen" destination="0fk-Sc-92I" id="Fot-4i-dDM"/>
                         <outlet property="mapAndCollectionView" destination="Yyg-Jz-ton" id="jMa-Te-tNv"/>
                         <outlet property="nearMe" destination="m2n-Xa-k1J" id="I5U-gK-2vG"/>
                         <outlet property="nearMeView" destination="QjK-ht-VaQ" id="D0e-9A-HdA"/>
                         <outlet property="nearYouAndSuggestion" destination="FBv-ac-qPI" id="tQw-8O-A3p"/>
+                        <outlet property="popularButton" destination="xvD-hu-L8b" id="opq-kX-Bpc"/>
+                        <outlet property="ratingButton" destination="Fmc-E2-yae" id="2gX-JS-lMC"/>
+                        <outlet property="rupeesFour" destination="tld-sx-gOj" id="X0C-sN-QAn"/>
+                        <outlet property="rupeesOne" destination="fbH-a1-jA8" id="BOF-o3-Hcx"/>
+                        <outlet property="rupeesThree" destination="ChC-oy-rS4" id="2bK-qv-vWk"/>
+                        <outlet property="rupeesTwo" destination="3d8-Gf-cI4" id="CeZ-bK-0kg"/>
                         <outlet property="search" destination="dbT-Gn-FCb" id="U5C-pc-3DM"/>
                         <outlet property="tableViewAndViewMap" destination="8zn-PK-teW" id="YJz-zo-9VL"/>
                         <outlet property="whiteView" destination="XCn-0c-Kff" id="oAb-jj-m4n"/>

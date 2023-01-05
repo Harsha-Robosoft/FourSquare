@@ -177,7 +177,12 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
         
         let cell = tableView01.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
-        cell.imageIs.image = getImage(urlString: objectOfHomeViewModel.homeDetails[indexPath.row].placeImage)
+        
+        var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
+        
+        imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+
+        cell.imageIs.image = getImage(urlString: imageIs)
         cell.addresIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address),\(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
         cell.distanceIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
         cell.nameIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].placeName
