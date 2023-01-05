@@ -713,7 +713,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                         <connections>
-                                                            <action selector="searchFieldUsed:" destination="LB5-kj-7Jj" eventType="editingChanged" id="uom-AH-bIc"/>
+                                                            <action selector="searchFieldUsing:" destination="LB5-kj-7Jj" eventType="editingChanged" id="maS-G1-a47"/>
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Near me" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m2n-Xa-k1J">
@@ -723,6 +723,9 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <connections>
+                                                            <action selector="nearMeFieldUsing:" destination="LB5-kj-7Jj" eventType="editingChanged" id="aTg-AF-XyU"/>
+                                                        </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJn-Ly-SYs">
                                                         <rect key="frame" x="360" y="15" width="24" height="24"/>
@@ -924,7 +927,7 @@
                                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UsW-MO-op2">
                                                                                 <rect key="frame" x="8" y="8" width="398" height="128"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kaG-pB-f52">
                                                                                     <size key="itemSize" width="340" height="128"/>
                                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1072,6 +1075,7 @@
                                                                                                     </constraints>
                                                                                                 </view>
                                                                                             </subviews>
+                                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <constraints>
                                                                                                 <constraint firstItem="TEr-o4-PNt" firstAttribute="centerY" secondItem="5Vz-re-zEE" secondAttribute="centerY" id="2hf-A4-EPr"/>
                                                                                                 <constraint firstItem="TEr-o4-PNt" firstAttribute="leading" secondItem="5Vz-re-zEE" secondAttribute="leading" id="5YC-e9-r8c"/>
@@ -1085,9 +1089,11 @@
                                                                                                 <constraint firstAttribute="bottom" secondItem="TEr-o4-PNt" secondAttribute="bottom" id="qHZ-8g-oda"/>
                                                                                             </constraints>
                                                                                         </collectionViewCellContentView>
+                                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <size key="customSize" width="398" height="128"/>
                                                                                         <connections>
                                                                                             <outlet property="address" destination="Yxw-8Y-wGg" id="yAU-9L-LoC"/>
+                                                                                            <outlet property="backView" destination="TEr-o4-PNt" id="b5h-6F-yFQ"/>
                                                                                             <outlet property="category" destination="S8Q-WN-4yx" id="OFW-qj-che"/>
                                                                                             <outlet property="distance" destination="co0-7L-lUa" id="cxs-f7-xYg"/>
                                                                                             <outlet property="imageIs" destination="DM0-WW-nz6" id="VFA-j1-JlA"/>
@@ -1997,6 +2003,7 @@
                         <outlet property="map_CollectionView" destination="UsW-MO-op2" id="gH3-Gn-2xV"/>
                         <outlet property="nearMe" destination="m2n-Xa-k1J" id="I5U-gK-2vG"/>
                         <outlet property="nearMeTableView" destination="2Ef-cn-3xs" id="GBl-Jl-ncN"/>
+                        <outlet property="nearMeTableViewHeightconstraints" destination="wMa-fC-Q8f" id="pBX-UY-k6h"/>
                         <outlet property="nearMeView" destination="QjK-ht-VaQ" id="D0e-9A-HdA"/>
                         <outlet property="nearYouAndSuggestion" destination="FBv-ac-qPI" id="tQw-8O-A3p"/>
                         <outlet property="outDoorSeating" destination="PM7-l4-yuJ" id="VM9-hO-zO1"/>
@@ -2942,6 +2949,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="135" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cwn-kp-pGB">
                                 <rect key="frame" x="0.0" y="150" width="414" height="586"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="586" id="SqU-v1-uQ1"/>
+                                </constraints>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Obd-aV-V5E">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
@@ -2976,6 +2986,7 @@
                         <outlet property="mapHeight" destination="oSL-9d-6Sa" id="Din-0V-TDv"/>
                         <outlet property="mapIs" destination="lUV-ny-s6U" id="oCp-Jy-Mbg"/>
                         <outlet property="tableView01" destination="Cwn-kp-pGB" id="eWX-XO-Y9Y"/>
+                        <outlet property="tableViewHeight" destination="SqU-v1-uQ1" id="YSf-w2-baF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMz-AP-uob" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

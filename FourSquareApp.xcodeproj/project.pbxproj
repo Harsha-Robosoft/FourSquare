@@ -47,6 +47,7 @@
 		77C1A4D72965932700D6ECCC /* SearchBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1A4D62965932700D6ECCC /* SearchBodyCell.swift */; };
 		77C1A4DA2965A44B00D6ECCC /* SearchCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1A4D92965A44B00D6ECCC /* SearchCollectionView.swift */; };
 		77C1A4DD2965A92100D6ECCC /* Search Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1A4DC2965A92100D6ECCC /* Search Button.swift */; };
+		77DF7C7B2966FE8F0050EDA3 /* NearCityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DF7C7A2966FE8F0050EDA3 /* NearCityModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		77C1A4D62965932700D6ECCC /* SearchBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBodyCell.swift; sourceTree = "<group>"; };
 		77C1A4D92965A44B00D6ECCC /* SearchCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionView.swift; sourceTree = "<group>"; };
 		77C1A4DC2965A92100D6ECCC /* Search Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search Button.swift"; sourceTree = "<group>"; };
+		77DF7C7A2966FE8F0050EDA3 /* NearCityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearCityModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,14 +196,6 @@
 			path = "Login and registraion VM";
 			sourceTree = "<group>";
 		};
-		77489DBE29655590005D6C33 /* Home VM */ = {
-			isa = PBXGroup;
-			children = (
-				77489DC0296555C2005D6C33 /* HomeViewModel.swift */,
-			);
-			path = "Home VM";
-			sourceTree = "<group>";
-		};
 		77489DC929655AB1005D6C33 /* RegisterNetwork */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,8 +238,8 @@
 		77664C662962B0020056BDBE /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				77B8047B2966EC81002D941B /* Search V M */,
-				77489DBE29655590005D6C33 /* Home VM */,
+				77489DC0296555C2005D6C33 /* HomeViewModel.swift */,
+				77B8047D2966F8D4002D941B /* SearchVm.swift */,
 				77489DBD2965556E005D6C33 /* Login and registraion VM */,
 			);
 			path = "View Model";
@@ -255,8 +249,8 @@
 			isa = PBXGroup;
 			children = (
 				77489DC629655997005D6C33 /* HomeNetwork.swift */,
-				77489DC929655AB1005D6C33 /* RegisterNetwork */,
 				77B804802966F96F002D941B /* SearchNetworkManager.swift */,
+				77489DC929655AB1005D6C33 /* RegisterNetwork */,
 			);
 			path = "Network Manager";
 			sourceTree = "<group>";
@@ -266,6 +260,7 @@
 			children = (
 				77C1A4D029656F7500D6ECCC /* HomeDataModel.swift */,
 				77B804782966AD1C002D941B /* UserLocationModel.swift */,
+				77DF7C7A2966FE8F0050EDA3 /* NearCityModel.swift */,
 			);
 			path = M_odel;
 			sourceTree = "<group>";
@@ -303,14 +298,6 @@
 				7712AD2629646E62008E1959 /* Location Manager.swift */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		77B8047B2966EC81002D941B /* Search V M */ = {
-			isa = PBXGroup;
-			children = (
-				77B8047D2966F8D4002D941B /* SearchVm.swift */,
-			);
-			path = "Search V M";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,6 +379,7 @@
 				77B804792966AD1C002D941B /* UserLocationModel.swift in Sources */,
 				77664C7C2962CF5B0056BDBE /* HomeVc.swift in Sources */,
 				77664C752962C35C0056BDBE /* textFieldBorderRemove.swift in Sources */,
+				77DF7C7B2966FE8F0050EDA3 /* NearCityModel.swift in Sources */,
 				77664C782962C47A0056BDBE /* LogInButton.swift in Sources */,
 				7776A3C7296303A700F6830D /* OtpVarificationNetwork.swift in Sources */,
 				77135206296296CD003CBBFC /* AppDelegate.swift in Sources */,

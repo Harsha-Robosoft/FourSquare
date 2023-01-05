@@ -25,6 +25,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var mapIs: MKMapView!
     @IBOutlet weak var mapHeight: NSLayoutConstraint!
     @IBOutlet weak var tableView01: UITableView!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     var delegate2: sendingIndex?
     
@@ -54,15 +55,23 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
 //        let latitude = "13.379162"
 //        let longitude = "74.740373"
         
+        tableViewHeight.constant = 0
+        
         if index == 0{
             let loader =   self.loader()
             objectOfHomeViewModel.apiCallForData(endPoint: "/getNearPlace", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                 if status == true{
+                    self.tableViewHeight.constant = 586
+                    UIView.animate(withDuration: 0.3 , animations: {
+                        self.view.layoutIfNeeded()
+                    }) { (status) in
+                        
+                    }
                     self.tableView01.reloadData()
                 }else{
-                    self.tableView01.isHidden = true
+                    self.tableViewHeight.constant = 0
                 }
                 }
             }
