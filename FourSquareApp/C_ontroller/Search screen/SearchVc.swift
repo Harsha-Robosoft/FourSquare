@@ -46,7 +46,6 @@ class SearchVc: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("User tapped on the text field : \(textField.placeholder)")
         
         if let name = textField.placeholder {
             
