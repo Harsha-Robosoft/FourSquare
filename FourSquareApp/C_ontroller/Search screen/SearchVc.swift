@@ -9,11 +9,23 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class SearchVc: UIViewController, UITextFieldDelegate {
+class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+//   OBJECT CREATION ---------------------------------
+    
+    var objectOfSearchViewModel = SearchViewModel.objectOfViewModel
+    
+    
+//    VARIABLES DECLARATION -----------------------------
+    
+    var test = false
+    var nearYou = 0
+    
+    
     @IBOutlet weak var search: UITextField!
     @IBOutlet weak var nearMe: UITextField!
     
-//    views ------------------------------------
+//    VIEWS ------------------------------------
     @IBOutlet weak var nearMeView: UIView!
     @IBOutlet weak var tableViewAndViewMap: UIView!
     @IBOutlet weak var mapAndCollectionView: UIView!
@@ -21,7 +33,7 @@ class SearchVc: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var filterScreen: UIView!
     @IBOutlet weak var whiteView: UIView!
    
-//    filter screen fields -------------------------------------------
+//    FILTER SCREEN FIRELD -------------------------------------------
     
     @IBOutlet weak var popularButton: SearchScreenButton!
     @IBOutlet weak var distanceButton: SearchScreenButton!
@@ -62,17 +74,30 @@ class SearchVc: UIViewController, UITextFieldDelegate {
     var parkingNum = true
     var wifiNum = true
     
-//    map & collection view fields ----------------------------------------
-    
+//    MAP & COLLECTION VIEW FIELD ----------------------------------------
+    var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
+    var manager = CLLocationManager()
+
     @IBOutlet weak var mapAndColectionView: MKMapView!
     @IBOutlet weak var listViewButton: UIButton!
     @IBOutlet weak var map_CollectionView: UICollectionView!
 
-//    near me view fields ----------------------------
+//    NEAR ME VIEW FIELDES ----------------------------
     @IBOutlet weak var useMyCurrentLocationButton: UIButton!
     
     @IBOutlet weak var searchBymap: UIButton!
     
+// NEAR TOU AND SUGGESTIONS FIELDS -----------------------
+    
+    @IBOutlet weak var nearMeTableView: UITableView!
+    @IBOutlet weak var topPickButton: UIButton!
+    @IBOutlet weak var pupularButton: UIButton!
+    @IBOutlet weak var lunchButton: UIButton!
+    @IBOutlet weak var cafeButton: UIButton!
+    
+//    TABLE VIEW & MAP VIEW ------------------------
+    @IBOutlet weak var mapViewButton: UIButton!
+    @IBOutlet weak var mapButton_TableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,29 +116,63 @@ class SearchVc: UIViewController, UITextFieldDelegate {
         whiteView.isHidden = false
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.delegate = self
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
         
+        nearMeTableView.delegate = self
+        nearMeTableView.dataSource = self
+        
+        
+        mapButton_TableView.delegate = self
+        mapButton_TableView.dataSource = self
+        mapButton_TableView.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
+        
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         if let name = textField.placeholder {
             
-            if name == "Search"{
+            if test == false{
                 
-                nearMeView.isHidden = true
-                tableViewAndViewMap.isHidden = true
-                mapAndCollectionView.isHidden = true
-                nearYouAndSuggestion.isHidden = false
-                filterScreen.isHidden = true
-                whiteView.isHidden = true
-                
+                if name == "Search"{
+                    
+                    nearYou = 1
+                    
+                    nearMeView.isHidden = true
+                    tableViewAndViewMap.isHidden = true
+                    mapAndCollectionView.isHidden = true
+                    nearYouAndSuggestion.isHidden = false
+                    filterScreen.isHidden = true
+                    whiteView.isHidden = true
+                    
+                    nearMeTableView.reloadData()
+                }else{
+                    nearYou = 0
+                    nearMeView.isHidden = false
+                    tableViewAndViewMap.isHidden = true
+                    mapAndCollectionView.isHidden = true
+                    nearYouAndSuggestion.isHidden = true
+                    filterScreen.isHidden = true
+                    whiteView.isHidden = true
+                    
+                }
             }else{
                 
-                nearMeView.isHidden = false
-                tableViewAndViewMap.isHidden = true
+                nearYou = 0
+                nearMeView.isHidden = true
+                tableViewAndViewMap.isHidden = false
                 mapAndCollectionView.isHidden = true
                 nearYouAndSuggestion.isHidden = true
                 filterScreen.isHidden = true
                 whiteView.isHidden = true
                 
+                test = false
             }
+            
+            
             
         }
 
@@ -134,6 +193,8 @@ class SearchVc: UIViewController, UITextFieldDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func filterButtonTapped(_ sender: Any) {
+        
+        nearYou = 0
         
         nearMeView.isHidden = true
         tableViewAndViewMap.isHidden = true
@@ -195,8 +256,6 @@ class SearchVc: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func filterByButton(_ sender: UIButton) {
-        
-        
         
         if sender.currentTitle == "Accepts creadit card"{
             
@@ -285,7 +344,7 @@ class SearchVc: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func useMyCurrentLocationButtonTapped(_ sender: UIButton) {
-        
+        nearYou = 0
         nearMeView.isHidden = true
         tableViewAndViewMap.isHidden = false
         mapAndCollectionView.isHidden = true
@@ -293,11 +352,10 @@ class SearchVc: UIViewController, UITextFieldDelegate {
         filterScreen.isHidden = true
         whiteView.isHidden = true
         
-        
     }
     
     @IBAction func searchInMapButtonTapped(_ sender: UIButton) {
-        
+        nearYou = 0
         nearMeView.isHidden = true
         tableViewAndViewMap.isHidden = true
         mapAndCollectionView.isHidden = false
@@ -306,15 +364,216 @@ class SearchVc: UIViewController, UITextFieldDelegate {
         whiteView.isHidden = true
         map_CollectionView.isHidden = true
         listViewButton.isHidden = true
+    }
+    
+    @IBAction func SuggestionButtonsTapped(_ sender: UIButton) {
+        nearYou = 0
+        test = true
+        
+        if sender.currentTitle == "Top pick"{
+
+            let loader =   self.loader()
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getTopPlace", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
+                    if status == true{
+                        self.mapButton_TableView.reloadData()
+                    }else{
+                        self.mapButton_TableView.isHidden = true
+                    }
+                }
+            }
+
+
+        }else if sender.currentTitle == "Popular"{
+
+            let loader =   self.loader()
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getPopularPlace", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
+                    if status == true{
+                        self.mapButton_TableView.reloadData()
+                    }else{
+                        self.mapButton_TableView.isHidden = true
+                    }
+                }
+            }
+
+        }else if sender.currentTitle == "Lunch"{
+
+            let loader =   self.loader()
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getRestaurants", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
+                    if status == true{
+
+                        self.mapButton_TableView.reloadData()
+                    }else{
+                        self.mapButton_TableView.isHidden = true
+                    }
+                }
+            }
+
+        }else{
+
+
+            let loader =   self.loader()
+            objectOfHomeViewModel.apiCallForData(endPoint: "/getCafe", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
+                DispatchQueue.main.async() {
+                    self.stopLoader(loader: loader)
+                    if status == true{
+                        self.mapButton_TableView.reloadData()
+                    }else{
+                        self.mapButton_TableView.isHidden = true
+                    }
+                }
+            }
+
+        }
+        
+    }
+    @IBAction func mapViewButtonTapped(_ sender: UIButton) {
+        
+        nearMeView.isHidden = true
+        mapAndCollectionView.isHidden = false
+        nearYouAndSuggestion.isHidden = true
+        filterScreen.isHidden = true
+        whiteView.isHidden = true
         
         
+        
+        
+        
+    }
+    @IBAction func listViewButtonTapped(_ sender: UIButton) {
     }
     
     
 }
 
 extension SearchVc{
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error:: \(error.localizedDescription)")
+    }
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            manager.requestLocation()
+        }
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            self.objectOfHomeViewModel.updateUserLocation(lat: String(location.coordinate.latitude), long: String(location.coordinate.longitude))
+            //            print("Current location: \(location)")
+            manager.stopUpdatingLocation()
+            render(location: location)
+        }
+    }
     
     
+    func render(location: CLLocation) {
+        let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        let region = MKCoordinateRegion(center: coordinate, span: span)
+        self.mapAndColectionView.setRegion(region, animated: true)
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        self.mapAndColectionView.addAnnotation(pin)
+    }
+  
+}
+
+
+extension SearchVc{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        if nearYou == 1{
+            return 1
+        }
+            return 1
+        }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if nearYou == 1{
+            
+            return 2
+        }
+        return objectOfHomeViewModel.homeDetails.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if nearYou == 1{
+        
+            let cell01 = tableView.dequeueReusableCell(withIdentifier: "Header") as? SearchHeaderCell
+            if let cell = cell01{
+                cell.name.text = "Near by places"
+            return cell
+        }
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if nearYou == 1{
+            
+            let cell = nearMeTableView.dequeueReusableCell(withIdentifier: "cell") as! SearchBodyCell
+            cell.name.text = "Harsha"
+            cell.imageIs.image = #imageLiteral(resourceName: "Ferrari-1200-1-1024x683")
+            return cell
+            
+        }
+        
+        
+        
+        let cell = mapButton_TableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
+        
+        var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
+        
+        imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+
+        cell.imageIs.image = getImage(urlString: imageIs)
+        cell.addresIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address),\(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
+        cell.distanceIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
+        cell.nameIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].placeName
+        cell.nationalityIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].category
+        cell.ratingIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].rating
+        if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "1"{
+            cell.rateIs.text = "₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "2"{
+            cell.rateIs.text = "₹₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "3"{
+            cell.rateIs.text = "₹₹₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "4"{
+            cell.rateIs.text = "₹₹₹₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "5"{
+            cell.rateIs.text = "₹₹₹₹₹"
+        }
+        cell.setShadow()
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if nearYou == 1{
+            return 55
+        }
+        return 135
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if nearYou == 1{
+            return 55
+        }
+        return 0
+    }
+}
+
+extension SearchVc{
+    
+
     
 }
