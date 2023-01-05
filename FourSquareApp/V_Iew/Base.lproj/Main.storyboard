@@ -695,10 +695,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coL-Ye-JF0">
-                                                        <rect key="frame" x="30" y="15" width="24" height="24"/>
+                                                        <rect key="frame" x="8" y="15" width="46" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="W6D-39-7wo"/>
-                                                            <constraint firstAttribute="width" constant="24" id="k0e-5g-KIa"/>
+                                                            <constraint firstAttribute="width" constant="46" id="k0e-5g-KIa"/>
                                                         </constraints>
                                                         <state key="normal" image="back_icon"/>
                                                         <connections>
@@ -711,7 +711,7 @@
                                                             <constraint firstAttribute="height" constant="35" id="xce-c9-BYU"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                         <connections>
                                                             <action selector="searchFieldUsing:" destination="LB5-kj-7Jj" eventType="editingChanged" id="maS-G1-a47"/>
                                                         </connections>
@@ -722,17 +722,18 @@
                                                             <constraint firstAttribute="height" constant="35" id="XS6-ST-gfX"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                         <connections>
                                                             <action selector="nearMeFieldUsing:" destination="LB5-kj-7Jj" eventType="editingChanged" id="aTg-AF-XyU"/>
                                                         </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJn-Ly-SYs">
-                                                        <rect key="frame" x="360" y="15" width="24" height="24"/>
+                                                        <rect key="frame" x="360" y="15" width="46" height="24"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="24" id="GI2-hF-AT3"/>
+                                                            <constraint firstAttribute="width" constant="46" id="GI2-hF-AT3"/>
                                                             <constraint firstAttribute="height" constant="24" id="fA6-0h-YGx"/>
                                                         </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                         <state key="normal" image="filter_icon"/>
                                                         <connections>
                                                             <action selector="filterButtonTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="qln-jA-Aze"/>
@@ -767,12 +768,12 @@
                                                     <constraint firstItem="mx6-kp-VIQ" firstAttribute="top" secondItem="dbT-Gn-FCb" secondAttribute="bottom" constant="24" id="c4O-Jd-91D"/>
                                                     <constraint firstItem="y9a-Np-RBC" firstAttribute="top" secondItem="4hl-ne-12Q" secondAttribute="top" constant="24.00000000000038" id="hCm-AK-HoY"/>
                                                     <constraint firstItem="SJn-Ly-SYs" firstAttribute="leading" secondItem="dbT-Gn-FCb" secondAttribute="trailing" constant="17" id="iMb-fG-Wc5"/>
-                                                    <constraint firstItem="coL-Ye-JF0" firstAttribute="leading" secondItem="4hl-ne-12Q" secondAttribute="leading" constant="30" id="iqm-tG-8lK"/>
+                                                    <constraint firstItem="coL-Ye-JF0" firstAttribute="leading" secondItem="4hl-ne-12Q" secondAttribute="leading" constant="8" id="iqm-tG-8lK"/>
                                                     <constraint firstAttribute="bottom" secondItem="mx6-kp-VIQ" secondAttribute="bottom" constant="27.666666666666671" id="lfE-Nz-ZgT"/>
                                                     <constraint firstAttribute="height" constant="120" id="p4u-F8-nej"/>
                                                     <constraint firstItem="dbT-Gn-FCb" firstAttribute="leading" secondItem="coL-Ye-JF0" secondAttribute="trailing" constant="18" id="qno-kx-gRb"/>
                                                     <constraint firstItem="y9a-Np-RBC" firstAttribute="leading" secondItem="coL-Ye-JF0" secondAttribute="trailing" constant="21" id="r4F-un-aN4"/>
-                                                    <constraint firstAttribute="trailing" secondItem="SJn-Ly-SYs" secondAttribute="trailing" constant="30" id="zLN-vw-vnL"/>
+                                                    <constraint firstAttribute="trailing" secondItem="SJn-Ly-SYs" secondAttribute="trailing" constant="8" id="zLN-vw-vnL"/>
                                                 </constraints>
                                             </view>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2LK-v4-Mqk">
@@ -1991,6 +1992,7 @@
                         <outlet property="dogFriendlyImage" destination="PBo-66-SRN" id="Wk9-ag-H6e"/>
                         <outlet property="familyFriendlyImage" destination="xdO-p6-U0G" id="cdg-8l-vLg"/>
                         <outlet property="familyFriendlyPlace" destination="EcJ-bR-tQW" id="RaA-zZ-Y4L"/>
+                        <outlet property="filter" destination="SJn-Ly-SYs" id="bdB-J9-KId"/>
                         <outlet property="filterScreen" destination="0fk-Sc-92I" id="Fot-4i-dDM"/>
                         <outlet property="inWalkingDistance" destination="7Sv-L2-2F6" id="Q62-sB-d0J"/>
                         <outlet property="inwalkingImage" destination="brk-xS-wjF" id="VbH-WY-Pdf"/>

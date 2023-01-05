@@ -48,7 +48,7 @@ class SearchNetworkManager {
         guard let url = URL(string:"https://four-square-three.vercel.app/api/searchPlace") else{ return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \("")", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let parameter: [String:Any] = [
             "latitude": lat,

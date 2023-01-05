@@ -19,8 +19,11 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     
     var test = false
     var nearYou = 0
+    var filterTapped = 0
+    var poplular_Distance_RatingButton = ""
+    var rateStatus = ""
     
-    
+    @IBOutlet weak var filter: UIButton!
     @IBOutlet weak var search: UITextField!
     @IBOutlet weak var nearMe: UITextField!
     
@@ -137,60 +140,64 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if let name = textField.placeholder {
             
-            if test == false{
-                
-                if name == "Search"{
-                    nearMeTableViewHeightconstraints.constant = 0
-                    nearYou = 1
+            if filterTapped == 0{
+                if test == false{
                     
-                    nearMeView.isHidden = true
-                    tableViewAndViewMap.isHidden = true
-                    mapAndCollectionView.isHidden = true
-                    nearYouAndSuggestion.isHidden = false
-                    filterScreen.isHidden = true
-                    whiteView.isHidden = true
-                    
-                    objectOfSearchViewModel.getNearCityDetailsApiCall(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
+                    if name == "Search"{
+                        nearMeTableViewHeightconstraints.constant = 0
+                        nearYou = 1
                         
-                        if status == true{
-                            self.nearMeTableViewHeightconstraints.constant = 180
-                            UIView.animate(withDuration: 0.3 , animations: {
-                                self.view.layoutIfNeeded()
-                            }) { (status) in
-                                
+                        nearMeView.isHidden = true
+                        tableViewAndViewMap.isHidden = true
+                        mapAndCollectionView.isHidden = true
+                        nearYouAndSuggestion.isHidden = false
+                        filterScreen.isHidden = true
+                        whiteView.isHidden = true
+                        
+                        filter.setTitle(nil, for: .normal)
+                        filter.setImage( #imageLiteral(resourceName: "filter_icon"), for: .normal)
+                        
+                        objectOfSearchViewModel.getNearCityDetailsApiCall(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
+                            
+                            if status == true{
+                                self.nearMeTableViewHeightconstraints.constant = 180
+                                UIView.animate(withDuration: 0.3 , animations: {
+                                    self.view.layoutIfNeeded()
+                                }) { (status) in
+                                    
+                                }
+                                self.nearMeTableView.reloadData()
+                            }else{
+                                self.nearMeTableViewHeightconstraints.constant = 0
                             }
-                            self.nearMeTableView.reloadData()
-                        }else{
-                            self.nearMeTableViewHeightconstraints.constant = 0
+                            
                         }
                         
+                    }else{
+                        filter.setTitle(nil, for: .normal)
+                        filter.setImage( #imageLiteral(resourceName: "filter_icon"), for: .normal)
+                        nearYou = 0
+                        nearMeView.isHidden = false
+                        tableViewAndViewMap.isHidden = true
+                        mapAndCollectionView.isHidden = true
+                        nearYouAndSuggestion.isHidden = true
+                        filterScreen.isHidden = true
+                        whiteView.isHidden = true
+                        
                     }
-                    
                 }else{
+                    
                     nearYou = 0
-                    nearMeView.isHidden = false
-                    tableViewAndViewMap.isHidden = true
+                    nearMeView.isHidden = true
+                    tableViewAndViewMap.isHidden = false
                     mapAndCollectionView.isHidden = true
                     nearYouAndSuggestion.isHidden = true
                     filterScreen.isHidden = true
                     whiteView.isHidden = true
                     
+                    test = false
                 }
-            }else{
-                
-                nearYou = 0
-                nearMeView.isHidden = true
-                tableViewAndViewMap.isHidden = false
-                mapAndCollectionView.isHidden = true
-                nearYouAndSuggestion.isHidden = true
-                filterScreen.isHidden = true
-                whiteView.isHidden = true
-                
-                test = false
-            }
-            
-            
-            
+            }else{}
         }
 
         
@@ -208,71 +215,57 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     
     @IBAction func searchFieldUsing(_ sender: Any) {
         
-        if search.text?.count ?? 0 >= 3{
-            
-            objectOfSearchViewModel.search(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: search.text ?? ""){ status in
+        if filterTapped == 0{
+            if search.text?.count ?? 0 >= 3{
                 
-                if status == true{
-                    
-                    self.nearMeView.isHidden = true
-                    self.tableViewAndViewMap.isHidden = false
-                    self.mapAndCollectionView.isHidden = true
-                    self.nearYouAndSuggestion.isHidden = true
-                    self.filterScreen.isHidden = true
-                    self.whiteView.isHidden = true
-                    
-                }else{
-                    
-                    self.nearMeView.isHidden = true
-                    self.tableViewAndViewMap.isHidden = true
-                    self.mapAndCollectionView.isHidden = true
-                    self.nearYouAndSuggestion.isHidden = true
-                    self.filterScreen.isHidden = true
-                    self.whiteView.isHidden = false
-                    
+                objectOfSearchViewModel.search(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: search.text ?? ""){ status in
+                    if status == true{
+                        self.nearMeView.isHidden = true
+                        self.tableViewAndViewMap.isHidden = false
+                        self.mapAndCollectionView.isHidden = true
+                        self.nearYouAndSuggestion.isHidden = true
+                        self.filterScreen.isHidden = true
+                        self.whiteView.isHidden = true
+                    }else{
+                        self.nearMeView.isHidden = true
+                        self.tableViewAndViewMap.isHidden = true
+                        self.mapAndCollectionView.isHidden = true
+                        self.nearYouAndSuggestion.isHidden = true
+                        self.filterScreen.isHidden = true
+                        self.whiteView.isHidden = false
+                    }
                 }
-                
-                
-                
-            }
-            
-            
-        }
+            }else{}
+        }else{}
+        
+        
         
     }
     
     @IBAction func nearMeFieldUsing(_ sender: Any) {
         
-        if search.text?.count ?? 0 >= 3{
-            
-            objectOfSearchViewModel.search(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: search.text ?? ""){ status in
+        if filterTapped == 0{
+            if search.text?.count ?? 0 >= 3{
                 
-                if status == true{
-                    
-                    self.nearMeView.isHidden = true
-                    self.tableViewAndViewMap.isHidden = false
-                    self.mapAndCollectionView.isHidden = true
-                    self.nearYouAndSuggestion.isHidden = true
-                    self.filterScreen.isHidden = true
-                    self.whiteView.isHidden = true
-                    
-                }else{
-                    
-                    self.nearMeView.isHidden = true
-                    self.tableViewAndViewMap.isHidden = true
-                    self.mapAndCollectionView.isHidden = true
-                    self.nearYouAndSuggestion.isHidden = true
-                    self.filterScreen.isHidden = true
-                    self.whiteView.isHidden = false
-                    
+                objectOfSearchViewModel.search(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: search.text ?? ""){ status in
+                    if status == true{
+                        self.nearMeView.isHidden = true
+                        self.tableViewAndViewMap.isHidden = false
+                        self.mapAndCollectionView.isHidden = true
+                        self.nearYouAndSuggestion.isHidden = true
+                        self.filterScreen.isHidden = true
+                        self.whiteView.isHidden = true
+                    }else{
+                        self.nearMeView.isHidden = true
+                        self.tableViewAndViewMap.isHidden = true
+                        self.mapAndCollectionView.isHidden = true
+                        self.nearYouAndSuggestion.isHidden = true
+                        self.filterScreen.isHidden = true
+                        self.whiteView.isHidden = false
+                    }
                 }
-                
-                
-                
-            }
-            
-            
-        }
+            }else{}
+        }else{}
         
     }
     
@@ -280,19 +273,62 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     @IBAction func backButtonTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    @IBAction func filterButtonTapped(_ sender: Any) {
+    @IBAction func filterButtonTapped(_ sender: UIButton) {
         
-        nearYou = 0
+        if sender.currentTitle == nil{
+            filterTapped = 1
+            nearYou = 0
+            nearMeView.isHidden = true
+            tableViewAndViewMap.isHidden = true
+            mapAndCollectionView.isHidden = true
+            nearYouAndSuggestion.isHidden = true
+            filterScreen.isHidden = false
+            whiteView.isHidden = true
+            
+            filter.setTitle("Done", for: .normal)
+            filter.setImage(nil, for: .normal)
+        }else{
+            
+            print("search name : \(search.text)")
+            
+            if acceptCard == false{
+                print("card accepted")
+            }
+            if delivary == false{
+                print("Delivary is there")
+            }
+            if dogFriendly == false{
+                print("Dog friendly")
+            }
+            if familyFriendly == false{
+                print("famili friendly")
+            }
+            if inWalkingDistanceNum == false{
+                print("in walking distance")
+            }
+            if outDoorSeatingNum == false{
+                print("out door seating is there")
+            }
+            if parkingNum == false{
+                print("parking in there")
+            }
+            if wifiNum == false{
+               print("wifi is there")
+            }
+            
+            print("set radious id : \(setRadiousField.text)")
+            print("condition : \(poplular_Distance_RatingButton)")
+            print("rate is : \(rateStatus)")
+            
+        }
         
-        nearMeView.isHidden = true
-        tableViewAndViewMap.isHidden = true
-        mapAndCollectionView.isHidden = true
-        nearYouAndSuggestion.isHidden = true
-        filterScreen.isHidden = false
-        whiteView.isHidden = true
+        
+        
         
     }
     @IBAction func popular_Distance_rating_ButtonTapped(_ sender: UIButton) {
+        
+        poplular_Distance_RatingButton = sender.currentTitle ?? ""
         
         if sender.currentTitle == "Popular"{
             
@@ -316,6 +352,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     }
     
     @IBAction func priceRangeButtonsTapped(_ sender: UIButton) {
+        
+        rateStatus = sender.currentTitle ?? ""
         
         if sender.currentTitle == "₹"{
             rupeesOne.showColour()
