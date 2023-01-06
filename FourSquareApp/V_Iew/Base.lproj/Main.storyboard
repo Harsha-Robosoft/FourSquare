@@ -2085,6 +2085,9 @@
                                                             <constraint firstAttribute="width" constant="24" id="EKM-6z-jL6"/>
                                                         </constraints>
                                                         <state key="normal" image="filter_icon"/>
+                                                        <connections>
+                                                            <action selector="filterButtonTapped:" destination="fft-Qa-DlA" eventType="touchUpInside" id="hm8-yn-UE5"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favourites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2z-Yf-i9n">
                                                         <rect key="frame" x="156.33333333333334" y="20" width="101.33333333333334" height="28"/>
@@ -2175,7 +2178,7 @@
                                                                     <color key="titleColor" red="0.22529408340000001" green="0.094071365889999994" blue="0.29439276460000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="popular_Distance_rating_ButtonTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="RH6-uy-g8g"/>
+                                                                    <action selector="popular_Distance_rating_ButtonTapped:" destination="fft-Qa-DlA" eventType="touchUpInside" id="qjb-Cg-5j3"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHZ-EZ-KJa" customClass="SearchScreenButton" customModule="FourSquareApp" customModuleProvider="target">
@@ -2189,6 +2192,7 @@
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="popular_Distance_rating_ButtonTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="C7R-h4-da9"/>
+                                                                    <action selector="popular_Distance_rating_ButtonTapped:" destination="fft-Qa-DlA" eventType="touchUpInside" id="Zi7-ws-DCo"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFW-3B-52m" customClass="SearchScreenButton" customModule="FourSquareApp" customModuleProvider="target">
@@ -2202,6 +2206,7 @@
                                                                     <color key="titleColor" red="0.22529408340000001" green="0.094071365889999994" blue="0.29439276460000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                                 <connections>
+                                                                    <action selector="popular_Distance_rating_ButtonTapped:" destination="fft-Qa-DlA" eventType="touchUpInside" id="c8m-LI-8Oa"/>
                                                                     <action selector="popular_Distance_rating_ButtonTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="i5N-gF-Q29"/>
                                                                 </connections>
                                                             </button>
@@ -2271,6 +2276,7 @@
                                                                     <color key="titleColor" red="0.25270423289999999" green="0.13522017" blue="0.31380760670000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                                 <connections>
+                                                                    <action selector="priceRangeButtonsTapped:" destination="fft-Qa-DlA" eventType="touchUpInside" id="4BS-S6-sAb"/>
                                                                     <action selector="priceRangeButtonsTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="bZ1-rc-Gx1"/>
                                                                 </connections>
                                                             </button>
@@ -2284,6 +2290,7 @@
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="priceRangeButtonsTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="LG5-9S-lhP"/>
+                                                                    <action selector="priceRangeButtonsTapped:" destination="fft-Qa-DlA" eventType="touchUpInside" id="Xok-yx-pLy"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4an-5P-u4l" customClass="SearchScreenButton" customModule="FourSquareApp" customModuleProvider="target">
@@ -2296,6 +2303,7 @@
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="priceRangeButtonsTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="8lP-Uh-8JQ"/>
+                                                                    <action selector="priceRangeButtonsTapped:" destination="fft-Qa-DlA" eventType="touchUpInside" id="SAM-EM-G6i"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FC1-Ol-rZE" customClass="SearchScreenButton" customModule="FourSquareApp" customModuleProvider="target">
@@ -2307,6 +2315,7 @@
                                                                     <color key="titleColor" red="0.26059591770000001" green="0.138800323" blue="0.32574871179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                                 <connections>
+                                                                    <action selector="priceRangeButtonsTapped:" destination="fft-Qa-DlA" eventType="touchUpInside" id="JMe-EI-7ZL"/>
                                                                     <action selector="priceRangeButtonsTapped:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="OVI-HJ-sgw"/>
                                                                 </connections>
                                                             </button>
@@ -2350,6 +2359,7 @@
                                                             <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
+                                                            <action selector="filterByButton:" destination="fft-Qa-DlA" eventType="touchUpInside" id="8DR-3B-rnE"/>
                                                             <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="Sjf-eG-BcF"/>
                                                         </connections>
                                                     </button>
@@ -2373,6 +2383,7 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="LDg-kG-hFY"/>
+                                                            <action selector="filterByButton:" destination="fft-Qa-DlA" eventType="touchUpInside" id="yZn-3y-SaB"/>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05g-Dc-h7q">
@@ -2395,6 +2406,7 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="Jr0-sV-gXd"/>
+                                                            <action selector="filterByButton:" destination="fft-Qa-DlA" eventType="touchUpInside" id="dBu-r8-adG"/>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oxa-ju-XGX">
@@ -2416,6 +2428,7 @@
                                                             <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
+                                                            <action selector="filterByButton:" destination="fft-Qa-DlA" eventType="touchUpInside" id="ZBh-vd-s23"/>
                                                             <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="h7b-HV-tXd"/>
                                                         </connections>
                                                     </button>
@@ -2438,6 +2451,7 @@
                                                             <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
+                                                            <action selector="filterByButton:" destination="fft-Qa-DlA" eventType="touchUpInside" id="B5Z-zF-dpx"/>
                                                             <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="BEY-CN-BnS"/>
                                                         </connections>
                                                     </button>
@@ -2461,6 +2475,7 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="exD-66-Jti"/>
+                                                            <action selector="filterByButton:" destination="fft-Qa-DlA" eventType="touchUpInside" id="iBv-7c-E9x"/>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qYz-mc-MDP">
@@ -2483,6 +2498,7 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="7Xq-VY-PxY"/>
+                                                            <action selector="filterByButton:" destination="fft-Qa-DlA" eventType="touchUpInside" id="dLg-56-EYo"/>
                                                         </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dof-o9-BjH">
@@ -2504,6 +2520,7 @@
                                                             <color key="titleColor" red="0.71756780149999999" green="0.71769279239999995" blue="0.71755987409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
+                                                            <action selector="filterByButton:" destination="fft-Qa-DlA" eventType="touchUpInside" id="3Yv-QU-iw6"/>
                                                             <action selector="filterByButton:" destination="LB5-kj-7Jj" eventType="touchUpInside" id="3ut-3C-lxU"/>
                                                         </connections>
                                                     </button>
@@ -2707,16 +2724,23 @@
                     </view>
                     <connections>
                         <outlet property="acceptCreaditcardButton" destination="5YN-Zi-jQ7" id="TOf-Js-lTz"/>
+                        <outlet property="cardImage" destination="Aeo-QW-1g1" id="311-EF-aJO"/>
                         <outlet property="delivaryButton" destination="f4z-Mb-1ef" id="CfJ-Kw-OEP"/>
+                        <outlet property="delivaryIMage" destination="IAk-30-9WH" id="kAq-8T-Q1C"/>
                         <outlet property="distanceButton" destination="RHZ-EZ-KJa" id="dAi-NP-npb"/>
                         <outlet property="dogFriendlyButton" destination="tt9-Ef-VzX" id="3dC-IZ-dzi"/>
+                        <outlet property="dogFriendlyImage" destination="PdE-LO-Ud8" id="8IQ-Ib-HEy"/>
+                        <outlet property="familyFriendlyImage" destination="F84-zX-VgJ" id="0di-zp-ZLd"/>
                         <outlet property="familyFriendlyPlace" destination="q3l-Ms-aca" id="CR9-wO-y7V"/>
                         <outlet property="favouiretFilter" destination="eE0-Gl-XqF" id="dRa-F5-7z8"/>
                         <outlet property="favouiretTableView" destination="1bx-OR-wlg" id="ZaA-OF-LPm"/>
                         <outlet property="favouritSearchFielf" destination="s8V-23-b9R" id="Ebm-4P-B7U"/>
                         <outlet property="filterView" destination="7tb-3u-qDa" id="Jnc-Uz-gcL"/>
                         <outlet property="inWalkingDistance" destination="MLd-Za-hQ8" id="u9J-le-FNa"/>
+                        <outlet property="inwalkingImage" destination="ExL-93-z4S" id="ZBF-Hx-xBZ"/>
                         <outlet property="outDoorSeating" destination="Ja3-Bi-Ggg" id="aPw-wI-iTH"/>
+                        <outlet property="outdoorImage" destination="K3J-EY-lyc" id="z9a-YQ-C7u"/>
+                        <outlet property="parkingImage" destination="zpo-7w-Wuv" id="fnl-RH-fWd"/>
                         <outlet property="parkingbutton" destination="0qi-MI-s24" id="5Dq-x2-QKG"/>
                         <outlet property="popularButton" destination="Mys-pB-fww" id="SsR-4c-5xQ"/>
                         <outlet property="ratingButton" destination="WFW-3B-52m" id="fbM-80-CsK"/>
@@ -2726,6 +2750,7 @@
                         <outlet property="rupeesTwo" destination="MPz-74-OzY" id="ef3-7l-KhR"/>
                         <outlet property="setRadiousField" destination="EFk-Cs-EUZ" id="ZLJ-S1-hQr"/>
                         <outlet property="wifiButton" destination="meu-Gh-wXR" id="Q2Q-sR-F5W"/>
+                        <outlet property="wifiimage" destination="35G-a7-SZr" id="oL1-7W-gGq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KST-Ds-pob" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

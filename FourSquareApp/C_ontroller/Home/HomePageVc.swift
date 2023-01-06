@@ -25,7 +25,6 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var mapIs: MKMapView!
     @IBOutlet weak var mapHeight: NSLayoutConstraint!
     @IBOutlet weak var tableView01: UITableView!
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     var delegate2: sendingIndex?
     
