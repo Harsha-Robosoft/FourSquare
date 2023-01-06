@@ -153,14 +153,28 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBAction func burherAboutButtonTapped(_ sender: UIButton) {
         
-        
+        let aboutVc = self.storyboard?.instantiateViewController(withIdentifier: "AboutUsVc") as? AboutUsVc
+        if let vc = aboutVc{
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         
         
     }
     @IBAction func burgerFeedbackButtonTapped(_ sender: UIButton) {
+        
+        let feedbackVc = self.storyboard?.instantiateViewController(withIdentifier: "FeedbackVc") as? FeedbackVc
+        if let vc = feedbackVc{
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
     @IBAction func burherFavouritesButtonTapped(_ sender: UIButton) {
+        
+        let favouritVc = self.storyboard?.instantiateViewController(withIdentifier: "FavouiretVc") as? FavouiretVc
+        if let vc = favouritVc{
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     @IBAction func name_LoginButtontapped(_ sender: UIButton) {
     

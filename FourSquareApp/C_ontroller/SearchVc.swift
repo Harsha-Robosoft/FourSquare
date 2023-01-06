@@ -604,15 +604,43 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     
     
     @IBAction func useMyCurrentLocationButtonTapped(_ sender: UIButton) {
-        nearYou = 0
-        nearMeView.isHidden = true
-        tableViewAndViewMap.isHidden = false
-        mapAndCollectionView.isHidden = true
-        nearYouAndSuggestion.isHidden = true
-        filterScreen.isHidden = true
-        whiteView.isHidden = true
+        let tokenIs = getToken()
         
-//        kjasfgiwfcvb
+        
+        
+        if tokenIs != ""{
+            
+            nearYou = 0
+            nearMeView.isHidden = true
+            tableViewAndViewMap.isHidden = false
+            mapAndCollectionView.isHidden = true
+            nearYouAndSuggestion.isHidden = true
+            filterScreen.isHidden = true
+            whiteView.isHidden = true
+            objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: ""){ status in
+                if status == true{
+                    
+                    self.searching = 1
+                    self.nearYou = 0
+                    self.filterSearchIs = 0
+                    self.nearMeView.isHidden = true
+                    self.tableViewAndViewMap.isHidden = false
+                    self.mapAndCollectionView.isHidden = true
+                    self.nearYouAndSuggestion.isHidden = true
+                    self.filterScreen.isHidden = true
+                    self.whiteView.isHidden = true
+                    self.mapButton_TableView.reloadData()
+                }else{
+                    self.nearMeView.isHidden = true
+                    self.tableViewAndViewMap.isHidden = true
+                    self.mapAndCollectionView.isHidden = true
+                    self.nearYouAndSuggestion.isHidden = true
+                    self.filterScreen.isHidden = true
+                    self.whiteView.isHidden = false
+                }
+            }
+            
+        }
         
         
         
@@ -914,7 +942,43 @@ extension SearchVc{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if nearYou == 1{
-            
+ 
+            let tokenIs = getToken()
+    
+            if tokenIs != ""{
+                
+                nearYou = 0
+                nearMeView.isHidden = true
+                tableViewAndViewMap.isHidden = false
+                mapAndCollectionView.isHidden = true
+                nearYouAndSuggestion.isHidden = true
+                filterScreen.isHidden = true
+                whiteView.isHidden = true
+                objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: objectOfSearchViewModel.nearCityData[indexPath.row].cityName){ status in
+                    if status == true{
+                        
+                        self.searching = 1
+                        self.nearYou = 0
+                        self.filterSearchIs = 0
+                        self.nearMeView.isHidden = true
+                        self.tableViewAndViewMap.isHidden = false
+                        self.mapAndCollectionView.isHidden = true
+                        self.nearYouAndSuggestion.isHidden = true
+                        self.filterScreen.isHidden = true
+                        self.whiteView.isHidden = true
+                        self.mapButton_TableView.reloadData()
+                    }else{
+                        self.nearMeView.isHidden = true
+                        self.tableViewAndViewMap.isHidden = true
+                        self.mapAndCollectionView.isHidden = true
+                        self.nearYouAndSuggestion.isHidden = true
+                        self.filterScreen.isHidden = true
+                        self.whiteView.isHidden = false
+                    }
+                }
+                
+            }
+
         }else{
             
             nearMeView.isHidden = true
@@ -923,6 +987,8 @@ extension SearchVc{
             nearYouAndSuggestion.isHidden = true
             filterScreen.isHidden = true
             whiteView.isHidden = true
+            map_CollectionView.isHidden = false
+            listViewButton.isHidden = false
             
             map_CollectionView.reloadData()
         }
@@ -934,10 +1000,45 @@ extension SearchVc{
 extension SearchVc{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if searching == 1{
+            return objectOfSearchViewModel.searchDetaisl.count
+            
+        }
         return objectOfHomeViewModel.homeDetails.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if searching == 1{
+            
+            let cell = map_CollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchCollectionView
+            
+            var imageIs = objectOfSearchViewModel.searchDetaisl[indexPath.row].placeImage
+            
+            imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+
+            cell.imageIs.image = getImage(urlString: imageIs)
+            cell.address.text = "\(objectOfSearchViewModel.searchDetaisl[indexPath.row].address),\(objectOfSearchViewModel.searchDetaisl[indexPath.row].city)"
+            cell.distance.text = "\(objectOfSearchViewModel.searchDetaisl[indexPath.row].distance)km"
+            cell.name.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].placeName
+            cell.category.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].category
+            cell.rating.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].rating
+            if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "1"{
+                cell.rate.text = "₹"
+            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "2"{
+                cell.rate.text = "₹₹"
+            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "3"{
+                cell.rate.text = "₹₹₹"
+            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "4"{
+                cell.rate.text = "₹₹₹₹"
+            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "5"{
+                cell.rate.text = "₹₹₹₹₹"
+            }
+            cell.setShadow()
+            
+            
+        }
+        
         let cell = map_CollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchCollectionView
         
         var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
