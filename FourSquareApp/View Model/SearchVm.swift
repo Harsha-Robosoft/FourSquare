@@ -11,13 +11,16 @@ class SearchViewModel {
     static var objectOfViewModel = SearchViewModel()
     var objectOfSearchNetworkManager = SearchNetworkManager()
     
+    var filterSearchDetails = [HomeDataModel]()
+    var searchDetaisl = [HomeDataModel]()
     var nearCityData = [NearCityModel]()
     
     func getNearCityDetailsApiCall(latToSend: String, longToSend: String, completion: @escaping((Bool) -> ())) {
         
         objectOfSearchNetworkManager.callNearCityApi(lat: latToSend, long: longToSend){ nearData, nearStatus, nearError in
-            self.nearCityData.removeAll()
+            
             DispatchQueue.main.async {
+                self.nearCityData.removeAll()
                 if nearError == nil{
                     
                     if nearStatus == true{
@@ -66,15 +69,69 @@ class SearchViewModel {
     }
     
     
-    func search(latToSend: String, longToSend: String
+    func search(tokenToSend: String,latToSend: String, longToSend: String
                 ,textIs: String, completion: @escaping((Bool) -> ())) {
-        objectOfSearchNetworkManager.searchApicalling(lat: latToSend, long: longToSend, tesxtToSend: textIs){searchData, searchStatus, SearchError in
+        objectOfSearchNetworkManager.searchApicalling(Token: tokenToSend, lat: latToSend, long: longToSend, tesxtToSend: textIs){searchData, searchStatus, SearchError in
+            
+            
             DispatchQueue.main.async {
+                self.searchDetaisl.removeAll()
                 if SearchError == nil{
                     if searchStatus == true{
                         
-                        
-                        
+                        if let data0 = searchData{
+                            if data0.isEmpty{
+                                completion(false)
+                            }else{
+                                var imageUrl = ""
+                                var placeId = ""
+                                var placeName = ""
+                                var ratingIs = ""
+                                var priceRangeIs = ""
+                                var category = ""
+                                var distanceIs = ""
+                                var address = ""
+                                var cityName = ""
+     
+                                for i in data0{
+                                    if let data01 = i["_id"] as? String{
+                                        placeId = data01
+                                    }
+                                    if let data02 = i["placeName"] as? String{
+                                        placeName = data02
+                                    }
+                                    if let data03 = i["placeImage"] as? String{
+                                        imageUrl = data03
+                                    }
+                                    if let data04 = i["address"] as? String{
+                                        address = data04
+                                    }
+                                    if let data05 = i["city"] as? String{
+                                        cityName = data05
+                                    }
+                                    if let data06 = i["category"] as? String{
+                                        category = data06
+                                    }
+                                    if let data07 = i["priceRange"] as? Int{
+                                        priceRangeIs = String(data07)
+                                    }
+                                    if let data08 = i["rating"] as? Float{
+                                        ratingIs = String(data08)
+                                    }
+                                    if let data09 = i["distance"] as? [String: Any]{
+                                        if let data10 = data09["calculated"] as? Double{
+                                            distanceIs = String(Int(Double(data10) / Double(1609)))
+                                        }
+                                    }
+                                    let search = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs)
+    //                                print("search data : \(imageUrl)\n\(placeId)\n\(placeName)\n\(ratingIs)\n\(priceRangeIs)\n\(category)\n\(distanceIs)\n\(address)\n\(cityName)")
+                                    self.searchDetaisl.append(search)
+                                }
+                                completion(true)
+                            }
+                            
+                            
+                        }
                         
                         
                     }else{
@@ -86,4 +143,86 @@ class SearchViewModel {
             }
         }
     }
+    
+    func searchWithFilterApiCall(tokenToSend: String, parameterDictionary: [String:Any], completion: @escaping((Bool) -> ())) {
+        
+        objectOfSearchNetworkManager.searchWithFilter(Token: tokenToSend, paramDictionary: parameterDictionary){ filterData, filterStatus, filterError in
+            DispatchQueue.main.async {
+                self.filterSearchDetails.removeAll()
+                if filterError == nil{
+                    if filterStatus == true{
+                        
+                        
+                        print("dat dat : \(filterData)")
+                      
+                        
+                        if let data0 = filterData{
+                            if(data0.isEmpty) {
+                                completion(false)
+                            }else{
+                               
+                                var imageUrl = ""
+                                var placeId = ""
+                                var placeName = ""
+                                var ratingIs = ""
+                                var priceRangeIs = ""
+                                var category = ""
+                                var distanceIs = ""
+                                var address = ""
+                                var cityName = ""
+     
+                                for i in data0{
+                                    if let data01 = i["_id"] as? String{
+                                        placeId = data01
+                                    }
+                                    if let data02 = i["placeName"] as? String{
+                                        placeName = data02
+                                    }
+                                    if let data03 = i["placeImage"] as? String{
+                                        imageUrl = data03
+                                    }
+                                    if let data04 = i["address"] as? String{
+                                        address = data04
+                                    }
+                                    if let data05 = i["city"] as? String{
+                                        cityName = data05
+                                    }
+                                    if let data06 = i["category"] as? String{
+                                        category = data06
+                                    }
+                                    if let data07 = i["priceRange"] as? Int{
+                                        priceRangeIs = String(data07)
+                                    }
+                                    if let data08 = i["rating"] as? Float{
+                                        ratingIs = String(data08)
+                                    }
+                                    if let data09 = i["distance"] as? [String: Any]{
+                                        if let data10 = data09["calculated"] as? Double{
+                                            distanceIs = String(Int(Double(data10) / Double(1609)))
+                                        }
+                                    }
+                                    let filterSearch = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs)
+    //                                print("search data : \(imageUrl)\n\(placeId)\n\(placeName)\n\(ratingIs)\n\(priceRangeIs)\n\(category)\n\(distanceIs)\n\(address)\n\(cityName)")
+                                    self.filterSearchDetails.append(filterSearch)
+                                }
+                                completion(true)
+                            }
+                            
+                            }
+                            
+                            
+                            
+                        
+                        
+                    }else{
+                        completion(false)
+                    }
+                }else{
+                    completion(false)
+                }
+            }
+        }
+    }
+    
+    
 }

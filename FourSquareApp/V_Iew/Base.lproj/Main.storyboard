@@ -337,6 +337,9 @@
                                                         <state key="normal" title="Log In">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="name_LoginButtontapped:" destination="BFk-mc-FDd" eventType="touchUpInside" id="orl-vT-Zpn"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZjO-2o-Jhl">
                                                         <rect key="frame" x="27" y="255" width="173" height="48"/>
@@ -349,6 +352,9 @@
                                                         <state key="normal" title="Favourites" image="favourite_icon_unselected_white">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="burherFavouritesButtonTapped:" destination="BFk-mc-FDd" eventType="touchUpInside" id="BKh-JS-pXc"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FQU-bg-wyf">
                                                         <rect key="frame" x="20" y="317" width="260" height="1"/>
@@ -369,6 +375,9 @@
                                                         <state key="normal" title="Feedback" image="feedback">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="burgerFeedbackButtonTapped:" destination="BFk-mc-FDd" eventType="touchUpInside" id="DJs-wi-CsU"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wQ-0z-YoC">
                                                         <rect key="frame" x="20" y="400" width="260" height="1"/>
@@ -390,6 +399,9 @@
                                                         <state key="normal" title="About us" image="aboutus">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="burherAboutButtonTapped:" destination="BFk-mc-FDd" eventType="touchUpInside" id="zfQ-DN-EjZ"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDu-i1-aur">
                                                         <rect key="frame" x="20" y="483" width="260" height="1"/>
@@ -411,6 +423,9 @@
                                                         <state key="normal" title="Logout" image="logout">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="burgerLogOutButtonTapped:" destination="BFk-mc-FDd" eventType="touchUpInside" id="UkC-kC-7oc"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKm-fk-wNE">
                                                         <rect key="frame" x="20" y="566" width="260" height="1"/>
@@ -636,6 +651,7 @@
                         <outlet property="containerBackView" destination="zOc-H9-rJa" id="sYD-Xb-Vms"/>
                         <outlet property="containerView" destination="hah-s6-YcQ" id="pZY-mr-zTL"/>
                         <outlet property="leading" destination="G9g-QH-XqG" id="R7j-gf-Iin"/>
+                        <outlet property="name_Loginbutton" destination="rBU-9P-dzg" id="cDS-Qx-PQS"/>
                         <outlet property="top" destination="jgv-9B-fXb" id="oFA-Ph-yG7"/>
                         <outlet property="topTapView" destination="aHW-uS-npX" id="JM5-sp-5DR"/>
                         <outlet property="trailing" destination="ktq-rb-atW" id="ip0-J0-SXu"/>
@@ -2951,9 +2967,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="135" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cwn-kp-pGB">
                                 <rect key="frame" x="0.0" y="150" width="414" height="586"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="586" id="SqU-v1-uQ1"/>
-                                </constraints>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Obd-aV-V5E">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
@@ -2988,7 +3001,6 @@
                         <outlet property="mapHeight" destination="oSL-9d-6Sa" id="Din-0V-TDv"/>
                         <outlet property="mapIs" destination="lUV-ny-s6U" id="oCp-Jy-Mbg"/>
                         <outlet property="tableView01" destination="Cwn-kp-pGB" id="eWX-XO-Y9Y"/>
-                        <outlet property="tableViewHeight" destination="SqU-v1-uQ1" id="YSf-w2-baF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMz-AP-uob" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

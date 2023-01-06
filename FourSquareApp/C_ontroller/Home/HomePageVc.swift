@@ -55,7 +55,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
 //        let latitude = "13.379162"
 //        let longitude = "74.740373"
         
-        tableViewHeight.constant = 0
+//        tableViewHeight.constant = 0
         
         if index == 0{
             let loader =   self.loader()
@@ -63,15 +63,10 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                 if status == true{
-                    self.tableViewHeight.constant = 586
-                    UIView.animate(withDuration: 0.3 , animations: {
-                        self.view.layoutIfNeeded()
-                    }) { (status) in
-                        
-                    }
+                    
                     self.tableView01.reloadData()
                 }else{
-                    self.tableViewHeight.constant = 0
+                    self.tableView01.isHidden = true
                 }
                 }
             }
@@ -176,7 +171,10 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objectOfHomeViewModel.homeDetails.count
+        if objectOfHomeViewModel.homeDetails.count != 0{
+            return objectOfHomeViewModel.homeDetails.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -189,28 +187,34 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let cell = tableView01.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
         
-        var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
-        
-        imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+        if objectOfHomeViewModel.homeDetails[indexPath.row].placeImage != nil {
+            
+            var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
+            
+            imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
 
-        cell.imageIs.image = getImage(urlString: imageIs)
-        cell.addresIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address),\(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
-        cell.distanceIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
-        cell.nameIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].placeName
-        cell.nationalityIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].category
-        cell.ratingIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].rating
-        if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "1"{
-            cell.rateIs.text = "₹"
-        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "2"{
-            cell.rateIs.text = "₹₹"
-        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "3"{
-            cell.rateIs.text = "₹₹₹"
-        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "4"{
-            cell.rateIs.text = "₹₹₹₹"
-        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "5"{
-            cell.rateIs.text = "₹₹₹₹₹"
+            cell.imageIs.image = getImage(urlString: imageIs)
+            cell.addresIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address),\(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
+            cell.distanceIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
+            cell.nameIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].placeName
+            cell.nationalityIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].category
+            cell.ratingIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].rating
+            if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "1"{
+                cell.rateIs.text = "₹"
+            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "2"{
+                cell.rateIs.text = "₹₹"
+            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "3"{
+                cell.rateIs.text = "₹₹₹"
+            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "4"{
+                cell.rateIs.text = "₹₹₹₹"
+            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "5"{
+                cell.rateIs.text = "₹₹₹₹₹"
+            }
+            cell.setShadow()
+            
         }
-        cell.setShadow()
+        
+        
         
         return cell
     }

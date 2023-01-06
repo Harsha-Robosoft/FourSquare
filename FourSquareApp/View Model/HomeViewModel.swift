@@ -18,8 +18,9 @@ class HomeViewModel {
     
     func apiCallForData(endPoint: String,latToSend: String, longToSend: String, completion: @escaping((Bool) -> ())) {
         objectOfHomeNetwork.callHomeApi(endPoint: endPoint, lat: latToSend, long: longToSend){ dataIs, statusIs, errorIs in
-            self.homeDetails.removeAll()
+            
             DispatchQueue.main.async {
+                self.homeDetails.removeAll()
                 if errorIs == nil{
                     if statusIs == true{
                         
@@ -75,14 +76,11 @@ class HomeViewModel {
                                 }
                                 
                                 let details = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs)
+                                
                                 self.homeDetails.append(details)
 
                             }
-                            
-                            
-                            let details = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs)
-                            self.homeDetails.append(details)
-                            print("data is : \(imageUrl)\n\(placeId)\n\(placeName)\n\(ratingIs)\n\(priceRangeIs)\n\(category)\n\(distanceIs)\n\(address)\n\(cityName)")
+
                         }
                         
                         completion(true)
@@ -107,6 +105,23 @@ class HomeViewModel {
         let location = UserLocationModel(latitude: lat, longitude: long)
         
         userLocation.append(location)
+    }
+    
+    
+    func signOutApiCall(tokenToSend: String, completion: @escaping((Bool) -> ())) {
+        objectOfHomeNetwork.signOutApi(token: tokenToSend){ logOutStatus, logOutError in
+            DispatchQueue.main.async {
+                if logOutError == nil{
+                    if logOutStatus == true{
+                        completion(true)
+                    }else{
+                        completion(false)
+                    }
+                }else{
+                    completion(false)
+                }
+            }
+        }
     }
     
 }

@@ -14,7 +14,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
 //   OBJECT CREATION ---------------------------------
     
     var objectOfSearchViewModel = SearchViewModel.objectOfViewModel
-    
+    var objectOfUserDefaults = UserDefaults()
+    var objectOfKeyChain = KeyChain()
 //    VARIABLES DECLARATION -----------------------------
     
     var test = false
@@ -22,6 +23,9 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     var filterTapped = 0
     var poplular_Distance_RatingButton = ""
     var rateStatus = ""
+    var searching = 0
+    var filterSearchIs = 0
+    
     
     @IBOutlet weak var filter: UIButton!
     @IBOutlet weak var search: UITextField!
@@ -146,6 +150,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                     if name == "Search"{
                         nearMeTableViewHeightconstraints.constant = 0
                         nearYou = 1
+                        filterSearchIs = 0
+                        searching = 0
                         
                         nearMeView.isHidden = true
                         tableViewAndViewMap.isHidden = true
@@ -174,9 +180,13 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         }
                         
                     }else{
+                        
+                        print("naana neena naana neena naana neena naana neena naana neena naana neena naana neena ")
+                        searching = 0
                         filter.setTitle(nil, for: .normal)
                         filter.setImage( #imageLiteral(resourceName: "filter_icon"), for: .normal)
                         nearYou = 0
+                        filterSearchIs = 0
                         nearMeView.isHidden = false
                         tableViewAndViewMap.isHidden = true
                         mapAndCollectionView.isHidden = true
@@ -215,57 +225,99 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     
     @IBAction func searchFieldUsing(_ sender: Any) {
         
-        if filterTapped == 0{
-            if search.text?.count ?? 0 >= 3{
-                
-                objectOfSearchViewModel.search(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: search.text ?? ""){ status in
-                    if status == true{
-                        self.nearMeView.isHidden = true
-                        self.tableViewAndViewMap.isHidden = false
-                        self.mapAndCollectionView.isHidden = true
-                        self.nearYouAndSuggestion.isHidden = true
-                        self.filterScreen.isHidden = true
-                        self.whiteView.isHidden = true
-                    }else{
-                        self.nearMeView.isHidden = true
-                        self.tableViewAndViewMap.isHidden = true
-                        self.mapAndCollectionView.isHidden = true
-                        self.nearYouAndSuggestion.isHidden = true
-                        self.filterScreen.isHidden = true
-                        self.whiteView.isHidden = false
+        let tokenIs = getToken()
+        if tokenIs != ""{
+            if filterTapped == 0{
+                if search.text?.count ?? 0 >= 3{
+                    objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: search.text ?? ""){ status in
+                        if status == true{
+                            
+                            self.searching = 1
+                            self.nearYou = 0
+                            self.filterSearchIs = 0
+                            self.nearMeView.isHidden = true
+                            self.tableViewAndViewMap.isHidden = false
+                            self.mapAndCollectionView.isHidden = true
+                            self.nearYouAndSuggestion.isHidden = true
+                            self.filterScreen.isHidden = true
+                            self.whiteView.isHidden = true
+                            self.mapButton_TableView.reloadData()
+                        }else{
+                            self.nearMeView.isHidden = true
+                            self.tableViewAndViewMap.isHidden = true
+                            self.mapAndCollectionView.isHidden = true
+                            self.nearYouAndSuggestion.isHidden = true
+                            self.filterScreen.isHidden = true
+                            self.whiteView.isHidden = false
+                        }
                     }
+                }else{self.nearMeView.isHidden = true
+                    self.tableViewAndViewMap.isHidden = true
+                    self.mapAndCollectionView.isHidden = true
+                    self.nearYouAndSuggestion.isHidden = false
+                    self.filterScreen.isHidden = true
+                    self.whiteView.isHidden = true
+                    
                 }
             }else{}
-        }else{}
-        
-        
-        
+        }else{
+            
+            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                
+                self.navigationController?.popToRootViewController(animated: true)
+                print("Handle Ok logic here")
+                
+            }))
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            present(refreshAlert, animated: true, completion: nil)
+        }
+
     }
     
     @IBAction func nearMeFieldUsing(_ sender: Any) {
         
-        if filterTapped == 0{
-            if search.text?.count ?? 0 >= 3{
-                
-                objectOfSearchViewModel.search(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: search.text ?? ""){ status in
-                    if status == true{
-                        self.nearMeView.isHidden = true
-                        self.tableViewAndViewMap.isHidden = false
-                        self.mapAndCollectionView.isHidden = true
-                        self.nearYouAndSuggestion.isHidden = true
-                        self.filterScreen.isHidden = true
-                        self.whiteView.isHidden = true
-                    }else{
-                        self.nearMeView.isHidden = true
-                        self.tableViewAndViewMap.isHidden = true
-                        self.mapAndCollectionView.isHidden = true
-                        self.nearYouAndSuggestion.isHidden = true
-                        self.filterScreen.isHidden = true
-                        self.whiteView.isHidden = false
+        let tokenIs = getToken()
+        if tokenIs != ""{
+            if filterTapped == 0{
+                if search.text?.count ?? 0 >= 3{
+                    objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: search.text ?? ""){ status in
+                        if status == true{
+                            self.nearMeView.isHidden = true
+                            self.tableViewAndViewMap.isHidden = false
+                            self.mapAndCollectionView.isHidden = true
+                            self.nearYouAndSuggestion.isHidden = true
+                            self.filterScreen.isHidden = true
+                            self.whiteView.isHidden = true
+                        }else{
+                            self.nearMeView.isHidden = true
+                            self.tableViewAndViewMap.isHidden = true
+                            self.mapAndCollectionView.isHidden = true
+                            self.nearYouAndSuggestion.isHidden = true
+                            self.filterScreen.isHidden = true
+                            self.whiteView.isHidden = false
+                        }
                     }
-                }
+                }else{}
             }else{}
-        }else{}
+        }else{
+            
+            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                
+                self.navigationController?.popToRootViewController(animated: true)
+                print("Handle Ok logic here")
+                
+            }))
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            present(refreshAlert, animated: true, completion: nil)
+        }
         
     }
     
@@ -275,52 +327,134 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     }
     @IBAction func filterButtonTapped(_ sender: UIButton) {
         
-        if sender.currentTitle == nil{
-            filterTapped = 1
-            nearYou = 0
-            nearMeView.isHidden = true
-            tableViewAndViewMap.isHidden = true
-            mapAndCollectionView.isHidden = true
-            nearYouAndSuggestion.isHidden = true
-            filterScreen.isHidden = false
-            whiteView.isHidden = true
+        let tokenIs = getToken()
+        
+        if tokenIs != ""{
             
-            filter.setTitle("Done", for: .normal)
-            filter.setImage(nil, for: .normal)
+            if sender.currentTitle == nil{
+                filterTapped = 1
+                nearYou = 0
+                
+                nearMeView.isHidden = true
+                tableViewAndViewMap.isHidden = true
+                mapAndCollectionView.isHidden = true
+                nearYouAndSuggestion.isHidden = true
+                filterScreen.isHidden = false
+                whiteView.isHidden = true
+                
+                filter.setTitle("Done", for: .normal)
+                filter.setImage(nil, for: .normal)
+            }else{
+                
+                var dictionaryIs = [String: Any]()
+                dictionaryIs["latitude"] = String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162")
+                dictionaryIs["longitude"] = String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")
+                
+//                print("search name : \(search.text)")
+                
+                if search.text != ""{
+                    dictionaryIs["text"] = search.text
+                }
+                
+                if setRadiousField.text != ""{
+                    dictionaryIs["radius"] = setRadiousField.text
+                }
+
+                if poplular_Distance_RatingButton != ""{
+                    dictionaryIs["sortBy"] = poplular_Distance_RatingButton
+                }
+                
+//                if rateStatus != ""{
+//                    dicIs["text"] = search.text
+//                }
+                if acceptCard == false{
+                    dictionaryIs["acceptedCredit"] = true
+//                    print("card accepted")
+                }
+                if delivary == false{
+                    dictionaryIs["delivery"] = true
+//                    print("Delivary is there")
+                }
+                if dogFriendly == false{
+                    dictionaryIs["dogFriendly"] = true
+//                    print("Dog friendly")
+                }
+                if familyFriendly == false{
+                    dictionaryIs["familyFriendly"] = true
+//                    print("famili friendly")
+                }
+                if inWalkingDistanceNum == false{
+                    dictionaryIs["inWalkingDistance"] = true
+//                    print("in walking distance")
+                }
+                if outDoorSeatingNum == false{
+                    dictionaryIs["outdoorDining"] = true
+//                    print("out door seating is there")
+                }
+                if parkingNum == false{
+                    dictionaryIs["parking"] = true
+//                    print("parking in there")
+                }
+                if wifiNum == false{
+                    dictionaryIs["wifi"] = true
+//                   print("wifi is there")
+                }
+                
+//                print("set radious id : \(setRadiousField.text)")
+//                print("condition : \(poplular_Distance_RatingButton)")
+//                print("rate is : \(rateStatus)")
+                
+                
+                objectOfSearchViewModel.searchWithFilterApiCall(tokenToSend: tokenIs, parameterDictionary: dictionaryIs){ status in
+                    
+                    if status == true{
+                        self.searching = 0
+                        self.nearYou = 0
+                        self.filterSearchIs = 1
+                        
+                        self.nearMeView.isHidden = true
+                        self.tableViewAndViewMap.isHidden = false
+                        self.mapAndCollectionView.isHidden = true
+                        self.nearYouAndSuggestion.isHidden = true
+                        self.filterScreen.isHidden = true
+                        self.whiteView.isHidden = true
+                        self.mapButton_TableView.reloadData()
+                    }else{
+                        
+                        print("Hi hi")
+                        
+                        self.nearMeView.isHidden = true
+                        self.tableViewAndViewMap.isHidden = true
+                        self.mapAndCollectionView.isHidden = true
+                        self.nearYouAndSuggestion.isHidden = true
+                        self.filterScreen.isHidden = true
+                        self.whiteView.isHidden = false
+                        
+                    }
+                    
+                }
+                
+                print("result : \(dictionaryIs)")
+                
+            }
+            
         }else{
+            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
             
-            print("search name : \(search.text)")
-            
-            if acceptCard == false{
-                print("card accepted")
-            }
-            if delivary == false{
-                print("Delivary is there")
-            }
-            if dogFriendly == false{
-                print("Dog friendly")
-            }
-            if familyFriendly == false{
-                print("famili friendly")
-            }
-            if inWalkingDistanceNum == false{
-                print("in walking distance")
-            }
-            if outDoorSeatingNum == false{
-                print("out door seating is there")
-            }
-            if parkingNum == false{
-                print("parking in there")
-            }
-            if wifiNum == false{
-               print("wifi is there")
-            }
-            
-            print("set radious id : \(setRadiousField.text)")
-            print("condition : \(poplular_Distance_RatingButton)")
-            print("rate is : \(rateStatus)")
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                
+                self.navigationController?.popToRootViewController(animated: true)
+                print("Handle Ok logic here")
+                
+            }))
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            present(refreshAlert, animated: true, completion: nil)
             
         }
+        
+        
         
         
         
@@ -478,6 +612,13 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         filterScreen.isHidden = true
         whiteView.isHidden = true
         
+//        kjasfgiwfcvb
+        
+        
+        
+        
+        
+        
     }
     
     @IBAction func searchInMapButtonTapped(_ sender: UIButton) {
@@ -566,6 +707,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         nearYouAndSuggestion.isHidden = true
         filterScreen.isHidden = true
         whiteView.isHidden = true
+        map_CollectionView.isHidden = false
+        listViewButton.isHidden = false
         
         map_CollectionView.reloadData()
         
@@ -630,6 +773,10 @@ extension SearchVc{
         if nearYou == 1{
             
             return objectOfSearchViewModel.nearCityData.count
+        } else if searching == 1{
+           return objectOfSearchViewModel.searchDetaisl.count
+        }else if filterSearchIs == 1{
+            return objectOfSearchViewModel.filterSearchDetails.count
         }
         return objectOfHomeViewModel.homeDetails.count
     }
@@ -661,6 +808,63 @@ extension SearchVc{
             
             cell.imageIs.image = getImage(urlString: imageIs)
             return cell
+            
+        }else if searching == 1{
+            
+            let cell = mapButton_TableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
+            
+            var imageIs = objectOfSearchViewModel.searchDetaisl[indexPath.row].placeImage
+            imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+
+            cell.imageIs.image = getImage(urlString: imageIs)
+            cell.addresIs.text = "\(objectOfSearchViewModel.searchDetaisl[indexPath.row].address),\(objectOfSearchViewModel.searchDetaisl[indexPath.row].city)"
+            cell.distanceIs.text = "\(objectOfSearchViewModel.searchDetaisl[indexPath.row].distance)km"
+            cell.nameIs.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].placeName
+            cell.nationalityIs.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].category
+            cell.ratingIs.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].rating
+            if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "1"{
+                cell.rateIs.text = "₹"
+            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "2"{
+                cell.rateIs.text = "₹₹"
+            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "3"{
+                cell.rateIs.text = "₹₹₹"
+            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "4"{
+                cell.rateIs.text = "₹₹₹₹"
+            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "5"{
+                cell.rateIs.text = "₹₹₹₹₹"
+            }
+            cell.setShadow()
+            
+            return cell
+
+        }else if filterSearchIs == 1{
+            
+            let cell = mapButton_TableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
+            
+            var imageIs = objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeImage
+            imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+
+            cell.imageIs.image = getImage(urlString: imageIs)
+            cell.addresIs.text = "\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].address),\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].city)"
+            cell.distanceIs.text = "\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].distance)km"
+            cell.nameIs.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeName
+            cell.nationalityIs.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].category
+            cell.ratingIs.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].rating
+            if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "1"{
+                cell.rateIs.text = "₹"
+            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "2"{
+                cell.rateIs.text = "₹₹"
+            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "3"{
+                cell.rateIs.text = "₹₹₹"
+            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "4"{
+                cell.rateIs.text = "₹₹₹₹"
+            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "5"{
+                cell.rateIs.text = "₹₹₹₹₹"
+            }
+            cell.setShadow()
+            
+            return cell
+            
             
         }
         
@@ -762,5 +966,23 @@ extension SearchVc{
         return cell
     }
 
+    
+}
+
+extension SearchVc{
+    func getToken() -> String {
+        var id = ""
+       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
+        if let idIs = userIdIs as? String{
+            id = idIs
+        }
+        print("Search id : \(id)")
+        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
+            return ""}
+        guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
+            return ""}
+        print("Search token",receivedToken)
+        return receivedToken
+    }
     
 }

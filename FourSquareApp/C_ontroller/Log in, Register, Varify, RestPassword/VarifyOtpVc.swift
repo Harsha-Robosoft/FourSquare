@@ -64,12 +64,15 @@ class VarifyOtpVc: UIViewController {
                     self.stopLoader(loader: loader)
                 if status == true{
                     
-                    for controller in self.navigationController!.viewControllers as Array {
-                        if controller.isKind(of: LogInVc.self) {
-                            self.navigationController!.popToViewController(controller, animated: true)
-                            break
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        for controller in self.navigationController!.viewControllers as Array {
+                            if controller.isKind(of: LogInVc.self) {
+                                self.navigationController!.popToViewController(controller, animated: true)
+                                break
+                            }
                         }
                     }
+                    
 
                     
                 }else{

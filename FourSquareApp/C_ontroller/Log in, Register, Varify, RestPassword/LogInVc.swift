@@ -9,7 +9,7 @@ import UIKit
 
 class LogInVc: UIViewController {
     
-    var userDefault = UserDefaults()
+    var objectOfUserDefaults = UserDefaults()
     var objectOfLoginViewModel = LoginViewModel.objectOfVm
 
     @IBOutlet weak var emailField: TextFieldBorder!
@@ -26,7 +26,7 @@ class LogInVc: UIViewController {
         
         if let vc = homeVc {
             
-            userDefault.setValue(1, forKey: "SkipStatus")
+            objectOfUserDefaults.setValue(1, forKey: "SkipStatus")
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
