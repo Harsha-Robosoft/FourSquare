@@ -12,6 +12,8 @@
 		7709BE3929695A3C00DD74AB /* UserDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7709BE3829695A3C00DD74AB /* UserDetailsModel.swift */; };
 		7709BE3C296998D100DD74AB /* FavouiretVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7709BE3B296998D100DD74AB /* FavouiretVm.swift */; };
 		7709BE3F29699A3F00DD74AB /* FavouiretNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7709BE3E29699A3F00DD74AB /* FavouiretNetwork.swift */; };
+		7709BE432969B37600DD74AB /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7709BE422969B37600DD74AB /* GradientView.swift */; };
+		7709BE462969BBB700DD74AB /* DetailsVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7709BE452969BBB700DD74AB /* DetailsVc.swift */; };
 		7712AD0E2963F7AB008E1959 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD0D2963F7AB008E1959 /* HomeCollectionViewCell.swift */; };
 		7712AD1629640B61008E1959 /* HomePageVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD1529640B61008E1959 /* HomePageVc.swift */; };
 		7712AD1929640DDB008E1959 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD1829640DDB008E1959 /* HomePageController.swift */; };
@@ -66,6 +68,8 @@
 		7709BE3829695A3C00DD74AB /* UserDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsModel.swift; sourceTree = "<group>"; };
 		7709BE3B296998D100DD74AB /* FavouiretVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouiretVm.swift; sourceTree = "<group>"; };
 		7709BE3E29699A3F00DD74AB /* FavouiretNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouiretNetwork.swift; sourceTree = "<group>"; };
+		7709BE422969B37600DD74AB /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		7709BE452969BBB700DD74AB /* DetailsVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsVc.swift; sourceTree = "<group>"; };
 		7712AD0D2963F7AB008E1959 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		7712AD1529640B61008E1959 /* HomePageVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVc.swift; sourceTree = "<group>"; };
 		7712AD1829640DDB008E1959 /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 		77664C642962AFF10056BDBE /* C_ontroller */ = {
 			isa = PBXGroup;
 			children = (
+				7709BE452969BBB700DD74AB /* DetailsVc.swift */,
 				77A101CF2968687000071069 /* FavouiretVc.swift */,
 				77A101CB296867D700071069 /* AboutUsVc.swift */,
 				77A101C7296861D200071069 /* FeedbackVc.swift */,
@@ -307,6 +312,7 @@
 				77C1A4DC2965A92100D6ECCC /* Search Button.swift */,
 				77B80474296686AB002D941B /* FilterByButtons.swift */,
 				77A101C42968608F00071069 /* FeedbackFieldBackgroundColour.swift */,
+				7709BE422969B37600DD74AB /* GradientView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77A101D02968687000071069 /* FavouiretVc.swift in Sources */,
+				7709BE462969BBB700DD74AB /* DetailsVc.swift in Sources */,
 				77C1A4DD2965A92100D6ECCC /* Search Button.swift in Sources */,
 				77A101CC296867D700071069 /* AboutUsVc.swift in Sources */,
 				77A101C8296861D200071069 /* FeedbackVc.swift in Sources */,
@@ -439,6 +446,7 @@
 				7712AD202964332D008E1959 /* HomeTableViewCell.swift in Sources */,
 				77B80475296686AB002D941B /* FilterByButtons.swift in Sources */,
 				77B804812966F96F002D941B /* SearchNetworkManager.swift in Sources */,
+				7709BE432969B37600DD74AB /* GradientView.swift in Sources */,
 				77664C722962C1570056BDBE /* orLabel.swift in Sources */,
 				7776A3B02962DAEB00F6830D /* EmailValidationVc.swift in Sources */,
 				77B8047E2966F8D4002D941B /* SearchVm.swift in Sources */,
