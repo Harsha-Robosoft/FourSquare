@@ -14,7 +14,6 @@ class HomeViewModel {
     
     var homeDetails = [HomeDataModel]()
     var userDetails = [UserDetailsModel]()
-    
     var userLocation = [UserLocationModel]()
     
     func apiCallForData(endPoint: String,latToSend: String, longToSend: String, completion: @escaping((Bool) -> ())) {

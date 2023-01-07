@@ -41,16 +41,13 @@ class FeedbackVc: UIViewController {
                 
                 guard let feddback = feedBackField.text else{ print("Feedback error")
                     return}
-                
-                
                 objectOfHomeViewModel.feedBackApiCall(tokenToSend: call, feedbackIs: feddback){status in
                     if status == true{
                         self.feddbackSubmitButton.isEnabled = false
+                        self.feddbackSubmitButton.alpha = 0.5
                     }else{
                         self.alertMessage(message: "Error while sending feedback...!!! . pleace give your feedback once again")
-                        
                     }
-                    
                 }
                 
             }else{

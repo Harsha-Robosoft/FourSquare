@@ -11,10 +11,15 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
+    var objectOfFavouiretViewModel = FavouiretViewModel.objectOfViewModel
+    var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
+    
     
     var poplular_Distance_RatingButton = ""
     var rateStatus = ""
     
+    @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var noDatFoundView: UIView!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var favouiretTableView: UITableView!
     @IBOutlet weak var favouiretFilter: UIButton!
@@ -60,14 +65,50 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var parkingNum = true
     var wifiNum = true
     
+    var didload = 0
+    var filterTapped = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addingPading()
+        didload = 1
+        noDatFoundView.isHidden = false
+        favouiretTableView.isHidden = true
         filterView.isHidden = true
         favouiretTableView.delegate = self
         favouiretTableView.dataSource = self
         favouiretTableView.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
         
+        let tokenIs = getToken()
+        var dictionaryIs = [String: Any]()
+        if didload == 1 {
+            var latitudeIs = ""
+            var longitudeIs = ""
+            if let latitude = objectOfHomeViewModel.userLocation.last?.latitude {
+                latitudeIs = latitude
+            }
+            if let longitude = objectOfHomeViewModel.userLocation.last?.longitude{
+                longitudeIs = longitude
+            }
+            dictionaryIs["latitude"] = latitudeIs
+            dictionaryIs["longitude"] = longitudeIs
+            dictionaryIs["text"] = ""
+        }
+        
+        objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, paramsDictionary: dictionaryIs){ status in
+            if status == true{
+                self.noDatFoundView.isHidden = true
+                self.favouiretTableView.isHidden = false
+                self.filterView.isHidden = true
+                self.favouiretTableView.reloadData()
+            }else{
+                self.noDatFoundView.isHidden = false
+                self.favouiretTableView.isHidden = true
+                self.filterView.isHidden = true
+            }
+            
+        }
+                
         // Do any additional setup after loading the view.
     }
     
@@ -76,13 +117,53 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
         favouritSearchFielf.leftView = paddingView
         favouritSearchFielf.leftViewMode = .always
     }
-    @IBAction func backtapped(_ sender: Any) {
+    @IBAction func backtapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
     
+    
+    @IBAction func searchFieldUsing(_ sender: Any) {
+        
+        if filterTapped != 1{
+            
+            let tokenIs = getToken()
+            var dictionaryIs = [String: Any]()
+            if didload == 1 {
+                var latitudeIs = ""
+                var longitudeIs = ""
+                if let latitude = objectOfHomeViewModel.userLocation.last?.latitude {
+                    latitudeIs = latitude
+                }
+                if let longitude = objectOfHomeViewModel.userLocation.last?.longitude{
+                    longitudeIs = longitude
+                }
+                dictionaryIs["latitude"] = latitudeIs
+                dictionaryIs["longitude"] = longitudeIs
+                dictionaryIs["text"] = searchField.text
+            }
+            
+            objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, paramsDictionary: dictionaryIs){ status in
+                if status == true{
+                    self.noDatFoundView.isHidden = true
+                    self.favouiretTableView.isHidden = false
+                    self.filterView.isHidden = true
+                    self.favouiretTableView.reloadData()
+                }else{
+                    self.noDatFoundView.isHidden = false
+                    self.favouiretTableView.isHidden = true
+                    self.filterView.isHidden = true
+                }
+                
+            }
+        }
+  
+    }
+    
+    
+    
     @IBAction func filterButtonTapped(_ sender: UIButton) {
         let tokenIs = getToken()
-        
+        filterTapped = 1
         if tokenIs != ""{
             
             if sender.currentTitle == nil{
@@ -91,12 +172,20 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 favouiretFilter.setTitle("Done", for: .normal)
                 favouiretFilter.setImage(nil, for: .normal)
             }else{
+                var latitudeIs = ""
+                var longitudeIs = ""
+                if let latitude = objectOfHomeViewModel.userLocation.last?.latitude {
+                    latitudeIs = latitude
+                }
+                if let longitude = objectOfHomeViewModel.userLocation.last?.longitude{
+                    longitudeIs = longitude
+                }
+                
                 
                 var dictionaryIs = [String: Any]()
-                dictionaryIs["latitude"] = "13.379162"
-                dictionaryIs["longitude"] = "74.740373"
+                dictionaryIs["latitude"] = latitudeIs
+                dictionaryIs["longitude"] = longitudeIs
                 
-//                print("search name : \(search.text)")
                 
                 if favouritSearchFielf.text != ""{
                     dictionaryIs["text"] = favouritSearchFielf.text
@@ -115,43 +204,48 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
 //                }
                 if acceptCard == false{
                     dictionaryIs["acceptedCredit"] = true
-//                    print("card accepted")
                 }
                 if delivary == false{
                     dictionaryIs["delivery"] = true
-//                    print("Delivary is there")
                 }
                 if dogFriendly == false{
                     dictionaryIs["dogFriendly"] = true
-//                    print("Dog friendly")
                 }
                 if familyFriendly == false{
                     dictionaryIs["familyFriendly"] = true
-//                    print("famili friendly")
                 }
                 if inWalkingDistanceNum == false{
                     dictionaryIs["inWalkingDistance"] = true
-//                    print("in walking distance")
                 }
                 if outDoorSeatingNum == false{
                     dictionaryIs["outdoorDining"] = true
-//                    print("out door seating is there")
                 }
                 if parkingNum == false{
                     dictionaryIs["parking"] = true
-//                    print("parking in there")
                 }
                 if wifiNum == false{
                     dictionaryIs["wifi"] = true
-//                   print("wifi is there")
                 }
                 
 
+                objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, paramsDictionary: dictionaryIs){ status in
+                    if status == true{
+                        self.noDatFoundView.isHidden = true
+                        self.favouiretTableView.isHidden = false
+                        self.filterView.isHidden = true
+                        self.favouiretTableView.reloadData()
+                    }else{
+                        self.noDatFoundView.isHidden = false
+                        self.favouiretTableView.isHidden = true
+                        self.filterView.isHidden = true
+                    }
+                    
+                }
                 
                 
                 
                 
-                print("result : \(dictionaryIs)")
+//                print("result : \(dictionaryIs)")
                 
             }
             
@@ -319,11 +413,31 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
 extension FavouiretVc{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return objectOfFavouiretViewModel.favSearchDetails.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = favouiretTableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
+        var imageIs = objectOfFavouiretViewModel.favSearchDetails[indexPath.row].placeImage
+        imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+        cell.imageIs.image = getImage(urlString: imageIs)
+        cell.addresIs.text = "\(objectOfFavouiretViewModel.favSearchDetails[indexPath.row].address),\(objectOfFavouiretViewModel.favSearchDetails[indexPath.row].city)"
+        cell.distanceIs.text = "\(objectOfFavouiretViewModel.favSearchDetails[indexPath.row].distance)km"
+        cell.nameIs.text = objectOfFavouiretViewModel.favSearchDetails[indexPath.row].placeName
+        cell.nationalityIs.text = objectOfFavouiretViewModel.favSearchDetails[indexPath.row].category
+        cell.ratingIs.text = objectOfFavouiretViewModel.favSearchDetails[indexPath.row].rating
+        if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "1"{
+            cell.rateIs.text = "₹"
+        }else if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "2"{
+            cell.rateIs.text = "₹₹"
+        }else if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "3"{
+            cell.rateIs.text = "₹₹₹"
+        }else if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "4"{
+            cell.rateIs.text = "₹₹₹₹"
+        }else if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "5"{
+            cell.rateIs.text = "₹₹₹₹₹"
+        }
+        cell.setShadow()
         return cell
     }
 }
