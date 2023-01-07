@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7709BE3229693CAF00DD74AB /* AboutUsVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7709BE3129693CAF00DD74AB /* AboutUsVm.swift */; };
+		7709BE352969418E00DD74AB /* AboutUsNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7709BE342969418E00DD74AB /* AboutUsNetwork.swift */; };
+		7709BE3929695A3C00DD74AB /* UserDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7709BE3829695A3C00DD74AB /* UserDetailsModel.swift */; };
 		7712AD0E2963F7AB008E1959 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD0D2963F7AB008E1959 /* HomeCollectionViewCell.swift */; };
 		7712AD1629640B61008E1959 /* HomePageVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD1529640B61008E1959 /* HomePageVc.swift */; };
 		7712AD1929640DDB008E1959 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7712AD1829640DDB008E1959 /* HomePageController.swift */; };
@@ -56,6 +59,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7709BE3129693CAF00DD74AB /* AboutUsVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsVm.swift; sourceTree = "<group>"; };
+		7709BE342969418E00DD74AB /* AboutUsNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsNetwork.swift; sourceTree = "<group>"; };
+		7709BE3829695A3C00DD74AB /* UserDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsModel.swift; sourceTree = "<group>"; };
 		7712AD0D2963F7AB008E1959 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		7712AD1529640B61008E1959 /* HomePageVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVc.swift; sourceTree = "<group>"; };
 		7712AD1829640DDB008E1959 /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
@@ -244,6 +250,7 @@
 		77664C662962B0020056BDBE /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				7709BE3129693CAF00DD74AB /* AboutUsVm.swift */,
 				77489DC0296555C2005D6C33 /* HomeViewModel.swift */,
 				77B8047D2966F8D4002D941B /* SearchVm.swift */,
 				77489DBD2965556E005D6C33 /* Login and registraion VM */,
@@ -254,6 +261,7 @@
 		77664C672962B0150056BDBE /* Network Manager */ = {
 			isa = PBXGroup;
 			children = (
+				7709BE342969418E00DD74AB /* AboutUsNetwork.swift */,
 				77489DC629655997005D6C33 /* HomeNetwork.swift */,
 				77B804802966F96F002D941B /* SearchNetworkManager.swift */,
 				77489DC929655AB1005D6C33 /* RegisterNetwork */,
@@ -267,6 +275,7 @@
 				77C1A4D029656F7500D6ECCC /* HomeDataModel.swift */,
 				77B804782966AD1C002D941B /* UserLocationModel.swift */,
 				77DF7C7A2966FE8F0050EDA3 /* NearCityModel.swift */,
+				7709BE3829695A3C00DD74AB /* UserDetailsModel.swift */,
 			);
 			path = M_odel;
 			sourceTree = "<group>";
@@ -406,10 +415,12 @@
 				7712AD1629640B61008E1959 /* HomePageVc.swift in Sources */,
 				7776A3BD2962EF3A00F6830D /* Register_login_Netowork.swift in Sources */,
 				7776A3CA296314D900F6830D /* ForgotPasswordVm.swift in Sources */,
+				7709BE352969418E00DD74AB /* AboutUsNetwork.swift in Sources */,
 				77489DC729655997005D6C33 /* HomeNetwork.swift in Sources */,
 				7776A3C4296301A700F6830D /* OtpVarificationVm.swift in Sources */,
 				77664C6C2962B5F70056BDBE /* LogInVc.swift in Sources */,
 				7712AD2729646E62008E1959 /* Location Manager.swift in Sources */,
+				7709BE3229693CAF00DD74AB /* AboutUsVm.swift in Sources */,
 				7776A3B32962DC5200F6830D /* VarifyOtpVc.swift in Sources */,
 				7776A3B62962E03A00F6830D /* ResetPasswordVc.swift in Sources */,
 				77C1A4D129656F7500D6ECCC /* HomeDataModel.swift in Sources */,
@@ -426,6 +437,7 @@
 				7776A3BA2962EE3F00F6830D /* RegisterVm.swift in Sources */,
 				77489DC1296555C2005D6C33 /* HomeViewModel.swift in Sources */,
 				77664C802962D54A0056BDBE /* RegisterVc.swift in Sources */,
+				7709BE3929695A3C00DD74AB /* UserDetailsModel.swift in Sources */,
 				77A101C52968608F00071069 /* FeedbackFieldBackgroundColour.swift in Sources */,
 				7712AD1929640DDB008E1959 /* HomePageController.swift in Sources */,
 			);

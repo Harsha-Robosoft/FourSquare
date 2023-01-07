@@ -13,6 +13,7 @@ class HomeViewModel {
     var objectOfHomeNetwork = HomeNetwork()
     
     var homeDetails = [HomeDataModel]()
+    var userDetails = [UserDetailsModel]()
     
     var userLocation = [UserLocationModel]()
     
@@ -124,4 +125,57 @@ class HomeViewModel {
         }
     }
     
+    
+    func userDetailsApiCall(tokenToSend: String, completion: @escaping((Bool) -> ())) {
+        objectOfHomeNetwork.userDetails(token: tokenToSend){ userData, userStatus, userError in
+            DispatchQueue.main.async {
+                if userError == nil{
+                    if userStatus == true{
+                        
+                        var userName = ""
+                        var userProfile = ""
+                        var userId = ""
+                        
+                        if let data0 = userData{
+                            
+                            if let data01 = data0["userName"] as? String{
+                                userName = data01
+                            }
+                            if let data02 = data0["userImage"] as? String{
+                                userProfile = data02
+                            }
+                            if let data03 = data0["_id"] as? String{
+                                userId = data03
+                            }
+                            
+                            let user = UserDetailsModel(userName: userName, userProfileImage: userProfile, userId: userId)
+                            self.userDetails.append(user)
+                        }
+                        completion(true)
+                        
+                    }else{
+                        completion(false)
+                    }
+                }else{
+                    completion(false)
+                }
+            }
+        }
+    }
+    
+    func feedBackApiCall(tokenToSend: String, feedbackIs: String, completion: @escaping((Bool) -> ())) {
+        objectOfHomeNetwork.feedbackApi(token: tokenToSend, feddBack: feedbackIs){ feedbackStatus, feedbackError in
+            DispatchQueue.main.async {
+                if feedbackError == nil{
+                    if feedbackStatus == true{
+                        completion(true)
+                    }else{
+                        completion(false)
+                    }
+                }else{
+                    completion(false)
+                }
+            }
+        }
+    }
 }

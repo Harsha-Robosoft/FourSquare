@@ -15,6 +15,8 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
     
+    @IBOutlet weak var proFileEditButton: UIButton!
+    @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var name_Loginbutton: UIButton!
     @IBOutlet weak var burgerWidth: NSLayoutConstraint!
     @IBOutlet weak var topTapView: UIView!
@@ -76,6 +78,36 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             top.constant = 50
             bottom.constant = 50
             menuOut = true
+            
+            let call = getToken()
+            
+            if call != ""{
+                
+                proFileEditButton.isEnabled = true
+                
+                objectOfHomeViewModel.userDetailsApiCall(tokenToSend: call){ status in
+                    if status == true{
+                        var imageIs = ""
+                        
+                        if let imageIsIS = self.objectOfHomeViewModel.userDetails.last?.userProfileImage{
+                            imageIs = imageIsIS
+                        }
+                        imageIs.insert("s", at: imageIs.index(imageIs.startIndex , offsetBy: 4) )
+                        self.userProfileImage.image = self.getImage(urlString: imageIs)
+                        self.name_Loginbutton.isEnabled = false
+                        self.name_Loginbutton.setTitle(self.objectOfHomeViewModel.userDetails.last?.userName.capitalized, for: .normal)
+                        
+                        
+                    }else{
+                        
+                    }
+                }
+            }else{
+                name_Loginbutton.isEnabled = true
+                proFileEditButton.isEnabled = false
+                
+            }
+            
         }
         else{
             burgerWidth.constant = 0
@@ -228,6 +260,13 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
         
     }
+    
+    @IBAction func editProfileButtonTapped(_ sender: UIButton) {
+        
+        print("profile hi ")
+        
+    }
+    
     
     
 }

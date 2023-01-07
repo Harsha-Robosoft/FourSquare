@@ -9,9 +9,7 @@ import Foundation
 class HomeNetwork {
     
     func callHomeApi(endPoint: String, lat: String, long: String, completion: @escaping(([[String: Any]]?,Bool,Error?) -> ())) {
-        
-//        print("end point : \(endPoint)\nlat : \(lat)\nlong : \(long)")
-        
+                
         guard let url = URL(string:"https://four-square-three.vercel.app/api\(endPoint)") else{ return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -62,7 +60,7 @@ class HomeNetwork {
                     print("logout responce : ",responsIs.statusCode)
                     if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                         do{
-                            let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                            _ = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
                             completion(true,nil)
                         }
                     }else if responsIs.statusCode == 400{
@@ -77,5 +75,70 @@ class HomeNetwork {
         
     }
     
+    
+    func userDetails(token: String, completion: @escaping(([String: Any]?,Bool,Error?) -> ())) {
+        guard let url = URL(string:"https://four-square-three.vercel.app/api/getProfile") else{ return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
+                guard let data = data, error == nil else{
+                    print("user data Error is: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                if let responsIs = responce as? HTTPURLResponse{
+                    print("user data responce : ",responsIs.statusCode)
+                    if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
+                        do{
+                            let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                            if let dataIsIs = responsData as? [String:Any]{
+                                completion(dataIsIs,true,nil)
+                            }
+                        }
+                    }else if responsIs.statusCode == 400{
+                        completion(nil,false,error)
+                    }else{
+                        completion(nil,false,error)
+                        print("user data Error is: ", error?.localizedDescription ?? "Error...?")
+                    }
+                }
+            })
+        task.resume()
+    }
+    
+    
+    func feedbackApi(token: String, feddBack: String, completion: @escaping((Bool,Error?) -> ())) {
+        
+        guard let url = URL(string:"https://four-square-three.vercel.app/api/addFeedback") else{ return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let parameter: [String:Any] = [
+            "feedback": feddBack
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
+                guard let data = data, error == nil else{
+                    print("Feedback Error is: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                if let responsIs = responce as? HTTPURLResponse{
+                    print("Feedback responce : ",responsIs.statusCode)
+                    if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
+                        do{
+                            _ = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                                completion(true,nil)
+                        }
+                    }else if responsIs.statusCode == 400{
+                        completion(false,error)
+                    }else{
+                        completion(false,error)
+                        print("Feedback Error is: ", error?.localizedDescription ?? "Error...?")
+                    }
+                }
+            })
+        task.resume()
+    }
     
 }
