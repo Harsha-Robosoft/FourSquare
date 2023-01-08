@@ -27,6 +27,10 @@
 		7713520D296296CD003CBBFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7713520B296296CD003CBBFC /* Main.storyboard */; };
 		7713520F296296CE003CBBFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7713520E296296CE003CBBFC /* Assets.xcassets */; };
 		77135212296296CE003CBBFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77135210296296CE003CBBFC /* LaunchScreen.storyboard */; };
+		7722BDC5296A92E700D32892 /* PlaceDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722BDC4296A92E700D32892 /* PlaceDetailsModel.swift */; };
+		7722BDC8296A950200D32892 /* PlaceDetailsVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722BDC7296A950200D32892 /* PlaceDetailsVm.swift */; };
+		7722BDCB296A95BB00D32892 /* PlaceDetailsNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722BDCA296A95BB00D32892 /* PlaceDetailsNetworkManager.swift */; };
+		7722BDD0296AB0F200D32892 /* DetailsStarsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722BDCF296AB0F200D32892 /* DetailsStarsStatus.swift */; };
 		77489DC1296555C2005D6C33 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77489DC0296555C2005D6C33 /* HomeViewModel.swift */; };
 		77489DC729655997005D6C33 /* HomeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77489DC629655997005D6C33 /* HomeNetwork.swift */; };
 		77664C6C2962B5F70056BDBE /* LogInVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77664C6B2962B5F70056BDBE /* LogInVc.swift */; };
@@ -85,6 +89,10 @@
 		7713520E296296CE003CBBFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77135211296296CE003CBBFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77135213296296CE003CBBFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7722BDC4296A92E700D32892 /* PlaceDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsModel.swift; sourceTree = "<group>"; };
+		7722BDC7296A950200D32892 /* PlaceDetailsVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsVm.swift; sourceTree = "<group>"; };
+		7722BDCA296A95BB00D32892 /* PlaceDetailsNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsNetworkManager.swift; sourceTree = "<group>"; };
+		7722BDCF296AB0F200D32892 /* DetailsStarsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsStarsStatus.swift; sourceTree = "<group>"; };
 		77489DC0296555C2005D6C33 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		77489DC629655997005D6C33 /* HomeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNetwork.swift; sourceTree = "<group>"; };
 		77664C6B2962B5F70056BDBE /* LogInVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVc.swift; sourceTree = "<group>"; };
@@ -259,10 +267,11 @@
 		77664C662962B0020056BDBE /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				7722BDC7296A950200D32892 /* PlaceDetailsVm.swift */,
 				7709BE3B296998D100DD74AB /* FavouiretVm.swift */,
 				7709BE3129693CAF00DD74AB /* AboutUsVm.swift */,
-				77489DC0296555C2005D6C33 /* HomeViewModel.swift */,
 				77B8047D2966F8D4002D941B /* SearchVm.swift */,
+				77489DC0296555C2005D6C33 /* HomeViewModel.swift */,
 				77489DBD2965556E005D6C33 /* Login and registraion VM */,
 			);
 			path = "View Model";
@@ -271,6 +280,7 @@
 		77664C672962B0150056BDBE /* Network Manager */ = {
 			isa = PBXGroup;
 			children = (
+				7722BDCA296A95BB00D32892 /* PlaceDetailsNetworkManager.swift */,
 				7709BE3E29699A3F00DD74AB /* FavouiretNetwork.swift */,
 				7709BE342969418E00DD74AB /* AboutUsNetwork.swift */,
 				77489DC629655997005D6C33 /* HomeNetwork.swift */,
@@ -283,6 +293,7 @@
 		77664C682962B02E0056BDBE /* M_odel */ = {
 			isa = PBXGroup;
 			children = (
+				7722BDC4296A92E700D32892 /* PlaceDetailsModel.swift */,
 				77C1A4D029656F7500D6ECCC /* HomeDataModel.swift */,
 				77B804782966AD1C002D941B /* UserLocationModel.swift */,
 				77DF7C7A2966FE8F0050EDA3 /* NearCityModel.swift */,
@@ -313,6 +324,7 @@
 				77B80474296686AB002D941B /* FilterByButtons.swift */,
 				77A101C42968608F00071069 /* FeedbackFieldBackgroundColour.swift */,
 				7709BE422969B37600DD74AB /* GradientView.swift */,
+				7722BDCF296AB0F200D32892 /* DetailsStarsStatus.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -431,13 +443,16 @@
 				7709BE352969418E00DD74AB /* AboutUsNetwork.swift in Sources */,
 				77489DC729655997005D6C33 /* HomeNetwork.swift in Sources */,
 				7776A3C4296301A700F6830D /* OtpVarificationVm.swift in Sources */,
+				7722BDC5296A92E700D32892 /* PlaceDetailsModel.swift in Sources */,
 				77664C6C2962B5F70056BDBE /* LogInVc.swift in Sources */,
 				7712AD2729646E62008E1959 /* Location Manager.swift in Sources */,
 				7709BE3229693CAF00DD74AB /* AboutUsVm.swift in Sources */,
 				7776A3B32962DC5200F6830D /* VarifyOtpVc.swift in Sources */,
 				7776A3B62962E03A00F6830D /* ResetPasswordVc.swift in Sources */,
+				7722BDD0296AB0F200D32892 /* DetailsStarsStatus.swift in Sources */,
 				77C1A4D129656F7500D6ECCC /* HomeDataModel.swift in Sources */,
 				77135208296296CD003CBBFC /* SceneDelegate.swift in Sources */,
+				7722BDC8296A950200D32892 /* PlaceDetailsVm.swift in Sources */,
 				7709BE3C296998D100DD74AB /* FavouiretVm.swift in Sources */,
 				77C1A4D72965932700D6ECCC /* SearchBodyCell.swift in Sources */,
 				77C1A4DA2965A44B00D6ECCC /* SearchCollectionView.swift in Sources */,
@@ -451,6 +466,7 @@
 				7776A3B02962DAEB00F6830D /* EmailValidationVc.swift in Sources */,
 				77B8047E2966F8D4002D941B /* SearchVm.swift in Sources */,
 				7776A3BA2962EE3F00F6830D /* RegisterVm.swift in Sources */,
+				7722BDCB296A95BB00D32892 /* PlaceDetailsNetworkManager.swift in Sources */,
 				77489DC1296555C2005D6C33 /* HomeViewModel.swift in Sources */,
 				77664C802962D54A0056BDBE /* RegisterVc.swift in Sources */,
 				7709BE3929695A3C00DD74AB /* UserDetailsModel.swift in Sources */,

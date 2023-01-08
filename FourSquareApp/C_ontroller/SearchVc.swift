@@ -25,6 +25,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     var rateStatus = ""
     var searching = 0
     var filterSearchIs = 0
+
     
     
     @IBOutlet weak var filter: UIButton!
@@ -350,7 +351,6 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 dictionaryIs["latitude"] = String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162")
                 dictionaryIs["longitude"] = String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")
                 
-//                print("search name : \(search.text)")
                 
                 if search.text != ""{
                     dictionaryIs["text"] = search.text
@@ -369,40 +369,28 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
 //                }
                 if acceptCard == false{
                     dictionaryIs["acceptedCredit"] = true
-//                    print("card accepted")
                 }
                 if delivary == false{
                     dictionaryIs["delivery"] = true
-//                    print("Delivary is there")
                 }
                 if dogFriendly == false{
                     dictionaryIs["dogFriendly"] = true
-//                    print("Dog friendly")
                 }
                 if familyFriendly == false{
                     dictionaryIs["familyFriendly"] = true
-//                    print("famili friendly")
                 }
                 if inWalkingDistanceNum == false{
                     dictionaryIs["inWalkingDistance"] = true
-//                    print("in walking distance")
                 }
                 if outDoorSeatingNum == false{
                     dictionaryIs["outdoorDining"] = true
-//                    print("out door seating is there")
                 }
                 if parkingNum == false{
                     dictionaryIs["parking"] = true
-//                    print("parking in there")
                 }
                 if wifiNum == false{
                     dictionaryIs["wifi"] = true
-//                   print("wifi is there")
                 }
-                
-//                print("set radious id : \(setRadiousField.text)")
-//                print("condition : \(poplular_Distance_RatingButton)")
-//                print("rate is : \(rateStatus)")
                 
                 
                 objectOfSearchViewModel.searchWithFilterApiCall(tokenToSend: tokenIs, parameterDictionary: dictionaryIs){ status in
@@ -605,9 +593,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     
     @IBAction func useMyCurrentLocationButtonTapped(_ sender: UIButton) {
         let tokenIs = getToken()
-        
-        
-        
+  
         if tokenIs != ""{
             
             nearYou = 0
@@ -641,12 +627,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             }
             
         }
-        
-        
-        
-        
-        
-        
+
     }
     
     @IBAction func searchInMapButtonTapped(_ sender: UIButton) {
@@ -723,9 +704,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                     }
                 }
             }
-
         }
-        
     }
     @IBAction func mapViewButtonTapped(_ sender: UIButton) {
         
@@ -750,8 +729,6 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         filterScreen.isHidden = true
         whiteView.isHidden = true
     }
-    
-    
 }
 
 extension SearchVc{
@@ -830,7 +807,7 @@ extension SearchVc{
             let cell = nearMeTableView.dequeueReusableCell(withIdentifier: "cell") as! SearchBodyCell
             cell.name.text = objectOfSearchViewModel.nearCityData[indexPath.row].cityName.capitalized
             
-            var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
+            var imageIs = objectOfSearchViewModel.nearCityData[indexPath.row].cityImage
             
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
             
@@ -840,10 +817,8 @@ extension SearchVc{
         }else if searching == 1{
             
             let cell = mapButton_TableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
-            
             var imageIs = objectOfSearchViewModel.searchDetaisl[indexPath.row].placeImage
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
-
             cell.imageIs.image = getImage(urlString: imageIs)
             cell.addresIs.text = "\(objectOfSearchViewModel.searchDetaisl[indexPath.row].address),\(objectOfSearchViewModel.searchDetaisl[indexPath.row].city)"
             cell.distanceIs.text = "\(objectOfSearchViewModel.searchDetaisl[indexPath.row].distance)km"
@@ -868,10 +843,8 @@ extension SearchVc{
         }else if filterSearchIs == 1{
             
             let cell = mapButton_TableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
-            
             var imageIs = objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeImage
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
-
             cell.imageIs.image = getImage(urlString: imageIs)
             cell.addresIs.text = "\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].address),\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].city)"
             cell.distanceIs.text = "\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].distance)km"
@@ -899,11 +872,8 @@ extension SearchVc{
         
         
         let cell = mapButton_TableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
-        
         var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
-        
         imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
-
         cell.imageIs.image = getImage(urlString: imageIs)
         cell.addresIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address),\(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
         cell.distanceIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
@@ -979,18 +949,32 @@ extension SearchVc{
                 
             }
 
+        }else if searching == 1{
+            print("search id didselect: ",objectOfSearchViewModel.searchDetaisl[indexPath.row]._id)
+            
+            let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
+            if let vc = Details{
+                vc.placeId = objectOfSearchViewModel.searchDetaisl[indexPath.row]._id
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+
+        }else if filterSearchIs == 1{
+            print("Filter search id didselect ",objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id)
+            
+            let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
+            if let vc = Details{
+                vc.placeId = objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }else{
+            print("home details if didselect", objectOfHomeViewModel.homeDetails[indexPath.row]._id)
             
-            nearMeView.isHidden = true
-            tableViewAndViewMap.isHidden = true
-            mapAndCollectionView.isHidden = false
-            nearYouAndSuggestion.isHidden = true
-            filterScreen.isHidden = true
-            whiteView.isHidden = true
-            map_CollectionView.isHidden = false
-            listViewButton.isHidden = false
-            
-            map_CollectionView.reloadData()
+            let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
+            if let vc = Details{
+                vc.placeId = objectOfHomeViewModel.homeDetails[indexPath.row]._id
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
         
     }
@@ -1037,6 +1021,32 @@ extension SearchVc{
             cell.setShadow()
             
             
+        }else if filterSearchIs == 1{
+            
+            let cell = map_CollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchCollectionView
+            
+            var imageIs = objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeImage
+            
+            imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+
+            cell.imageIs.image = getImage(urlString: imageIs)
+            cell.address.text = "\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].address),\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].city)"
+            cell.distance.text = "\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].distance)km"
+            cell.name.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeName
+            cell.category.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].category
+            cell.rating.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].rating
+            if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "1"{
+                cell.rate.text = "₹"
+            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "2"{
+                cell.rate.text = "₹₹"
+            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "3"{
+                cell.rate.text = "₹₹₹"
+            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "4"{
+                cell.rate.text = "₹₹₹₹"
+            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "5"{
+                cell.rate.text = "₹₹₹₹₹"
+            }
+            cell.setShadow()
         }
         
         let cell = map_CollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchCollectionView

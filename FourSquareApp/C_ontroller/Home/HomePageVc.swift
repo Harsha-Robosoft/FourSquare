@@ -224,8 +224,12 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        print("\(objectOfHomeViewModel.homeDetails[indexPath.row]._id)")
+            
+        let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
+        if let vc = Details{
+            vc.placeId = objectOfHomeViewModel.homeDetails[indexPath.row]._id
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 }

@@ -124,7 +124,6 @@ class SearchViewModel {
                                         }
                                     }
                                     let search = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs)
-    //                                print("search data : \(imageUrl)\n\(placeId)\n\(placeName)\n\(ratingIs)\n\(priceRangeIs)\n\(category)\n\(distanceIs)\n\(address)\n\(cityName)")
                                     self.searchDetaisl.append(search)
                                 }
                                 completion(true)
@@ -151,10 +150,6 @@ class SearchViewModel {
                 self.filterSearchDetails.removeAll()
                 if filterError == nil{
                     if filterStatus == true{
-                        
-                        
-                        print("dat dat : \(filterData)")
-                      
                         
                         if let data0 = filterData{
                             if(data0.isEmpty) {
