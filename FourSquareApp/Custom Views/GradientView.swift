@@ -33,7 +33,7 @@ class GradientBottom: UIView {
     }
 }
 class GradientLeftToRight: UIView {
-    var topColor: UIColor =   #colorLiteral(red: 0.9606800675, green: 0.9608443379, blue: 0.9606696963, alpha: 0.3832138271)
+    var topColor: UIColor =   #colorLiteral(red: 0.9533321261, green: 0.9377500415, blue: 0.908346355, alpha: 1)
     var bottomColor: UIColor = #colorLiteral(red: 0.1294117647, green: 0.1294117647, blue: 0.1294117647, alpha: 0.01848779966)
     let gradientLayer = CAGradientLayer()
     override func layoutSubviews() {

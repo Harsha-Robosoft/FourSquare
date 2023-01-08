@@ -1048,36 +1048,54 @@ extension SearchVc{
             }
             cell.setShadow()
         }
+            
+            let cell = map_CollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchCollectionView
+            var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
+            imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+            cell.imageIs.image = getImage(urlString: imageIs)
+            cell.address.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address),\(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
+            cell.distance.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
+            cell.name.text = objectOfHomeViewModel.homeDetails[indexPath.row].placeName
+            cell.category.text = objectOfHomeViewModel.homeDetails[indexPath.row].category
+            cell.rating.text = objectOfHomeViewModel.homeDetails[indexPath.row].rating
+            if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "1"{
+                cell.rate.text = "₹"
+            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "2"{
+                cell.rate.text = "₹₹"
+            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "3"{
+                cell.rate.text = "₹₹₹"
+            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "4"{
+                cell.rate.text = "₹₹₹₹"
+            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "5"{
+                cell.rate.text = "₹₹₹₹₹"
+            }
+            cell.setShadow()
+            return cell
         
-        let cell = map_CollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchCollectionView
-        
-        var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
-        
-        imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
-
-        cell.imageIs.image = getImage(urlString: imageIs)
-        cell.address.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address),\(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
-        cell.distance.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
-        cell.name.text = objectOfHomeViewModel.homeDetails[indexPath.row].placeName
-        cell.category.text = objectOfHomeViewModel.homeDetails[indexPath.row].category
-        cell.rating.text = objectOfHomeViewModel.homeDetails[indexPath.row].rating
-        if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "1"{
-            cell.rate.text = "₹"
-        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "2"{
-            cell.rate.text = "₹₹"
-        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "3"{
-            cell.rate.text = "₹₹₹"
-        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "4"{
-            cell.rate.text = "₹₹₹₹"
-        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "5"{
-            cell.rate.text = "₹₹₹₹₹"
-        }
-        cell.setShadow()
-        
-        return cell
     }
-
     
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if searching == 1{
+            let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
+            if let vc = Details{
+                vc.placeId = objectOfSearchViewModel.searchDetaisl[indexPath.row]._id
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }else if filterSearchIs == 1{
+            let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
+            if let vc = Details{
+                vc.placeId = objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }else{
+            let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
+            if let vc = Details{
+                vc.placeId = objectOfHomeViewModel.homeDetails[indexPath.row]._id
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
 }
 
 extension SearchVc{
@@ -1095,5 +1113,4 @@ extension SearchVc{
         print("Search token",receivedToken)
         return receivedToken
     }
-    
 }

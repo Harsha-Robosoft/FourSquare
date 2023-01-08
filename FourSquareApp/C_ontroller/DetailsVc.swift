@@ -92,6 +92,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 }
                 imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
                 
+                numberIs.insert(" ", at: numberIs.index(numberIs.startIndex, offsetBy: 5))
                 if ratingIs == 1{
                     self.starOne.changes()
                     self.starTwo.noChange()
