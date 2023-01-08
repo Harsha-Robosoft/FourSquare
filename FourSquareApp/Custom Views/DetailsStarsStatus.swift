@@ -21,9 +21,7 @@ class DetailsStarsStatus: UIButton {
         self.setImage(#imageLiteral(resourceName: "rating_icon_selected"), for: .normal)
     }
     func noChange() {
-//        let image = UIImage(named: "star")
         self.setImage(#imageLiteral(resourceName: "rating_icon_unselected"), for: .normal)
-//        self.tintColor = #colorLiteral(red: 0.9873251319, green: 0.669172585, blue: 0.3242347836, alpha: 1)
     }
 
 }

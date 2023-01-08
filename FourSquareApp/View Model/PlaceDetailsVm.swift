@@ -24,7 +24,6 @@ class PlaceDetailsViewModel {
                             if(data0.isEmpty) {
                                 completion(false)
                             }else{
-                               
                                 var latIs = 0.0
                                 var longIs = 0.0
                                 var placeIdIsIS = ""
@@ -37,7 +36,6 @@ class PlaceDetailsViewModel {
                                 var rating = 0.0
                                 var priceRangeIs = 0
                                 var phoneNum = ""
-                                
                                 if let data1 = data0["_id"] as? String{
                                     placeIdIsIS = data1
                                 }
@@ -69,31 +67,34 @@ class PlaceDetailsViewModel {
                                     phoneNum = data10
                                 }
                                 if let data11 = data0["location"] as? [String:Any]{
-                                    
                                     if let data001 = data11["coordinates"] as? [Double]{
-                                        
                                         latIs = data001[1]
                                         longIs = data001[0]
-                                            print("longitude is is is : \(data001[0])")
-                                            print("latitude is is is : \(data001[1])")
                                     }
-                                
                                 }
-                                
-                                
-                                
-                                
                                 let place = PlaceDetailsModel(latitude: latIs, longitude: longIs, placeId: placeIdIsIS, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, overview: overview, rating: rating, priceRange: priceRangeIs, phoneNumber: phoneNum)
                                 self.perticularPlaceDetails.append(place)
-                                
                                 completion(true)
                             }
-                            
                             }
-                        
-                        
-                        
-                        
+                    }else{
+                        completion(false)
+                    }
+                }else{
+                    completion(false)
+                }
+            }
+        }
+    }
+    
+    
+    func addRatingApiCall(tokenTosend: String, placeId: String, ratingIs: Int, completion: @escaping((Bool) -> ())) {
+        
+        objectOfPlaceDetailsNetworkManager.addRating(token: tokenTosend, _Id: placeId, rating: ratingIs){ ratingStatus, ratingeError in
+            DispatchQueue.main.async {
+                if ratingeError == nil{
+                    if ratingStatus == true{
+                        completion(true)
                     }else{
                         completion(false)
                     }
