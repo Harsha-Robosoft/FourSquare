@@ -32,6 +32,11 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             objectOfPhotoViewModel.getAllPhotosApicall(tokenIs: call, placeIdis: placeId){status in
                 if status == true{
                     
+                    if self.objectOfPhotoViewModel.AllPhotosDetails.last?.imageIs != ""{
+                        self.collectionView01.reloadData()
+                    }
+                    
+                    
                 }else{
                     self.collectionView01.isHidden = true
                 }
@@ -74,18 +79,22 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        return objectOfPhotoViewModel.AllPhotosDetails.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView01.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionCell
-        cell.imageIs.image = #imageLiteral(resourceName: "Ferrari-1200-1-1024x683")
+        var imageIs = objectOfPhotoViewModel.AllPhotosDetails[indexPath.row].imageIs
+        imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+        cell.imageIs.image = getImage(urlString: imageIs)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let showVc = self.storyboard?.instantiateViewController(withIdentifier: "ShowPhotoVc") as? ShowPhotoVc
         if let vc = showVc{
+            vc.placeName = nameIs
+            vc.details = objectOfPhotoViewModel.AllPhotosDetails[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

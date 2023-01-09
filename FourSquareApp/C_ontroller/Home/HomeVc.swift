@@ -37,6 +37,15 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         let tokenIs = getToken()
+        
+        objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: tokenIs){ status in
+            if status == true{
+                print("jigi jigi")
+            }else{
+                print("No No no no ")
+            }
+        }
+        
         print("user token is : \(tokenIs)")
     
         if tokenIs != ""{
@@ -244,6 +253,20 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    @IBAction func filterButtonTapped(_ sender: UIButton) {
+        
+        let searVc = self.storyboard?.instantiateViewController(withIdentifier: "SearchVc") as? SearchVc
+        if let vc = searVc{
+            vc.showFilterScreen = 1
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        
+    }
+    
+    
+    
     @IBAction func tapGestureTapped(_ sender: Any) {
         burgerWidth.constant = 0
         leading.constant = 0

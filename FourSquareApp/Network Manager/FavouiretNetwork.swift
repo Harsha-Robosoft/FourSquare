@@ -5,11 +5,13 @@
 //  Created by Harsha R Mundaragi on 07/01/23.
 //
 
+
+
 import Foundation
 class FavouiretNetwork {
     
-    func favouiretSearchListFilter(token: String, paramDictionary: [String: Any], completion: @escaping(([[String: Any]]?,Bool,Error?) -> ())) {
-        guard let url = URL(string:"https://four-square-three.vercel.app/api/searchFavourite") else{ return }
+    func favouiretSearchListFilter(token: String,endPoint: String, paramDictionary: [String: Any], completion: @escaping(([[String: Any]]?,Bool,Error?) -> ())) {
+        guard let url = URL(string:"https://four-square-three.vercel.app/api\(endPoint)") else{ return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

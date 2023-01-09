@@ -36,6 +36,10 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         tableView01.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
     }
  
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView01.reloadData()
+    }
 
     
     override func viewDidAppear(_ animated: Bool) {
@@ -155,8 +159,6 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     
     func render(location: CLLocation) {
-        
-        
         let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         let region = MKCoordinateRegion(center: coordinate, span: span)
@@ -210,6 +212,8 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 cell.rateIs.text = "₹₹₹₹₹"
             }
             cell.setShadow()
+            cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
+            cell.buttonTatus(id: objectOfHomeViewModel.homeDetails[indexPath.row]._id)
             
         }
         
@@ -225,6 +229,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
+        print("did select place id : \(objectOfHomeViewModel.homeDetails[indexPath.row]._id)")
         let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
         if let vc = Details{
             vc.placeId = objectOfHomeViewModel.homeDetails[indexPath.row]._id

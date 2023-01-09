@@ -27,6 +27,13 @@
 		7713520D296296CD003CBBFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7713520B296296CD003CBBFC /* Main.storyboard */; };
 		7713520F296296CE003CBBFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7713520E296296CE003CBBFC /* Assets.xcassets */; };
 		77135212296296CE003CBBFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77135210296296CE003CBBFC /* LaunchScreen.storyboard */; };
+		77192FAB296BCFFF004B9991 /* AllReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77192FAA296BCFFF004B9991 /* AllReviewModel.swift */; };
+		77192FAE296BF5DF004B9991 /* AllPhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77192FAD296BF5DF004B9991 /* AllPhotosModel.swift */; };
+		77192FB1296C1BFB004B9991 /* AddToFavouiretVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77192FB0296C1BFB004B9991 /* AddToFavouiretVm.swift */; };
+		77192FB4296C1C8F004B9991 /* AddFavouiretNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77192FB3296C1C8F004B9991 /* AddFavouiretNetwork.swift */; };
+		77192FB8296C2272004B9991 /* FavouiretIdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77192FB7296C2272004B9991 /* FavouiretIdModel.swift */; };
+		77192FBB296C38FC004B9991 /* favCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77192FBA296C38FC004B9991 /* favCell.xib */; };
+		77192FBE296C3A67004B9991 /* FavTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77192FBD296C3A67004B9991 /* FavTableCell.swift */; };
 		7722BDC5296A92E700D32892 /* PlaceDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722BDC4296A92E700D32892 /* PlaceDetailsModel.swift */; };
 		7722BDC8296A950200D32892 /* PlaceDetailsVm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722BDC7296A950200D32892 /* PlaceDetailsVm.swift */; };
 		7722BDCB296A95BB00D32892 /* PlaceDetailsNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722BDCA296A95BB00D32892 /* PlaceDetailsNetworkManager.swift */; };
@@ -100,6 +107,13 @@
 		7713520E296296CE003CBBFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77135211296296CE003CBBFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77135213296296CE003CBBFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77192FAA296BCFFF004B9991 /* AllReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllReviewModel.swift; sourceTree = "<group>"; };
+		77192FAD296BF5DF004B9991 /* AllPhotosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPhotosModel.swift; sourceTree = "<group>"; };
+		77192FB0296C1BFB004B9991 /* AddToFavouiretVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToFavouiretVm.swift; sourceTree = "<group>"; };
+		77192FB3296C1C8F004B9991 /* AddFavouiretNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFavouiretNetwork.swift; sourceTree = "<group>"; };
+		77192FB7296C2272004B9991 /* FavouiretIdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouiretIdModel.swift; sourceTree = "<group>"; };
+		77192FBA296C38FC004B9991 /* favCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = favCell.xib; sourceTree = "<group>"; };
+		77192FBD296C3A67004B9991 /* FavTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavTableCell.swift; sourceTree = "<group>"; };
 		7722BDC4296A92E700D32892 /* PlaceDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsModel.swift; sourceTree = "<group>"; };
 		7722BDC7296A950200D32892 /* PlaceDetailsVm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsVm.swift; sourceTree = "<group>"; };
 		7722BDCA296A95BB00D32892 /* PlaceDetailsNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsNetworkManager.swift; sourceTree = "<group>"; };
@@ -185,6 +199,8 @@
 			children = (
 				7712AD1C296431F0008E1959 /* mapFile.xib */,
 				7712AD1F2964332D008E1959 /* HomeTableViewCell.swift */,
+				77192FBA296C38FC004B9991 /* favCell.xib */,
+				77192FBD296C3A67004B9991 /* FavTableCell.swift */,
 			);
 			path = xibfiles;
 			sourceTree = "<group>";
@@ -295,6 +311,7 @@
 		77664C662962B0020056BDBE /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				77192FB0296C1BFB004B9991 /* AddToFavouiretVm.swift */,
 				7722BDF8296B10ED00D32892 /* ReviewVM.swift */,
 				7722BDF2296B09A600D32892 /* PhotosVm.swift */,
 				7722BDC7296A950200D32892 /* PlaceDetailsVm.swift */,
@@ -310,6 +327,7 @@
 		77664C672962B0150056BDBE /* Network Manager */ = {
 			isa = PBXGroup;
 			children = (
+				77192FB3296C1C8F004B9991 /* AddFavouiretNetwork.swift */,
 				7722BDFB296B115B00D32892 /* ReviewNetwork.swift */,
 				7722BDF5296B0B4A00D32892 /* PhotoNetwork.swift */,
 				7722BDCA296A95BB00D32892 /* PlaceDetailsNetworkManager.swift */,
@@ -330,6 +348,9 @@
 				77B804782966AD1C002D941B /* UserLocationModel.swift */,
 				77DF7C7A2966FE8F0050EDA3 /* NearCityModel.swift */,
 				7709BE3829695A3C00DD74AB /* UserDetailsModel.swift */,
+				77192FAA296BCFFF004B9991 /* AllReviewModel.swift */,
+				77192FAD296BF5DF004B9991 /* AllPhotosModel.swift */,
+				77192FB7296C2272004B9991 /* FavouiretIdModel.swift */,
 			);
 			path = M_odel;
 			sourceTree = "<group>";
@@ -438,6 +459,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77192FBB296C38FC004B9991 /* favCell.xib in Resources */,
 				77135212296296CE003CBBFC /* LaunchScreen.storyboard in Resources */,
 				7713520F296296CE003CBBFC /* Assets.xcassets in Resources */,
 				7712AD1D296431F0008E1959 /* mapFile.xib in Resources */,
@@ -452,6 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77192FB1296C1BFB004B9991 /* AddToFavouiretVm.swift in Sources */,
 				77A101D02968687000071069 /* FavouiretVc.swift in Sources */,
 				7722BDF9296B10ED00D32892 /* ReviewVM.swift in Sources */,
 				7709BE462969BBB700DD74AB /* DetailsVc.swift in Sources */,
@@ -471,13 +494,16 @@
 				77664C7C2962CF5B0056BDBE /* HomeVc.swift in Sources */,
 				77664C752962C35C0056BDBE /* textFieldBorderRemove.swift in Sources */,
 				77DF7C7B2966FE8F0050EDA3 /* NearCityModel.swift in Sources */,
+				77192FBE296C3A67004B9991 /* FavTableCell.swift in Sources */,
 				77664C782962C47A0056BDBE /* LogInButton.swift in Sources */,
 				7776A3C7296303A700F6830D /* OtpVarificationNetwork.swift in Sources */,
 				7722BDEC296AF28F00D32892 /* ShowPhotoVc.swift in Sources */,
 				77135206296296CD003CBBFC /* AppDelegate.swift in Sources */,
+				77192FB4296C1C8F004B9991 /* AddFavouiretNetwork.swift in Sources */,
 				77C1A4D4296592E500D6ECCC /* SearchHeaderCell.swift in Sources */,
 				7712AD1629640B61008E1959 /* HomePageVc.swift in Sources */,
 				7776A3BD2962EF3A00F6830D /* Register_login_Netowork.swift in Sources */,
+				77192FAE296BF5DF004B9991 /* AllPhotosModel.swift in Sources */,
 				7776A3CA296314D900F6830D /* ForgotPasswordVm.swift in Sources */,
 				7709BE352969418E00DD74AB /* AboutUsNetwork.swift in Sources */,
 				77489DC729655997005D6C33 /* HomeNetwork.swift in Sources */,
@@ -490,10 +516,12 @@
 				7722BDD3296AD7CD00D32892 /* ReviewVc.swift in Sources */,
 				7776A3B32962DC5200F6830D /* VarifyOtpVc.swift in Sources */,
 				7776A3B62962E03A00F6830D /* ResetPasswordVc.swift in Sources */,
+				77192FB8296C2272004B9991 /* FavouiretIdModel.swift in Sources */,
 				7722BDD0296AB0F200D32892 /* DetailsStarsStatus.swift in Sources */,
 				77C1A4D129656F7500D6ECCC /* HomeDataModel.swift in Sources */,
 				77135208296296CD003CBBFC /* SceneDelegate.swift in Sources */,
 				7722BDD6296AD80300D32892 /* AddReviewVc.swift in Sources */,
+				77192FAB296BCFFF004B9991 /* AllReviewModel.swift in Sources */,
 				7722BDC8296A950200D32892 /* PlaceDetailsVm.swift in Sources */,
 				7709BE3C296998D100DD74AB /* FavouiretVm.swift in Sources */,
 				77C1A4D72965932700D6ECCC /* SearchBodyCell.swift in Sources */,

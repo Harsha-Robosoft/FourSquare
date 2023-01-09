@@ -9,6 +9,19 @@ import UIKit
 
 class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+//    let data = NSMutableData()
+//    let name = "_id"
+
+    
+    
+    
+    var objectOfReviewViewModel = ReviewViewModel.objectOfViewModel
+    var objectOfUserDefaults = UserDefaults()
+    var objectOfKeyChain = KeyChain()
+    
+    var placeIsIs = ""
+    var photoArray = [UIImage]()
+    
     @IBOutlet weak var reviewField: FeedbackFieldBackgroundColour!
     
     @IBOutlet weak var view_1: UIView!
@@ -29,6 +42,8 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBOutlet weak var button_4: UIButton!
     @IBOutlet weak var button_5: UIButton!
 
+    @IBOutlet weak var submitButton: UIButton!
+    
     var buttonw1 = 1
     var buttonw2 = 0
     var buttonw3 = 0
@@ -37,14 +52,12 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        submitButton.isEnabled = false
+        submitButton.alpha = 0.5
         view_2.isHidden = true
         view_3.isHidden = true
         view_4.isHidden = true
         view_5.isHidden = true
-        
-
-        // Do any additional setup after loading the view.
     }
     @IBAction func backButtonTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -90,30 +103,37 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         if buttonw1 == 1{
             image_1.image = info[.originalImage] as? UIImage
+            photoArray.append(image_1.image ?? #imageLiteral(resourceName: "Ferrari-1200-1-1024x683"))
             button_1.isHidden = true
             view_2.isHidden = false
             buttonw1 = 0
             buttonw2 = 1
+            submitButton.isEnabled = true
+            submitButton.alpha = 1.0
         }else if buttonw2 == 1{
             image_2.image = info[.originalImage] as? UIImage
+            photoArray.append(image_2.image ?? #imageLiteral(resourceName: "Ferrari-1200-1-1024x683"))
             button_2.isHidden = true
             view_3.isHidden = false
             buttonw2 = 0
             buttonw3 = 1
         }else if buttonw3 == 1{
             image_3.image = info[.originalImage] as? UIImage
+            photoArray.append(image_3.image ?? #imageLiteral(resourceName: "Ferrari-1200-1-1024x683"))
             button_3.isHidden = true
             view_4.isHidden = false
             buttonw3 = 0
             buttonw4 = 1
         }else if buttonw4 == 1{
             image_4.image = info[.originalImage] as? UIImage
+            photoArray.append(image_4.image ?? #imageLiteral(resourceName: "Ferrari-1200-1-1024x683"))
             button_4.isHidden = true
             view_5.isHidden = false
             buttonw4 = 0
             buttonw5 = 1
         }else if buttonw5 == 1{
             image_5.image = info[.originalImage] as? UIImage
+            photoArray.append(image_5.image ?? #imageLiteral(resourceName: "Ferrari-1200-1-1024x683"))
             button_5.isHidden = true
             buttonw5 = 0
         }
@@ -121,6 +141,81 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         self.dismiss(animated: true, completion: nil)
     }
+    @IBAction func reviewTextField(_ sender: Any) {
+        
+        if reviewField.text != ""{
+            submitButton.isEnabled = true
+            submitButton.alpha = 1.0
+        }else{
+            submitButton.isEnabled = false
+            submitButton.alpha = 0.5
+        }
+    }
     
     
+    
+    @IBAction func submitfeddBackButtonTapped(_ sender: UIButton) {
+        
+        let call = getToken()
+        
+        if reviewField.text != ""{
+
+            var reviewToSend = ""
+
+            if let review00 = reviewField.text{
+                reviewToSend = review00
+            }
+
+            objectOfReviewViewModel.textReviewSubmitApiCall(tokenIs: call, restaturantId: placeIsIs, reviewIs: reviewToSend){ status in
+                if status == true{
+                    self.submitButton.isEnabled = false
+                    self.submitButton.alpha = 0.5
+                }else{
+                    self.alertMessage(message: "Error while submitting the review try later ...!")
+                }
+
+            }
+
+        }
+        
+        if buttonw1 == 0{
+ print("place is id : \(placeIsIs)")
+//            Api call
+            objectOfReviewViewModel.photoReviewSubmitApiCall(rokenIs: call, placeIdIs: placeIsIs, images: photoArray){ status in
+                if status == true{
+                    print("data received")
+                }else{
+                    print("data not received")
+                }
+                
+            }
+
+
+//            print("count is ius : \(photoArray.count)")
+            
+        }
+        
+        
+        
+    }
+    
+    
+}
+
+
+extension AddReviewVc{
+    func getToken() -> String {
+        var id = ""
+       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
+        if let idIs = userIdIs as? String{
+            id = idIs
+        }
+        print("Search id : \(id)")
+        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
+            return ""}
+        guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
+            return ""}
+        print("Search token",receivedToken)
+        return receivedToken
+    }
 }

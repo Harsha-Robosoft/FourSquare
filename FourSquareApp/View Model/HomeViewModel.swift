@@ -15,6 +15,7 @@ class HomeViewModel {
     var homeDetails = [HomeDataModel]()
     var userDetails = [UserDetailsModel]()
     var userLocation = [UserLocationModel]()
+    var favouiretIdData = [FavouiretIdModel]()
     
     func apiCallForData(endPoint: String,latToSend: String, longToSend: String, completion: @escaping((Bool) -> ())) {
         objectOfHomeNetwork.callHomeApi(endPoint: endPoint, lat: latToSend, long: longToSend){ dataIs, statusIs, errorIs in
@@ -167,6 +168,54 @@ class HomeViewModel {
             DispatchQueue.main.async {
                 if feedbackError == nil{
                     if feedbackStatus == true{
+                        completion(true)
+                    }else{
+                        completion(false)
+                    }
+                }else{
+                    completion(false)
+                }
+            }
+        }
+    }
+    
+    func AllFavouiretPlaceIdApiCall(tokenIs: String, completion: @escaping((Bool) -> ())) {
+        objectOfHomeNetwork.favouiretPlaceIdies(token: tokenIs){ idData,idStatus, idError in
+            DispatchQueue.main.async {
+                if idError == nil{
+                    if idStatus == true{
+                        
+                        if let data0 = idData{
+                            
+                            var placeIdIs = ""
+                            var _IdIs = ""
+                            
+                            if let data01 = data0["favouritePlaces"] as? [[String: Any]]{
+                                
+                                for i in data01{
+                                    
+                                    if let data001 = i["placeId"] as? String{
+                                        placeIdIs = data001
+                                    }
+                                    print("place id is is : \(placeIdIs)")
+                                    
+                                    if let data002 = i["_id"] as? String{
+                                        _IdIs = data002
+                                    }
+                                    
+                                    let favId = FavouiretIdModel(placeIs: placeIdIs, _Id: _IdIs)
+                                    
+                                    self.favouiretIdData.append(favId)
+                                }
+                                
+                            }
+                            
+                            
+                            
+                        }
+                        
+                        
+                        
                         completion(true)
                     }else{
                         completion(false)

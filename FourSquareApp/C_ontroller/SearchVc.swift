@@ -22,11 +22,11 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     var nearYou = 0
     var filterTapped = 0
     var poplular_Distance_RatingButton = ""
-    var rateStatus = ""
+    var rateStatus = 0
     var searching = 0
     var filterSearchIs = 0
 
-    
+    var showFilterScreen = 0
     
     @IBOutlet weak var filter: UIButton!
     @IBOutlet weak var search: UITextField!
@@ -110,18 +110,30 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if showFilterScreen == 1{
+            nearMeView.isHidden = true
+            tableViewAndViewMap.isHidden = true
+            mapAndCollectionView.isHidden = true
+            nearYouAndSuggestion.isHidden = true
+            filterScreen.isHidden = false
+            whiteView.isHidden = true
+            
+            filter.setTitle("Done", for: .normal)
+            filter.setImage(nil, for: .normal)
+
+        }else{
+            nearMeView.isHidden = true
+            tableViewAndViewMap.isHidden = true
+            mapAndCollectionView.isHidden = true
+            nearYouAndSuggestion.isHidden = true
+            filterScreen.isHidden = true
+            whiteView.isHidden = false
+        }
+
         search.delegate = self
         nearMe.delegate = self
         addingPading()
-        
 
-
-        nearMeView.isHidden = true
-        tableViewAndViewMap.isHidden = true
-        mapAndCollectionView.isHidden = true
-        nearYouAndSuggestion.isHidden = true
-        filterScreen.isHidden = true
-        whiteView.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -352,9 +364,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 dictionaryIs["longitude"] = String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")
                 
                 
-                if search.text != ""{
                     dictionaryIs["text"] = search.text
-                }
                 
                 if setRadiousField.text != ""{
                     dictionaryIs["radius"] = setRadiousField.text
@@ -364,9 +374,9 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                     dictionaryIs["sortBy"] = poplular_Distance_RatingButton
                 }
                 
-//                if rateStatus != ""{
-//                    dicIs["text"] = search.text
-//                }
+                if rateStatus != 0{
+                    dictionaryIs["pricr"] = rateStatus
+                }
                 if acceptCard == false{
                     dictionaryIs["acceptedCredit"] = true
                 }
@@ -406,11 +416,11 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         self.nearYouAndSuggestion.isHidden = true
                         self.filterScreen.isHidden = true
                         self.whiteView.isHidden = true
+                        self.filter.setTitle(nil, for: .normal)
+                        self.filter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
                         self.mapButton_TableView.reloadData()
                     }else{
-                        
-                        print("Hi hi")
-                        
+                                                
                         self.nearMeView.isHidden = true
                         self.tableViewAndViewMap.isHidden = true
                         self.mapAndCollectionView.isHidden = true
@@ -441,10 +451,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             present(refreshAlert, animated: true, completion: nil)
             
         }
-        
-        
-        
-        
+
         
         
     }
@@ -475,30 +482,33 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     
     @IBAction func priceRangeButtonsTapped(_ sender: UIButton) {
         
-        rateStatus = sender.currentTitle ?? ""
+        
         
         if sender.currentTitle == "₹"{
             rupeesOne.showColour()
             rupeesTwo.dontShowColour()
             rupeesThree.dontShowColour()
             rupeesFour.dontShowColour()
+            rateStatus = 1
         }else if sender.currentTitle == "₹₹"{
             rupeesOne.dontShowColour()
             rupeesTwo.showColour()
             rupeesThree.dontShowColour()
             rupeesFour.dontShowColour()
+            rateStatus = 2
         }
         else if sender.currentTitle == "₹₹₹"{
             rupeesOne.dontShowColour()
             rupeesTwo.dontShowColour()
             rupeesThree.showColour()
             rupeesFour.dontShowColour()
+            rateStatus = 3
         }else{
             rupeesOne.dontShowColour()
             rupeesTwo.dontShowColour()
             rupeesThree.dontShowColour()
             rupeesFour.showColour()
-            
+            rateStatus = 4
         }
         
     }

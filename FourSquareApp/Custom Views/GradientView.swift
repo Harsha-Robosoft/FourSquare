@@ -44,3 +44,26 @@ class GradientLeftToRight: UIView {
         self.layer.addSublayer(gradientLayer)
     }
 }
+
+class blurEffect: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        addEffect()
+    }
+
+    
+    
+    func addEffect() {
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        self.frame = self.bounds
+        self.addSubview(blurView)
+    }
+    
+    
+}

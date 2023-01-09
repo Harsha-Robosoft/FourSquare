@@ -141,4 +141,36 @@ class HomeNetwork {
         task.resume()
     }
     
+    
+    func favouiretPlaceIdies(token: String, completion: @escaping(([String: Any]?,Bool,Error?) -> ())) {
+        guard let url = URL(string:"https://four-square-three.vercel.app/api/getFavouriteId") else{ return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
+                guard let data = data, error == nil else{
+                    print("All favouirets Id Error is: \(String(describing: error?.localizedDescription))")
+                    return
+                }
+                if let responsIs = responce as? HTTPURLResponse{
+                    print("All favouirets Id responce : ",responsIs.statusCode)
+                    if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
+                        do{
+                            let responcedata = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                            if let data0 = responcedata as? [String: Any]{
+                                completion(data0,true,nil)
+
+                            }
+                        }
+                    }else if responsIs.statusCode == 400{
+                        completion(nil,false,error)
+                    }else{
+                        completion(nil,false,error)
+                        print("All favouirets Id Error is: ", error?.localizedDescription ?? "Error...?")
+                    }
+                }
+            })
+        task.resume()
+    }
+    
 }

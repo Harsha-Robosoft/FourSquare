@@ -12,8 +12,8 @@ class FavouiretViewModel {
     
     var favSearchDetails = [HomeDataModel]()
     
-    func userFavouriteplacesListAndSearch(tokenToSend: String, paramsDictionary: [String: Any],completion: @escaping((Bool) -> ())) {
-        objectOfFavouiretNetwork.favouiretSearchListFilter(token: tokenToSend, paramDictionary: paramsDictionary){ favSearcData, favSearchStatus, favSearchError in
+    func userFavouriteplacesListAndSearch(tokenToSend: String, endpointIs : String, paramsDictionary: [String: Any],completion: @escaping((Bool) -> ())) {
+        objectOfFavouiretNetwork.favouiretSearchListFilter(token: tokenToSend, endPoint: endpointIs, paramDictionary: paramsDictionary){ favSearcData, favSearchStatus, favSearchError in
             DispatchQueue.main.async {
                 self.favSearchDetails.removeAll()
                 if favSearchError == nil{
@@ -42,16 +42,17 @@ class FavouiretViewModel {
                                     if let data03 = i["placeImage"] as? String{
                                         imageUrl = data03
                                     }
-                                    if let data04 = i["address"] as? String{
+                                    if let data04 = i["placeAddress"] as? String{
                                         address = data04
                                     }
-                                    if let data05 = i["city"] as? String{
+                                    if let data05 = i["placeCity"] as? String{
                                         cityName = data05
                                     }
-                                    if let data06 = i["category"] as? String{
+                                    if let data06 = i["placeCategory"] as? String{
+                                        print("cat : \(data06)")
                                         category = data06
                                     }
-                                    if let data07 = i["priceRange"] as? Int{
+                                    if let data07 = i["placePriceRange"] as? Int{
                                         priceRangeIs = String(data07)
                                     }
                                     if let data08 = i["rating"] as? Float{

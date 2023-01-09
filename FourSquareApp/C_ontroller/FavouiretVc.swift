@@ -7,7 +7,9 @@
 
 import UIKit
 
-class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource, reloadTable{
+
+    
 
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
@@ -16,7 +18,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     
     var poplular_Distance_RatingButton = ""
-    var rateStatus = ""
+    var rateStatus = 0
     
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var noDatFoundView: UIView!
@@ -77,7 +79,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
         filterView.isHidden = true
         favouiretTableView.delegate = self
         favouiretTableView.dataSource = self
-        favouiretTableView.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
+        favouiretTableView.register(UINib(nibName: "favCell", bundle: nil), forCellReuseIdentifier: "cellFave")
         
         let tokenIs = getToken()
         var dictionaryIs = [String: Any]()
@@ -95,7 +97,9 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
             dictionaryIs["text"] = ""
         }
         
-        objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, paramsDictionary: dictionaryIs){ status in
+        
+        
+        objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
             if status == true{
                 self.noDatFoundView.isHidden = true
                 self.favouiretTableView.isHidden = false
@@ -110,6 +114,10 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
         }
                 
         // Do any additional setup after loading the view.
+    }
+    
+    func reloadTheTable() {
+        favouiretTableView.reloadData()
     }
     
     func addingPading() {
@@ -142,7 +150,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 dictionaryIs["text"] = searchField.text
             }
             
-            objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, paramsDictionary: dictionaryIs){ status in
+            objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
                 if status == true{
                     self.noDatFoundView.isHidden = true
                     self.favouiretTableView.isHidden = false
@@ -199,9 +207,9 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
                     dictionaryIs["sortBy"] = poplular_Distance_RatingButton
                 }
                 
-//                if rateStatus != ""{
-//                    dicIs["text"] = search.text
-//                }
+                if rateStatus != 0{
+                    dictionaryIs["price"] = rateStatus
+                }
                 if acceptCard == false{
                     dictionaryIs["acceptedCredit"] = true
                 }
@@ -228,7 +236,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
                 }
                 
 
-                objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, paramsDictionary: dictionaryIs){ status in
+                objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/favFilter", paramsDictionary: dictionaryIs){ status in
                     if status == true{
                         self.noDatFoundView.isHidden = true
                         self.favouiretTableView.isHidden = false
@@ -241,12 +249,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
                     }
                     
                 }
-                
-                
-                
-                
-//                print("result : \(dictionaryIs)")
-                
+
             }
             
         }else{
@@ -357,29 +360,33 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     @IBAction func priceRangeButtonsTapped(_ sender: UIButton) {
         
-        rateStatus = sender.currentTitle ?? ""
+        
         
         if sender.currentTitle == "₹"{
             rupeesOne.showColour()
             rupeesTwo.dontShowColour()
             rupeesThree.dontShowColour()
             rupeesFour.dontShowColour()
+            rateStatus = 1
         }else if sender.currentTitle == "₹₹"{
             rupeesOne.dontShowColour()
             rupeesTwo.showColour()
             rupeesThree.dontShowColour()
             rupeesFour.dontShowColour()
+            rateStatus = 2
         }
         else if sender.currentTitle == "₹₹₹"{
             rupeesOne.dontShowColour()
             rupeesTwo.dontShowColour()
             rupeesThree.showColour()
             rupeesFour.dontShowColour()
+            rateStatus = 3
         }else{
             rupeesOne.dontShowColour()
             rupeesTwo.dontShowColour()
             rupeesThree.dontShowColour()
             rupeesFour.showColour()
+            rateStatus = 4
             
         }
         
@@ -417,7 +424,7 @@ extension FavouiretVc{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = favouiretTableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
+        let cell = favouiretTableView.dequeueReusableCell(withIdentifier: "cellFave") as! FavTableCell
         var imageIs = objectOfFavouiretViewModel.favSearchDetails[indexPath.row].placeImage
         imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
         cell.imageIs.image = getImage(urlString: imageIs)
@@ -437,6 +444,9 @@ extension FavouiretVc{
         }else if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "5"{
             cell.rateIs.text = "₹₹₹₹₹"
         }
+        
+        cell.placeId = objectOfFavouiretViewModel.favSearchDetails[indexPath.row]._id
+        cell.delegateCell = self
         cell.setShadow()
         return cell
     }
