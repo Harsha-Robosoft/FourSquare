@@ -37,15 +37,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         let tokenIs = getToken()
-        
-        objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: tokenIs){ status in
-            if status == true{
-                print("fav id list received")
-            }else{
-                print("fav id list NOT received")
-            }
-        }
-        
+
         print("user token is : \(tokenIs)")
     
         if tokenIs != ""{

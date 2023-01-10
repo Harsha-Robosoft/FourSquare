@@ -17,6 +17,9 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     func reloadTheTable() {
         tableView01.reloadData()
     }
+    
+    var objectOfUserDefaults = UserDefaults()
+    var objectOfKeyChain = KeyChain()
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
 
     var index = 0
@@ -32,6 +35,20 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         super.viewDidLoad()
         tableView01.delegate = self
         tableView01.dataSource = self
+        
+        let call = getToken()
+        
+        if call != ""{
+            objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+                if status == true{
+                    self.tableView01.reloadData()
+                    print("fav id list received")
+                }else{
+                    print("fav id list received")
+                }
+            }
+        }
+        
    
         tableView01.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
     }
@@ -243,6 +260,25 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
 }
 
 
+extension HomePageVc{
+    
+    func getToken() -> String {
+        var id = ""
+       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
+        if let idIs = userIdIs as? String{
+            id = idIs
+        }
+        print("Home id : \(id)")
+        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
+            return ""}
+        guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
+            return ""}
+        print("Home token",receivedToken)
+        return receivedToken
+    }
+    
+}
+
 extension UIViewController{
     
     func getImage(urlString: String) -> UIImage {
@@ -262,4 +298,5 @@ extension UIViewController{
         return #imageLiteral(resourceName: "Ferrari-1200-1-1024x683")
         
     }
+    
 }

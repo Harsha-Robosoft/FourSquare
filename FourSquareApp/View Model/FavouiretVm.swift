@@ -33,7 +33,7 @@ class FavouiretViewModel {
                                 var cityName = ""
      
                                 for i in data0{
-                                    if let data01 = i["_id"] as? String{
+                                    if let data01 = i["placeId"] as? String{
                                         placeId = data01
                                     }
                                     if let data02 = i["placeName"] as? String{

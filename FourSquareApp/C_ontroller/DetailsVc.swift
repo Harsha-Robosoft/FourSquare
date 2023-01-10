@@ -117,13 +117,11 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 
                 numberIs.insert(" ", at: numberIs.index(numberIs.startIndex, offsetBy: 5))
                 
-                for i in self.objectOfHomeViewModel.favouiretIdData{
                     
-                    if placeIdIs == i.placeIs{
-                        self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_selected"), for: .normal)
-                    }else{
-                        self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_unselected"), for: .normal)
-                    }
+                if self.objectOfHomeViewModel.userFavouiretListArray.contains(placeIdIs){
+                    self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_selected"), for: .normal)
+                }else{
+                    self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_unselected"), for: .normal)
                 }
                 
                 
@@ -320,8 +318,8 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
             if sender.currentImage == #imageLiteral(resourceName: "rating_icon_selected"){
                 objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: placeId){ status in
                     if status == true{
-//                        self.objectOfHomeViewModel.userFavouiretListArray = self.objectOfHomeViewModel.userFavouiretListArray.filter { $0 != self.placeId}
-//                        self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_unselected"), for: .normal)
+                        self.objectOfHomeViewModel.userFavouiretListArray = self.objectOfHomeViewModel.userFavouiretListArray.filter { $0 != self.placeId}
+                        self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_unselected"), for: .normal)
                         self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
                             if status == true{
                                 print("fav id list received")
@@ -338,7 +336,8 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: placeId){ status in
                     if status == true{
                         self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_selected"), for: .normal)
-//                        self.objectOfHomeViewModel.userFavouiretListArray.append(self.placeId)
+                        self.objectOfHomeViewModel.userFavouiretListArray.append(self.placeId)
+                        self.objectOfHomeViewModel.userFavouiretListArray.append(self.placeId)
                         self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
                             if status == true{
                                 print("fav id list received")

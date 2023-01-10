@@ -113,11 +113,40 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
         }
                 
-        // Do any additional setup after loading the view.
     }
     
     func reloadTheTable() {
-        favouiretTableView.reloadData()
+        print("hello ")
+        
+        let tokenIs = getToken()
+        var dictionaryIs = [String: Any]()
+        
+        var latitudeIs = ""
+        var longitudeIs = ""
+        if let latitude = objectOfHomeViewModel.userLocation.last?.latitude {
+            latitudeIs = latitude
+        }
+        if let longitude = objectOfHomeViewModel.userLocation.last?.longitude{
+            longitudeIs = longitude
+        }
+        dictionaryIs["latitude"] = latitudeIs
+        dictionaryIs["longitude"] = longitudeIs
+        dictionaryIs["text"] = ""
+        
+        
+        objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+            if status == true{
+                self.noDatFoundView.isHidden = true
+                self.favouiretTableView.isHidden = false
+                self.filterView.isHidden = true
+                self.favouiretTableView.reloadData()
+            }else{
+                self.noDatFoundView.isHidden = false
+                self.favouiretTableView.isHidden = true
+                self.filterView.isHidden = true
+            }
+            
+        }
     }
     
     func addingPading() {
@@ -443,6 +472,8 @@ extension FavouiretVc{
         }else if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "5"{
             cell.rateIs.text = "₹₹₹₹₹"
         }
+        
+        print("koli : \(objectOfFavouiretViewModel.favSearchDetails[indexPath.row]._id)")
         
         cell.placeId = objectOfFavouiretViewModel.favSearchDetails[indexPath.row]._id
         cell.delegateCell = self

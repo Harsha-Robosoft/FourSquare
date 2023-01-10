@@ -20,11 +20,11 @@ class AddFavouiretNetworkManager {
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
             let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
                 guard let data = data, error == nil else{
-                    print("add favouiret Error is: \(String(describing: error?.localizedDescription))")
+                    print("ADD or REMOVE favouiret Error is: \(String(describing: error?.localizedDescription))")
                     return
                 }
                 if let responsIs = responce as? HTTPURLResponse{
-                    print("add favouiretr responce : ",responsIs.statusCode)
+                    print("ADD or REMOVE favouiretr responce : ",responsIs.statusCode)
                     if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                         do{
                             let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
@@ -34,7 +34,7 @@ class AddFavouiretNetworkManager {
                         completion(false,error)
                     }else{
                         completion(false,error)
-                        print("add favouiret Error is: ", error?.localizedDescription ?? "Error...?")
+                        print("ADD or REMOVE favouiret Error is: ", error?.localizedDescription ?? "Error...?")
                     }
                 }
             })

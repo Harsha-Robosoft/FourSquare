@@ -159,6 +159,8 @@ class HomeViewModel {
     func AllFavouiretPlaceIdApiCall(tokenIs: String, completion: @escaping((Bool) -> ())) {
         objectOfHomeNetwork.favouiretPlaceIdies(token: tokenIs){ idData,idStatus, idError in
             DispatchQueue.main.async {
+                self.favouiretIdData.removeAll()
+                self.userFavouiretListArray.removeAll()
                 if idError == nil{
                     if idStatus == true{
                         if let data0 = idData{
