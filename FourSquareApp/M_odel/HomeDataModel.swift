@@ -7,6 +7,10 @@
 
 import Foundation
 class HomeDataModel {
+    
+    var latitude:Double
+    var longitude: Double
+    
     var _id: String
     var placeName: String
     var placeImage: String
@@ -17,7 +21,7 @@ class HomeDataModel {
     var rating: String
     var distance: String
     
-    init(_id: String,placeName: String,placeImage: String,address: String,city: String,category: String,priceRange: String,rating: String,distance: String) {
+    init(_id: String,placeName: String,placeImage: String,address: String,city: String,category: String,priceRange: String,rating: String,distance: String,latitude:Double,longitude: Double) {
         self._id = _id
         self.placeName = placeName
         self.placeImage = placeImage
@@ -27,5 +31,7 @@ class HomeDataModel {
         self.priceRange = priceRange
         self.rating = rating
         self.distance = distance
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }

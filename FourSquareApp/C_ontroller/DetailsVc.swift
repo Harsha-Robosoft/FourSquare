@@ -284,7 +284,10 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
 
     @IBAction func ratingButtonTapped(_ sender: UIButton) {
         ratingBackView.isHidden = false
-        ratingLabel.text = String(ratingISIS)
+        
+        let number = ratingISIS
+        let roundedNumber = String(format: "%.1f", number)
+        ratingLabel.text = roundedNumber
     }
     
     @IBAction func photosButtonTapped(_ sender: UIButton) {
@@ -309,9 +312,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
         
     }
     @IBAction func likeButtonTapped(_ sender: UIButton) {
-        
-        print(sender.currentTitle)
-        
+                
         let call = getToken()
          
         if call != ""{

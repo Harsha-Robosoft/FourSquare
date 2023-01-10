@@ -25,8 +25,11 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     var rateStatus = 0
     var searching = 0
     var filterSearchIs = 0
-
+    var mapViewTapped = 0
+    
     var showFilterScreen = 0
+    
+    var annotation = [[String: Any]]()
     
     @IBOutlet weak var filter: UIButton!
     @IBOutlet weak var search: UITextField!
@@ -738,9 +741,14 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         filterScreen.isHidden = true
         whiteView.isHidden = true
     }
+    
+    
+    
+    
 }
 
 extension SearchVc{
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error:: \(error.localizedDescription)")
     }
@@ -754,13 +762,13 @@ extension SearchVc{
             self.objectOfHomeViewModel.updateUserLocation(lat: String(location.coordinate.latitude), long: String(location.coordinate.longitude))
             //            print("Current location: \(location)")
             manager.stopUpdatingLocation()
-            render(location: location)
+            render(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         }
     }
     
     
-    func render(location: CLLocation) {
-        let coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+    func render(latitude: Double, longitude: Double) {
+        let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         let region = MKCoordinateRegion(center: coordinate, span: span)
         self.mapAndColectionView.setRegion(region, animated: true)
@@ -768,6 +776,24 @@ extension SearchVc{
         pin.coordinate = coordinate
         self.mapAndColectionView.addAnnotation(pin)
     }
+    
+    
+    func setAnnotation(locations: [[String: Any]]) {
+        
+        for location in locations{
+            let coordinate = CLLocationCoordinate2DMake(location["latitude"] as? CLLocationDegrees ?? 13.3409, location["longitude"] as? CLLocationDegrees ?? 74.7421)
+            let span = MKCoordinateSpan(latitudeDelta: 10.0, longitudeDelta: 10.0)
+            let region = MKCoordinateRegion(center: coordinate, span: span)
+            self.mapAndColectionView.setRegion(region, animated: true)
+            let pin = MKPointAnnotation()
+            pin.title = location["title"] as? String
+            pin.coordinate = coordinate
+            self.mapAndColectionView.addAnnotation(pin)
+        }
+        
+        
+    }
+    
   
 }
 
@@ -1027,6 +1053,11 @@ extension SearchVc{
             }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "5"{
                 cell.rate.text = "₹₹₹₹₹"
             }
+            
+            annotation.append(["title":objectOfSearchViewModel.searchDetaisl[indexPath.row].placeName,"latitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].longitude,"longitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].longitude])
+            
+            setAnnotation(locations: annotation)
+            
             cell.setShadow()
             
             return cell
@@ -1055,6 +1086,11 @@ extension SearchVc{
             }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "5"{
                 cell.rate.text = "₹₹₹₹₹"
             }
+            
+            annotation.append(["title":objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeName,"latitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude,"longitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude])
+            
+            setAnnotation(locations: annotation)
+            
             cell.setShadow()
             return cell
         }
@@ -1080,6 +1116,11 @@ extension SearchVc{
             }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "5"{
                 cell.rate.text = "₹₹₹₹₹"
             }
+        
+        annotation.append(["title":objectOfHomeViewModel.homeDetails[indexPath.row].placeName,"latitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude,"longitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude])
+        
+        setAnnotation(locations: annotation)
+        
             cell.setShadow()
             return cell
         

@@ -212,7 +212,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
 
             cell.imageIs.image = getImage(urlString: imageIs)
-            cell.addresIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address),\(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
+            cell.addresIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address), \(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
             cell.distanceIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
             cell.nameIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].placeName
             cell.nationalityIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].category
@@ -231,7 +231,8 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             cell.setShadow()
             cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
             cell.buttonTatus(id: objectOfHomeViewModel.homeDetails[indexPath.row]._id)
-            
+//            cell.backView.layer.masksToBounds = true
+//            cell.backView.bounds.width = tableView01.bounds.width
             cell.delegateHomeCell = self
             
             return cell

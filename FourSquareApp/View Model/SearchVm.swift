@@ -96,6 +96,9 @@ class SearchViewModel {
                                 var address = ""
                                 var cityName = ""
      
+                                var lati = 0.0
+                                var longi = 0.0
+                                
                                 for i in data0{
                                     if let data01 = i["_id"] as? String{
                                         placeId = data01
@@ -119,14 +122,26 @@ class SearchViewModel {
                                         priceRangeIs = String(data07)
                                     }
                                     if let data08 = i["rating"] as? Float{
-                                        ratingIs = String(data08)
+                                        let number = Float(data08)
+                                        ratingIs = String(format: "%.1f", number)
                                     }
                                     if let data09 = i["distance"] as? [String: Any]{
                                         if let data10 = data09["calculated"] as? Double{
-                                            distanceIs = String(Int(Double(data10) / Double(1609)))
+                                            let number = Float(Float(data10) / 1609)
+                                            distanceIs = String(format: "%.1f", number)
                                         }
                                     }
-                                    let search = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs)
+                                    
+                                    if let data10 = i["location"] as? [String: Any]{
+                                        if let data11 = data10["coordinates"] as? [Double]{
+                                            print("longi : \(data11[0])")
+                                            print("lati : \(data11[1])")
+                                            lati = data11[1]
+                                            longi = data11[0]
+                                        }
+                                    }
+                                    
+                                    let search = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs, latitude: lati , longitude:longi)
                                     self.searchDetaisl.append(search)
                                 }
                                 completion(true)
@@ -169,6 +184,9 @@ class SearchViewModel {
                                 var address = ""
                                 var cityName = ""
      
+                                var lati = 0.0
+                                var longi = 0.0
+                                
                                 for i in data0{
                                     if let data01 = i["_id"] as? String{
                                         placeId = data01
@@ -192,14 +210,25 @@ class SearchViewModel {
                                         priceRangeIs = String(data07)
                                     }
                                     if let data08 = i["rating"] as? Float{
-                                        ratingIs = String(data08)
+                                        let number = Float(data08)
+                                        ratingIs = String(format: "%.1f", number)
                                     }
                                     if let data09 = i["distance"] as? [String: Any]{
                                         if let data10 = data09["calculated"] as? Double{
-                                            distanceIs = String(Int(Double(data10) / Double(1609)))
+                                            let number = Float(Float(data10) / 1609)
+                                            distanceIs = String(format: "%.1f", number)
                                         }
                                     }
-                                    let filterSearch = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs)
+                                    
+                                    if let data10 = i["location"] as? [String: Any]{
+                                        if let data11 = data10["coordinates"] as? [Double]{
+                                            print("longi : \(data11[0])")
+                                            print("lati : \(data11[1])")
+                                            lati = data11[1]
+                                            longi = data11[0]
+                                        }
+                                    }
+                                    let filterSearch = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs, latitude: lati , longitude:longi)
     //                                print("search data : \(imageUrl)\n\(placeId)\n\(placeName)\n\(ratingIs)\n\(priceRangeIs)\n\(category)\n\(distanceIs)\n\(address)\n\(cityName)")
                                     self.filterSearchDetails.append(filterSearch)
                                 }

@@ -8,7 +8,7 @@
 import UIKit
 
 
-class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource ,sendingIndex {
+class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,sendingIndex {
     
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     
@@ -211,7 +211,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     @IBAction func name_LoginButtontapped(_ sender: UIButton) {
     
-        let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+        let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
 
                 refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
 
@@ -278,11 +278,63 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {
         
-        print("profile hi ")
+        let call = getToken()
         
+        if call != ""{
+            let refreshAlert = UIAlertController(title: "ALERT", message: "Do you want to update your profile image?", preferredStyle: UIAlertController.Style.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                
+                let imageController = UIImagePickerController()
+                imageController.delegate = self
+                imageController.sourceType = .photoLibrary
+                self.present(imageController, animated: true, completion: nil)
+                print("Handle Ok logic here")
+                
+            }))
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            present(refreshAlert, animated: true, completion: nil)
+        }else{
+            let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+
+                    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+
+                        self.navigationController?.popToRootViewController(animated: true)
+                        print("Handle Ok logic here")
+
+                    }))
+                    refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                          print("Handle Cancel Logic here")
+                    }))
+                    present(refreshAlert, animated: true, completion: nil)
+        }
+
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let imageIs: UIImage?
+        
+        imageIs = info[.originalImage] as? UIImage
+        self.dismiss(animated: true, completion: nil)
+        uploadPhoto(imageIsIs: imageIs ?? #imageLiteral(resourceName: "Ferrari-1200-1-1024x683"))
     }
     
     
+    func uploadPhoto(imageIsIs: UIImage) {
+        let call = getToken()
+        objectOfHomeViewModel.userProfilePhotoUpdateApiCall(token: call, imageIs: imageIsIs){ status in
+            if status == true{
+                self.alertMessage(message: "Profile photo is been updated")
+                self.userProfileImage.image = imageIsIs
+            }else{
+                self.alertMessage(message: "Profile photo is not been updated...!!!")
+                
+            }
+        }
+    }
     
 }
 

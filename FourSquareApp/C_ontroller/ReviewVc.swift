@@ -96,8 +96,13 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.imageIs.image = getImage(urlString: imageIs)
         cell.nameIs.text = objectOfReviewViewModel.allReviewdata[indexPath.row].reviewBy
         cell.reviewIs.text = objectOfReviewViewModel.allReviewdata[indexPath.row].review
+        cell.dateAndTime.text = objectOfReviewViewModel.allReviewdata[indexPath.row].reviewDate
+        print("time : \(objectOfReviewViewModel.allReviewdata[indexPath.row].reviewDate)")
+        
+        
         return cell
     }
+    
     
     
 }

@@ -130,16 +130,9 @@ class ReviewNetworkManager {
                 }else{
                     completion(false,error)
                 }
-
             }
-
         })
-        
         task.resume()
-        
-        
-        
-        
     }
     
 }

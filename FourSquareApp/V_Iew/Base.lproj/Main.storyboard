@@ -1831,7 +1831,7 @@
                                                                                     <constraint firstAttribute="height" constant="1" id="KWM-I0-OXS"/>
                                                                                 </constraints>
                                                                             </view>
-                                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="55" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Ef-cn-3xs">
+                                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="55" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Ef-cn-3xs">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="180"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <constraints>
@@ -1907,11 +1907,21 @@
                                                                                                             <color key="textColor" red="0.062733002009999997" green="0.06275205314" blue="0.062731795009999994" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                                             <nil key="highlightedColor"/>
                                                                                                         </label>
+                                                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="olv-bS-ztl">
+                                                                                                            <rect key="frame" x="0.0" y="54" width="414" height="1"/>
+                                                                                                            <color key="backgroundColor" red="0.87833553549999999" green="0.87848657370000005" blue="0.8783260584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                                            <constraints>
+                                                                                                                <constraint firstAttribute="height" constant="1" id="3SZ-9l-QV5"/>
+                                                                                                            </constraints>
+                                                                                                        </view>
                                                                                                     </subviews>
                                                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstItem="uof-7M-Kgx" firstAttribute="centerY" secondItem="bee-cZ-JBN" secondAttribute="centerY" id="3Ni-YN-TSL"/>
+                                                                                                        <constraint firstAttribute="trailing" secondItem="olv-bS-ztl" secondAttribute="trailing" id="6p1-Ce-wVX"/>
                                                                                                         <constraint firstItem="uof-7M-Kgx" firstAttribute="leading" secondItem="7ye-lR-0CY" secondAttribute="trailing" constant="15" id="GTb-Id-KQi"/>
+                                                                                                        <constraint firstAttribute="bottom" secondItem="olv-bS-ztl" secondAttribute="bottom" id="ThM-9S-HBe"/>
+                                                                                                        <constraint firstItem="olv-bS-ztl" firstAttribute="leading" secondItem="bee-cZ-JBN" secondAttribute="leading" id="U7s-pd-xIk"/>
                                                                                                         <constraint firstItem="7ye-lR-0CY" firstAttribute="centerY" secondItem="bee-cZ-JBN" secondAttribute="centerY" id="kPu-aL-OU2"/>
                                                                                                         <constraint firstItem="7ye-lR-0CY" firstAttribute="leading" secondItem="bee-cZ-JBN" secondAttribute="leading" constant="25" id="ozG-Lo-heh"/>
                                                                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uof-7M-Kgx" secondAttribute="trailing" constant="20" symbolic="YES" id="rO3-2q-Jfe"/>

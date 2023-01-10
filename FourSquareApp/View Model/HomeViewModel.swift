@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class HomeViewModel {
     
@@ -38,6 +39,10 @@ class HomeViewModel {
                             var distanceIs = ""
                             var address = ""
                             var cityName = ""
+                            
+                            var lati = 0.0
+                            var longi = 0.0
+                            
                             for i in data1{
                                 if let data01 = i["_id"] as? String{
                                     placeId = data01
@@ -61,14 +66,31 @@ class HomeViewModel {
                                     priceRangeIs = String(data07)
                                 }
                                 if let data08 = i["rating"] as? Float{
-                                    ratingIs = String(data08)
+                                    
+                                    let number = Float(data08)
+                                    ratingIs = String(format: "%.1f", number)
                                 }
                                 if let data09 = i["distance"] as? [String: Any]{
                                     if let data10 = data09["calculated"] as? Double{
-                                        distanceIs = String(Int(Double(data10) / Double(1609)))
+//                                        distanceIs = String(Float(Float(data10) / 1609))
+                                        let number = Float(Float(data10) / 1609)
+                                        distanceIs = String(format: "%.1f", number)
+                                        
+//                                        let roundedNumber = String(format: "%.1f", number)
+
                                     }
                                 }
-                                let details = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs)
+                                
+                                if let data10 = i["location"] as? [String: Any]{
+                                    if let data11 = data10["coordinates"] as? [Double]{
+                                        print("longi : \(data11[0])")
+                                        print("lati : \(data11[1])")
+                                        lati = data11[1]
+                                        longi = data11[0]
+                                    }
+                                }
+                                
+                                let details = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs, latitude: lati , longitude:longi)
                                 self.homeDetails.append(details)
                             }
                         }
@@ -182,6 +204,22 @@ class HomeViewModel {
                                 }
                             }
                         }
+                        completion(true)
+                    }else{
+                        completion(false)
+                    }
+                }else{
+                    completion(false)
+                }
+            }
+        }
+    }
+    
+    func userProfilePhotoUpdateApiCall(token: String, imageIs: UIImage, completion: @escaping((Bool) -> ())) {
+        objectOfHomeNetwork.updateUserProfile(token: token, image: imageIs){ userStatus, userError in
+            DispatchQueue.main.async {
+                if userError == nil{
+                    if userStatus == true{
                         completion(true)
                     }else{
                         completion(false)
