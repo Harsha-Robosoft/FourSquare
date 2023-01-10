@@ -29,7 +29,7 @@ class OtpVarificationNetwork {
                     print("Send otp responce : ",responsIs.statusCode)
                     if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                         do{
-                            let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                            _ = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
                                 completion(true,nil)
                         }
                     }else if responsIs.statusCode == 400{
@@ -67,7 +67,7 @@ class OtpVarificationNetwork {
                     print("Varify otp responce : ",responsIs.statusCode)
                     if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                         do{
-                            let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                            _ = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
                                 completion(true,nil)
                         }
                     }else if responsIs.statusCode == 400{
@@ -104,7 +104,7 @@ class OtpVarificationNetwork {
                     print("Check mail id is valid responce : ",responsIs.statusCode)
                     if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                         do{
-                            let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                            _ = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
                                 completion(true,nil)
                         }
                     }else if responsIs.statusCode == 400{

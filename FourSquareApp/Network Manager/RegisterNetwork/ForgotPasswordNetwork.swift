@@ -28,7 +28,7 @@ class ForgotPasswordNetwork {
                     print("Register responce : ",responsIs.statusCode)
                     if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                         do{
-                            let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                            _ = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
                                 completion(true,nil)
                         }
                     }else if responsIs.statusCode == 400{

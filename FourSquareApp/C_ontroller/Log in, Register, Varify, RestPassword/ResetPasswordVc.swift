@@ -31,7 +31,7 @@ class ResetPasswordVc: UIViewController {
             var passwordToSend = ""
             
             if let pass = newPassword.text{
-                var password = isValidPassword(pass1: pass)
+                let password = isValidPassword(pass1: pass)
 
                 if password == true{
                     
