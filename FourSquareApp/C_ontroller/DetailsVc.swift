@@ -11,6 +11,8 @@ import CoreLocation
 
 class DetailsVc: UIViewController, CLLocationManagerDelegate {
 
+    var objectOfAddToFavouiretViewModel = AddToFavouiretViewModel.objectOfAddToFavouiretViewModel
+    var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     var objectOfPlaceDetailsViewModel = PlaceDetailsViewModel.objectOfviewModel
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
@@ -70,7 +72,8 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 var cityname = ""
                 var numberIs = ""
                 var categotyIs = ""
-                var ratingIs = 0
+                var ratingIs = 0.0
+                var placeIdIs = ""
                 if let lat = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.latitude{
                     latTOsend = lat
                 }
@@ -100,9 +103,12 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 if let rating = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.rating{
                     
                     self.ratingISIS = rating
-                    ratingIs = Int(rating)
+                    ratingIs = Double(rating)
                 }
                 
+                if let placeId = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.placeId{
+                    placeIdIs = placeId
+                }
                 
                 if let image00 = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.placeImage{
                     imageIs = image00
@@ -110,6 +116,17 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
                 
                 numberIs.insert(" ", at: numberIs.index(numberIs.startIndex, offsetBy: 5))
+                
+                for i in self.objectOfHomeViewModel.favouiretIdData{
+                    
+                    if placeIdIs == i.placeIs{
+                        self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_selected"), for: .normal)
+                    }else{
+                        self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_unselected"), for: .normal)
+                    }
+                }
+                
+                
                 if ratingIs == 1{
                     self.starOne.changes()
                     self.starTwo.noChange()
@@ -152,6 +169,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 self.overViewToShow.text = overView
                 self.numberToShow.text = "+91 \(numberIs)"
                 self.adressToshow.text = "\(address),\(cityname)."
+//                self.ratingLabel.text = String(ratingIs)
                 
                 
             }else{
@@ -292,6 +310,59 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
         }
         
     }
+    @IBAction func likeButtonTapped(_ sender: UIButton) {
+        
+        print(sender.currentTitle)
+        
+        let call = getToken()
+         
+        if call != ""{
+            if sender.currentImage == #imageLiteral(resourceName: "rating_icon_selected"){
+                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: placeId){ status in
+                    if status == true{
+//                        self.objectOfHomeViewModel.userFavouiretListArray = self.objectOfHomeViewModel.userFavouiretListArray.filter { $0 != self.placeId}
+//                        self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_unselected"), for: .normal)
+                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+                            if status == true{
+                                print("fav id list received")
+                            }else{
+                                print("fav id list NOT received")
+                            }
+                        }
+                    }else{
+                    }
+                }
+                
+            }else{
+                
+                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: placeId){ status in
+                    if status == true{
+                        self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_selected"), for: .normal)
+//                        self.objectOfHomeViewModel.userFavouiretListArray.append(self.placeId)
+                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+                            if status == true{
+                                print("fav id list received")
+                            }else{
+                                print("fav id list NOT received")
+                            }
+                        }
+                    }else{
+                    }
+                }
+            }
+        }else{
+            
+        }
+        
+                
+        
+
+//
+//        <UIImage:0x60000321a130 named(main: rating_icon_selected) {29.666666666666668, 29.666666666666668}>
+    }
+    
+    
+    
     
 }
 

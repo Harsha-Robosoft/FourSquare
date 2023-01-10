@@ -65,9 +65,13 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
         
-        
-       
-        
+        let addPhotoVc = self.storyboard?.instantiateViewController(withIdentifier: "AddReviewVc") as? AddReviewVc
+        if let vc = addPhotoVc{
+            vc.placeIsIs = placeId
+            vc.addonlyPhoto = 1
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
     }
     
     

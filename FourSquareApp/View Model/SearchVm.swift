@@ -83,6 +83,9 @@ class SearchViewModel {
                             if data0.isEmpty{
                                 completion(false)
                             }else{
+                                
+                                print("collection cell data : \(data0)")
+                                
                                 var imageUrl = ""
                                 var placeId = ""
                                 var placeName = ""
@@ -204,11 +207,6 @@ class SearchViewModel {
                             }
                             
                             }
-                            
-                            
-                            
-                        
-                        
                     }else{
                         completion(false)
                     }

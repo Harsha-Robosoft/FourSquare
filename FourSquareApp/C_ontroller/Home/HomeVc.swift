@@ -40,9 +40,9 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: tokenIs){ status in
             if status == true{
-                print("jigi jigi")
+                print("fav id list received")
             }else{
-                print("No No no no ")
+                print("fav id list NOT received")
             }
         }
         

@@ -42,15 +42,9 @@ class FavTableCell: UITableViewCell {
     }
     
     @IBAction func removeButtonTapped(_ sender: Any) {
-        
-
-        
         let call = getToken()
-        
-        
         print("Sending place Id : \(placeId)")
         print("Sending token : \(call)")
-        
         objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: placeId){ status in
             
             if status == true{

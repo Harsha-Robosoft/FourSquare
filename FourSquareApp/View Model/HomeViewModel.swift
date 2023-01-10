@@ -9,6 +9,10 @@ import Foundation
 
 class HomeViewModel {
     
+    
+    var userFavouiretListArray = [String]()
+    
+    
     static var objectOfViewModel = HomeViewModel()
     var objectOfHomeNetwork = HomeNetwork()
     
@@ -24,9 +28,7 @@ class HomeViewModel {
                 self.homeDetails.removeAll()
                 if errorIs == nil{
                     if statusIs == true{
-                        
                         if let data1 = dataIs{
-                            
                             var imageUrl = ""
                             var placeId = ""
                             var placeName = ""
@@ -36,11 +38,7 @@ class HomeViewModel {
                             var distanceIs = ""
                             var address = ""
                             var cityName = ""
-                            
-                            
-                            
                             for i in data1{
-                                
                                 if let data01 = i["_id"] as? String{
                                     placeId = data01
                                 }
@@ -65,27 +63,16 @@ class HomeViewModel {
                                 if let data08 = i["rating"] as? Float{
                                     ratingIs = String(data08)
                                 }
-                                
                                 if let data09 = i["distance"] as? [String: Any]{
-                                    
                                     if let data10 = data09["calculated"] as? Double{
-                                        
                                         distanceIs = String(Int(Double(data10) / Double(1609)))
                                     }
-                                    
-                                    
                                 }
-                                
                                 let details = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs)
-                                
                                 self.homeDetails.append(details)
-
                             }
-
                         }
-                        
                         completion(true)
-                        
                     }else{
                         completion(false)
                     }
@@ -93,18 +80,13 @@ class HomeViewModel {
                     completion(false)
                 }
             }
-            
-            
         }
     }
     
     
     func updateUserLocation(lat: String, long: String) {
-        
         userLocation.removeAll()
-        
         let location = UserLocationModel(latitude: lat, longitude: long)
-        
         userLocation.append(location)
     }
     
@@ -131,13 +113,10 @@ class HomeViewModel {
             DispatchQueue.main.async {
                 if userError == nil{
                     if userStatus == true{
-                        
                         var userName = ""
                         var userProfile = ""
                         var userId = ""
-                        
                         if let data0 = userData{
-                            
                             if let data01 = data0["userName"] as? String{
                                 userName = data01
                             }
@@ -147,12 +126,10 @@ class HomeViewModel {
                             if let data03 = data0["_id"] as? String{
                                 userId = data03
                             }
-                            
                             let user = UserDetailsModel(userName: userName, userProfileImage: userProfile, userId: userId)
                             self.userDetails.append(user)
                         }
                         completion(true)
-                        
                     }else{
                         completion(false)
                     }
@@ -184,38 +161,25 @@ class HomeViewModel {
             DispatchQueue.main.async {
                 if idError == nil{
                     if idStatus == true{
-                        
                         if let data0 = idData{
-                            
                             var placeIdIs = ""
                             var _IdIs = ""
-                            
                             if let data01 = data0["favouritePlaces"] as? [[String: Any]]{
-                                
                                 for i in data01{
-                                    
                                     if let data001 = i["placeId"] as? String{
+                                        
+                                        self.userFavouiretListArray.append(data001)
+                                        
                                         placeIdIs = data001
                                     }
-                                    print("place id is is : \(placeIdIs)")
-                                    
                                     if let data002 = i["_id"] as? String{
                                         _IdIs = data002
                                     }
-                                    
                                     let favId = FavouiretIdModel(placeIs: placeIdIs, _Id: _IdIs)
-                                    
                                     self.favouiretIdData.append(favId)
                                 }
-                                
                             }
-                            
-                            
-                            
                         }
-                        
-                        
-                        
                         completion(true)
                     }else{
                         completion(false)

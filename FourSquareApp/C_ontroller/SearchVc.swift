@@ -726,7 +726,6 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         whiteView.isHidden = true
         map_CollectionView.isHidden = false
         listViewButton.isHidden = false
-        
         map_CollectionView.reloadData()
         
     }
@@ -947,6 +946,7 @@ extension SearchVc{
                         self.filterScreen.isHidden = true
                         self.whiteView.isHidden = true
                         self.mapButton_TableView.reloadData()
+//                        self.map_CollectionView.reloadData()
                     }else{
                         self.nearMeView.isHidden = true
                         self.tableViewAndViewMap.isHidden = true
@@ -996,7 +996,6 @@ extension SearchVc{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching == 1{
             return objectOfSearchViewModel.searchDetaisl.count
-            
         }
         return objectOfHomeViewModel.homeDetails.count
     }
@@ -1030,7 +1029,7 @@ extension SearchVc{
             }
             cell.setShadow()
             
-            
+            return cell
         }else if filterSearchIs == 1{
             
             let cell = map_CollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchCollectionView
@@ -1057,9 +1056,11 @@ extension SearchVc{
                 cell.rate.text = "₹₹₹₹₹"
             }
             cell.setShadow()
+            return cell
         }
             
             let cell = map_CollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchCollectionView
+
             var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
             cell.imageIs.image = getImage(urlString: imageIs)

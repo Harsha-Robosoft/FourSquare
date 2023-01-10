@@ -13,12 +13,12 @@ protocol sendingIndex {
     func gotoIndex(index: Int)
 }
 
-class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
-    
+class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, reloadHomeTable {
+    func reloadTheTable() {
+        tableView01.reloadData()
+    }
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
 
-    
-    
     var index = 0
     var manager = CLLocationManager()
     
@@ -215,6 +215,9 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
             cell.buttonTatus(id: objectOfHomeViewModel.homeDetails[indexPath.row]._id)
             
+            cell.delegateHomeCell = self
+            
+            return cell
         }
         
         

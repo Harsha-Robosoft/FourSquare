@@ -194,10 +194,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 dictionaryIs["latitude"] = latitudeIs
                 dictionaryIs["longitude"] = longitudeIs
                 
-                
-                if favouritSearchFielf.text != ""{
-                    dictionaryIs["text"] = favouritSearchFielf.text
-                }
+                dictionaryIs["text"] = favouritSearchFielf.text
                 
                 if setRadiousField.text != ""{
                     dictionaryIs["radius"] = setRadiousField.text
@@ -241,6 +238,8 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                         self.noDatFoundView.isHidden = true
                         self.favouiretTableView.isHidden = false
                         self.filterView.isHidden = true
+                        self.favouiretFilter.setTitle(nil, for: .normal)
+                        self.favouiretFilter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
                         self.favouiretTableView.reloadData()
                     }else{
                         self.noDatFoundView.isHidden = false

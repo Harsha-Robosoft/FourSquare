@@ -6,6 +6,9 @@
 //
 
 import UIKit
+protocol reloadHomeTable {
+    func reloadTheTable()
+}
 
 class HomeTableViewCell: UITableViewCell {
     
@@ -13,6 +16,9 @@ class HomeTableViewCell: UITableViewCell {
     var objectOfKeyChain = KeyChain()
     var objectOfAddToFavouiretViewModel = AddToFavouiretViewModel.objectOfAddToFavouiretViewModel
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
+    
+    var delegateHomeCell: reloadHomeTable?
+    
     
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var imageIs: UIImageView!
@@ -39,22 +45,33 @@ class HomeTableViewCell: UITableViewCell {
     }
    
     func buttonTatus(id: String) {
-//        print("id1 :\(objectOfHomeViewModel.favouiretIdData)")
-
-        for i in objectOfHomeViewModel.favouiretIdData{
-            
-            if i.placeIs == id{
-                print("id1 : \(nameIs.text), id2 : \(i.placeIs)")
-                likeButton.changes()
-                statusISS = 1
-            }
-        }
+//        for i in objectOfHomeViewModel.userFavouiretListArray{
+//            if i == id{
+//                print("0909",nameIs.text)
+//                likeButton.changes()
+//                onClick = true
+//                statusISS = 1
+////            }else{
+////                print(434343,nameIs.text)
+////                likeButton.noChange()
+////                onClick = false
+////            }
+//        }
+//    }
+////        if(statusISS == 0) {
+////            likeButton.noChange()
+////            onClick = false
+////        }
         
-        if statusISS == 0{
+        if( objectOfHomeViewModel.userFavouiretListArray.contains(_Id) ) {
             print("0909",nameIs.text)
-            likeButton.noChange()
+            likeButton.changes()
+            onClick = true
         }
-        
+        else {
+            likeButton.noChange()
+            onClick = false
+        }
     }
     
     @IBAction func likeButtonTapped(_ sender: UIButton) {
@@ -66,29 +83,39 @@ class HomeTableViewCell: UITableViewCell {
             if onClick == true{
 
                 objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: _Id){ status in
-                    
                     if status == true{
-                        print("6524135762")
-                        self.likeButton.changes()
+                        self.likeButton.noChange()
                         self.onClick = false
+                        self.objectOfHomeViewModel.userFavouiretListArray = self.objectOfHomeViewModel.userFavouiretListArray.filter { $0 != self._Id}
+                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+                            if status == true{
+                                print("fav id list received")
+                                self.delegateHomeCell?.reloadTheTable()
+                            }else{
+                                print("fav id list NOT received")
+                            }
+                        }
                     }else{
-//                        self.alertMessage(message: "Error while adding to favouites...!")
                     }
                 }
-                
-                
             }else{
                 
                 objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: _Id){ status in
-                    
                     if status == true{
                         self.likeButton.noChange()
+                        self.objectOfHomeViewModel.userFavouiretListArray.append(self._Id)
                         self.onClick = true
+                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+                            if status == true{
+                                print("fav id list received")
+                                self.delegateHomeCell?.reloadTheTable()
+                            }else{
+                                print("fav id list NOT received")
+                            }
+                        }
                     }else{
-//                        self.alertMessage(message: "Error while removing from favouites...!")
                     }
                 }
-               
             }
         }else{
             
@@ -114,14 +141,5 @@ extension HomeTableViewCell{
         print("Search token",receivedToken)
         return receivedToken
     }
-    
-//    func alertMessage(message: String){
-//
-//            let alert = UIAlertController(title: "ALERT", message: message, preferredStyle: .alert)
-//
-//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//
-//            self.present(alert,animated: true, completion: nil)
-//        }
     
 }

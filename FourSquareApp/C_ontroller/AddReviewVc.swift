@@ -9,11 +9,13 @@ import UIKit
 
 class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-//    let data = NSMutableData()
-//    let name = "_id"
 
     
-    
+    @IBOutlet weak var addYourPhots: UILabel!
+    @IBOutlet weak var reviewFieldHeight: NSLayoutConstraint!
+    @IBOutlet weak var writereviewHeight: NSLayoutConstraint!
+    @IBOutlet weak var addRevie_AddPhotoFiewld: UILabel!
+    var addonlyPhoto = 0
     
     var objectOfReviewViewModel = ReviewViewModel.objectOfViewModel
     var objectOfUserDefaults = UserDefaults()
@@ -52,14 +54,34 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        submitButton.isEnabled = false
-        submitButton.alpha = 0.5
-        view_2.isHidden = true
-        view_3.isHidden = true
-        view_4.isHidden = true
-        view_5.isHidden = true
+        
+        if addonlyPhoto == 0{
+            reviewFieldHeight.constant = 200
+            writereviewHeight.constant = 33
+            submitButton.isEnabled = false
+            submitButton.alpha = 0.5
+            view_2.isHidden = true
+            view_3.isHidden = true
+            view_4.isHidden = true
+            view_5.isHidden = true
+        }else{
+            
+            addRevie_AddPhotoFiewld.text = "Add photos"
+            addYourPhots.text = "Add your photos"
+            reviewFieldHeight.constant = 0
+            writereviewHeight.constant = 0
+            submitButton.isEnabled = false
+            submitButton.alpha = 0.5
+            view_2.isHidden = true
+            view_3.isHidden = true
+            view_4.isHidden = true
+            view_5.isHidden = true
+            
+        }
+        
     }
     @IBAction func backButtonTapped(_ sender: UIButton) {
+        addonlyPhoto = 0
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func button_1Tapped(_ sender: UIButton) {
@@ -178,24 +200,30 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
         }
         
-        if buttonw1 == 0{
- print("place is id : \(placeIsIs)")
-//            Api call
-            objectOfReviewViewModel.photoReviewSubmitApiCall(rokenIs: call, placeIdIs: placeIsIs, images: photoArray){ status in
-                if status == true{
-                    print("data received")
-                }else{
-                    print("data not received")
+        if addonlyPhoto == 0{
+            if buttonw1 == 0{
+                objectOfReviewViewModel.photoReviewSubmitApiCall(rokenIs: call, placeIdIs: placeIsIs, images: photoArray){ status in
+                    if status == true{
+                        print(000000000000)
+                        print("data received")
+                    }else{
+                        print("data not received")
+                    }
                 }
-                
             }
-
-
-//            print("count is ius : \(photoArray.count)")
-            
+        }else{
+            if buttonw1 == 0{
+                
+                objectOfReviewViewModel.photoReviewSubmitApiCall(rokenIs: call, placeIdIs: placeIsIs, images: photoArray){ status in
+                    if status == true{
+                        print(11111111111)
+                        print("data received")
+                    }else{
+                        print("data not received")
+                    }
+                }
+            }
         }
-        
-        
         
     }
     

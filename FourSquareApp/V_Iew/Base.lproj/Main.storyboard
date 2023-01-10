@@ -680,12 +680,12 @@
         <!--Details Vc-->
         <scene sceneID="yGz-cU-rFB">
             <objects>
-                <viewController storyboardIdentifier="DetailsVc" id="Ler-s1-zh1" customClass="DetailsVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsVc" automaticallyAdjustsScrollViewInsets="NO" id="Ler-s1-zh1" customClass="DetailsVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="36Y-HC-Nao">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUL-1N-azn">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="OUL-1N-azn">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4n-XK-bJc">
@@ -717,8 +717,12 @@
                                                             <constraint firstAttribute="height" constant="24" id="6NA-LM-h9A"/>
                                                             <constraint firstAttribute="width" constant="24" id="jYo-rk-S58"/>
                                                         </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="1"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" image="star" catalog="system"/>
+                                                        <state key="normal" title="0" image="rating_icon_unselected"/>
+                                                        <connections>
+                                                            <action selector="likeButtonTapped:" destination="Ler-s1-zh1" eventType="touchUpInside" id="B0L-at-mcx"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N28-Af-q09">
                                                         <rect key="frame" x="318" y="19" width="24" height="24"/>
@@ -1278,12 +1282,12 @@
         <!--Search Vc-->
         <scene sceneID="bIn-m5-69T">
             <objects>
-                <viewController storyboardIdentifier="SearchVc" id="LB5-kj-7Jj" customClass="SearchVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchVc" automaticallyAdjustsScrollViewInsets="NO" id="LB5-kj-7Jj" customClass="SearchVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H1I-Kg-SQr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BQm-uj-5Q2">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="BQm-uj-5Q2">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T85-Oo-YJj">
@@ -1374,7 +1378,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="SJn-Ly-SYs" secondAttribute="trailing" constant="8" id="zLN-vw-vnL"/>
                                                 </constraints>
                                             </view>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2LK-v4-Mqk">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="2LK-v4-Mqk">
                                                 <rect key="frame" x="0.0" y="120" width="414" height="616"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5n-AP-yeT" userLabel="seconf view">
@@ -2636,12 +2640,12 @@
         <!--Favouiret Vc-->
         <scene sceneID="lLd-bM-DXk">
             <objects>
-                <viewController storyboardIdentifier="FavouiretVc" id="fft-Qa-DlA" customClass="FavouiretVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavouiretVc" automaticallyAdjustsScrollViewInsets="NO" id="fft-Qa-DlA" customClass="FavouiretVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Da0-qn-jDF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqf-5k-RYT">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="aqf-5k-RYT">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iUy-Mv-Cv3">
@@ -3366,12 +3370,12 @@
         <!--Feedback Vc-->
         <scene sceneID="Dwd-v9-sPR">
             <objects>
-                <viewController storyboardIdentifier="FeedbackVc" id="JRJ-6H-AIQ" customClass="FeedbackVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedbackVc" automaticallyAdjustsScrollViewInsets="NO" id="JRJ-6H-AIQ" customClass="FeedbackVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BoK-wg-ed9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbv-H8-zA7">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="hbv-H8-zA7">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNT-DJ-m3g">
@@ -3519,12 +3523,12 @@
         <!--About Us Vc-->
         <scene sceneID="nAa-4q-DKN">
             <objects>
-                <viewController storyboardIdentifier="AboutUsVc" id="6cR-bC-Rd6" customClass="AboutUsVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AboutUsVc" automaticallyAdjustsScrollViewInsets="NO" id="6cR-bC-Rd6" customClass="AboutUsVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qbe-Nc-tay">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RXb-XI-6E1">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="RXb-XI-6E1">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8t-C1-My0">
@@ -3642,12 +3646,12 @@
         <!--Photo Vc-->
         <scene sceneID="eNa-9w-cyQ">
             <objects>
-                <viewController storyboardIdentifier="PhotoVc" id="Zhb-qo-g5h" customClass="PhotoVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoVc" automaticallyAdjustsScrollViewInsets="NO" id="Zhb-qo-g5h" customClass="PhotoVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TqL-IY-bhS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dkt-YT-Kh4">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="Dkt-YT-Kh4">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6x-tZ-u2a">
@@ -3703,7 +3707,7 @@
                                                     <constraint firstItem="O23-kB-Pum" firstAttribute="leading" secondItem="GcK-AM-o0S" secondAttribute="leading" constant="25" id="nzB-jP-bz8"/>
                                                 </constraints>
                                             </view>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vCa-ef-Us0">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vCa-ef-Us0">
                                                 <rect key="frame" x="5" y="65" width="404" height="666"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Nif-4T-Zsb">
@@ -3788,12 +3792,12 @@
         <!--Review Vc-->
         <scene sceneID="N6e-qC-iSj">
             <objects>
-                <viewController storyboardIdentifier="ReviewVc" id="tFF-Cw-jwO" customClass="ReviewVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewVc" automaticallyAdjustsScrollViewInsets="NO" id="tFF-Cw-jwO" customClass="ReviewVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ome-e1-eVs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bz3-Jr-2hr">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="Bz3-Jr-2hr">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="68m-Xo-tOJ">
@@ -3849,7 +3853,7 @@
                                                     <constraint firstAttribute="height" constant="60" id="j96-ak-aer"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CpK-Vv-g8S">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CpK-Vv-g8S">
                                                 <rect key="frame" x="0.0" y="60" width="414" height="676"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <prototypes>
@@ -3997,12 +4001,12 @@
         <!--Add Review Vc-->
         <scene sceneID="u2V-9O-kfy">
             <objects>
-                <viewController storyboardIdentifier="AddReviewVc" id="w7C-If-8Rc" customClass="AddReviewVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddReviewVc" automaticallyAdjustsScrollViewInsets="NO" id="w7C-If-8Rc" customClass="AddReviewVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cDl-Ib-oGY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RMq-nn-BZQ">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="RMq-nn-BZQ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AWd-Zr-FHc">
@@ -4345,6 +4349,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addRevie_AddPhotoFiewld" destination="pH7-cM-Tnx" id="k8P-0F-UPX"/>
+                        <outlet property="addYourPhots" destination="pgE-VX-PUl" id="BIZ-Ha-fVO"/>
                         <outlet property="button_1" destination="pOJ-MR-9MM" id="t1K-Og-O30"/>
                         <outlet property="button_2" destination="E73-Fu-4Kf" id="GDr-aH-V1F"/>
                         <outlet property="button_3" destination="e89-72-ikW" id="C01-FV-dkB"/>
@@ -4356,12 +4362,14 @@
                         <outlet property="image_4" destination="LH0-9X-0R2" id="Z0M-ce-NIP"/>
                         <outlet property="image_5" destination="Mcc-Qu-PVu" id="1k0-no-vRh"/>
                         <outlet property="reviewField" destination="vDO-jg-htH" id="ZlJ-df-8Wn"/>
+                        <outlet property="reviewFieldHeight" destination="XE7-wR-G5d" id="HQr-Bv-Sdq"/>
                         <outlet property="submitButton" destination="Adb-PC-pSh" id="KI3-3A-tmT"/>
                         <outlet property="view_1" destination="iNE-DH-EJ7" id="o7b-g0-qOP"/>
                         <outlet property="view_2" destination="ils-Wx-Iaw" id="Zw8-zG-nGf"/>
                         <outlet property="view_3" destination="FtM-ss-YFg" id="v7E-at-P2w"/>
                         <outlet property="view_4" destination="lkI-Qo-vb1" id="p5l-2l-5MI"/>
                         <outlet property="view_5" destination="DRX-nF-hvj" id="PBR-To-W0f"/>
+                        <outlet property="writereviewHeight" destination="oZb-mU-bZv" id="W9n-5a-eQO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tiL-5k-KeU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -4371,12 +4379,12 @@
         <!--Show Photo Vc-->
         <scene sceneID="7Rs-nY-7ls">
             <objects>
-                <viewController storyboardIdentifier="ShowPhotoVc" id="acS-XS-wwR" customClass="ShowPhotoVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShowPhotoVc" automaticallyAdjustsScrollViewInsets="NO" id="acS-XS-wwR" customClass="ShowPhotoVc" customModule="FourSquareApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hRE-GV-o3t">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIA-BL-v3K">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="PIA-BL-v3K">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c94-cK-k88">
