@@ -187,24 +187,36 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         filter.setTitle(nil, for: .normal)
                         filter.setImage( #imageLiteral(resourceName: "filter_icon"), for: .normal)
                         
-                        objectOfSearchViewModel.getNearCityDetailsApiCall(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
-                            
-                            if status == true{
-                                self.nearMeTableViewHeightconstraints.constant = 180
-                                UIView.animate(withDuration: 0.3 , animations: {
-                                    self.view.layoutIfNeeded()
-                                }) { (status) in
-                                    
+                        print("count \(objectOfSearchViewModel.nearCityData.count)")
+                        
+                        if objectOfSearchViewModel.nearCityData.count == 0{
+                            objectOfSearchViewModel.getNearCityDetailsApiCall(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
+                                
+                                if status == true{
+                                    self.nearMeTableViewHeightconstraints.constant = 180
+                                    UIView.animate(withDuration: 0.3 , animations: {
+                                        self.view.layoutIfNeeded()
+                                    }) { (status) in
+                                        
+                                    }
+                                    self.nearMeTableView.reloadData()
+                                }else{
+                                    self.nearMeTableViewHeightconstraints.constant = 0
                                 }
-                                self.nearMeTableView.reloadData()
-                            }else{
-                                self.nearMeTableViewHeightconstraints.constant = 0
+                                
                             }
-                            
+                        }else{
+                            self.nearMeTableViewHeightconstraints.constant = 180
+                            self.nearMeTableView.reloadData()
                         }
+                        
+                        
                         
                     }else{
                         
+                        nearYou = 0
+                        filterSearchIs = 0
+                        searching = 0
                         print("naana neena naana neena naana neena naana neena naana neena naana neena naana neena ")
                         searching = 0
                         filter.setTitle(nil, for: .normal)
@@ -429,7 +441,11 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         self.whiteView.isHidden = true
                         self.filter.setTitle(nil, for: .normal)
                         self.filter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
+                        
+                        print("09090")
                         self.mapButton_TableView.reloadData()
+                        self.map_CollectionView.reloadData()
+
                     }else{
                                                 
                         self.nearMeView.isHidden = true
@@ -438,6 +454,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         self.nearYouAndSuggestion.isHidden = true
                         self.filterScreen.isHidden = true
                         self.whiteView.isHidden = false
+                        self.filter.setTitle(nil, for: .normal)
+                        self.filter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
                         
                     }
                     
@@ -733,6 +751,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     
     @IBAction func SuggestionButtonsTapped(_ sender: UIButton) {
         nearYou = 0
+        searching = 0
+        filterSearchIs = 0
         test = true
         
         if sender.currentTitle == "Top pick"{
@@ -816,6 +836,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         nearYouAndSuggestion.isHidden = true
         filterScreen.isHidden = true
         whiteView.isHidden = true
+//        annotation.removeAll()
     }
     
     
@@ -887,13 +908,16 @@ extension SearchVc{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if nearYou == 1{
-            
+            print("near")
             return objectOfSearchViewModel.nearCityData.count
         } else if searching == 1{
+            print("search")
            return objectOfSearchViewModel.searchDetaisl.count
         }else if filterSearchIs == 1{
+            print("filter")
             return objectOfSearchViewModel.filterSearchDetails.count
         }
+        print("suggestion")
         return objectOfHomeViewModel.homeDetails.count
     }
     
@@ -915,7 +939,8 @@ extension SearchVc{
         
         if nearYou == 1{
             
-            let cell = nearMeTableView.dequeueReusableCell(withIdentifier: "cell") as! SearchBodyCell
+
+            guard let cell = nearMeTableView.dequeueReusableCell(withIdentifier: "cell") as? SearchBodyCell else{ return UITableViewCell()}
             cell.name.text = objectOfSearchViewModel.nearCityData[indexPath.row].cityName.capitalized
             
             var imageIs = objectOfSearchViewModel.nearCityData[indexPath.row].cityImage

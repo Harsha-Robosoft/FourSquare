@@ -102,14 +102,16 @@ class VarifyOtpVc: UIViewController {
                     self.stopLoader(loader: loader)
                 if status == true{
                     
-                    let createPasswordVc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordVc") as? ResetPasswordVc
-                    if let vc = createPasswordVc{
-                        
-                        vc.mailIdToSend = self.emailId
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
-
                     
+                    DispatchQueue.main.async {
+                        let createPasswordVc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordVc") as? ResetPasswordVc
+                        if let vc = createPasswordVc{
+                            
+                            vc.mailIdToSend = self.emailId
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+  
                 }else{
                     
                     DispatchQueue.main.async {

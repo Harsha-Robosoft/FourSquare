@@ -5275,10 +5275,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="135" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cwn-kp-pGB">
-                                <rect key="frame" x="0.0" y="150" width="414" height="586"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Obd-aV-V5E">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                 <subviews>
@@ -5295,23 +5291,27 @@
                                     <constraint firstItem="lUV-ny-s6U" firstAttribute="top" secondItem="Obd-aV-V5E" secondAttribute="top" id="tJE-T6-FKW"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="28X-ez-LI4">
+                                <rect key="frame" x="0.0" y="150" width="414" height="586"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="z8m-DU-99P"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Obd-aV-V5E" firstAttribute="leading" secondItem="46k-CJ-wxn" secondAttribute="leading" id="8fC-yg-nh7"/>
                             <constraint firstItem="Obd-aV-V5E" firstAttribute="top" secondItem="46k-CJ-wxn" secondAttribute="top" id="KT0-JY-601"/>
-                            <constraint firstItem="Cwn-kp-pGB" firstAttribute="leading" secondItem="46k-CJ-wxn" secondAttribute="leading" id="YYj-jD-sJL"/>
-                            <constraint firstAttribute="bottom" secondItem="Cwn-kp-pGB" secondAttribute="bottom" id="YjF-v6-e94"/>
-                            <constraint firstItem="Cwn-kp-pGB" firstAttribute="top" secondItem="Obd-aV-V5E" secondAttribute="bottom" id="fcb-d2-YZO"/>
+                            <constraint firstItem="28X-ez-LI4" firstAttribute="top" secondItem="Obd-aV-V5E" secondAttribute="bottom" id="OtH-0E-WqQ"/>
+                            <constraint firstItem="z8m-DU-99P" firstAttribute="bottom" secondItem="28X-ez-LI4" secondAttribute="bottom" id="Ps6-pe-72q"/>
+                            <constraint firstItem="28X-ez-LI4" firstAttribute="leading" secondItem="z8m-DU-99P" secondAttribute="leading" id="VNi-ve-6o5"/>
                             <constraint firstAttribute="trailing" secondItem="Obd-aV-V5E" secondAttribute="trailing" id="gGL-6H-iIg"/>
-                            <constraint firstAttribute="trailing" secondItem="Cwn-kp-pGB" secondAttribute="trailing" id="rA0-gs-tRv"/>
+                            <constraint firstItem="z8m-DU-99P" firstAttribute="trailing" secondItem="28X-ez-LI4" secondAttribute="trailing" id="v1M-M6-0Zm"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapHeight" destination="oSL-9d-6Sa" id="Din-0V-TDv"/>
                         <outlet property="mapIs" destination="lUV-ny-s6U" id="oCp-Jy-Mbg"/>
-                        <outlet property="tableView01" destination="Cwn-kp-pGB" id="eWX-XO-Y9Y"/>
+                        <outlet property="tableView01" destination="28X-ez-LI4" id="sGd-gF-QKG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMz-AP-uob" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

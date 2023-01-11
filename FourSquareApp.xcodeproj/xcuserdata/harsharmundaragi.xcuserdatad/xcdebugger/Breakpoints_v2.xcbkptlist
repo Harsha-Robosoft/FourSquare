@@ -3,4 +3,54 @@
    uuid = "C002BBD7-6470-4BB7-9D7B-C1A2B5DA62A4"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEAB4E39-9324-4DFB-A9FE-E549B9131B59"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FourSquareApp/C_ontroller/Log in, Register, Varify, RestPassword/VarifyOtpVc.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "getInButtonTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FEAB4E39-9324-4DFB-A9FE-E549B9131B59 - efcc9101e7eea6a6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in FourSquareApp.VarifyOtpVc.getInButtonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "FourSquareApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Development/FourSquare/FourSquareApp/C_ontroller/Log%20in,%20Register,%20Varify,%20RestPassword/VarifyOtpVc.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "184">
+               </Location>
+               <Location
+                  uuid = "FEAB4E39-9324-4DFB-A9FE-E549B9131B59 - 6c60c7790701e4d0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #2 (Swift.Bool) -&gt; () in FourSquareApp.VarifyOtpVc.getInButtonTapped(__C.UIButton) -&gt; ()"
+                  moduleName = "FourSquareApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Development/FourSquare/FourSquareApp/C_ontroller/Log%20in,%20Register,%20Varify,%20RestPassword/VarifyOtpVc.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "102"
+                  endingLineNumber = "102"
+                  offsetFromSymbolStart = "215">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

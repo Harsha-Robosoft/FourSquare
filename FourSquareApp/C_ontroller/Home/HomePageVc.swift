@@ -25,6 +25,8 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     var index = 0
     var manager = CLLocationManager()
     
+    var homeView = 0
+    
     @IBOutlet weak var mapIs: MKMapView!
     @IBOutlet weak var mapHeight: NSLayoutConstraint!
     @IBOutlet weak var tableView01: UITableView!
@@ -36,6 +38,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         tableView01.delegate = self
         tableView01.dataSource = self
         tableView01.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
+//        tableView01.register(UINib(nibName: "favCell", bundle: nil), forCellReuseIdentifier: "cellFave")
 
         let call = getToken()
         
@@ -72,12 +75,10 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func checkInedxForApicall(index: Int) {
         
-//        let latitude = "13.379162"
-//        let longitude = "74.740373"
         
-//        tableViewHeight.constant = 0
         
         if index == 0{
+            
             let loader =   self.loader()
             objectOfHomeViewModel.apiCallForData(endPoint: "/getNearPlace", latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
                 DispatchQueue.main.async() {
