@@ -85,6 +85,15 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     @IBOutlet weak var parkingImage: UIImageView!
     @IBOutlet weak var wifiimage: UIImageView!
     
+    @IBOutlet weak var acceptCardLabel: FilterLabel!
+    @IBOutlet weak var delivaryLabel: FilterLabel!
+    @IBOutlet weak var dogFriendlyLabel: FilterLabel!
+    @IBOutlet weak var familyFriendlyLabel: FilterLabel!
+    @IBOutlet weak var inWalkingDistanceLabel: FilterLabel!
+    @IBOutlet weak var outdoorLabel: FilterLabel!
+    @IBOutlet weak var parkingLabel: FilterLabel!
+    @IBOutlet weak var wiFiLabel: FilterLabel!
+    
     var acceptCard = true
     var delivary = true
     var dogFriendly = true
@@ -390,6 +399,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
+        
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func filterButtonTapped(_ sender: UIButton) {
@@ -646,81 +656,81 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         if sender.currentTitle == "Accepts creadit card"{
             
             if acceptCard {
-                acceptCreaditcardButton.enable()
+                acceptCardLabel.addChanges()
                 cardImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
                 acceptCard = false
             }else{
-                acceptCreaditcardButton.disable()
+                acceptCardLabel.noChange()
                 cardImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
                 acceptCard = true
             }
         }else if sender.currentTitle == "Delivary"{
             if delivary {
-                delivaryButton.enable()
+                delivaryLabel.addChanges()
                 delivaryIMage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
                 delivary = false
             }else{
-                delivaryButton.disable()
+                delivaryLabel.noChange()
                 delivaryIMage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
                 delivary = true
             }
         }else if sender.currentTitle == "Dog friendly"{
             if dogFriendly  {
-                dogFriendlyButton.enable()
+                dogFriendlyLabel.addChanges()
                 dogFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
                 dogFriendly = false
             }else{
-                dogFriendlyButton.disable()
+                dogFriendlyLabel.noChange()
                 dogFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
                 dogFriendly = true
             }
         }else if sender.currentTitle == "Family-friendly place"{
             if familyFriendly  {
-                familyFriendlyPlace.enable()
+                familyFriendlyLabel.addChanges()
                 familyFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
                 familyFriendly = false
             }else{
-                familyFriendlyPlace.disable()
+                familyFriendlyLabel.noChange()
                 familyFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
                 familyFriendly = true
             }
         }else if sender.currentTitle == "In walking distance"{
             if inWalkingDistanceNum  {
-                inWalkingDistance.enable()
+                inWalkingDistanceLabel.addChanges()
                 inwalkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
                 inWalkingDistanceNum = false
             }else{
-                inWalkingDistance.disable()
+                inWalkingDistanceLabel.noChange()
                 inwalkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
                 inWalkingDistanceNum = true
             }
         }else if sender.currentTitle == "Outdoor seating"{
             if outDoorSeatingNum  {
-                outDoorSeating.enable()
+                outdoorLabel.addChanges()
                 outdoorImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
                 outDoorSeatingNum = false
             }else{
-                outDoorSeating.disable()
+                outdoorLabel.noChange()
                 outdoorImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
                 outDoorSeatingNum = true
             }
         }else if sender.currentTitle == "Parking"{
             if parkingNum {
-                parkingbutton.enable()
+                parkingLabel.addChanges()
                 parkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
                 parkingNum = false
             }else{
-                parkingbutton.disable()
+                parkingLabel.noChange()
                 parkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
                 parkingNum = true
             }
         }else {
             if wifiNum  {
-                wifiButton.enable()
+                wiFiLabel.addChanges()
                 wifiimage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
                 wifiNum = false
             }else{
-                wifiButton.disable()
+                wiFiLabel.noChange()
                 wifiimage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
                 wifiNum = true
             }

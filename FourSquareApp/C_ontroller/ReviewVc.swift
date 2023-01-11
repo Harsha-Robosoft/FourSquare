@@ -22,14 +22,14 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var nameToshow: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         nameToshow.text = nameIs
         tableView01.delegate = self
         tableView01.dataSource = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         let call = getToken()
-        
         if call != ""{
-            
             print("place id for All review : \(placeId)")
             objectOfReviewViewModel.getAllReviewDataApiCall(tokenIs: call, placeIdis: placeId ){ status in
                 if status == true{
@@ -37,23 +37,18 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }else{
                     self.tableView01.isHidden = true
                 }
-                
             }
         }else{
             let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-            
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                
                 self.navigationController?.popToRootViewController(animated: true)
                 print("Handle Ok logic here")
-                
             }))
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                 print("Handle Cancel Logic here")
             }))
             present(refreshAlert, animated: true, completion: nil)
         }
-   
     }
 
     @IBAction func addReviewButtonTapped(_ sender: UIButton){
@@ -88,17 +83,12 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView01.dequeueReusableCell(withIdentifier: "tableCell") as! ReviewCell
-        
         var imageIs = objectOfReviewViewModel.allReviewdata[indexPath.row].reviewerImage
         imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
         cell.imageIs.image = getImage(urlString: imageIs)
         cell.nameIs.text = objectOfReviewViewModel.allReviewdata[indexPath.row].reviewBy
         cell.reviewIs.text = objectOfReviewViewModel.allReviewdata[indexPath.row].review
-        
-//        print("time : \(objectOfReviewViewModel.allReviewdata[indexPath.row].reviewDate)")
-
         cell.dateAndTime.text = getDate(date: objectOfReviewViewModel.allReviewdata[indexPath.row].reviewDate)
         
         return cell

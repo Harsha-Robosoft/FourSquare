@@ -25,42 +25,33 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         nameToshoe.text = nameIs
         collectionView01.delegate = self
         collectionView01.dataSource = self
-        
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         let call = getToken()
         
         if call != ""{
             objectOfPhotoViewModel.getAllPhotosApicall(tokenIs: call, placeIdis: placeId){status in
                 if status == true{
-                    
                     if self.objectOfPhotoViewModel.AllPhotosDetails.last?.imageIs != ""{
                         self.collectionView01.reloadData()
                     }
-                    
-                    
                 }else{
                     self.collectionView01.isHidden = true
                 }
             }
         }else{
-            
             let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-            
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                
                 self.navigationController?.popToRootViewController(animated: true)
                 print("Handle Ok logic here")
-                
             }))
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                 print("Handle Cancel Logic here")
             }))
             present(refreshAlert, animated: true, completion: nil)
-            
         }
-        
-        
-        
-        
     }
     
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
