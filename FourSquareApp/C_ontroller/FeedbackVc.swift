@@ -6,6 +6,9 @@
 //
 
 import UIKit
+protocol showHomePage3 {
+    func homePage3()
+}
 
 class FeedbackVc: UIViewController {
     
@@ -13,7 +16,7 @@ class FeedbackVc: UIViewController {
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
     
-    
+    var homeDelegate3: showHomePage3?
     @IBOutlet weak var feddbackSubmitButton: UIButton!
     @IBOutlet weak var feedBackField: FeedbackFieldBackgroundColour!
     
@@ -32,6 +35,7 @@ class FeedbackVc: UIViewController {
         }
     }
     @IBAction func backButtonTapped(_ sender: UIButton) {
+        homeDelegate3?.homePage3()
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func feedbackSubmitButton(_ sender: UIButton) {

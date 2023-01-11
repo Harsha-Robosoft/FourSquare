@@ -19,6 +19,7 @@ class HomeTableViewCell: UITableViewCell {
     
     var delegateHomeCell: reloadHomeTable?
     
+    @IBOutlet weak var contentViewIs: HomeTableViewCell!
     
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var imageIs: UIImageView!
@@ -64,7 +65,6 @@ class HomeTableViewCell: UITableViewCell {
 ////        }
         
         if( objectOfHomeViewModel.userFavouiretListArray.contains(_Id) ) {
-            print("0909",nameIs.text)
             likeButton.changes()
             onClick = true
         }
@@ -76,8 +76,9 @@ class HomeTableViewCell: UITableViewCell {
     
     @IBAction func likeButtonTapped(_ sender: UIButton) {
         
+        print("hi hi ")
         let call = getToken()
-        
+
         print("Id is is : \(_Id)")
         if call != ""{
             if onClick == true{
@@ -99,7 +100,7 @@ class HomeTableViewCell: UITableViewCell {
                     }
                 }
             }else{
-                
+
                 objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: _Id){ status in
                     if status == true{
                         self.likeButton.noChange()
@@ -118,7 +119,7 @@ class HomeTableViewCell: UITableViewCell {
                 }
             }
         }else{
-            
+
         }
   
     }

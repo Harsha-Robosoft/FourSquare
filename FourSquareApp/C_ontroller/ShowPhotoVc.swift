@@ -49,7 +49,7 @@ class ShowPhotoVc: UIViewController {
         userImage.image = getImage(urlString: userImageTo)
         imageToShow.image = getImage(urlString: image)
         userName.text = userNameIs.capitalized
-        dateToshow.text = dateIs
+        dateToshow.text = getDate(date: dateIs)
         nameIs.text = placeName.capitalized
         // Do any additional setup after loading the view.
     }
@@ -57,6 +57,18 @@ class ShowPhotoVc: UIViewController {
 
     @IBAction func backButtonTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func getDate(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        var dateIs: Date?
+        if let date = dateFormatter.date(from: date) {
+            dateIs = date
+        }
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
+        let result = dateFormatter.string(from: dateIs!)
+        return result
     }
     
 }

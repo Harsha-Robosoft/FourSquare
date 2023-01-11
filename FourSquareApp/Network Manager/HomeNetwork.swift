@@ -187,7 +187,7 @@ class HomeNetwork {
         
         let fieldName = "image"
         
-        if let imageData = image.jpegData(compressionQuality: 0.1) {
+        if let imageData = image.jpegData(compressionQuality: 0.6) {
             data.append("--\(boundary)\r\n".data(using: .utf8) ?? data as Data)
             data.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"image.jpg\"\r\n".data(using: .utf8) ?? data as Data)
             data.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8) ?? data as Data)
@@ -202,6 +202,7 @@ class HomeNetwork {
                 return
             }
             if let responsIs = responce as? HTTPURLResponse{
+                print("User profile Error is: \(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))")
                 print("User profile responce",responsIs.statusCode)
                 if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
                     do{

@@ -6,11 +6,15 @@
 //
 
 import UIKit
+protocol showHomePage2 {
+    func homePage2()
+}
 
 class AboutUsVc: UIViewController {
 
     var objectOfAboutUsViewModel = AboutUsViewModel.objectOfViewModel
     
+    var homeDelegate2: showHomePage2?
     @IBOutlet weak var labelField: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,7 @@ class AboutUsVc: UIViewController {
         
     }
     @IBAction func backButtonTapped(_ sender: UIButton) {
+        homeDelegate2?.homePage2()
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func homeButtonTapped(_ sender: UIButton) {

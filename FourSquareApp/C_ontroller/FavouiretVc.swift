@@ -6,6 +6,9 @@
 //
 
 import UIKit
+protocol showHomePage1 {
+    func homePage1()
+}
 
 class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource, reloadTable{
 
@@ -19,6 +22,16 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     var poplular_Distance_RatingButton = ""
     var rateStatus = 0
+    
+    var rupeesOneStatus = 0
+    var rupeesTwoStatus = 0
+    var rupeesThreeStatus = 0
+    var rupeesFourStatus = 0
+    var popularStatus = 0
+    var distanceStatus = 0
+    var popRatingStatus = 0
+    
+    var homeDelegate1: showHomePage1?
     
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var noDatFoundView: UIView!
@@ -155,6 +168,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         favouritSearchFielf.leftViewMode = .always
     }
     @IBAction func backtapped(_ sender: UIButton) {
+        homeDelegate1?.homePage1()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -391,30 +405,76 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         
         if sender.currentTitle == "₹"{
-            rupeesOne.showColour()
-            rupeesTwo.dontShowColour()
-            rupeesThree.dontShowColour()
-            rupeesFour.dontShowColour()
-            rateStatus = 1
+            
+            if rupeesOneStatus == 0{
+                rupeesOne.showColour()
+                rupeesTwo.dontShowColour()
+                rupeesThree.dontShowColour()
+                rupeesFour.dontShowColour()
+                rateStatus = 1
+                rupeesOneStatus = 1
+                rupeesTwoStatus = 0
+                rupeesThreeStatus = 0
+                rupeesFourStatus = 0
+            }else{
+                rupeesOne.dontShowColour()
+                rupeesOneStatus = 0
+                rateStatus = 0
+            }
+            
+            
         }else if sender.currentTitle == "₹₹"{
-            rupeesOne.dontShowColour()
-            rupeesTwo.showColour()
-            rupeesThree.dontShowColour()
-            rupeesFour.dontShowColour()
-            rateStatus = 2
+            if rupeesTwoStatus == 0{
+                rupeesOne.dontShowColour()
+                rupeesTwo.showColour()
+                rupeesThree.dontShowColour()
+                rupeesFour.dontShowColour()
+                rateStatus = 2
+                rupeesOneStatus = 0
+                rupeesTwoStatus = 1
+                rupeesThreeStatus = 0
+                rupeesFourStatus = 0
+            }else{
+                rupeesTwo.dontShowColour()
+                rupeesTwoStatus = 0
+                rateStatus = 0
+            }
+            
         }
         else if sender.currentTitle == "₹₹₹"{
-            rupeesOne.dontShowColour()
-            rupeesTwo.dontShowColour()
-            rupeesThree.showColour()
-            rupeesFour.dontShowColour()
-            rateStatus = 3
-        }else{
-            rupeesOne.dontShowColour()
-            rupeesTwo.dontShowColour()
-            rupeesThree.dontShowColour()
-            rupeesFour.showColour()
-            rateStatus = 4
+            if rupeesThreeStatus == 0{
+                rupeesOne.dontShowColour()
+                rupeesTwo.dontShowColour()
+                rupeesThree.showColour()
+                rupeesFour.dontShowColour()
+                rateStatus = 3
+                rupeesOneStatus = 0
+                rupeesTwoStatus = 0
+                rupeesThreeStatus = 1
+                rupeesFourStatus = 0
+            }else{
+                rupeesThree.dontShowColour()
+                rupeesThreeStatus = 0
+                rateStatus = 0
+            }
+            
+        }else if sender.currentTitle == "₹₹₹₹"{
+            if rupeesFourStatus == 0{
+                rupeesOne.dontShowColour()
+                rupeesTwo.dontShowColour()
+                rupeesThree.dontShowColour()
+                rupeesFour.showColour()
+                rateStatus = 4
+                rupeesOneStatus = 0
+                rupeesTwoStatus = 0
+                rupeesThreeStatus = 0
+                rupeesFourStatus = 1
+            }else{
+                rupeesFour.dontShowColour()
+                rupeesFourStatus = 0
+                rateStatus = 0
+            }
+            
             
         }
         
@@ -425,21 +485,46 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         poplular_Distance_RatingButton = sender.currentTitle ?? ""
         
         if sender.currentTitle == "Popular"{
+            if popularStatus == 0{
+                popularButton.showColour()
+                distanceButton.dontShowColour()
+                ratingButton.dontShowColour()
+                popularStatus = 1
+                distanceStatus = 0
+                popRatingStatus = 0
+            }else{
+                popularStatus = 0
+                popularButton.dontShowColour()
+            }
             
-            popularButton.showColour()
-            distanceButton.dontShowColour()
-            ratingButton.dontShowColour()
             
         }else if sender.currentTitle == "Distance"{
+            if distanceStatus == 0{
+                popularButton.dontShowColour()
+                distanceButton.showColour()
+                ratingButton.dontShowColour()
+                popularStatus = 0
+                distanceStatus = 1
+                popRatingStatus = 0
+            }else{
+                distanceStatus = 0
+                distanceButton.dontShowColour()
+            }
             
-            popularButton.dontShowColour()
-            distanceButton.showColour()
-            ratingButton.dontShowColour()
             
-        }else {
-            popularButton.dontShowColour()
-            distanceButton.dontShowColour()
-            ratingButton.showColour()
+        }else if sender.currentTitle == "Rating" {
+            if popRatingStatus == 0{
+                popularButton.dontShowColour()
+                distanceButton.dontShowColour()
+                ratingButton.showColour()
+                popularStatus = 0
+                distanceStatus = 0
+                popRatingStatus = 1
+            }else{
+                popRatingStatus = 0
+                ratingButton.dontShowColour()
+            }
+            
             
         }
         

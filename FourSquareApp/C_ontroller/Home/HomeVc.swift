@@ -8,7 +8,37 @@
 import UIKit
 
 
-class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,sendingIndex {
+class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,sendingIndex, showHomePage1, showHomePage2, showHomePage3 {
+    func homePage3() {
+        burgerWidth.constant = 0
+        leading.constant = 0
+        trailing.constant = 0
+        top.constant = 0
+        bottom.constant = 0
+        menuOut = false
+        topTapView.isHidden = true
+    }
+    
+    func homePage2() {
+        burgerWidth.constant = 0
+        leading.constant = 0
+        trailing.constant = 0
+        top.constant = 0
+        bottom.constant = 0
+        menuOut = false
+        topTapView.isHidden = true
+    }
+    
+    func homePage1() {
+        burgerWidth.constant = 0
+        leading.constant = 0
+        trailing.constant = 0
+        top.constant = 0
+        bottom.constant = 0
+        menuOut = false
+        topTapView.isHidden = true
+    }
+    
     
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     
@@ -37,9 +67,9 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         let tokenIs = getToken()
-
+        
         print("user token is : \(tokenIs)")
-    
+        
         if tokenIs != ""{
             
             name_Loginbutton.isEnabled = false
@@ -67,7 +97,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         collectionView.scrollToItem(at: [0,index], at: .centeredHorizontally, animated: true)
         collectionView.selectItem(at: [0,index], animated: true, scrollPosition: UICollectionView.ScrollPosition(rawValue: 0))
     }
-
+    
     
     @IBAction func burgerButtonTapped(_ sender: Any) {
         
@@ -117,6 +147,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             top.constant = 0
             bottom.constant = 0
             menuOut = false
+            topTapView.isHidden = true
             
         }
         
@@ -137,49 +168,49 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if call != ""{
             
             let refreshAlert = UIAlertController(title: "ALERT", message: "Are you sure you want to LOG OUT ...!!!", preferredStyle: UIAlertController.Style.alert)
-
-                    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-
-                        let loader =   self.loader()
-                        self.objectOfHomeViewModel.signOutApiCall(tokenToSend: call){ status in
-                            print("9900",status)
-                            DispatchQueue.main.async() {
-                                self.stopLoader(loader: loader)
-                            if status == true{
-                                DispatchQueue.main.async {
-                                    var id = ""
-                                    if let idIs =  self.objectOfUserDefaults.value(forKey: "userId") as? String{
-                                        id = idIs
-                                        print("user id is : \(idIs)")
-                                    }
-                                    print("user id is1 : \(id)")
-                                    self.objectOfKeyChain.deletePassword(userId: id)
-                                    self.objectOfUserDefaults.set("", forKey: "userId")
-                                    self.objectOfUserDefaults.setValue(1, forKey: "SignOut")
-                                    self.navigationController?.popToRootViewController(animated: true)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                
+                let loader =   self.loader()
+                self.objectOfHomeViewModel.signOutApiCall(tokenToSend: call){ status in
+                    print("9900",status)
+                    DispatchQueue.main.async() {
+                        self.stopLoader(loader: loader)
+                        if status == true{
+                            DispatchQueue.main.async {
+                                var id = ""
+                                if let idIs =  self.objectOfUserDefaults.value(forKey: "userId") as? String{
+                                    id = idIs
+                                    print("user id is : \(idIs)")
                                 }
-                                
-                            }else{
-                                DispatchQueue.main.async {
-                                    self.alertMessage(message: "Something went wrong while sign out try again")
-
-                                }
+                                print("user id is1 : \(id)")
+                                self.objectOfKeyChain.deletePassword(userId: id)
+                                self.objectOfUserDefaults.set("", forKey: "userId")
+                                self.objectOfUserDefaults.setValue(1, forKey: "SignOut")
+                                self.navigationController?.popToRootViewController(animated: true)
                             }
+                            
+                        }else{
+                            DispatchQueue.main.async {
+                                self.alertMessage(message: "Something went wrong while sign out try again")
+                                
                             }
                         }
-                        print("Handle Ok logic here")
-
-                    }))
-                    refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                          print("Handle Cancel Logic here")
-                    }))
-                    present(refreshAlert, animated: true, completion: nil)
+                    }
+                }
+                print("Handle Ok logic here")
+                
+            }))
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            present(refreshAlert, animated: true, completion: nil)
         }else{
             
             
             
         }
-  
+        
         
     }
     
@@ -188,6 +219,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let aboutVc = self.storyboard?.instantiateViewController(withIdentifier: "AboutUsVc") as? AboutUsVc
         if let vc = aboutVc{
+            vc.homeDelegate2 = self
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -197,6 +229,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let feedbackVc = self.storyboard?.instantiateViewController(withIdentifier: "FeedbackVc") as? FeedbackVc
         if let vc = feedbackVc{
+            vc.homeDelegate3 = self
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -206,23 +239,24 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let favouritVc = self.storyboard?.instantiateViewController(withIdentifier: "FavouiretVc") as? FavouiretVc
         if let vc = favouritVc{
+            vc.homeDelegate1 = self
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     @IBAction func name_LoginButtontapped(_ sender: UIButton) {
-    
+        
         let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-
-                refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-
-                    self.navigationController?.popToRootViewController(animated: true)
-                    print("Handle Ok logic here")
-
-                }))
-                refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                      print("Handle Cancel Logic here")
-                }))
-                present(refreshAlert, animated: true, completion: nil)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            
+            self.navigationController?.popToRootViewController(animated: true)
+            print("Handle Ok logic here")
+            
+        }))
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+            print("Handle Cancel Logic here")
+        }))
+        present(refreshAlert, animated: true, completion: nil)
         
         
     }
@@ -230,13 +264,13 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let vc = segue.destination as? HomePageController{
-        
+            
             self.pageView = vc
             vc.delegate1 = self
         }
     }
     
-
+    
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         
@@ -267,7 +301,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         bottom.constant = 0
         menuOut = false
         topTapView.isHidden = true
-
+        
         UIView.animate(withDuration: 0.3 , animations: {
             self.view.layoutIfNeeded()
         }) { (status) in
@@ -298,19 +332,19 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             present(refreshAlert, animated: true, completion: nil)
         }else{
             let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-
-                    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-
-                        self.navigationController?.popToRootViewController(animated: true)
-                        print("Handle Ok logic here")
-
-                    }))
-                    refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                          print("Handle Cancel Logic here")
-                    }))
-                    present(refreshAlert, animated: true, completion: nil)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                
+                self.navigationController?.popToRootViewController(animated: true)
+                print("Handle Ok logic here")
+                
+            }))
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            present(refreshAlert, animated: true, completion: nil)
         }
-
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -325,13 +359,16 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func uploadPhoto(imageIsIs: UIImage) {
         let call = getToken()
+        
+        print("image is : \(imageIsIs)")
+        
         objectOfHomeViewModel.userProfilePhotoUpdateApiCall(token: call, imageIs: imageIsIs){ status in
             if status == true{
                 self.alertMessage(message: "Profile photo is been updated")
                 self.userProfileImage.image = imageIsIs
             }else{
                 self.alertMessage(message: "Profile photo is not been updated...!!!")
-                
+
             }
         }
     }
@@ -356,9 +393,9 @@ extension HomeVc{
         let cell = collectionView.cellForItem(at: indexPath) as! HomeCollectionViewCell
         cell.labelToUpdate.textColor = .white
         pageView?.goToPAge(indexIs: indexPath.row)
-
+        
     }
-
+    
     
 }
 
@@ -382,7 +419,7 @@ extension HomeVc{
     
     func getToken() -> String {
         var id = ""
-       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
+        let userIdIs = objectOfUserDefaults.value(forKey: "userId")
         if let idIs = userIdIs as? String{
             id = idIs
         }

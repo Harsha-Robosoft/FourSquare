@@ -35,7 +35,8 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         super.viewDidLoad()
         tableView01.delegate = self
         tableView01.dataSource = self
-        
+        tableView01.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
+
         let call = getToken()
         
         if call != ""{
@@ -50,7 +51,6 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
         
    
-        tableView01.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
     }
  
     override func viewDidLayoutSubviews() {
@@ -208,7 +208,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         if objectOfHomeViewModel.homeDetails[indexPath.row].placeImage != nil {
             
             var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
-            
+
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
 
             cell.imageIs.image = getImage(urlString: imageIs)
@@ -231,8 +231,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             cell.setShadow()
             cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
             cell.buttonTatus(id: objectOfHomeViewModel.homeDetails[indexPath.row]._id)
-//            cell.backView.layer.masksToBounds = true
-//            cell.backView.bounds.width = tableView01.bounds.width
+            
             cell.delegateHomeCell = self
             
             return cell

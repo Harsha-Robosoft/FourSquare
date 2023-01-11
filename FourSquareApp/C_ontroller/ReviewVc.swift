@@ -96,9 +96,10 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.imageIs.image = getImage(urlString: imageIs)
         cell.nameIs.text = objectOfReviewViewModel.allReviewdata[indexPath.row].reviewBy
         cell.reviewIs.text = objectOfReviewViewModel.allReviewdata[indexPath.row].review
-        cell.dateAndTime.text = objectOfReviewViewModel.allReviewdata[indexPath.row].reviewDate
-        print("time : \(objectOfReviewViewModel.allReviewdata[indexPath.row].reviewDate)")
         
+//        print("time : \(objectOfReviewViewModel.allReviewdata[indexPath.row].reviewDate)")
+
+        cell.dateAndTime.text = getDate(date: objectOfReviewViewModel.allReviewdata[indexPath.row].reviewDate)
         
         return cell
     }
@@ -124,5 +125,15 @@ extension ReviewVc{
         print("Search token",receivedToken)
         return receivedToken
     }
-    
+    func getDate(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        var dateIs: Date?
+        if let date = dateFormatter.date(from: date) {
+            dateIs = date
+        }
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
+        let result = dateFormatter.string(from: dateIs!)
+        return result
+    } 
 }

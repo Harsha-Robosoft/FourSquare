@@ -26,6 +26,14 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     var searching = 0
     var filterSearchIs = 0
     var mapViewTapped = 0
+    var rupeesOneStatus = 0
+    var rupeesTwoStatus = 0
+    var rupeesThreeStatus = 0
+    var rupeesFourStatus = 0
+    var popularStatus = 0
+    var distanceStatus = 0
+    var popRatingStatus = 0
+    
     
     var showFilterScreen = 0
     
@@ -464,54 +472,122 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         
         if sender.currentTitle == "Popular"{
             
-            popularButton.showColour()
-            distanceButton.dontShowColour()
-            ratingButton.dontShowColour()
+            if popularStatus == 0{
+                popularButton.showColour()
+                distanceButton.dontShowColour()
+                ratingButton.dontShowColour()
+                popularStatus = 1
+                distanceStatus = 0
+                popRatingStatus = 0
+            }else{
+                popularButton.dontShowColour()
+                popularStatus = 0
+            }
+            
             
         }else if sender.currentTitle == "Distance"{
+            if distanceStatus == 0{
+                popularButton.dontShowColour()
+                distanceButton.showColour()
+                ratingButton.dontShowColour()
+                popularStatus = 0
+                distanceStatus = 1
+                popRatingStatus = 0
+            }else{
+                distanceButton.dontShowColour()
+                distanceStatus = 0
+            }
             
-            popularButton.dontShowColour()
-            distanceButton.showColour()
-            ratingButton.dontShowColour()
             
-        }else {
-            popularButton.dontShowColour()
-            distanceButton.dontShowColour()
-            ratingButton.showColour()
+        }else if sender.currentTitle == "Rating" {
+            if popRatingStatus == 0{
+                popularButton.dontShowColour()
+                distanceButton.dontShowColour()
+                ratingButton.showColour()
+                popularStatus = 0
+                distanceStatus = 0
+                popRatingStatus = 1
+            }else{
+                ratingButton.dontShowColour()
+                popRatingStatus = 0
+            }
+            
             
         }
         
     }
     
     @IBAction func priceRangeButtonsTapped(_ sender: UIButton) {
-        
-        
-        
         if sender.currentTitle == "₹"{
-            rupeesOne.showColour()
-            rupeesTwo.dontShowColour()
-            rupeesThree.dontShowColour()
-            rupeesFour.dontShowColour()
-            rateStatus = 1
+            if rupeesOneStatus == 0{
+                rupeesOne.showColour()
+                rupeesTwo.dontShowColour()
+                rupeesThree.dontShowColour()
+                rupeesFour.dontShowColour()
+                rateStatus = 1
+                rupeesOneStatus = 1
+                rupeesTwoStatus = 0
+                rupeesThreeStatus = 0
+                rupeesFourStatus = 0
+            }else{
+                rupeesOne.dontShowColour()
+                rateStatus = 0
+                rupeesOneStatus = 0
+            }
+            
         }else if sender.currentTitle == "₹₹"{
-            rupeesOne.dontShowColour()
-            rupeesTwo.showColour()
-            rupeesThree.dontShowColour()
-            rupeesFour.dontShowColour()
-            rateStatus = 2
+            
+            if rupeesTwoStatus == 0{
+                
+                rupeesOne.dontShowColour()
+                rupeesTwo.showColour()
+                rupeesThree.dontShowColour()
+                rupeesFour.dontShowColour()
+                rateStatus = 2
+                rupeesOneStatus = 0
+                rupeesTwoStatus = 1
+                rupeesThreeStatus = 0
+                rupeesFourStatus = 0
+                
+            }else{
+                rupeesTwo.dontShowColour()
+                rateStatus = 0
+                rupeesTwoStatus = 0
+            }
         }
         else if sender.currentTitle == "₹₹₹"{
-            rupeesOne.dontShowColour()
-            rupeesTwo.dontShowColour()
-            rupeesThree.showColour()
-            rupeesFour.dontShowColour()
-            rateStatus = 3
-        }else{
-            rupeesOne.dontShowColour()
-            rupeesTwo.dontShowColour()
-            rupeesThree.dontShowColour()
-            rupeesFour.showColour()
-            rateStatus = 4
+            if rupeesThreeStatus == 0{
+                rupeesOne.dontShowColour()
+                rupeesTwo.dontShowColour()
+                rupeesThree.showColour()
+                rupeesFour.dontShowColour()
+                rateStatus = 3
+                rupeesOneStatus = 0
+                rupeesTwoStatus = 0
+                rupeesThreeStatus = 1
+                rupeesFourStatus = 0
+            }else{
+
+                rupeesThree.dontShowColour()
+                rateStatus = 0
+                rupeesThreeStatus = 0
+            }
+        }else if sender.currentTitle == "₹₹₹₹"{
+            if rupeesFourStatus == 0{
+                rupeesOne.dontShowColour()
+                rupeesTwo.dontShowColour()
+                rupeesThree.dontShowColour()
+                rupeesFour.showColour()
+                rateStatus = 4
+                rupeesOneStatus = 0
+                rupeesTwoStatus = 0
+                rupeesThreeStatus = 0
+                rupeesFourStatus = 1
+            }else{
+                rupeesFour.dontShowColour()
+                rateStatus = 0
+                rupeesFourStatus = 0
+            }
         }
         
     }
@@ -871,6 +947,10 @@ extension SearchVc{
             }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "5"{
                 cell.rateIs.text = "₹₹₹₹₹"
             }
+            
+            cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
+            cell.buttonTatus(id: objectOfHomeViewModel.homeDetails[indexPath.row]._id)
+            
             cell.setShadow()
             
             return cell
@@ -897,6 +977,9 @@ extension SearchVc{
             }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "5"{
                 cell.rateIs.text = "₹₹₹₹₹"
             }
+            
+            cell._Id = objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id
+            cell.buttonTatus(id: objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id)
             cell.setShadow()
             
             return cell
@@ -926,6 +1009,9 @@ extension SearchVc{
         }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "5"{
             cell.rateIs.text = "₹₹₹₹₹"
         }
+        
+        cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
+        cell.buttonTatus(id: objectOfHomeViewModel.homeDetails[indexPath.row]._id)
         cell.setShadow()
         
         return cell
@@ -1058,6 +1144,9 @@ extension SearchVc{
             
             setAnnotation(locations: annotation)
             
+            cell._Id = objectOfSearchViewModel.searchDetaisl[indexPath.row]._id
+            cell.buttonTatus(id: objectOfSearchViewModel.searchDetaisl[indexPath.row]._id)
+            
             cell.setShadow()
             
             return cell
@@ -1091,6 +1180,9 @@ extension SearchVc{
             
             setAnnotation(locations: annotation)
             
+            cell._Id = objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id
+            cell.buttonTatus(id: objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id)
+            
             cell.setShadow()
             return cell
         }
@@ -1120,6 +1212,9 @@ extension SearchVc{
         annotation.append(["title":objectOfHomeViewModel.homeDetails[indexPath.row].placeName,"latitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude,"longitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude])
         
         setAnnotation(locations: annotation)
+        
+        cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
+        cell.buttonTatus(id: objectOfHomeViewModel.homeDetails[indexPath.row]._id)
         
             cell.setShadow()
             return cell
