@@ -9,37 +9,7 @@ import UIKit
 
 
 class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,sendingIndex, showHomePage1, showHomePage2, showHomePage3 {
-    func homePage3() {
-        burgerWidth.constant = 0
-        leading.constant = 0
-        trailing.constant = 0
-        top.constant = 0
-        bottom.constant = 0
-        menuOut = false
-        topTapView.isHidden = true
-    }
-    
-    func homePage2() {
-        burgerWidth.constant = 0
-        leading.constant = 0
-        trailing.constant = 0
-        top.constant = 0
-        bottom.constant = 0
-        menuOut = false
-        topTapView.isHidden = true
-    }
-    
-    func homePage1() {
-        burgerWidth.constant = 0
-        leading.constant = 0
-        trailing.constant = 0
-        top.constant = 0
-        bottom.constant = 0
-        menuOut = false
-        topTapView.isHidden = true
-    }
-    
-    
+
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     
     var objectOfUserDefaults = UserDefaults()
@@ -395,8 +365,6 @@ extension HomeVc{
         pageView?.goToPAge(indexIs: indexPath.row)
         
     }
-    
-    
 }
 
 extension HomeVc: UICollectionViewDelegateFlowLayout{
@@ -416,7 +384,6 @@ extension HomeVc: UICollectionViewDelegateFlowLayout{
 }
 
 extension HomeVc{
-    
     func getToken() -> String {
         var id = ""
         let userIdIs = objectOfUserDefaults.value(forKey: "userId")
@@ -430,5 +397,36 @@ extension HomeVc{
             return ""}
         print("Home token",receivedToken)
         return receivedToken
+    }
+}
+extension HomeVc{
+    func homePage3() {
+        burgerWidth.constant = 0
+        leading.constant = 0
+        trailing.constant = 0
+        top.constant = 0
+        bottom.constant = 0
+        menuOut = false
+        topTapView.isHidden = true
+    }
+    
+    func homePage2() {
+        burgerWidth.constant = 0
+        leading.constant = 0
+        trailing.constant = 0
+        top.constant = 0
+        bottom.constant = 0
+        menuOut = false
+        topTapView.isHidden = true
+    }
+    
+    func homePage1() {
+        burgerWidth.constant = 0
+        leading.constant = 0
+        trailing.constant = 0
+        top.constant = 0
+        bottom.constant = 0
+        menuOut = false
+        topTapView.isHidden = true
     }
 }

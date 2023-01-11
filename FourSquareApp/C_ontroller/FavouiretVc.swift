@@ -276,7 +276,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 }
                 
 
-                objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/favFilter", paramsDictionary: dictionaryIs){ status in
+                objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/favFilter", paramsDictionary: dictionaryIs){ [self] status in
                     if status == true{
                         self.noDatFoundView.isHidden = true
                         self.favouiretTableView.isHidden = false
@@ -284,10 +284,14 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                         self.favouiretFilter.setTitle(nil, for: .normal)
                         self.favouiretFilter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
                         self.favouiretTableView.reloadData()
+                        self.searchField.text = ""
                     }else{
                         self.noDatFoundView.isHidden = false
                         self.favouiretTableView.isHidden = true
                         self.filterView.isHidden = true
+                        self.favouiretFilter.setTitle(nil, for: .normal)
+                        self.favouiretFilter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
+                        self.searchField.text = ""
                     }
                     
                 }

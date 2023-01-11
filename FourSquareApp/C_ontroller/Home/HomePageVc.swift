@@ -206,40 +206,33 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         let cell = tableView01.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
         
-        if objectOfHomeViewModel.homeDetails[indexPath.row].placeImage != nil {
-            
-            var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
-
-            imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
-
-            cell.imageIs.image = getImage(urlString: imageIs)
-            cell.addresIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address), \(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
-            cell.distanceIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
-            cell.nameIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].placeName
-            cell.nationalityIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].category
-            cell.ratingIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].rating
-            if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "1"{
-                cell.rateIs.text = "₹"
-            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "2"{
-                cell.rateIs.text = "₹₹"
-            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "3"{
-                cell.rateIs.text = "₹₹₹"
-            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "4"{
-                cell.rateIs.text = "₹₹₹₹"
-            }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "5"{
-                cell.rateIs.text = "₹₹₹₹₹"
-            }
-            cell.setShadow()
-            cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
-            cell.buttonTatus(id: objectOfHomeViewModel.homeDetails[indexPath.row]._id)
-            
-            cell.delegateHomeCell = self
-            
-            return cell
+        var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
+        
+        imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+        
+        cell.imageIs.image = getImage(urlString: imageIs)
+        cell.addresIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].address), \(objectOfHomeViewModel.homeDetails[indexPath.row].city)"
+        cell.distanceIs.text = "\(objectOfHomeViewModel.homeDetails[indexPath.row].distance)km"
+        cell.nameIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].placeName
+        cell.nationalityIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].category
+        cell.ratingIs.text = objectOfHomeViewModel.homeDetails[indexPath.row].rating
+        if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "1"{
+            cell.rateIs.text = "₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "2"{
+            cell.rateIs.text = "₹₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "3"{
+            cell.rateIs.text = "₹₹₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "4"{
+            cell.rateIs.text = "₹₹₹₹"
+        }else if objectOfHomeViewModel.homeDetails[indexPath.row].priceRange == "5"{
+            cell.rateIs.text = "₹₹₹₹₹"
         }
+        cell.setShadow()
+        cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
+        cell.buttonTatus(id: objectOfHomeViewModel.homeDetails[indexPath.row]._id)
         
-        
-        
+        cell.delegateHomeCell = self
+
         return cell
     }
     

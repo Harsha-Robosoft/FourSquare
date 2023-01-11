@@ -109,7 +109,7 @@
                                 <color key="textColor" red="0.39995324609999999" green="0.40002685789999998" blue="0.39994865660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="udupi" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW9-XN-kwA">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="udupi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW9-XN-kwA">
                                 <rect key="frame" x="130" y="105" width="41.5" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="KUy-ea-hmt"/>
@@ -117,6 +117,7 @@
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                 <color key="textColor" red="0.39995324609999999" green="0.40002685789999998" blue="0.39994865660000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -138,6 +139,7 @@
                             <constraint firstAttribute="bottom" secondItem="Hcu-1O-tOT" secondAttribute="bottom" id="gkU-RK-H8V"/>
                             <constraint firstItem="Wx6-FP-ifZ" firstAttribute="leading" secondItem="Hcu-1O-tOT" secondAttribute="trailing" constant="10" id="jki-sl-nGs"/>
                             <constraint firstItem="nnF-I5-TTp" firstAttribute="top" secondItem="dir-KJ-gqY" secondAttribute="bottom" constant="7" id="mvH-Uh-tI8"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lW9-XN-kwA" secondAttribute="trailing" constant="10" id="pUm-iB-xab"/>
                             <constraint firstItem="CVH-91-vwA" firstAttribute="leading" secondItem="Hcu-1O-tOT" secondAttribute="trailing" constant="10" id="s9J-i4-lEN"/>
                             <constraint firstItem="Khd-2z-qWR" firstAttribute="top" secondItem="dir-KJ-gqY" secondAttribute="bottom" constant="13" id="vmt-IR-aSl"/>
                             <constraint firstItem="dir-KJ-gqY" firstAttribute="top" secondItem="Wx6-FP-ifZ" secondAttribute="bottom" constant="25" id="xK2-D0-UeF"/>

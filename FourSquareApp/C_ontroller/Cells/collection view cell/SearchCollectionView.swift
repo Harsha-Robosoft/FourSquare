@@ -6,6 +6,9 @@
 //
 
 import UIKit
+protocol reloadHomeTable2 {
+   func tableReloda()
+}
 
 class SearchCollectionView: UICollectionViewCell {
     
@@ -13,6 +16,8 @@ class SearchCollectionView: UICollectionViewCell {
     var objectOfKeyChain = KeyChain()
     var objectOfAddToFavouiretViewModel = AddToFavouiretViewModel.objectOfAddToFavouiretViewModel
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
+    
+    var collectionDelegate: reloadHomeTable2?
     
     @IBOutlet weak var imageIs: UIImageView!
     @IBOutlet weak var name: UILabel!
@@ -41,26 +46,7 @@ class SearchCollectionView: UICollectionViewCell {
     }
     
     func buttonTatus(id: String) {
-//        for i in objectOfHomeViewModel.userFavouiretListArray{
-//            if i == id{
-//                print("0909",nameIs.text)
-//                likeButton.changes()
-//                onClick = true
-//                statusISS = 1
-////            }else{
-////                print(434343,nameIs.text)
-////                likeButton.noChange()
-////                onClick = false
-////            }
-//        }
-//    }
-////        if(statusISS == 0) {
-////            likeButton.noChange()
-////            onClick = false
-////        }
-        
         if( objectOfHomeViewModel.userFavouiretListArray.contains(_Id) ) {
-//            print("0909",nameIs.text)
             likeButton.changes()
             onClick = true
         }
@@ -86,6 +72,7 @@ class SearchCollectionView: UICollectionViewCell {
                         self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
                             if status == true{
                                 print("fav id list received")
+                                self.collectionDelegate?.tableReloda()
                             }else{
                                 print("fav id list NOT received")
                             }
@@ -103,6 +90,7 @@ class SearchCollectionView: UICollectionViewCell {
                         self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
                             if status == true{
                                 print("fav id list received")
+                                self.collectionDelegate?.tableReloda()
                             }else{
                                 print("fav id list NOT received")
                             }

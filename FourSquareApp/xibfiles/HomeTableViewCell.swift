@@ -18,9 +18,7 @@ class HomeTableViewCell: UITableViewCell {
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     
     var delegateHomeCell: reloadHomeTable?
-    
-    @IBOutlet weak var contentViewIs: HomeTableViewCell!
-    
+        
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var imageIs: UIImageView!
     @IBOutlet weak var nameIs: UILabel!
