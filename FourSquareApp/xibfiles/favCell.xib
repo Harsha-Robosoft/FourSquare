@@ -115,6 +115,7 @@
                                     <constraint firstAttribute="height" constant="24" id="hq6-UL-AVm"/>
                                     <constraint firstAttribute="width" constant="24" id="ysA-iu-wIC"/>
                                 </constraints>
+                                <color key="tintColor" red="0.74488657709999995" green="0.7489360571" blue="0.75713723899999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="multiply" catalog="system"/>
                                 <connections>
                                     <action selector="removeButtonTapped:" destination="2at-hp-tbd" eventType="touchUpInside" id="wkF-4w-TMx"/>

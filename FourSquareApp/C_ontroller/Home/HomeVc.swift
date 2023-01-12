@@ -31,6 +31,8 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var containerView: UIView!
     var menuOut = false
     
+    var indexValue = 0
+    
     var pageView: HomePageController?
     
     var collectionItem = ["Near you","Toppic","Popular","Lunch","Coffee"]
@@ -214,21 +216,9 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     @IBAction func name_LoginButtontapped(_ sender: UIButton) {
-        
-//        let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-//
-//        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-            
+
             self.navigationController?.popToRootViewController(animated: true)
-//            print("Handle Ok logic here")
-//            
-//        }))
-//        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-//            print("Handle Cancel Logic here")
-//        }))
-//        present(refreshAlert, animated: true, completion: nil)
-        
-        
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -338,7 +328,6 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.userProfileImage.image = imageIsIs
             }else{
                 self.alertMessage(message: "Profile photo is not been updated...!!!")
-
             }
         }
     }
@@ -362,6 +351,8 @@ extension HomeVc{
         
         let cell = collectionView.cellForItem(at: indexPath) as! HomeCollectionViewCell
         cell.labelToUpdate.textColor = .white
+        
+        
         pageView?.goToPAge(indexIs: indexPath.row)
         
     }

@@ -511,7 +511,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 
                 self.navigationController?.popToRootViewController(animated: true)
                 print("Handle Ok logic here")
-                
+                 
             }))
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                 print("Handle Cancel Logic here")

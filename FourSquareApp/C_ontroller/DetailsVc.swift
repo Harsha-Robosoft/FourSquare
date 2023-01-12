@@ -210,7 +210,18 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 }
             }
         }else{
-            self.alertMessage(message: "you are not logged in pleace login.")
+            let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                
+                self.navigationController?.popToRootViewController(animated: true)
+                print("Handle Ok logic here")
+                
+            }))
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            present(refreshAlert, animated: true, completion: nil)
         }
     }
     
@@ -340,7 +351,18 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 }
             }
         }else{
-            self.alertMessage(message: "You are not logged in pleace login.")
+            let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                
+                self.navigationController?.popToRootViewController(animated: true)
+                print("Handle Ok logic here")
+                
+            }))
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            present(refreshAlert, animated: true, completion: nil)
         }
 
     } 
