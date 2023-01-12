@@ -66,7 +66,8 @@ class HomeViewModel {
                                     priceRangeIs = String(data07)
                                 }
                                 if let data08 = i["rating"] as? Float{
-                                    
+                                    print("6565",data08)
+
                                     let number = Float(data08)
                                     ratingIs = String(format: "%.1f", number)
                                 }

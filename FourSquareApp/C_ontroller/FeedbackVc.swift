@@ -22,11 +22,11 @@ class FeedbackVc: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
-
-
+    
+    
     @IBAction func backButtonTapped(_ sender: UIButton) {
         homeDelegate3?.homePage3()
         self.navigationController?.popViewController(animated: true)
@@ -58,20 +58,9 @@ class FeedbackVc: UIViewController {
                 alertMessage(message: "Pleace write your precious feed back")
             }
         }else{
-            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-
-                    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-
-                        self.navigationController?.popToRootViewController(animated: true)
-                        print("Handle Ok logic here")
-
-                    }))
-                    refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                          print("Handle Cancel Logic here")
-                    }))
-                    present(refreshAlert, animated: true, completion: nil)
+            self.alertMessage(message: "You are not logged in pleace login.")
         }
- 
+        
     }
 }
 
@@ -79,7 +68,7 @@ extension FeedbackVc{
     
     func getToken() -> String {
         var id = ""
-       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
+        let userIdIs = objectOfUserDefaults.value(forKey: "userId")
         if let idIs = userIdIs as? String{
             id = idIs
         }

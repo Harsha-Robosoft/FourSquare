@@ -8,7 +8,7 @@
 import UIKit
 
 class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     var nameIs = ""
     var placeId = ""
     
@@ -16,7 +16,7 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
     
-
+    
     
     @IBOutlet weak var tableView01: UITableView!
     @IBOutlet weak var nameToshow: UILabel!
@@ -39,7 +39,7 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }else{
-            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+            let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                 self.navigationController?.popToRootViewController(animated: true)
                 print("Handle Ok logic here")
@@ -50,7 +50,7 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
             present(refreshAlert, animated: true, completion: nil)
         }
     }
-
+    
     @IBAction func addReviewButtonTapped(_ sender: UIButton){
         
         let call = getToken()
@@ -62,15 +62,7 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }else{
-            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                self.navigationController?.popToRootViewController(animated: true)
-                print("Handle Ok logic here")
-            }))
-            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                print("Handle Cancel Logic here")
-            }))
-            present(refreshAlert, animated: true, completion: nil)
+            alertMessage(message: "you are not logged in pleace login.")
         }
     }
     @IBAction func backButtonTapped(_ sender: UIButton) {
@@ -103,7 +95,7 @@ extension ReviewVc{
     
     func getToken() -> String {
         var id = ""
-       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
+        let userIdIs = objectOfUserDefaults.value(forKey: "userId")
         if let idIs = userIdIs as? String{
             id = idIs
         }

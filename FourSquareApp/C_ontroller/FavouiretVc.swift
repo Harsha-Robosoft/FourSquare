@@ -11,9 +11,9 @@ protocol showHomePage1 {
 }
 
 class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource, reloadTable{
-
     
-
+    
+    
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
     var objectOfFavouiretViewModel = FavouiretViewModel.objectOfViewModel
@@ -70,7 +70,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var outdoorImage: UIImageView!
     @IBOutlet weak var parkingImage: UIImageView!
     @IBOutlet weak var wifiimage: UIImageView!
-
+    
     @IBOutlet weak var acceptCardLabel: FilterLabel!
     @IBOutlet weak var delivaryLabel: FilterLabel!
     @IBOutlet weak var dogFriendlyLabel: FilterLabel!
@@ -104,37 +104,43 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         favouiretTableView.register(UINib(nibName: "favCell", bundle: nil), forCellReuseIdentifier: "cellFave")
         
         let tokenIs = getToken()
-        var dictionaryIs = [String: Any]()
-        if didload == 1 {
-            var latitudeIs = ""
-            var longitudeIs = ""
-            if let latitude = objectOfHomeViewModel.userLocation.last?.latitude {
-                latitudeIs = latitude
-            }
-            if let longitude = objectOfHomeViewModel.userLocation.last?.longitude{
-                longitudeIs = longitude
-            }
-            dictionaryIs["latitude"] = latitudeIs
-            dictionaryIs["longitude"] = longitudeIs
-            dictionaryIs["text"] = ""
-        }
         
-        
-        
-        objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
-            if status == true{
-                self.noDatFoundView.isHidden = true
-                self.favouiretTableView.isHidden = false
-                self.filterView.isHidden = true
-                self.favouiretTableView.reloadData()
-            }else{
-                self.noDatFoundView.isHidden = false
-                self.favouiretTableView.isHidden = true
-                self.filterView.isHidden = true
+        if tokenIs != ""{
+            var dictionaryIs = [String: Any]()
+            if didload == 1 {
+                var latitudeIs = ""
+                var longitudeIs = ""
+                if let latitude = objectOfHomeViewModel.userLocation.last?.latitude {
+                    latitudeIs = latitude
+                }
+                if let longitude = objectOfHomeViewModel.userLocation.last?.longitude{
+                    longitudeIs = longitude
+                }
+                dictionaryIs["latitude"] = latitudeIs
+                dictionaryIs["longitude"] = longitudeIs
+                dictionaryIs["text"] = ""
             }
             
-        }
+            
+            
+            objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+                if status == true{
+                    self.noDatFoundView.isHidden = true
+                    self.favouiretTableView.isHidden = false
+                    self.filterView.isHidden = true
+                    self.favouiretTableView.reloadData()
+                }else{
+                    self.noDatFoundView.isHidden = false
+                    self.favouiretTableView.isHidden = true
+                    self.filterView.isHidden = true
+                }
                 
+            }
+        }else{
+            self.alertMessage(message: "You are not logged in pleace login.")
+        }
+        
+        
     }
     
     func reloadTheTable() {
@@ -216,7 +222,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 
             }
         }
-  
+        
     }
     
     
@@ -251,7 +257,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 if setRadiousField.text != ""{
                     dictionaryIs["radius"] = setRadiousField.text
                 }
-
+                
                 if poplular_Distance_RatingButton != ""{
                     dictionaryIs["sortBy"] = poplular_Distance_RatingButton
                 }
@@ -284,7 +290,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     dictionaryIs["wifi"] = true
                 }
                 
-
+                
                 objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/favFilter", paramsDictionary: dictionaryIs){ [self] status in
                     if status == true{
                         self.noDatFoundView.isHidden = true
@@ -304,22 +310,11 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     }
                     
                 }
-
+                
             }
             
         }else{
-            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-            
-            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                
-                self.navigationController?.popToRootViewController(animated: true)
-                print("Handle Ok logic here")
-                
-            }))
-            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                print("Handle Cancel Logic here")
-            }))
-            present(refreshAlert, animated: true, completion: nil)
+            self.alertMessage(message: "You are not logged in pleace login.")
             
         }
         
@@ -584,7 +579,7 @@ extension FavouiretVc{
     
     func getToken() -> String {
         var id = ""
-       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
+        let userIdIs = objectOfUserDefaults.value(forKey: "userId")
         if let idIs = userIdIs as? String{
             id = idIs
         }

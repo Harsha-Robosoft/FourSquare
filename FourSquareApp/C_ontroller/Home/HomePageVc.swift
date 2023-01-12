@@ -35,6 +35,11 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        print("count1 : \(objectOfHomeViewModel.homeDetails.last?.placeName.count)")
+//        print("count2 : \(objectOfHomeViewModel.homeDetails.last?.rating.count)")
+        
+        
         tableView01.delegate = self
         tableView01.dataSource = self
         tableView01.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
@@ -230,6 +235,8 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         cell.setShadow()
         cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
         cell.buttonTatus(id: objectOfHomeViewModel.homeDetails[indexPath.row]._id)
+        
+        
         
         cell.delegateHomeCell = self
 

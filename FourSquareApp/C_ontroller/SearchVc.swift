@@ -197,9 +197,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         
                         filter.setTitle(nil, for: .normal)
                         filter.setImage( #imageLiteral(resourceName: "filter_icon"), for: .normal)
-                        
-                        print("count \(objectOfSearchViewModel.nearCityData.count)")
-                        
+                                                
                         if objectOfSearchViewModel.nearCityData.count == 0{
                             objectOfSearchViewModel.getNearCityDetailsApiCall(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
                                 
@@ -336,7 +334,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             }else{}
         }else{
             
-            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+            let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                 
@@ -380,7 +378,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             }else{}
         }else{
             
-            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+            let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                 
@@ -429,7 +427,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 
                 dictionaryIs["text"] = search.text
                 
-                if setRadiousField.text != ""{
+                if setRadiousField.text != "" && Int(setRadiousField.text ?? "") != nil{
                     dictionaryIs["radius"] = setRadiousField.text
                 }
                 
@@ -440,9 +438,6 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 if rateStatus != 0{
                     dictionaryIs["price"] = rateStatus
                 }
-                
-                
-                
                 if acceptCard == false{
                     dictionaryIs["acceptedCredit"] = true
                 }
@@ -469,13 +464,14 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 }
                 
                 
+                
                 objectOfSearchViewModel.searchWithFilterApiCall(tokenToSend: tokenIs, parameterDictionary: dictionaryIs){ status in
-                    
+
                     if status == true{
                         self.searching = 0
                         self.nearYou = 0
                         self.filterSearchIs = 1
-                        
+
                         self.nearMeView.isHidden = true
                         self.tableViewAndViewMap.isHidden = false
                         self.mapAndCollectionView.isHidden = true
@@ -487,9 +483,9 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         self.search.text = ""
                         self.mapButton_TableView.reloadData()
                         //                        self.map_CollectionView.reloadData()
-                        
+
                     }else{
-                        
+
                         self.nearMeView.isHidden = true
                         self.tableViewAndViewMap.isHidden = true
                         self.mapAndCollectionView.isHidden = true
@@ -499,9 +495,9 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         self.filter.setTitle(nil, for: .normal)
                         self.filter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
                         self.search.text = ""
-                        
+
                     }
-                    
+
                 }
                 
                 print("result : \(dictionaryIs)")
@@ -509,7 +505,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             }
             
         }else{
-            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+            let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
             
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                 
@@ -776,6 +772,19 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 }
             }
             
+        }else{
+            let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
+            
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                
+                self.navigationController?.popToRootViewController(animated: true)
+                print("Handle Ok logic here")
+                
+            }))
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
+                print("Handle Cancel Logic here")
+            }))
+            present(refreshAlert, animated: true, completion: nil)
         }
         
     }

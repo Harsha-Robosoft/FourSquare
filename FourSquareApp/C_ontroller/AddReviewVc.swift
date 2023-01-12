@@ -180,50 +180,76 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         let call = getToken()
         
-        if reviewField.text != ""{
+        if call != ""{
+            if reviewField.text != ""{
 
-            var reviewToSend = ""
+                var reviewToSend = ""
 
-            if let review00 = reviewField.text{
-                reviewToSend = review00
-            }
+                if let review00 = reviewField.text{
+                    reviewToSend = review00
+                }
 
-            objectOfReviewViewModel.textReviewSubmitApiCall(tokenIs: call, restaturantId: placeIsIs, reviewIs: reviewToSend){ status in
-                if status == true{
-                    self.submitButton.isEnabled = false
-                    self.submitButton.alpha = 0.5
-                }else{
-                    self.alertMessage(message: "Error while submitting the review try later ...!")
+                objectOfReviewViewModel.textReviewSubmitApiCall(tokenIs: call, restaturantId: placeIsIs, reviewIs: reviewToSend){ status in
+                    if status == true{
+                        self.submitButton.isEnabled = false
+                        self.submitButton.alpha = 0.5
+                        self.reviewFieldHeight.constant = 200
+                        self.writereviewHeight.constant = 33
+                        self.submitButton.isEnabled = false
+                        self.submitButton.alpha = 0.5
+                        self.view_2.isHidden = true
+                        self.view_3.isHidden = true
+                        self.view_4.isHidden = true
+                        self.view_5.isHidden = true
+                    }else{
+                        self.alertMessage(message: "Error while submitting the review try later ...!")
+                    }
+
                 }
 
             }
-
-        }
-        
-        if addonlyPhoto == 0{
-            if buttonw1 == 0{
-                objectOfReviewViewModel.photoReviewSubmitApiCall(rokenIs: call, placeIdIs: placeIsIs, images: photoArray){ status in
-                    if status == true{
-                        print(000000000000)
-                        print("data received")
-                    }else{
-                        print("data not received")
+            
+            if addonlyPhoto == 0{
+                if buttonw1 == 0{
+                    objectOfReviewViewModel.photoReviewSubmitApiCall(rokenIs: call, placeIdIs: placeIsIs, images: photoArray){ status in
+                        if status == true{
+                            print(000000000000)
+                            self.reviewFieldHeight.constant = 200
+                            self.writereviewHeight.constant = 33
+                            self.submitButton.isEnabled = false
+                            self.submitButton.alpha = 0.5
+                            self.view_2.isHidden = true
+                            self.view_3.isHidden = true
+                            self.view_4.isHidden = true
+                            self.view_5.isHidden = true
+                            print("data received")
+                        }else{
+                            print("data not received")
+                        }
+                    }
+                }
+            }else{
+                if buttonw1 == 0{
+                    
+                    objectOfReviewViewModel.photoReviewSubmitApiCall(rokenIs: call, placeIdIs: placeIsIs, images: photoArray){ status in
+                        if status == true{
+                            print(11111111111)
+                            self.view_2.isHidden = true
+                            self.view_3.isHidden = true
+                            self.view_4.isHidden = true
+                            self.view_5.isHidden = true
+                            print("data received")
+                        }else{
+                            print("data not received")
+                        }
                     }
                 }
             }
         }else{
-            if buttonw1 == 0{
-                
-                objectOfReviewViewModel.photoReviewSubmitApiCall(rokenIs: call, placeIdIs: placeIsIs, images: photoArray){ status in
-                    if status == true{
-                        print(11111111111)
-                        print("data received")
-                    }else{
-                        print("data not received")
-                    }
-                }
-            }
+            alertMessage(message: "You are not logged in pleace login.")
         }
+        
+        
         
     }
     

@@ -10,7 +10,7 @@ import MapKit
 import CoreLocation
 
 class DetailsVc: UIViewController, CLLocationManagerDelegate {
-
+    
     var objectOfAddToFavouiretViewModel = AddToFavouiretViewModel.objectOfAddToFavouiretViewModel
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     var objectOfPlaceDetailsViewModel = PlaceDetailsViewModel.objectOfviewModel
@@ -117,7 +117,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 
                 numberIs.insert(" ", at: numberIs.index(numberIs.startIndex, offsetBy: 5))
                 
-                    
+                
                 if self.objectOfHomeViewModel.userFavouiretListArray.contains(placeIdIs){
                     self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_selected"), for: .normal)
                 }else{
@@ -167,7 +167,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 self.overViewToShow.text = overView
                 self.numberToShow.text = "+91 \(numberIs)"
                 self.adressToshow.text = "\(address),\(cityname)."
-//                self.ratingLabel.text = String(ratingIs)
+                //                self.ratingLabel.text = String(ratingIs)
                 
                 
             }else{
@@ -175,7 +175,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
             }
             
         }
-
+        
     }
     
     
@@ -200,28 +200,17 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
         print("given rating : \(givenRating)")
         print("place if : \(placeId)")
         let call = getToken()
-
+        
         if call != ""{
             objectOfPlaceDetailsViewModel.addRatingApiCall(tokenTosend: call, placeId: placeId, ratingIs: givenRating){status in
                 if status == true{
                     self.ratingBackView.isHidden = true
                 }else{
-
+                    
                 }
             }
         }else{
-            let refreshAlert = UIAlertController(title: "ALERT", message: "Are you not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-            
-            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                
-                self.navigationController?.popToRootViewController(animated: true)
-                print("Handle Ok logic here")
-                
-            }))
-            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                print("Handle Cancel Logic here")
-            }))
-            present(refreshAlert, animated: true, completion: nil)
+            self.alertMessage(message: "you are not logged in pleace login.")
         }
     }
     
@@ -281,7 +270,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
         
     }
     
-
+    
     @IBAction func ratingButtonTapped(_ sender: UIButton) {
         ratingBackView.isHidden = false
         
@@ -312,9 +301,9 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
         
     }
     @IBAction func likeButtonTapped(_ sender: UIButton) {
-                
+        
         let call = getToken()
-         
+        
         if call != ""{
             if sender.currentImage == #imageLiteral(resourceName: "rating_icon_selected"){
                 objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: placeId){ status in
@@ -351,26 +340,17 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                 }
             }
         }else{
-            
+            self.alertMessage(message: "You are not logged in pleace login.")
         }
-        
-                
-        
 
-//
-//        <UIImage:0x60000321a130 named(main: rating_icon_selected) {29.666666666666668, 29.666666666666668}>
-    }
-    
-    
-    
-    
+    } 
 }
 
 
 extension DetailsVc{
     func getToken() -> String {
         var id = ""
-       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
+        let userIdIs = objectOfUserDefaults.value(forKey: "userId")
         if let idIs = userIdIs as? String{
             id = idIs
         }
