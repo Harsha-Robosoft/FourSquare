@@ -1186,7 +1186,7 @@ extension SearchVc{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching == 1{
             return objectOfSearchViewModel.searchDetaisl.count
-        } else if filterTapped == 1{
+        } else if filterSearchIs == 1{
             return objectOfSearchViewModel.filterSearchDetails.count
         }
         return objectOfHomeViewModel.homeDetails.count
@@ -1220,7 +1220,7 @@ extension SearchVc{
                 cell.rate.text = "₹₹₹₹₹"
             }
             
-//            annotation.append(["title":objectOfSearchViewModel.searchDetaisl[indexPath.row].placeName,"latitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].latitude,"longitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].longitude])
+            annotation.append(["title":objectOfSearchViewModel.searchDetaisl[indexPath.row].placeName,"latitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].latitude,"longitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].longitude])
             
             setAnnotation(locations: annotation)
             
@@ -1256,7 +1256,7 @@ extension SearchVc{
                 cell.rate.text = "₹₹₹₹₹"
             }
             
-//            annotation.append(["title":objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeName,"latitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude,"longitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude])
+            annotation.append(["title":objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeName,"latitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude,"longitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude])
             
             setAnnotation(locations: annotation)
             
@@ -1289,7 +1289,7 @@ extension SearchVc{
             cell.rate.text = "₹₹₹₹₹"
         }
         
-//        annotation.append(["title":objectOfHomeViewModel.homeDetails[indexPath.row].placeName,"latitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude,"longitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude])
+        annotation.append(["title":objectOfHomeViewModel.homeDetails[indexPath.row].placeName,"latitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude,"longitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude])
         
         setAnnotation(locations: annotation)
         

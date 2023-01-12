@@ -95,23 +95,20 @@ class VarifyOtpVc: UIViewController {
             }
             
             print("otp : \(otpToSend)")
+            let createPasswordVc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordVc") as? ResetPasswordVc
             
             let loader =   self.loader()
             objectOfOtpvarificationViewModel.varifyOtpApicall(otpIs: otpToSend){ status in
-                DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                 if status == true{
-                    
-                    
                     DispatchQueue.main.async {
-                        let createPasswordVc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordVc") as? ResetPasswordVc
                         if let vc = createPasswordVc{
                             
                             vc.mailIdToSend = self.emailId
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
                     }
-  
+ 
                 }else{
                     
                     DispatchQueue.main.async {
@@ -119,7 +116,6 @@ class VarifyOtpVc: UIViewController {
 
                     }
                 }
-            }
                 
             }
             

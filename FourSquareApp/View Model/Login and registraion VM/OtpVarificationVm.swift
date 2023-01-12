@@ -36,17 +36,17 @@ class OtpvarificationViewModel {
         objectOfOtpVarificationNetwork.verifyOtp(otp: otpIs){ varifyStatus, varifyError in
             DispatchQueue.main.async {
                 if varifyError == nil{
-                    
+
                     if varifyStatus == true{
-                        
+
                         completion(true)
                     }else{
                         completion(false)
                     }
-                    
+
                 }else{
                     completion(false)
-                    
+
                 }
             }
 

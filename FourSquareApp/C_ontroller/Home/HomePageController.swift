@@ -21,11 +21,23 @@ class HomePageController: UIPageViewController, UIPageViewControllerDataSource, 
         }
     }
     
-    func goToPAge(indexIs: Int) {
-        previousIndex = indexIs
-        if let nextVc = contentView(at: indexIs) {
-            self.setViewControllers([nextVc], direction: .forward, animated: true, completion: nil)
+    func goToPAge(indexIs: Int, direction: String) {
+        
+        if direction == "push"{
+            
+            previousIndex = indexIs
+            if let nextVc = contentView(at: indexIs) {
+                self.setViewControllers([nextVc], direction: .forward, animated: true, completion: nil)
+            }
+        }else{
+            previousIndex = indexIs
+            if let nextVc = contentView(at: indexIs) {
+                self.setViewControllers([nextVc], direction: .reverse, animated: true, completion: nil)
+            }
+
         }
+        
+        
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {

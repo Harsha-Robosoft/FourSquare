@@ -58,7 +58,7 @@ class FavouiretViewModel {
                                     if let data07 = i["placePriceRange"] as? Int{
                                         priceRangeIs = String(data07)
                                     }
-                                    if let data08 = i["rating"] as? Float{
+                                    if let data08 = i["rating"] as? Double{
                                         let number = Float(data08)
                                         ratingIs = String(format: "%.1f", number)
                                     }

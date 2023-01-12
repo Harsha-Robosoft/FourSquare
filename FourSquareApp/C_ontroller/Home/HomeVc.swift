@@ -352,8 +352,16 @@ extension HomeVc{
         let cell = collectionView.cellForItem(at: indexPath) as! HomeCollectionViewCell
         cell.labelToUpdate.textColor = .white
         
+        if indexPath.row > indexValue{
+            indexValue = indexPath.row
+            pageView?.goToPAge(indexIs: indexPath.row, direction: "push")
+        }else if indexPath.row < indexValue{
+            
+            indexValue = indexPath.row
+            pageView?.goToPAge(indexIs: indexPath.row, direction: "pop")
+        }
         
-        pageView?.goToPAge(indexIs: indexPath.row)
+       
         
     }
 }

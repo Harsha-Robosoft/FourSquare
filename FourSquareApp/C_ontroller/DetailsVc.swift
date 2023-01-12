@@ -61,6 +61,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         
         ratingBackView.isHidden = true
+        ratingView.isHidden = true
         objectOfPlaceDetailsViewModel.perticularPlaceDetailsApiCall(placeId: placeId){ status in
             if status == true{
                 var latTOsend = 0.0
@@ -192,6 +193,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
     }
     @IBAction func ratingScreenCancelButton(_ sender: UIButton) {
         ratingBackView.isHidden = true
+        ratingView.isHidden = true
     }
     
     
@@ -205,6 +207,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
             objectOfPlaceDetailsViewModel.addRatingApiCall(tokenTosend: call, placeId: placeId, ratingIs: givenRating){status in
                 if status == true{
                     self.ratingBackView.isHidden = true
+                    self.ratingView.isHidden = true
                 }else{
                     
                 }
@@ -284,6 +287,13 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func ratingButtonTapped(_ sender: UIButton) {
         ratingBackView.isHidden = false
+        ratingView.isHidden = false
+        
+        let blur = UIBlurEffect(style: .regular)
+        let effectView = UIVisualEffectView(effect: blur)
+        effectView.frame = ratingBackView.bounds
+        effectView.alpha = 1
+        ratingBackView.addSubview( effectView)
         
         let number = ratingISIS
         let roundedNumber = String(format: "%.1f", number)

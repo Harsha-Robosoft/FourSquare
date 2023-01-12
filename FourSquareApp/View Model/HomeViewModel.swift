@@ -65,10 +65,10 @@ class HomeViewModel {
                                 if let data07 = i["priceRange"] as? Int{
                                     priceRangeIs = String(data07)
                                 }
-                                if let data08 = i["rating"] as? Float{
+                                if let data08 = i["rating"] as? Double{
                                     print("6565",data08)
 
-                                    let number = Float(data08)
+                                    let number = Double(data08)
                                     ratingIs = String(format: "%.1f", number)
                                 }
                                 if let data09 = i["distance"] as? [String: Any]{
