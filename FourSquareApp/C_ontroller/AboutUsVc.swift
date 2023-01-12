@@ -42,12 +42,14 @@ class AboutUsVc: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func homeButtonTapped(_ sender: UIButton) {
-        for controller in self.navigationController!.viewControllers as Array {
-            if controller.isKind(of: HomeVc.self) {
-                self.navigationController!.popToViewController(controller, animated: true)
-                break
-            }
-        }
+        homeDelegate2?.homePage2()
+        self.navigationController?.popViewController(animated: true)
+//        for controller in self.navigationController!.viewControllers as Array {
+//            if controller.isKind(of: HomeVc.self) {
+//                self.navigationController!.popToViewController(controller, animated: true)
+//                break
+//            }
+//        }
     }
     
 }

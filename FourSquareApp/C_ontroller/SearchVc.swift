@@ -233,7 +233,6 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         nearYou = 0
                         filterSearchIs = 0
                         searching = 0
-                        print("naana neena naana neena naana neena naana neena naana neena naana neena naana neena ")
                         searching = 0
                         filter.setTitle(nil, for: .normal)
                         filter.setImage( #imageLiteral(resourceName: "filter_icon"), for: .normal)
@@ -271,7 +270,6 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                     nearYou = 0
                     filterSearchIs = 0
                     searching = 0
-                    print("naana neena naana neena naana neena naana neena naana neena naana neena naana neena ")
                     filter.setTitle(nil, for: .normal)
                     filter.setImage( #imageLiteral(resourceName: "filter_icon"), for: .normal)
                     nearMeView.isHidden = false
@@ -368,6 +366,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                             self.nearYouAndSuggestion.isHidden = true
                             self.filterScreen.isHidden = true
                             self.whiteView.isHidden = true
+                            self.mapButton_TableView.reloadData()
                         }else{
                             self.nearMeView.isHidden = true
                             self.tableViewAndViewMap.isHidden = true
@@ -439,8 +438,11 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 }
                 
                 if rateStatus != 0{
-                    dictionaryIs["pricr"] = rateStatus
+                    dictionaryIs["price"] = rateStatus
                 }
+                
+                
+                
                 if acceptCard == false{
                     dictionaryIs["acceptedCredit"] = true
                 }
@@ -1209,7 +1211,7 @@ extension SearchVc{
                 cell.rate.text = "₹₹₹₹₹"
             }
             
-            annotation.append(["title":objectOfSearchViewModel.searchDetaisl[indexPath.row].placeName,"latitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].latitude,"longitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].longitude])
+//            annotation.append(["title":objectOfSearchViewModel.searchDetaisl[indexPath.row].placeName,"latitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].latitude,"longitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].longitude])
             
             setAnnotation(locations: annotation)
             
@@ -1245,7 +1247,7 @@ extension SearchVc{
                 cell.rate.text = "₹₹₹₹₹"
             }
             
-            annotation.append(["title":objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeName,"latitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude,"longitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude])
+//            annotation.append(["title":objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeName,"latitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude,"longitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude])
             
             setAnnotation(locations: annotation)
             
@@ -1278,7 +1280,7 @@ extension SearchVc{
             cell.rate.text = "₹₹₹₹₹"
         }
         
-        annotation.append(["title":objectOfHomeViewModel.homeDetails[indexPath.row].placeName,"latitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude,"longitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude])
+//        annotation.append(["title":objectOfHomeViewModel.homeDetails[indexPath.row].placeName,"latitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude,"longitude": objectOfHomeViewModel.homeDetails[indexPath.row].longitude])
         
         setAnnotation(locations: annotation)
         

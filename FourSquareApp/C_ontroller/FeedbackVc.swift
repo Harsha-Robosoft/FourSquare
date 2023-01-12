@@ -26,18 +26,18 @@ class FeedbackVc: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    @IBAction func homeButtonTapped(_ sender: UIButton) {
-        for controller in self.navigationController!.viewControllers as Array {
-            if controller.isKind(of: HomeVc.self) {
-                self.navigationController!.popToViewController(controller, animated: true)
-                break
-            }
-        }
-    }
+
     @IBAction func backButtonTapped(_ sender: UIButton) {
         homeDelegate3?.homePage3()
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func homeButtonTapped(_ sender: Any) {
+        homeDelegate3?.homePage3()
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     @IBAction func feedbackSubmitButton(_ sender: UIButton) {
         let call = getToken()
         if call != ""{
