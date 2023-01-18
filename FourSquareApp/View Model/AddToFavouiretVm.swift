@@ -6,12 +6,12 @@
 //
 
 import Foundation
-class AddToFavouiretViewModel {
-    static var objectOfAddToFavouiretViewModel = AddToFavouiretViewModel()
-    var objectOfAddFavouiretNetworkManager = AddFavouiretNetworkManager()
+class AddToFavoriteViewModel {
+    static var objectOfAddToFavoriteViewModel = AddToFavoriteViewModel()
+    var objectOfAddFavoriteNetworkManager = AddFavoriteNetworkManager()
     
     func addPlaceToFavouiretList(tokenTosend: String, placeIdIs: String, completion: @escaping((Bool) -> ())) {
-        objectOfAddFavouiretNetworkManager.addFavouiretPlace(token: tokenTosend, placeid: placeIdIs){favStatus, favError in
+        objectOfAddFavoriteNetworkManager.addFavouiretPlace(token: tokenTosend, placeid: placeIdIs){favStatus, favError in
             DispatchQueue.main.async {
                 if favError == nil{
                     if favStatus == true{

@@ -10,13 +10,13 @@ protocol showHomePage1 {
     func homePage1()
 }
 
-class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource, reloadTable{
+class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource, reloadTable{
     
     
     
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
-    var objectOfFavouiretViewModel = FavouiretViewModel.objectOfViewModel
+    var objectOfFavouiretViewModel = FavoriteViewModel.objectOfViewModel
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     
     
@@ -561,7 +561,7 @@ class FavouiretVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
 }
 
-extension FavouiretVc{
+extension FavoritetVc{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objectOfFavouiretViewModel.favSearchDetails.count
     }
@@ -597,7 +597,7 @@ extension FavouiretVc{
     }
 }
 
-extension FavouiretVc{
+extension FavoritetVc{
     
     func getToken() -> String {
         var id = ""

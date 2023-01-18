@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class PlaceDetailsModel {
+class PlaceDetails {
     var latitude: Double
     var longitude: Double
     var placeId: String

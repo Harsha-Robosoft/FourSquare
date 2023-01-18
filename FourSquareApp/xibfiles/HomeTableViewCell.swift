@@ -14,7 +14,7 @@ class HomeTableViewCell: UITableViewCell {
     
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
-    var objectOfAddToFavouiretViewModel = AddToFavouiretViewModel.objectOfAddToFavouiretViewModel
+    var objectOfAddToFavouiretViewModel = AddToFavoriteViewModel.objectOfAddToFavoriteViewModel
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     
     var delegateHomeCell: reloadHomeTable?
@@ -43,25 +43,7 @@ class HomeTableViewCell: UITableViewCell {
         backView.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
    
-    func buttonTatus(id: String) {
-//        for i in objectOfHomeViewModel.userFavouiretListArray{
-//            if i == id{
-//                print("0909",nameIs.text)
-//                likeButton.changes()
-//                onClick = true
-//                statusISS = 1
-////            }else{
-////                print(434343,nameIs.text)
-////                likeButton.noChange()
-////                onClick = false
-////            }
-//        }
-//    }
-////        if(statusISS == 0) {
-////            likeButton.noChange()
-////            onClick = false
-////        }
-        
+    func buttonStatus(id: String) {
         if( objectOfHomeViewModel.userFavouiretListArray.contains(_Id) ) {
             likeButton.changes()
             onClick = true

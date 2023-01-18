@@ -14,7 +14,7 @@ class SearchCollectionView: UICollectionViewCell {
     
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
-    var objectOfAddToFavouiretViewModel = AddToFavouiretViewModel.objectOfAddToFavouiretViewModel
+    var objectOfAddToFavouiretViewModel = AddToFavoriteViewModel.objectOfAddToFavoriteViewModel
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     
     var collectionDelegate: reloadHomeTable2?

@@ -10,7 +10,7 @@ class PhotoViewModel {
     static var objectOfViewModel = PhotoViewModel()
     var objectOfPhotoNetworkModel = PhotoNetworkModel()
     
-    var AllPhotosDetails = [AllPhotosModel]()
+    var AllPhotosDetails = [PhotosDetails]()
     
     func getAllPhotosApicall(tokenIs: String, placeIdis: String, completion: @escaping((Bool) -> ())) {
         objectOfPhotoNetworkModel.getAllPhotos(token: tokenIs, placeId: placeIdis){ photodata, photoStatus, photoError in
@@ -57,7 +57,7 @@ class PhotoViewModel {
                                             
                                         }
                                         
-                                        let photosIs = AllPhotosModel(reviewerId: reviewerIdIs, reviewBy: reviewByIs, reviewerImage: reviewerImageIs, reviewDate: reviewDateIs, _id: _idIs, imageIs: imageISIS)
+                                        let photosIs = PhotosDetails(reviewerId: reviewerIdIs, reviewBy: reviewByIs, reviewerImage: reviewerImageIs, reviewDate: reviewDateIs, _id: _idIs, imageIs: imageISIS)
                                         
                                         self.AllPhotosDetails.append(photosIs)
                                     }

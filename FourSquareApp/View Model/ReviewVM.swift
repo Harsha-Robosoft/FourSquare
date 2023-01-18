@@ -12,7 +12,7 @@ class ReviewViewModel {
     static var objectOfViewModel = ReviewViewModel()
     var objectOfReviewNetworkManager = ReviewNetworkManager()
     
-    var allReviewdata = [AllReviewModel]()
+    var allReviewdata = [ReviewDetails]()
     
     func getAllReviewDataApiCall(tokenIs: String, placeIdis: String, completion: @escaping((Bool) -> ())) {
         objectOfReviewNetworkManager.Allreviews(token: tokenIs, placeId: placeIdis){reviewData, reviewStatus, reviewError in
@@ -55,7 +55,7 @@ class ReviewViewModel {
                                             _idIs = data06
                                         }
                                         
-                                        let review0101 = AllReviewModel(reviewerId: reviewerIdIs, reviewBy: reviewByIs, review: reviewIs, reviewerImage: reviewerImageIs, reviewDate: reviewDateIs, _id: _idIs)
+                                        let review0101 = ReviewDetails(reviewerId: reviewerIdIs, reviewBy: reviewByIs, review: reviewIs, reviewerImage: reviewerImageIs, reviewDate: reviewDateIs, _id: _idIs)
                                         
                                         self.allReviewdata.append(review0101)
                                     }

@@ -11,7 +11,7 @@ import CoreLocation
 
 class DetailsVc: UIViewController, CLLocationManagerDelegate {
     
-    var objectOfAddToFavouiretViewModel = AddToFavouiretViewModel.objectOfAddToFavouiretViewModel
+    var objectOfAddToFavouiretViewModel = AddToFavoriteViewModel.objectOfAddToFavoriteViewModel
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     var objectOfPlaceDetailsViewModel = PlaceDetailsViewModel.objectOfviewModel
     var objectOfUserDefaults = UserDefaults()

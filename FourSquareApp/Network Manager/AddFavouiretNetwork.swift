@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class AddFavouiretNetworkManager {
+class AddFavoriteNetworkManager {
     
     func addFavouiretPlace(token: String, placeid: String, completion: @escaping((Bool,Error?) -> ())) {
         guard let url = URL(string:"https://four-square-three.vercel.app/api/addFavourite") else{ return }

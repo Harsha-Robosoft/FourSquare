@@ -11,7 +11,7 @@ class PlaceDetailsViewModel {
     static var objectOfviewModel = PlaceDetailsViewModel()
     var objectOfPlaceDetailsNetworkManager = PlaceDetailsNetworkManager()
     
-    var perticularPlaceDetails = [PlaceDetailsModel]()
+    var perticularPlaceDetails = [PlaceDetails]()
     
     func perticularPlaceDetailsApiCall(placeId: String, completion: @escaping((Bool) -> ())) {
         objectOfPlaceDetailsNetworkManager.particularPlaceDetails(placeIs: placeId){ placeData, placeStatus, placeError in
@@ -72,7 +72,7 @@ class PlaceDetailsViewModel {
                                         longIs = data001[0]
                                     }
                                 }
-                                let place = PlaceDetailsModel(latitude: latIs, longitude: longIs, placeId: placeIdIsIS, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, overview: overview, rating: rating, priceRange: priceRangeIs, phoneNumber: phoneNum)
+                                let place = PlaceDetails(latitude: latIs, longitude: longIs, placeId: placeIdIsIS, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, overview: overview, rating: rating, priceRange: priceRangeIs, phoneNumber: phoneNum)
                                 self.perticularPlaceDetails.append(place)
                                 completion(true)
                             }

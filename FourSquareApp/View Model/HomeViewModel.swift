@@ -13,14 +13,14 @@ class HomeViewModel {
     
     var userFavouiretListArray = [String]()
     
-    
+    var commonVm = CommonVm()
     static var objectOfViewModel = HomeViewModel()
     var objectOfHomeNetwork = HomeNetwork()
     
-    var homeDetails = [HomeDataModel]()
-    var userDetails = [UserDetailsModel]()
-    var userLocation = [UserLocationModel]()
-    var favouiretIdData = [FavouiretIdModel]()
+    var homeDetails = [HomeData]()
+    var userDetails = [UserDetails]()
+    var userLocation = [UserLocation]()
+    var favouiretIdData = [FavoriteDetails]()
     
     func apiCallForData(endPoint: String,latToSend: String, longToSend: String, completion: @escaping((Bool) -> ())) {
         objectOfHomeNetwork.callHomeApi(endPoint: endPoint, lat: latToSend, long: longToSend){ dataIs, statusIs, errorIs in
@@ -30,70 +30,7 @@ class HomeViewModel {
                 if errorIs == nil{
                     if statusIs == true{
                         if let data1 = dataIs{
-                            var imageUrl = ""
-                            var placeId = ""
-                            var placeName = ""
-                            var ratingIs = ""
-                            var priceRangeIs = ""
-                            var category = ""
-                            var distanceIs = ""
-                            var address = ""
-                            var cityName = ""
-                            
-                            var lati = 0.0
-                            var longi = 0.0
-                            
-                            for i in data1{
-                                if let data01 = i["_id"] as? String{
-                                    placeId = data01
-                                }
-                                if let data02 = i["placeName"] as? String{
-                                    placeName = data02
-                                }
-                                if let data03 = i["placeImage"] as? String{
-                                    imageUrl = data03
-                                }
-                                if let data04 = i["address"] as? String{
-                                    address = data04
-                                }
-                                if let data05 = i["city"] as? String{
-                                    cityName = data05
-                                }
-                                if let data06 = i["category"] as? String{
-                                    category = data06
-                                }
-                                if let data07 = i["priceRange"] as? Int{
-                                    priceRangeIs = String(data07)
-                                }
-                                if let data08 = i["rating"] as? Double{
-                                    print("6565",data08)
-
-                                    let number = Double(data08)
-                                    ratingIs = String(format: "%.1f", number)
-                                }
-                                if let data09 = i["distance"] as? [String: Any]{
-                                    if let data10 = data09["calculated"] as? Double{
-//                                        distanceIs = String(Float(Float(data10) / 1609))
-                                        let number = Float(Float(data10) / 1609)
-                                        distanceIs = String(format: "%.1f", number)
-                                        
-//                                        let roundedNumber = String(format: "%.1f", number)
-
-                                    }
-                                }
-                                
-                                if let data10 = i["location"] as? [String: Any]{
-                                    if let data11 = data10["coordinates"] as? [Double]{
-                                        print("longi : \(data11[0])")
-                                        print("lati : \(data11[1])")
-                                        lati = data11[1]
-                                        longi = data11[0]
-                                    }
-                                }
-                                
-                                let details = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs, latitude: lati , longitude:longi)
-                                self.homeDetails.append(details)
-                            }
+                            self.homeDetails = self.commonVm.commonParsing(parsingdata: data1)
                         }
                         completion(true)
                     }else{
@@ -109,7 +46,7 @@ class HomeViewModel {
     
     func updateUserLocation(lat: String, long: String) {
         userLocation.removeAll()
-        let location = UserLocationModel(latitude: lat, longitude: long)
+        let location = UserLocation(latitude: lat, longitude: long)
         userLocation.append(location)
     }
     
@@ -149,7 +86,7 @@ class HomeViewModel {
                             if let data03 = data0["_id"] as? String{
                                 userId = data03
                             }
-                            let user = UserDetailsModel(userName: userName, userProfileImage: userProfile, userId: userId)
+                            let user = UserDetails(userName: userName, userProfileImage: userProfile, userId: userId)
                             self.userDetails.append(user)
                         }
                         completion(true)
@@ -200,7 +137,7 @@ class HomeViewModel {
                                     if let data002 = i["_id"] as? String{
                                         _IdIs = data002
                                     }
-                                    let favId = FavouiretIdModel(placeIs: placeIdIs, _Id: _IdIs)
+                                    let favId = FavoriteDetails(placeIs: placeIdIs, _Id: _IdIs)
                                     self.favouiretIdData.append(favId)
                                 }
                             }

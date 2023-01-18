@@ -14,7 +14,7 @@ protocol reloadTable {
 class FavTableCell: UITableViewCell {
 
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
-    var objectOfAddToFavouiretViewModel = AddToFavouiretViewModel.objectOfAddToFavouiretViewModel
+    var objectOfAddToFavouiretViewModel = AddToFavoriteViewModel.objectOfAddToFavoriteViewModel
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
     
@@ -43,16 +43,12 @@ class FavTableCell: UITableViewCell {
     }
     
     @IBAction func removeButtonTapped(_ sender: Any) {
-//        print("button id : \(placeId)")
-        
         let call = getToken()
         print("Sending place Id : \(placeId)")
         print("Sending token : \(call)")
-        
         if call != ""{
             objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: placeId){ status in
                 if status == true{
-                  
                     self.objectOfHomeViewModel.userFavouiretListArray = self.objectOfHomeViewModel.userFavouiretListArray.filter { $0 != self.placeId}
                     self.delegateCell?.reloadTheTable()
                     self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
@@ -62,16 +58,10 @@ class FavTableCell: UITableViewCell {
                             print("fav id list NOT received")
                         }
                     }
-                    
-                }else{
-
-                }
+                }else{}
             }
         }
-        
     }
-    
-    
 }
 
 

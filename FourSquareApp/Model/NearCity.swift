@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class NearCityModel {
+class NearCity {
     var cityId: String
     var cityName: String
     var cityImage: String

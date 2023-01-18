@@ -11,7 +11,7 @@ class ShowPhotoVc: UIViewController {
 
     var placeName = ""
     
-    var details: AllPhotosModel?
+    var details: PhotosDetails?
     
     @IBOutlet weak var imageToShow: UIImageView!
     @IBOutlet weak var userImage: UIImageView!

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class UserDetailsModel {
+class UserDetails {
     var userName: String
     var userProfileImage: String
     var userId: String

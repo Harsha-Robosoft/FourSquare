@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class FavouiretIdModel {
+class FavoriteDetails {
     var placeIs: String
     var _Id: String
     init(placeIs: String,_Id: String) {

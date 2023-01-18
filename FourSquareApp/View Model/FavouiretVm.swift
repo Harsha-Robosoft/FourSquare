@@ -6,11 +6,11 @@
 //
 
 import Foundation
-class FavouiretViewModel {
-    static var objectOfViewModel = FavouiretViewModel()
+class FavoriteViewModel {
+    static var objectOfViewModel = FavoriteViewModel()
     var objectOfFavouiretNetwork = FavouiretNetwork()
     
-    var favSearchDetails = [HomeDataModel]()
+    var favSearchDetails = [HomeData]()
     
     func userFavouriteplacesListAndSearch(tokenToSend: String, endpointIs : String, paramsDictionary: [String: Any],completion: @escaping((Bool) -> ())) {
         objectOfFavouiretNetwork.favouiretSearchListFilter(token: tokenToSend, endPoint: endpointIs, paramDictionary: paramsDictionary){ favSearcData, favSearchStatus, favSearchError in
@@ -78,7 +78,7 @@ class FavouiretViewModel {
                                         }
                                     }
                                     
-                                    let favSearch = HomeDataModel(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs,latitude: lati , longitude:longi)
+                                    let favSearch = HomeData(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs,latitude: lati , longitude:longi)
     //                                print("search data : \(imageUrl)\n\(placeId)\n\(placeName)\n\(ratingIs)\n\(priceRangeIs)\n\(category)\n\(distanceIs)\n\(address)\n\(cityName)")
                                     self.favSearchDetails.append(favSearch)
                                 }

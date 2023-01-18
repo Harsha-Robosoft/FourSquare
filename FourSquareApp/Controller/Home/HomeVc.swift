@@ -209,7 +209,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBAction func burherFavouritesButtonTapped(_ sender: UIButton) {
         
-        let favouritVc = self.storyboard?.instantiateViewController(withIdentifier: "FavouiretVc") as? FavouiretVc
+        let favouritVc = self.storyboard?.instantiateViewController(withIdentifier: "FavouiretVc") as? FavoritetVc
         if let vc = favouritVc{
             vc.homeDelegate1 = self
             self.navigationController?.pushViewController(vc, animated: true)

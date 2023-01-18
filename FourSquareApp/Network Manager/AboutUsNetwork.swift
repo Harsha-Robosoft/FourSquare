@@ -7,35 +7,28 @@
 
 import Foundation
 class AboutUsNetwork {
+    var ApiResponceObject = ApiResponce()
     
     func aboutUsApi(completion: @escaping(([[String: Any]]?,Bool,Error?) -> ())) {
         
         guard let url = URL(string:"https://four-square-three.vercel.app/api/getAboutUs") else{ return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-            let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
-                guard let data = data, error == nil else{
-                    print("Home 5 screen Error is: \(String(describing: error?.localizedDescription))")
-                    return
-                }
-                if let responsIs = responce as? HTTPURLResponse{
-                    print("Home 5 screen responce : ",responsIs.statusCode)
-                    if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
-                        do{
-                            let responsData = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                            if let dataIs = responsData as? [[String: Any]]{
-                                completion(dataIs,true,nil)
-                            }
-                        }
-                    }else if responsIs.statusCode == 400{
-                        completion(nil,false,error)
-                    }else{
-                        completion(nil,false,error)
-                        print("Register Error is: ", error?.localizedDescription ?? "Error...?")
+        ApiResponceObject.apiResonce(requestType: request){ reponceData, responceStatus, responceError in
+            if responceError == nil{
+                if responceStatus == true{
+                    print(566,reponceData)
+                    if let aboutdata = reponceData as? [[String: Any]]{
+                        print(55,aboutdata)
+                        completion(aboutdata,true,nil )
                     }
+                }else{
+                    completion(nil,false,responceError)
                 }
-            })
-        task.resume()
+            }else{
+                completion(nil,false,responceError)
+            }
+        }
     }
     
 }

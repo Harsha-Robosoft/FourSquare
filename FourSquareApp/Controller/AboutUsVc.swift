@@ -19,7 +19,7 @@ class AboutUsVc: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if objectOfAboutUsViewModel.aboutDataIsIS == ""{
+        print("nanau ")
             objectOfAboutUsViewModel.ApiCallForAboutUs(){ status in
                 if status == true{
                     self.labelField.text = self.objectOfAboutUsViewModel.aboutDataIsIS
@@ -28,9 +28,7 @@ class AboutUsVc: UIViewController {
                 }
                 
             }
-        }else{
-            labelField.text = objectOfAboutUsViewModel.aboutDataIsIS
-        }
+        
 
     }
     @IBAction func backButtonTapped(_ sender: UIButton) {

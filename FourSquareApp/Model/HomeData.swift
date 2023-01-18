@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class HomeDataModel {
+class HomeData {
     
     var latitude:Double
     var longitude: Double

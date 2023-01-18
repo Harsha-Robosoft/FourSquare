@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class UserLocationModel {
+class UserLocation {
     
     var latitude: String
     var longitude: String
