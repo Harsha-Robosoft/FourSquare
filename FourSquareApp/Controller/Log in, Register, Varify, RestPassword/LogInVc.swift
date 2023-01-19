@@ -39,7 +39,7 @@ class LogInVc: UIViewController {
                 passwordToSend = password
             }
             let loader =   self.loader()
-            objectOfLoginViewModel.apiCallForUserLogin(emailIs: emailToSend, passwordIs: passwordToSend){ message, status in
+            objectOfLoginViewModel.apiCallForUserLogin(emailToSend: emailToSend, passwordToSend: passwordToSend){ message, status in
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                     if status == true{

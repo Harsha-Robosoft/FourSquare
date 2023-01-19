@@ -8,66 +8,63 @@
 import Foundation
 class CommonVm {
     func commonParsing(parsingdata: [[String: Any]]) -> [HomeData] {
+        var arrayToSend = [HomeData]()
         var imageUrl = ""
         var placeId = ""
         var placeName = ""
         var ratingIs = ""
-        var priceRangeIs = ""
+        var priceRange = ""
         var category = ""
-        var distanceIs = ""
+        var distance = ""
         var address = ""
         var cityName = ""
-        
         var lati = 0.0
         var longi = 0.0
         
-        var arr = [HomeData]()
+        arrayToSend.removeAll()
         for i in parsingdata{
-            if let data01 = i["_id"] as? String{
-                placeId = data01
+            if let parsing01 = i["_id"] as? String{
+                placeId = parsing01
             }
-            if let data02 = i["placeName"] as? String{
-                placeName = data02
+            if let parsing02 = i["placeName"] as? String{
+                placeName = parsing02
             }
-            if let data03 = i["placeImage"] as? String{
-                imageUrl = data03
+            if let parsing03 = i["placeImage"] as? String{
+                imageUrl = parsing03
             }
-            if let data04 = i["address"] as? String{
-                address = data04
+            if let parsing04 = i["address"] as? String{
+                address = parsing04
             }
-            if let data05 = i["city"] as? String{
-                cityName = data05
+            if let parsing05 = i["city"] as? String{
+                cityName = parsing05
             }
-            if let data06 = i["category"] as? String{
-                category = data06
+            if let parsing06 = i["category"] as? String{
+                category = parsing06
             }
-            if let data07 = i["priceRange"] as? Int{
-                priceRangeIs = String(data07)
+            if let parsing07 = i["priceRange"] as? Int{
+                priceRange = String(parsing07)
             }
-            if let data08 = i["rating"] as? Double{
-                print("6565",data08)
-                let number = Double(data08)
+            if let parsing08 = i["rating"] as? Double{
+                let number = Double(parsing08)
                 ratingIs = String(format: "%.1f", number)
             }
-            if let data09 = i["distance"] as? [String: Any]{
-                if let data10 = data09["calculated"] as? Double{
-                    let number = Float(Float(data10) / 1609)
-                    distanceIs = String(format: "%.1f", number)
+            if let parsing09 = i["distance"] as? [String: Any]{
+                if let parsing10 = parsing09["calculated"] as? Double{
+                    let number = Float(Float(parsing10) / 1609)
+                    distance = String(format: "%.1f", number)
                 }
             }
             
-            if let data10 = i["location"] as? [String: Any]{
-                if let data11 = data10["coordinates"] as? [Double]{
-                    print("longi : \(data11[0])")
-                    print("lati : \(data11[1])")
-                    lati = data11[1]
-                    longi = data11[0]
+            if let parsing10 = i["location"] as? [String: Any]{
+                if let parsing11 = parsing10["coordinates"] as? [Double]{
+                    lati = parsing11[1]
+                    longi = parsing11[0]
                 }
             }
             
-            let details = HomeData(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRangeIs, rating: ratingIs, distance: distanceIs, latitude: lati , longitude:longi)
-            arr.append(details)
+            let details = HomeData(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRange, rating: ratingIs, distance: distance, latitude: lati , longitude:longi)
+            arrayToSend.append(details)
         }
-        return arr
+        return arrayToSend
     }
 }

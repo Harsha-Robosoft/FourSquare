@@ -12,10 +12,7 @@ protocol showHomePage1 {
 
 class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource, reloadTable{
     
-    
-    
-    var objectOfUserDefaults = UserDefaults()
-    var objectOfKeyChain = KeyChain()
+    var getTheToken = GetToken.getTheUserToken
     var objectOfFavouiretViewModel = FavoriteViewModel.objectOfViewModel
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     
@@ -103,7 +100,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         favouiretTableView.dataSource = self
         favouiretTableView.register(UINib(nibName: "favCell", bundle: nil), forCellReuseIdentifier: "cellFave")
         
-        let tokenIs = getToken()
+        let tokenIs = getTheToken.getToken()
         
         if tokenIs != ""{
             var dictionaryIs = [String: Any]()
@@ -123,7 +120,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
             
             
-            objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+            objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
                 if status == true{
                     self.noDatFoundView.isHidden = true
                     self.favouiretTableView.isHidden = false
@@ -157,7 +154,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     func reloadTheTable() {
         print("hello ")
         
-        let tokenIs = getToken()
+        let tokenIs = getTheToken.getToken()
         var dictionaryIs = [String: Any]()
         
         var latitudeIs = ""
@@ -173,7 +170,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         dictionaryIs["text"] = ""
         
         
-        objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+        objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
             if status == true{
                 self.noDatFoundView.isHidden = true
                 self.favouiretTableView.isHidden = false
@@ -203,7 +200,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         if filterTapped != 1{
             
-            let tokenIs = getToken()
+            let tokenIs = getTheToken.getToken()
             var dictionaryIs = [String: Any]()
             if didload == 1 {
                 var latitudeIs = ""
@@ -219,7 +216,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 dictionaryIs["text"] = searchField.text
             }
             
-            objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+            objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
                 if status == true{
                     self.noDatFoundView.isHidden = true
                     self.favouiretTableView.isHidden = false
@@ -239,7 +236,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     @IBAction func filterButtonTapped(_ sender: UIButton) {
-        let tokenIs = getToken()
+        let tokenIs = getTheToken.getToken()
         filterTapped = 1
         if tokenIs != ""{
             
@@ -302,7 +299,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 }
                 
                 
-                objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointIs: "/favFilter", paramsDictionary: dictionaryIs){ [self] status in
+                objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/favFilter", paramsDictionary: dictionaryIs){ [self] status in
                     if status == true{
                         self.noDatFoundView.isHidden = true
                         self.favouiretTableView.isHidden = false
@@ -597,20 +594,3 @@ extension FavoritetVc{
     }
 }
 
-extension FavoritetVc{
-    
-    func getToken() -> String {
-        var id = ""
-        let userIdIs = objectOfUserDefaults.value(forKey: "userId")
-        if let idIs = userIdIs as? String{
-            id = idIs
-        }
-        print("Favourite id : \(id)")
-        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
-            return ""}
-        guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
-            return ""}
-        print("Favourite token",receivedToken)
-        return receivedToken
-    }
-}

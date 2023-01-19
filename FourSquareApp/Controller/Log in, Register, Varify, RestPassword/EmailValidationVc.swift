@@ -29,7 +29,7 @@ class EmailValidationVc: UIViewController {
         }
         let loader =   self.loader()
 
-        objectOfOtpvarificationViewModel.chekMailIdIsValidApiCall(emailIs: emailIS.lowercased()){ status in
+        objectOfOtpvarificationViewModel.chekMailIdIsValidApiCall(emailToSend: emailIS.lowercased()){ status in
             
             DispatchQueue.main.async() {
                 self.stopLoader(loader: loader)

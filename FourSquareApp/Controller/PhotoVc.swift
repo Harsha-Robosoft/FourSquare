@@ -12,8 +12,7 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     var nameIs = ""
     var placeId = ""
     
-    var objectOfUserDefaults = UserDefaults()
-    var objectOfKeyChain = KeyChain()
+    var getTheToken = GetToken.getTheUserToken
     var objectOfPhotoViewModel = PhotoViewModel.objectOfViewModel
     
     @IBOutlet weak var nameToshoe: UILabel!
@@ -29,10 +28,9 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let call = getToken()
-        
+        let call = getTheToken.getToken()
         if call != ""{
-            objectOfPhotoViewModel.getAllPhotosApicall(tokenIs: call, placeIdis: placeId){status in
+            objectOfPhotoViewModel.getAllPhotosApicall(tokenToSend: call, placeIdToSend: placeId){status in
                 if status == true{
                     if self.objectOfPhotoViewModel.AllPhotosDetails.last?.imageIs != ""{
                         self.collectionView01.reloadData()
@@ -43,39 +41,28 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             }
         }else{
             let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-            
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                
                 self.navigationController?.popToRootViewController(animated: true)
-                print("Handle Ok logic here")
-                
             }))
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                print("Handle Cancel Logic here")
             }))
             present(refreshAlert, animated: true, completion: nil)
         }
     }
     
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
-        
         let addPhotoVc = self.storyboard?.instantiateViewController(withIdentifier: "AddReviewVc") as? AddReviewVc
         if let vc = addPhotoVc{
             vc.placeIsIs = placeId
             vc.addonlyPhoto = 1
             self.navigationController?.pushViewController(vc, animated: true)
         }
-
     }
-    
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return objectOfPhotoViewModel.AllPhotosDetails.count
     }
@@ -96,8 +83,6 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
-    
 }
 
 extension PhotoVc: UICollectionViewDelegateFlowLayout{
@@ -112,26 +97,4 @@ extension PhotoVc: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-
-    
-}
-
-
-extension PhotoVc{
-    
-    func getToken() -> String {
-        var id = ""
-       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
-        if let idIs = userIdIs as? String{
-            id = idIs
-        }
-        print("Search id : \(id)")
-        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
-            return ""}
-        guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
-            return ""}
-        print("Search token",receivedToken)
-        return receivedToken
-    }
-    
 }

@@ -6,11 +6,7 @@
 
 
 import CoreLocation
-
 import Foundation
-
-
-
 class LocationManager: NSObject,CLLocationManagerDelegate {
 
     static let shared = LocationManager()

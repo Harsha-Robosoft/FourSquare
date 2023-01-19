@@ -14,17 +14,12 @@ protocol sendingIndex {
 }
 
 class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, reloadHomeTable {
-    func reloadTheTable() {
-        tableView01.reloadData()
-    }
     
-    var objectOfUserDefaults = UserDefaults()
-    var objectOfKeyChain = KeyChain()
+    var getTheToken = GetToken.getTheUserToken
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
 
     var index = 0
     var manager = CLLocationManager()
-    
     var homeView = 0
     
     @IBOutlet weak var mapIs: MKMapView!
@@ -38,9 +33,9 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         tableView01.delegate = self
         tableView01.dataSource = self
         tableView01.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
-        let call = getToken()
+        let call = getTheToken.getToken()
         if call != ""{
-            objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+            objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                 if status == true{
                     self.tableView01.reloadData()
                     print("fav id list received")
@@ -185,19 +180,8 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
 
 
 extension HomePageVc{
-    func getToken() -> String {
-        var id = ""
-       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
-        if let idIs = userIdIs as? String{
-            id = idIs
-        }
-        print("Home id : \(id)")
-        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
-            return ""}
-        guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
-            return ""}
-        print("Home token",receivedToken)
-        return receivedToken
+    func reloadTheTable() {
+        tableView01.reloadData()
     }
 }
 

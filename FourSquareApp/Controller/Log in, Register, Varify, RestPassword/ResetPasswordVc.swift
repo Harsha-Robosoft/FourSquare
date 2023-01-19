@@ -47,7 +47,7 @@ class ResetPasswordVc: UIViewController {
                 
                 let loader =   self.loader()
 
-                objectOfForgotPasswordViewModel.forgotPassewordApiCall(emailIs: mailIdToSend, passwordIs: passwordToSend){ status in
+                objectOfForgotPasswordViewModel.forgotPassewordApiCall(emailToSend: mailIdToSend, passwordToSend: passwordToSend){ status in
                     DispatchQueue.main.async() {
                         self.stopLoader(loader: loader)
                     if status == true{

@@ -18,9 +18,8 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
     var addonlyPhoto = 0
     
     var objectOfReviewViewModel = ReviewViewModel.objectOfViewModel
-    var objectOfUserDefaults = UserDefaults()
-    var objectOfKeyChain = KeyChain()
-    
+    var getTheToken = GetToken.getTheUserToken
+
     var placeIsIs = ""
     var photoArray = [UIImage]()
     
@@ -76,7 +75,6 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
             view_3.isHidden = true
             view_4.isHidden = true
             view_5.isHidden = true
-            
         }
         
     }
@@ -85,35 +83,22 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func button_1Tapped(_ sender: UIButton) {
-        print(1)
-        let imageController = UIImagePickerController()
-        imageController.delegate = self
-        imageController.sourceType = .photoLibrary
-        self.present(imageController, animated: true, completion: nil)
+        imagePickerFunction()
     }
     @IBAction func button_2Tapped(_ sender: UIButton) {
-        print(2)
-        let imageController = UIImagePickerController()
-        imageController.delegate = self
-        imageController.sourceType = .photoLibrary
-        self.present(imageController, animated: true, completion: nil)
+        imagePickerFunction()
     }
     @IBAction func button_3Tapped(_ sender: UIButton) {
-        print(3)
-        let imageController = UIImagePickerController()
-        imageController.delegate = self
-        imageController.sourceType = .photoLibrary
-        self.present(imageController, animated: true, completion: nil)
+        imagePickerFunction()
     }
     @IBAction func button_4Tapped(_ sender: UIButton) {
-        print(4)
-        let imageController = UIImagePickerController()
-        imageController.delegate = self
-        imageController.sourceType = .photoLibrary
-        self.present(imageController, animated: true, completion: nil)
+        imagePickerFunction()
     }
     @IBAction func button_5Tapped(_ sender: UIButton) {
-        print(5)
+        imagePickerFunction()
+    }
+    
+    func imagePickerFunction() {
         let imageController = UIImagePickerController()
         imageController.delegate = self
         imageController.sourceType = .photoLibrary
@@ -159,8 +144,6 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
             button_5.isHidden = true
             buttonw5 = 0
         }
-        
-        
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func reviewTextField(_ sender: Any) {
@@ -178,18 +161,14 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     @IBAction func submitfeddBackButtonTapped(_ sender: UIButton) {
         
-        let call = getToken()
-        
+        let call = getTheToken.getToken()
         if call != ""{
             if reviewField.text != ""{
-
                 var reviewToSend = ""
-
                 if let review00 = reviewField.text{
                     reviewToSend = review00
                 }
-
-                objectOfReviewViewModel.textReviewSubmitApiCall(tokenIs: call, restaturantId: placeIsIs, reviewIs: reviewToSend){ status in
+                objectOfReviewViewModel.textReviewSubmitApiCall(tokenToSend: call, restaturantId: placeIsIs, reviewToSend: reviewToSend){ status in
                     if status == true{
                         self.submitButton.isEnabled = false
                         self.submitButton.alpha = 0.5
@@ -204,16 +183,12 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
                     }else{
                         self.alertMessage(message: "Error while submitting the review try later ...!")
                     }
-
                 }
-
             }
-            
             if addonlyPhoto == 0{
                 if buttonw1 == 0{
-                    objectOfReviewViewModel.photoReviewSubmitApiCall(rokenIs: call, placeIdIs: placeIsIs, images: photoArray){ status in
+                    objectOfReviewViewModel.photoReviewSubmitApiCall(tokenToSend: call, placeIdToSend: placeIsIs, images: photoArray){ status in
                         if status == true{
-                            print(000000000000)
                             self.reviewFieldHeight.constant = 200
                             self.writereviewHeight.constant = 33
                             self.submitButton.isEnabled = false
@@ -230,10 +205,8 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 }
             }else{
                 if buttonw1 == 0{
-                    
-                    objectOfReviewViewModel.photoReviewSubmitApiCall(rokenIs: call, placeIdIs: placeIsIs, images: photoArray){ status in
+                    objectOfReviewViewModel.photoReviewSubmitApiCall(tokenToSend: call, placeIdToSend: placeIsIs, images: photoArray){ status in
                         if status == true{
-                            print(11111111111)
                             self.view_2.isHidden = true
                             self.view_3.isHidden = true
                             self.view_4.isHidden = true
@@ -247,40 +220,13 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
             }
         }else{
             let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-            
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                
                 self.navigationController?.popToRootViewController(animated: true)
-                print("Handle Ok logic here")
-                
             }))
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                print("Handle Cancel Logic here")
             }))
             present(refreshAlert, animated: true, completion: nil)
         }
-        
-        
-        
-    }
-    
-    
-}
-
-
-extension AddReviewVc{
-    func getToken() -> String {
-        var id = ""
-       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
-        if let idIs = userIdIs as? String{
-            id = idIs
-        }
-        print("Search id : \(id)")
-        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
-            return ""}
-        guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
-            return ""}
-        print("Search token",receivedToken)
-        return receivedToken
     }
 }
+

@@ -59,7 +59,7 @@ class VarifyOtpVc: UIViewController {
             }
             let loader =   self.loader()
 
-            objectOfOtpvarificationViewModel.varifyOtpApicall(otpIs: otpToSend){ status in
+            objectOfOtpvarificationViewModel.varifyOtpApicall(otpToSend: otpToSend){ status in
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                 if status == true{
@@ -98,7 +98,7 @@ class VarifyOtpVc: UIViewController {
             let createPasswordVc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordVc") as? ResetPasswordVc
             
             let loader =   self.loader()
-            objectOfOtpvarificationViewModel.varifyOtpApicall(otpIs: otpToSend){ status in
+            objectOfOtpvarificationViewModel.varifyOtpApicall(otpToSend: otpToSend){ status in
                     self.stopLoader(loader: loader)
                 if status == true{
                     DispatchQueue.main.async {

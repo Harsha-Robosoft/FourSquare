@@ -44,9 +44,7 @@ class SearchNetworkManager {
     }
     
     func searchApicalling(Token: String,lat: String,long: String,tesxtToSend: String, completion: @escaping(([[String: Any]]?,Bool,Error?) -> ())) {
-        
-//        print("Search data is :\nToken : \(Token)\nlatitude : \(lat)\nlongitude : \(long)\nSearch text : \(tesxtToSend)")
-        
+                
         
         guard let url = URL(string:"https://four-square-three.vercel.app/api/filterSearch") else{ return }
         var request = URLRequest(url: url)

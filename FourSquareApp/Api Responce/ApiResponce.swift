@@ -7,28 +7,78 @@
 
 import Foundation
 class ApiResponce {
-    func apiResonce(requestType: URLRequest, returnResponce: @escaping((Any?,Bool,Error?) -> ())){
+    func getApiResonce(request: URLRequest, returnResponce: @escaping((Any?,Bool,Error?) -> ())){
         
-        print("898",requestType)
-        
-        URLSession.shared.dataTask(with: requestType) { data, responce, error in
-            if let responce = responce as? HTTPURLResponse{
-                guard let responceData = data else{ return}
-                
-                if responce.statusCode == 400 || responce.statusCode == 401{
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
+            guard let data = data, error == nil else{
+                print("ADD or REMOVE favouiret Error is: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if let responsIs = responce as? HTTPURLResponse{
+                print("ADD or REMOVE favouiretr responce : ",responsIs.statusCode)
+                if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
+                    do{
+                        let responseDat = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                        returnResponce(responseDat,true,nil)
+                    }
+                }else if responsIs.statusCode == 400{
                     returnResponce(nil,false,error)
-                }else if responce.statusCode == 200 || responce.statusCode == 201{
-                    let responceData = try? JSONSerialization.jsonObject(with: responceData, options: .mutableContainers)
-                    print(responceData)
-                    returnResponce(responceData,true,nil)
                 }else{
                     returnResponce(nil,false,error)
+                    print("ADD or REMOVE favouiret Error is: ", error?.localizedDescription ?? "Error...?")
                 }
             }
-            
-            if error != nil{
-                print("hi hi ")
+        })
+    task.resume()
+    }
+    
+    func postApiResonce(request: URLRequest, returnResponce: @escaping((Any?,Bool,Error?) -> ())){
+        
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
+            guard let data = data, error == nil else{
+                print("ADD or REMOVE favouiret Error is: \(String(describing: error?.localizedDescription))")
+                return
             }
-        }.resume()
+            if let responsIs = responce as? HTTPURLResponse{
+                print("ADD or REMOVE favouiretr responce : ",responsIs.statusCode)
+                if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
+                    do{
+                        let responseDat = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                        returnResponce(responseDat,true,nil)
+                    }
+                }else if responsIs.statusCode == 400{
+                    returnResponce(nil,false,error)
+                }else{
+                    returnResponce(nil,false,error)
+                    print("ADD or REMOVE favouiret Error is: ", error?.localizedDescription ?? "Error...?")
+                }
+            }
+        })
+    task.resume()
+    }
+    
+    func postFormdatApiResonce(request: URLRequest, returnResponce: @escaping((Any?,Bool,Error?) -> ())){
+        
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
+            guard let data = data, error == nil else{
+                print("ADD or REMOVE favouiret Error is: \(String(describing: error?.localizedDescription))")
+                return
+            }
+            if let responsIs = responce as? HTTPURLResponse{
+                print("ADD or REMOVE favouiretr responce : ",responsIs.statusCode)
+                if (responsIs.statusCode == 200 || responsIs.statusCode == 201){
+                    do{
+                        let responseDat = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                        returnResponce(responseDat,true,nil)
+                    }
+                }else if responsIs.statusCode == 400{
+                    returnResponce(nil,false,error)
+                }else{
+                    returnResponce(nil,false,error)
+                    print("ADD or REMOVE favouiret Error is: ", error?.localizedDescription ?? "Error...?")
+                }
+            }
+        })
+    task.resume()
     }
 }

@@ -12,8 +12,8 @@ import CoreLocation
 class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, reloadHomeTable, reloadHomeTable2 {
     //   OBJECT CREATION ---------------------------------
     var objectOfSearchViewModel = SearchViewModel.objectOfViewModel
-    var objectOfUserDefaults = UserDefaults()
-    var objectOfKeyChain = KeyChain()
+    var getTheToken = GetToken.getTheUserToken
+
     //    VARIABLES DECLARATION -----------------------------
     var test = false
     var nearYou = 0
@@ -239,11 +239,11 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     }
     
     @IBAction func searchFieldUsing(_ sender: Any) {
-        let tokenIs = getToken()
+        let tokenIs = getTheToken.getToken()
         if tokenIs != ""{
             if filterTapped == 0 && showFilterScreen == 0{
                 if search.text?.count ?? 0 >= 3{
-                    objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: search.text ?? ""){ status in
+                    objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: search.text ?? ""){ status in
                         if status == true{
                             self.searching = 1
                             self.nearYou = 0
@@ -284,11 +284,11 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     }
     
     @IBAction func nearMeFieldUsing(_ sender: Any) {
-        let tokenIs = getToken()
+        let tokenIs = getTheToken.getToken()
         if tokenIs != ""{
             if filterTapped == 0{
                 if search.text?.count ?? 0 >= 3{
-                    objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: search.text ?? ""){ status in
+                    objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: search.text ?? ""){ status in
                         if status == true{
                             self.nearMeView.isHidden = true
                             self.tableViewAndViewMap.isHidden = false
@@ -323,7 +323,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func filterButtonTapped(_ sender: UIButton) {
-        let tokenIs = getToken()
+        let tokenIs = getTheToken.getToken()
         if tokenIs != ""{
             if sender.currentTitle == nil{
                 filterTapped = 1
@@ -607,7 +607,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     }
     
     @IBAction func useMyCurrentLocationButtonTapped(_ sender: UIButton) {
-        let tokenIs = getToken()
+        let tokenIs = getTheToken.getToken()
         if tokenIs != ""{
             nearYou = 0
             nearMeView.isHidden = true
@@ -616,7 +616,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             nearYouAndSuggestion.isHidden = true
             filterScreen.isHidden = true
             whiteView.isHidden = true
-            objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: ""){ status in
+            objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: ""){ status in
                 if status == true{
                     self.searching = 1
                     self.nearYou = 0
@@ -887,7 +887,7 @@ extension SearchVc{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if nearYou == 1{
-            let tokenIs = getToken()
+            let tokenIs = getTheToken.getToken()
             if tokenIs != ""{
                 nearYou = 0
                 nearMeView.isHidden = true
@@ -896,7 +896,7 @@ extension SearchVc{
                 nearYouAndSuggestion.isHidden = true
                 filterScreen.isHidden = true
                 whiteView.isHidden = true
-                objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textIs: objectOfSearchViewModel.nearCityData[indexPath.row].cityName){ status in
+                objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: objectOfSearchViewModel.nearCityData[indexPath.row].cityName){ status in
                     if status == true{
                         self.searching = 1
                         self.nearYou = 0
@@ -1061,23 +1061,6 @@ extension SearchVc{
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
-    }
-}
-
-extension SearchVc{
-    func getToken() -> String {
-        var id = ""
-        let userIdIs = objectOfUserDefaults.value(forKey: "userId")
-        if let idIs = userIdIs as? String{
-            id = idIs
-        }
-        print("Search id : \(id)")
-        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
-            return ""}
-        guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
-            return ""}
-        print("Search token",receivedToken)
-        return receivedToken
     }
 }
 

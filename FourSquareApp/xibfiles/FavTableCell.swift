@@ -47,11 +47,11 @@ class FavTableCell: UITableViewCell {
         print("Sending place Id : \(placeId)")
         print("Sending token : \(call)")
         if call != ""{
-            objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: placeId){ status in
+            objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: placeId){ status in
                 if status == true{
                     self.objectOfHomeViewModel.userFavouiretListArray = self.objectOfHomeViewModel.userFavouiretListArray.filter { $0 != self.placeId}
                     self.delegateCell?.reloadTheTable()
-                    self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+                    self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                         if status == true{
                             print("fav id list received")
                         }else{

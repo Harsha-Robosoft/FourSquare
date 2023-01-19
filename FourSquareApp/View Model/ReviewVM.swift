@@ -8,64 +8,112 @@
 import Foundation
 import UIKit
 class ReviewViewModel {
-    
+    var apiResponce = ApiResponce()
     static var objectOfViewModel = ReviewViewModel()
     var objectOfReviewNetworkManager = ReviewNetworkManager()
     
     var allReviewdata = [ReviewDetails]()
     
-    func getAllReviewDataApiCall(tokenIs: String, placeIdis: String, completion: @escaping((Bool) -> ())) {
-        objectOfReviewNetworkManager.Allreviews(token: tokenIs, placeId: placeIdis){reviewData, reviewStatus, reviewError in
+    func getAllReviewDataApiCall(tokenToSend: String, placeIdToSend: String, completion: @escaping((Bool) -> ())) {
+        
+        guard let url = URL(string:"https://four-square-three.vercel.app/api/getReview") else{ return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(tokenToSend)", forHTTPHeaderField: "Authorization")
+
+        let parameter: [String:Any] = [
+            "_id": placeIdToSend
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
+        apiResponce.postApiResonce(request: request){ data, status, error in
+            DispatchQueue.main.async {
+                if error != nil && status != true{
+                    completion(false)
+                    return
+                }
+                if let parsing0 = data as? [String: Any]{
+                    if parsing0.isEmpty{
+                        completion(false)
+                    }else{
+                        if let parsing1 = parsing0["reviewText"] as? [[String: Any]]{
+                            var reviewerId = ""
+                            var reviewBy = ""
+                            var review = ""
+                            var reviewerImage = ""
+                            var reviewDate = ""
+                            var _id = ""
+                            for i in parsing1{
+                                if let parsing01 = i["reviewerId"] as? String{
+                                    reviewerId = parsing01
+                                }
+                                if let parsing02 = i["reviewBy"] as? String{
+                                    reviewBy = parsing02
+                                }
+                                if let parsing03 = i["review"] as? String{
+                                    review = parsing03
+                                }
+                                if let parsing04 = i["reviewerImage"] as? String{
+                                    reviewerImage = parsing04
+                                }
+                                if let parsing05 = i["reviewDate"] as? String{
+                                    reviewDate = parsing05
+                                }
+                                if let parsing06 = i["_id"] as? String{
+                                    _id = parsing06
+                                }
+                                let review0101 = ReviewDetails(reviewerId: reviewerId, reviewBy: reviewBy, review: review, reviewerImage: reviewerImage, reviewDate: reviewDate, _id: _id)
+                                self.allReviewdata.append(review0101)
+                            }
+                        }
+                        completion(true)
+                    }
+                }
+            }
+        }
+        
+        
+/*        objectOfReviewNetworkManager.Allreviews(token: tokenToSend, placeId: placeIdToSend){reviewData, reviewStatus, reviewError in
             DispatchQueue.main.async {
                 if reviewError == nil{
                     if reviewStatus == true{
-                        
-                        if let data0 = reviewData{
-                            
-                            if data0.isEmpty{
+                        if let parsing0 = reviewData{
+                            if parsing0.isEmpty{
                                 completion(false)
                             }else{
-                                if let data1 = data0["reviewText"] as? [[String: Any]]{
-                                    
-                                    var reviewerIdIs = ""
-                                    var reviewByIs = ""
-                                    var reviewIs = ""
-                                    var reviewerImageIs = ""
-                                    var reviewDateIs = ""
-                                    var _idIs = ""
-                                    
-                                    for i in data1{
-                                        
-                                        if let data01 = i["reviewerId"] as? String{
-                                            reviewerIdIs = data01
+                                if let parsing1 = parsing0["reviewText"] as? [[String: Any]]{
+                                    var reviewerId = ""
+                                    var reviewBy = ""
+                                    var review = ""
+                                    var reviewerImage = ""
+                                    var reviewDate = ""
+                                    var _id = ""
+                                    for i in parsing1{
+                                        if let parsing01 = i["reviewerId"] as? String{
+                                            reviewerId = parsing01
                                         }
-                                        if let data02 = i["reviewBy"] as? String{
-                                            reviewByIs = data02
+                                        if let parsing02 = i["reviewBy"] as? String{
+                                            reviewBy = parsing02
                                         }
-                                        if let data03 = i["review"] as? String{
-                                            reviewIs = data03
+                                        if let parsing03 = i["review"] as? String{
+                                            review = parsing03
                                         }
-                                        if let data04 = i["reviewerImage"] as? String{
-                                            reviewerImageIs = data04
+                                        if let parsing04 = i["reviewerImage"] as? String{
+                                            reviewerImage = parsing04
                                         }
-                                        if let data05 = i["reviewDate"] as? String{
-                                            reviewDateIs = data05
+                                        if let parsing05 = i["reviewDate"] as? String{
+                                            reviewDate = parsing05
                                         }
-                                        if let data06 = i["_id"] as? String{
-                                            _idIs = data06
+                                        if let parsing06 = i["_id"] as? String{
+                                            _id = parsing06
                                         }
-                                        
-                                        let review0101 = ReviewDetails(reviewerId: reviewerIdIs, reviewBy: reviewByIs, review: reviewIs, reviewerImage: reviewerImageIs, reviewDate: reviewDateIs, _id: _idIs)
-                                        
+                                        let review0101 = ReviewDetails(reviewerId: reviewerId, reviewBy: reviewBy, review: review, reviewerImage: reviewerImage, reviewDate: reviewDate, _id: _id)
                                         self.allReviewdata.append(review0101)
                                     }
                                 }
                                 completion(true)
                             }
-
                         }
-                        
-                        
                     }else{
                         completion(false)
                     }
@@ -73,11 +121,34 @@ class ReviewViewModel {
                     completion(false)
                 }
             }
-        }
+        } */
     }
     
-    func textReviewSubmitApiCall(tokenIs: String, restaturantId: String, reviewIs: String, completion: @escaping((Bool) -> ())) {
-        objectOfReviewNetworkManager.textReviewSubmit(token: tokenIs, restaturantId: restaturantId, reviewIs: reviewIs){ textStatus, textError in
+    func textReviewSubmitApiCall(tokenToSend: String, restaturantId: String, reviewToSend: String, completion: @escaping((Bool) -> ())) {
+        
+        guard let url = URL(string:"https://four-square-three.vercel.app/api/addReview") else{ return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(tokenToSend)", forHTTPHeaderField: "Authorization")
+
+        let parameter: [String:Any] = [
+            "_id": restaturantId,
+            "review": reviewToSend
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
+        apiResponce.postApiResonce(request: request){ data, status, error in
+            DispatchQueue.main.async {
+                if error != nil && status != true{
+                    completion(false)
+                }else{
+                    completion(true)
+                }
+            }
+        }
+        
+        
+  /*      objectOfReviewNetworkManager.textReviewSubmit(token: tokenToSend, restaturantId: restaturantId, review: reviewToSend){ textStatus, textError in
             DispatchQueue.main.async {
                 if textError == nil{
                     if textStatus == true{
@@ -89,11 +160,51 @@ class ReviewViewModel {
                     completion(false)
                 }
             }
-        }
+        }*/
     }
     
-    func photoReviewSubmitApiCall(rokenIs: String, placeIdIs: String, images: [UIImage], completion: @escaping((Bool) -> ())) {
-        objectOfReviewNetworkManager.photoReviewSubmit(token: rokenIs, placeId: placeIdIs, image: images){ photoStatus, photoError in
+    func photoReviewSubmitApiCall(tokenToSend: String, placeIdToSend: String, images: [UIImage], completion: @escaping((Bool) -> ())) {
+        
+        guard let url = URL(string:"https://four-square-three.vercel.app/api/addReviewImage") else{return}
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let boundary = "Boundary-\(UUID().uuidString)"
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(tokenToSend)", forHTTPHeaderField: "Authorization")
+            let data = NSMutableData()
+        
+        let fieldName = "image"
+        for i in images{
+            if let imageData = i.jpegData(compressionQuality: 0.1) {
+                data.append("--\(boundary)\r\n".data(using: .utf8) ?? data as Data)
+                data.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"image.jpg\"\r\n".data(using: .utf8) ?? data as Data)
+                data.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8) ?? data as Data)
+                data.append(imageData)
+                data.append("\r\n".data(using: .utf8) ?? data as Data)
+            }
+        }
+            
+        let name = "_id"
+            data.append("--\(boundary)\r\n".data(using: .utf8) ?? data as Data)
+            data.append("Content-Disposition: form-data; name=\"\(name)\"\r\n\r\n".data(using: .utf8) ?? data as Data)
+            data.append(placeIdToSend.data(using: .utf8) ?? data as Data)
+            data.append("\r\n".data(using: .utf8) ?? data as Data)
+            data.append("--\(boundary)--\r\n".data(using: .utf8) ?? data as Data)
+            request.httpBody = data as Data
+        apiResponce.postFormdatApiResonce(request: request){ data, status, error in
+            DispatchQueue.main.async {
+                if error != nil && status != true{
+                    completion(false)
+                }else{
+                    completion(true)
+                }
+            }
+        }
+       
+        
+        
+        
+/*        objectOfReviewNetworkManager.photoReviewSubmit(token: tokenToSend, placeId: placeIdToSend, image: images){ photoStatus, photoError in
             DispatchQueue.main.async {
                 if photoError == nil{
                     if photoStatus == true{
@@ -105,6 +216,6 @@ class ReviewViewModel {
                     completion(false)
                 }
             }
-        }
+        }*/
     }
 }

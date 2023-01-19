@@ -13,8 +13,7 @@ protocol showHomePage3 {
 class FeedbackVc: UIViewController {
     
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
-    var objectOfUserDefaults = UserDefaults()
-    var objectOfKeyChain = KeyChain()
+    var getTheToken = GetToken.getTheUserToken
     
     var homeDelegate3: showHomePage3?
     @IBOutlet weak var feddbackSubmitButton: UIButton!
@@ -23,7 +22,6 @@ class FeedbackVc: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
     }
     
     
@@ -39,13 +37,12 @@ class FeedbackVc: UIViewController {
     
     
     @IBAction func feedbackSubmitButton(_ sender: UIButton) {
-        let call = getToken()
+        let call = getTheToken.getToken()
         if call != ""{
             if feedBackField.text != ""{
-                
                 guard let feddback = feedBackField.text else{ print("Feedback error")
                     return}
-                objectOfHomeViewModel.feedBackApiCall(tokenToSend: call, feedbackIs: feddback){status in
+                objectOfHomeViewModel.feedBackApiCall(tokenToSend: call, feedbackToSend: feddback){status in
                     if status == true{
                         self.feddbackSubmitButton.isEnabled = false
                         self.feddbackSubmitButton.alpha = 0.5
@@ -53,43 +50,18 @@ class FeedbackVc: UIViewController {
                         self.alertMessage(message: "Error while sending feedback...!!! . pleace give your feedback once again")
                     }
                 }
-                
             }else{
                 alertMessage(message: "Pleace write your precious feed back")
             }
         }else{
             let refreshAlert = UIAlertController(title: "ALERT", message: "You are not loged in. Pleace login", preferredStyle: UIAlertController.Style.alert)
-            
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                
                 self.navigationController?.popToRootViewController(animated: true)
-                print("Handle Ok logic here")
-                
             }))
             refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
-                print("Handle Cancel Logic here")
             }))
             present(refreshAlert, animated: true, completion: nil)
         }
-        
     }
 }
 
-extension FeedbackVc{
-    
-    func getToken() -> String {
-        var id = ""
-        let userIdIs = objectOfUserDefaults.value(forKey: "userId")
-        if let idIs = userIdIs as? String{
-            id = idIs
-        }
-        print("Home id : \(id)")
-        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
-            return ""}
-        guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
-            return ""}
-        print("Home token",receivedToken)
-        return receivedToken
-    }
-    
-}

@@ -46,7 +46,7 @@ class ReviewNetworkManager {
     }
     
     
-    func textReviewSubmit(token: String, restaturantId: String, reviewIs: String,completion: @escaping((Bool, Error?) -> ())) {
+    func textReviewSubmit(token: String, restaturantId: String, review: String,completion: @escaping((Bool, Error?) -> ())) {
         guard let url = URL(string:"https://four-square-three.vercel.app/api/addReview") else{ return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -55,7 +55,7 @@ class ReviewNetworkManager {
 
         let parameter: [String:Any] = [
             "_id": restaturantId,
-            "review": reviewIs
+            "review": review
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
             let task = URLSession.shared.dataTask(with: request, completionHandler: { data, responce, error in
@@ -83,9 +83,7 @@ class ReviewNetworkManager {
     }
     
     func photoReviewSubmit(token: String, placeId: String, image: [UIImage], completion: @escaping((Bool, Error?) -> ())) {
-        
-        print("Api Data : token\(token)\n\(placeId)\n numnber\(image.count)")
-        
+                
         guard let url = URL(string:"https://four-square-three.vercel.app/api/addReviewImage") else{return}
             var request = URLRequest(url: url)
             request.httpMethod = "POST"

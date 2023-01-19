@@ -12,6 +12,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
     var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
     
+    var getTheToken = GetToken.getTheUserToken
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
     
@@ -38,7 +39,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var collectionItem = ["Near you","Toppic","Popular","Lunch","Coffee"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tokenIs = getToken()
+        let tokenIs = getTheToken.getToken()
         
         print("user token is : \(tokenIs)")
         
@@ -82,7 +83,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             bottom.constant = 50
             menuOut = true
             
-            let call = getToken()
+            let call = getTheToken.getToken()
             
             if call != ""{
                 
@@ -135,7 +136,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBAction func burgerLogOutButtonTapped(_ sender: UIButton) {
         
-        let call = getToken()
+        let call = getTheToken.getToken()
         
         if call != ""{
             
@@ -272,7 +273,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {
         
-        let call = getToken()
+        let call = getTheToken.getToken()
         
         if call != ""{
             let refreshAlert = UIAlertController(title: "ALERT", message: "Do you want to update your profile image?", preferredStyle: UIAlertController.Style.alert)
@@ -318,11 +319,11 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func uploadPhoto(imageIsIs: UIImage) {
-        let call = getToken()
+        let call = getTheToken.getToken()
         
         print("image is : \(imageIsIs)")
         
-        objectOfHomeViewModel.userProfilePhotoUpdateApiCall(token: call, imageIs: imageIsIs){ status in
+        objectOfHomeViewModel.userProfilePhotoUpdateApiCall(token: call, imageTosend: imageIsIs){ status in
             if status == true{
                 self.alertMessage(message: "Profile photo is been updated")
                 self.userProfileImage.image = imageIsIs
@@ -382,22 +383,6 @@ extension HomeVc: UICollectionViewDelegateFlowLayout{
     }
 }
 
-extension HomeVc{
-    func getToken() -> String {
-        var id = ""
-        let userIdIs = objectOfUserDefaults.value(forKey: "userId")
-        if let idIs = userIdIs as? String{
-            id = idIs
-        }
-        print("Home id : \(id)")
-        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
-            return ""}
-        guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
-            return ""}
-        print("Home token",receivedToken)
-        return receivedToken
-    }
-}
 extension HomeVc{
     func homePage3() {
         burgerWidth.constant = 0

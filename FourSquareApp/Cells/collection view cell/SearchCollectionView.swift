@@ -64,12 +64,12 @@ class SearchCollectionView: UICollectionViewCell {
         if call != ""{
             if onClick == true{
 
-                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: _Id){ status in
+                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: _Id){ status in
                     if status == true{
                         self.likeButton.noChange()
                         self.onClick = false
                         self.objectOfHomeViewModel.userFavouiretListArray = self.objectOfHomeViewModel.userFavouiretListArray.filter { $0 != self._Id}
-                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                             if status == true{
                                 print("fav id list received")
                                 self.collectionDelegate?.tableReloda()
@@ -82,12 +82,12 @@ class SearchCollectionView: UICollectionViewCell {
                 }
             }else{
                 
-                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: _Id){ status in
+                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: _Id){ status in
                     if status == true{
                         self.likeButton.noChange()
                         self.objectOfHomeViewModel.userFavouiretListArray.append(self._Id)
                         self.onClick = true
-                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                             if status == true{
                                 print("fav id list received")
                                 self.collectionDelegate?.tableReloda()

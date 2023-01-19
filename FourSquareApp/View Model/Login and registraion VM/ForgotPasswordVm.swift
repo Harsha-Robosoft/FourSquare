@@ -7,27 +7,29 @@
 
 import Foundation
 class ForgotPasswordViewModel {
-    
+    var apiResponce = ApiResponce()
     static var objectOfVm = ForgotPasswordViewModel()
     var objectOfForgotPasswordNetwork = ForgotPasswordNetwork()
     
-    func forgotPassewordApiCall(emailIs: String, passwordIs: String, completion: @escaping((Bool) -> ())) {
-        objectOfForgotPasswordNetwork.ForgotPassword(email: emailIs, password: passwordIs){ forgotStatus, ForgotError in
-            
-            if ForgotError == nil{
-                
-                if forgotStatus == true{
-                    
-                    completion(true)
-                }else{
+    func forgotPassewordApiCall(emailToSend: String, passwordToSend: String, completion: @escaping((Bool) -> ())) {
+        guard let url = URL(string:"https://four-square-three.vercel.app/api/forgotPassword") else{ return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let parameter: [String:Any] = [
+            "email": emailToSend,
+            "password": passwordToSend
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
+        apiResponce.postApiResonce(request: request){ data, status, error in
+            DispatchQueue.main.async {
+                if error != nil && status != true {
                     completion(false)
+                }else{
+                    completion(true)
                 }
                 
-            }else{
-                completion(false)
-                
             }
-            
         }
     }
 }

@@ -9,9 +9,7 @@ import Foundation
 class OtpVarificationNetwork {
     
     func sendOtp(email: String, completion: @escaping((Bool,Error?) -> ())) {
-        
-        print("otp sending mail id : \(email)")
-        
+                
         guard let url = URL(string:"https://four-square-three.vercel.app/api/sendOtp") else{ return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

@@ -9,7 +9,6 @@ import Foundation
 class PhotosDetails {
     
     var imageIs: String
-    
     var reviewerId: String
     var reviewBy: String
     var reviewerImage: String

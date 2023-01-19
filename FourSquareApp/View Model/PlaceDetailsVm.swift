@@ -8,25 +8,102 @@
 import Foundation
 class PlaceDetailsViewModel {
     
+    var apiResponce = ApiResponce()
     static var objectOfviewModel = PlaceDetailsViewModel()
     var objectOfPlaceDetailsNetworkManager = PlaceDetailsNetworkManager()
     
     var perticularPlaceDetails = [PlaceDetails]()
     
     func perticularPlaceDetailsApiCall(placeId: String, completion: @escaping((Bool) -> ())) {
-        objectOfPlaceDetailsNetworkManager.particularPlaceDetails(placeIs: placeId){ placeData, placeStatus, placeError in
+        
+        guard let url = URL(string:"https://four-square-three.vercel.app/api/getParticularPlace") else{ return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let parameter: [String:Any] = [
+            "_id": placeId
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
+        apiResponce.postApiResonce(request: request){ data, status, error in
+            DispatchQueue.main.async {
+            if error != nil && status != true{
+                completion(false)
+                return
+            }
+            if let parsing0 = data as? [String: Any]{
+                if(parsing0.isEmpty) {
+                    completion(false)
+                }else{
+                    var lat = 0.0
+                    var long = 0.0
+                    var placeId = ""
+                    var placeName = ""
+                    var imageUrl = ""
+                    var address = ""
+                    var cityName = ""
+                    var category = ""
+                    var overview = ""
+                    var rating = 0.0
+                    var priceRange = 0
+                    var phoneNum = ""
+                    if let parsing1 = parsing0["_id"] as? String{
+                        placeId = parsing1
+                    }
+                    if let parsing2 = parsing0["placeName"] as? String{
+                        placeName = parsing2
+                    }
+                    if let parsing3 = parsing0["placeImage"] as? String{
+                        imageUrl = parsing3
+                    }
+                    if let parsing4 = parsing0["address"] as? String{
+                        address = parsing4
+                    }
+                    if let parsing5 = parsing0["city"] as? String{
+                        cityName = parsing5
+                    }
+                    if let parsing6 = parsing0["category"] as? String{
+                        category = parsing6
+                    }
+                    if let parsing7 = parsing0["overview"] as? String{
+                        overview = parsing7
+                    }
+                    if let parsing8 = parsing0["priceRange"] as? Int{
+                        priceRange = parsing8
+                    }
+                    if let parsing9 = parsing0["rating"] as? Double{
+                        rating = parsing9
+                    }
+                    if let parsing10 = parsing0["placePhone"] as? String{
+                        phoneNum = parsing10
+                    }
+                    if let parsing11 = parsing0["location"] as? [String:Any]{
+                        if let parsing001 = parsing11["coordinates"] as? [Double]{
+                            lat = parsing001[1]
+                            long = parsing001[0]
+                        }
+                    }
+                    let place = PlaceDetails(latitude: lat, longitude: long, placeId: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, overview: overview, rating: rating, priceRange: priceRange, phoneNumber: phoneNum)
+                    self.perticularPlaceDetails.append(place)
+                    completion(true)
+                }
+            }
+        }
+        }
+        
+        
+/*        objectOfPlaceDetailsNetworkManager.particularPlaceDetails(placeIs: placeId){ placeData, placeStatus, placeError in
             DispatchQueue.main.async {
                 self.perticularPlaceDetails.removeAll()
                 if placeError == nil{
                     if placeStatus == true{
                         
-                        if let data0 = placeData{
-                            if(data0.isEmpty) {
+                        if let parsing0 = placeData{
+                            if(parsing0.isEmpty) {
                                 completion(false)
                             }else{
-                                var latIs = 0.0
-                                var longIs = 0.0
-                                var placeIdIsIS = ""
+                                var lat = 0.0
+                                var long = 0.0
+                                var placeId = ""
                                 var placeName = ""
                                 var imageUrl = ""
                                 var address = ""
@@ -34,49 +111,49 @@ class PlaceDetailsViewModel {
                                 var category = ""
                                 var overview = ""
                                 var rating = 0.0
-                                var priceRangeIs = 0
+                                var priceRange = 0
                                 var phoneNum = ""
-                                if let data1 = data0["_id"] as? String{
-                                    placeIdIsIS = data1
+                                if let parsing1 = parsing0["_id"] as? String{
+                                    placeId = parsing1
                                 }
-                                if let data2 = data0["placeName"] as? String{
-                                    placeName = data2
+                                if let parsing2 = parsing0["placeName"] as? String{
+                                    placeName = parsing2
                                 }
-                                if let data3 = data0["placeImage"] as? String{
-                                    imageUrl = data3
+                                if let parsing3 = parsing0["placeImage"] as? String{
+                                    imageUrl = parsing3
                                 }
-                                if let data4 = data0["address"] as? String{
-                                    address = data4
+                                if let parsing4 = parsing0["address"] as? String{
+                                    address = parsing4
                                 }
-                                if let data5 = data0["city"] as? String{
-                                    cityName = data5
+                                if let parsing5 = parsing0["city"] as? String{
+                                    cityName = parsing5
                                 }
-                                if let data6 = data0["category"] as? String{
-                                    category = data6
+                                if let parsing6 = parsing0["category"] as? String{
+                                    category = parsing6
                                 }
-                                if let data7 = data0["overview"] as? String{
-                                    overview = data7
+                                if let parsing7 = parsing0["overview"] as? String{
+                                    overview = parsing7
                                 }
-                                if let data8 = data0["priceRange"] as? Int{
-                                    priceRangeIs = data8
+                                if let parsing8 = parsing0["priceRange"] as? Int{
+                                    priceRange = parsing8
                                 }
-                                if let data9 = data0["rating"] as? Double{
-                                    rating = data9
+                                if let parsing9 = parsing0["rating"] as? Double{
+                                    rating = parsing9
                                 }
-                                if let data10 = data0["placePhone"] as? String{
-                                    phoneNum = data10
+                                if let parsing10 = parsing0["placePhone"] as? String{
+                                    phoneNum = parsing10
                                 }
-                                if let data11 = data0["location"] as? [String:Any]{
-                                    if let data001 = data11["coordinates"] as? [Double]{
-                                        latIs = data001[1]
-                                        longIs = data001[0]
+                                if let parsing11 = parsing0["location"] as? [String:Any]{
+                                    if let parsing001 = parsing11["coordinates"] as? [Double]{
+                                        lat = parsing001[1]
+                                        long = parsing001[0]
                                     }
                                 }
-                                let place = PlaceDetails(latitude: latIs, longitude: longIs, placeId: placeIdIsIS, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, overview: overview, rating: rating, priceRange: priceRangeIs, phoneNumber: phoneNum)
+                                let place = PlaceDetails(latitude: lat, longitude: long, placeId: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, overview: overview, rating: rating, priceRange: priceRange, phoneNumber: phoneNum)
                                 self.perticularPlaceDetails.append(place)
                                 completion(true)
                             }
-                            }
+                        }
                     }else{
                         completion(false)
                     }
@@ -84,13 +161,34 @@ class PlaceDetailsViewModel {
                     completion(false)
                 }
             }
-        }
+        } */
     }
     
     
-    func addRatingApiCall(tokenTosend: String, placeId: String, ratingIs: Int, completion: @escaping((Bool) -> ())) {
+    func addRatingApiCall(tokenTosend: String, placeId: String, ratingToSend: Int, completion: @escaping((Bool) -> ())) {
         
-        objectOfPlaceDetailsNetworkManager.addRating(token: tokenTosend, _Id: placeId, rating: ratingIs){ ratingStatus, ratingeError in
+        guard let url = URL(string:"https://four-square-three.vercel.app/api/addRating") else{ return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(tokenTosend)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let parameter: [String:Any] = [
+            "_id": placeId,
+            "rating": ratingToSend
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
+        apiResponce.postApiResonce(request: request){ data, status, error in
+            DispatchQueue.main.async {
+                if error != nil && status != true{
+                    completion(false)
+                }else{
+                    completion(true)
+                }
+            }
+        }
+        
+        
+/*        objectOfPlaceDetailsNetworkManager.addRating(token: tokenTosend, _Id: placeId, rating: ratingToSend){ ratingStatus, ratingeError in
             DispatchQueue.main.async {
                 if ratingeError == nil{
                     if ratingStatus == true{
@@ -102,6 +200,6 @@ class PlaceDetailsViewModel {
                     completion(false)
                 }
             }
-        }
+        } */
     }
 }

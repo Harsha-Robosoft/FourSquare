@@ -36,7 +36,6 @@ class HomeTableViewCell: UITableViewCell {
     var statusISS = 0
     
     func setShadow() {
-        
         backView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2).cgColor
         backView.layer.shadowOpacity = 100
         backView.layer.shadowRadius = 5
@@ -55,21 +54,17 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     @IBAction func likeButtonTapped(_ sender: UIButton) {
-        
-        print("hi hi ")
         let call = getToken()
-
-        print("Id is is : \(_Id)")
         if call != ""{
             if onClick == true{
-
-                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: _Id){ status in
+                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: _Id){ status in
                     if status == true{
                         self.likeButton.noChange()
                         self.onClick = false
                         self.objectOfHomeViewModel.userFavouiretListArray = self.objectOfHomeViewModel.userFavouiretListArray.filter { $0 != self._Id}
-                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                             if status == true{
+                                print("jsfavuavsckC0000912031029831278")
                                 print("fav id list received")
                                 self.delegateHomeCell?.reloadTheTable()
                             }else{
@@ -81,12 +76,12 @@ class HomeTableViewCell: UITableViewCell {
                 }
             }else{
 
-                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdIs: _Id){ status in
+                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: _Id){ status in
                     if status == true{
                         self.likeButton.noChange()
                         self.objectOfHomeViewModel.userFavouiretListArray.append(self._Id)
                         self.onClick = true
-                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenIs: call){ status in
+                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                             if status == true{
                                 print("fav id list received")
                                 self.delegateHomeCell?.reloadTheTable()
@@ -98,12 +93,8 @@ class HomeTableViewCell: UITableViewCell {
                     }
                 }
             }
-        }else{
-            
-        }
-  
+        }else{}
     }
-
 }
 
 
@@ -114,12 +105,10 @@ extension HomeTableViewCell{
         if let idIs = userIdIs as? String{
             id = idIs
         }
-        print("Search id : \(id)")
         guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
             return ""}
         guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
             return ""}
-        print("Search token",receivedToken)
         return receivedToken
     }
     

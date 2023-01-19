@@ -8,30 +8,28 @@
 import Foundation
 class AboutUsViewModel {
     
+    var ApiResponceObject = ApiResponce()
     static var objectOfViewModel = AboutUsViewModel()
     var objectOfAboutUsNetwork = AboutUsNetwork()
     
     var aboutDataIsIS = ""
     func ApiCallForAboutUs(completion: @escaping((Bool) -> ())) {
-        objectOfAboutUsNetwork.aboutUsApi(){ aboutData, aboutStatus, aboutError in
+        guard let url = URL(string:"https://four-square-three.vercel.app/api/getAboutUs") else{ return}
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        ApiResponceObject.getApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
-                if aboutError == nil{
-                    if aboutStatus == true{
-                        if let data0 = aboutData {
-                            
-                            for i in data0{
-                                if let dataIS = i["aboutUs"] as? String{
-                                    
-                                    self.aboutDataIsIS = dataIS
-                                }
-                            }
-                        }
-                        completion(true)
-                    }else{
-                        completion(false)
-                    }
-                }else{
+                if error != nil && status != true{
                     completion(false)
+                    return
+                }
+                if let parsing0 = data as? [[String: Any]]{
+                    for i in parsing0{
+                        if let parsing = i["aboutUs"] as? String{
+                            self.aboutDataIsIS = parsing
+                        }
+                    }
+                    completion(true)
                 }
             }
         }
