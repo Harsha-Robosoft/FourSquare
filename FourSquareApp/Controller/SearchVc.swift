@@ -15,9 +15,16 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     var getTheToken = GetToken.getTheUserToken
 
     //    VARIABLES DECLARATION -----------------------------
+    
+    var filterElement = ["Accepts creadit card","Delivary","Dog friendly","Family-friendly place","In walking distance","Outdoor seating","Parking","Wi-fi"]
+    
+    
+    var cell00: FilterButtonTableCell?
+    
     var test = false
     var nearYou = 0
     var filterTapped = 0
+    var filterTableToShow = 0
     var poplular_Distance_RatingButton = ""
     var rateStatus = 0
     var searching = 0
@@ -43,6 +50,10 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     @IBOutlet weak var filterScreen: UIView!
     @IBOutlet weak var whiteView: UIView!
     //    FILTER SCREEN FIRELD -------------------------------------------
+    
+    @IBOutlet weak var filterButtonTable: UITableView!
+    
+    
     @IBOutlet weak var popularButton: SearchScreenButton!
     @IBOutlet weak var distanceButton: SearchScreenButton!
     @IBOutlet weak var ratingButton: SearchScreenButton!
@@ -138,6 +149,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         map_CollectionView.dataSource = self
         mapButton_TableView.delegate = self
         mapButton_TableView.dataSource = self
+        filterButtonTable.delegate = self
+        filterButtonTable.dataSource = self
         mapButton_TableView.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -149,6 +162,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         nearYou = 1
                         filterSearchIs = 0
                         searching = 0
+                        filterTableToShow = 0
                         nearMeView.isHidden = true
                         tableViewAndViewMap.isHidden = true
                         mapAndCollectionView.isHidden = true
@@ -248,6 +262,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                             self.searching = 1
                             self.nearYou = 0
                             self.filterSearchIs = 0
+                            self.filterTableToShow = 0
                             self.nearMeView.isHidden = true
                             self.tableViewAndViewMap.isHidden = false
                             self.mapAndCollectionView.isHidden = true
@@ -327,7 +342,10 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         if tokenIs != ""{
             if sender.currentTitle == nil{
                 filterTapped = 1
+                filterTableToShow = 1
                 nearYou = 0
+                searching = 0
+                filterSearchIs = 0
                 nearMeView.isHidden = true
                 tableViewAndViewMap.isHidden = true
                 mapAndCollectionView.isHidden = true
@@ -336,6 +354,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 whiteView.isHidden = true
                 filter.setTitle("Done", for: .normal)
                 filter.setImage(nil, for: .normal)
+                filterButtonTable.reloadData()
             }else{
                 var dictionaryIs = [String: Any]()
                 dictionaryIs["latitude"] = String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162")
@@ -350,35 +369,39 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 if rateStatus != 0{
                     dictionaryIs["price"] = rateStatus
                 }
-                if acceptCard == false{
+                if objectOfSearchViewModel.userFilterChoice.contains("Accepts creadit card"){
                     dictionaryIs["acceptedCredit"] = true
                 }
-                if delivary == false{
+                if objectOfSearchViewModel.userFilterChoice.contains("Delivary"){
                     dictionaryIs["delivery"] = true
                 }
-                if dogFriendly == false{
+                if objectOfSearchViewModel.userFilterChoice.contains("Dog friendly"){
                     dictionaryIs["dogFriendly"] = true
                 }
-                if familyFriendly == false{
+                if objectOfSearchViewModel.userFilterChoice.contains("Family-friendly place"){
                     dictionaryIs["familyFriendly"] = true
                 }
-                if inWalkingDistanceNum == false{
+                if objectOfSearchViewModel.userFilterChoice.contains("In walking distance"){
                     dictionaryIs["inWalkingDistance"] = true
                 }
-                if outDoorSeatingNum == false{
+                if objectOfSearchViewModel.userFilterChoice.contains("Outdoor seating"){
                     dictionaryIs["outdoorDining"] = true
                 }
-                if parkingNum == false{
+                if objectOfSearchViewModel.userFilterChoice.contains("Parking"){
                     dictionaryIs["parking"] = true
                 }
-                if wifiNum == false{
+                if objectOfSearchViewModel.userFilterChoice.contains("Wi-fi"){
                     dictionaryIs["wifi"] = true
                 }
+                
+                print("dic",dictionaryIs)
+                
                 objectOfSearchViewModel.searchWithFilterApiCall(tokenToSend: tokenIs, parameterDictionary: dictionaryIs){ status in
                     if status == true{
                         self.searching = 0
                         self.nearYou = 0
                         self.filterSearchIs = 1
+                        self.filterTableToShow = 0
                         self.nearMeView.isHidden = true
                         self.tableViewAndViewMap.isHidden = false
                         self.mapAndCollectionView.isHidden = true
@@ -389,6 +412,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         self.filter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
                         self.search.text = ""
                         self.mapButton_TableView.reloadData()
+                        self.objectOfSearchViewModel.userFilterChoice.removeAll()
                     }else{
                         self.nearMeView.isHidden = true
                         self.tableViewAndViewMap.isHidden = true
@@ -766,6 +790,8 @@ extension SearchVc{
             return objectOfSearchViewModel.searchDetaisl.count
         }else if filterSearchIs == 1{
             return objectOfSearchViewModel.filterSearchDetails.count
+        }else if filterTableToShow == 1{
+            return filterElement.capacity
         }
         return objectOfHomeViewModel.homeDetails.count
     }
@@ -843,7 +869,15 @@ extension SearchVc{
             cell.setShadow()
             cell.delegateHomeCell = self
             return cell
+        } else if filterTableToShow == 1{
+            let cell = filterButtonTable.dequeueReusableCell(withIdentifier: "buttonCell") as! FilterButtonTableCell
+            cell.selectionStyle = .none
+            cell00 = cell
+            cell.updateLable.text = filterElement[indexPath.row]
+            cell.updateImage.noChanges()
+            return cell
         }
+        
         let cell = mapButton_TableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
         var imageIs = objectOfHomeViewModel.homeDetails[indexPath.row].placeImage
         imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
@@ -874,6 +908,8 @@ extension SearchVc{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if nearYou == 1{
             return 55
+        }else if filterTableToShow == 1{
+            return 42.6
         }
         return 135
     }
@@ -930,6 +966,20 @@ extension SearchVc{
                 vc.placeId = objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+        }else if filterTableToShow == 1{
+            let cell = filterButtonTable.cellForRow(at: indexPath) as! FilterButtonTableCell
+            if objectOfSearchViewModel.userFilterChoice.contains(filterElement[indexPath.row]){
+                objectOfSearchViewModel.userFilterChoice = objectOfSearchViewModel.userFilterChoice.filter { $0 != filterElement[indexPath.row] }
+            }else{
+                objectOfSearchViewModel.userFilterChoice.append(filterElement[indexPath.row])
+            }
+            
+            
+            
+            cell.changeTheStatus(filterItem: filterElement[indexPath.row])
+            print("0909",filterElement[indexPath.row])
+            
+            
         }else{
             let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
             if let vc = Details{

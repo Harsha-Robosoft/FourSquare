@@ -8,9 +8,13 @@
 import Foundation
 class SearchViewModel {
     
+    
+    
     var apiResponce = ApiResponce()
     static var objectOfViewModel = SearchViewModel()
     var objectOfSearchNetworkManager = SearchNetworkManager()
+    
+    var userFilterChoice = [String]()
     
     var commonVm = CommonVm()
     var filterSearchDetails = [HomeData]()
