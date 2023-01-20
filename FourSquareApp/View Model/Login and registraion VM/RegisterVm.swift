@@ -10,7 +10,6 @@ import Foundation
 class RegisterViewModel {
     var apiResponce = ApiResponce()
     static var objectOfVm = RegisterViewModel()
-    var obejctOfRegisterNetwork = RegisterNetwork()
     
     func apiCallForUserRegistration(emailToSend: String, mobileNumberToSend: String, passwordToSend: String, completion: @escaping((String, Bool) -> ())) {
         

@@ -12,10 +12,10 @@ protocol reloadHomeTable2 {
 
 class SearchCollectionView: UICollectionViewCell {
     
-    var objectOfUserDefaults = UserDefaults()
-    var objectOfKeyChain = KeyChain()
-    var objectOfAddToFavouiretViewModel = AddToFavoriteViewModel.addToFavoriteViewModel_Shared
-    var objectOfHomeViewModel = HomeViewModel._Shared
+    var userDefaults_Shared = UserDefaults()
+    var keyChain_Shared = KeyChain()
+    var addToFavouiretViewModel_Shared = AddToFavoriteViewModel.addToFavoriteViewModel_Shared
+    var homeViewModel_Shared = HomeViewModel._Shared
     
     var collectionDelegate: reloadHomeTable2?
     
@@ -46,7 +46,7 @@ class SearchCollectionView: UICollectionViewCell {
     }
     
     func buttonTatus(id: String) {
-        if( objectOfHomeViewModel.userFavouiretListArray.contains(_Id) ) {
+        if( homeViewModel_Shared.userFavouiretListArray.contains(_Id) ) {
             likeButton.changes()
             onClick = true
         }
@@ -64,12 +64,12 @@ class SearchCollectionView: UICollectionViewCell {
         if call != ""{
             if onClick == true{
 
-                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: _Id){ status in
+                addToFavouiretViewModel_Shared.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: _Id){ status in
                     if status == true{
                         self.likeButton.noChange()
                         self.onClick = false
-                        self.objectOfHomeViewModel.userFavouiretListArray = self.objectOfHomeViewModel.userFavouiretListArray.filter { $0 != self._Id}
-                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
+                        self.homeViewModel_Shared.userFavouiretListArray = self.homeViewModel_Shared.userFavouiretListArray.filter { $0 != self._Id}
+                        self.homeViewModel_Shared.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                             if status == true{
                                 print("fav id list received")
                                 self.collectionDelegate?.tableReloda()
@@ -82,12 +82,12 @@ class SearchCollectionView: UICollectionViewCell {
                 }
             }else{
                 
-                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: _Id){ status in
+                addToFavouiretViewModel_Shared.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: _Id){ status in
                     if status == true{
                         self.likeButton.noChange()
-                        self.objectOfHomeViewModel.userFavouiretListArray.append(self._Id)
+                        self.homeViewModel_Shared.userFavouiretListArray.append(self._Id)
                         self.onClick = true
-                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
+                        self.homeViewModel_Shared.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                             if status == true{
                                 print("fav id list received")
                                 self.collectionDelegate?.tableReloda()
@@ -110,12 +110,12 @@ class SearchCollectionView: UICollectionViewCell {
 extension SearchCollectionView{
     func getToken() -> String {
         var id = ""
-       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
+       let userIdIs = userDefaults_Shared.value(forKey: "userId")
         if let idIs = userIdIs as? String{
             id = idIs
         }
         print("Search id : \(id)")
-        guard let receivedTokenData = objectOfKeyChain.loadData(userId: id) else {print("utr 2")
+        guard let receivedTokenData = keyChain_Shared.loadData(userId: id) else {print("utr 2")
             return ""}
         guard let receivedToken = String(data: receivedTokenData, encoding: .utf8) else {print("utr 3")
             return ""}

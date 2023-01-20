@@ -12,7 +12,6 @@ class LoginViewModel {
     var apiResponce = ApiResponce()
     var objectOfUserDefaults = UserDefaults()
     static var objectOfVm = LoginViewModel()
-    var objectOfRegisterNetwork = RegisterNetwork()
     
     func apiCallForUserLogin(emailToSend: String, passwordToSend: String, completion: @escaping((String,Bool) -> ())) {
         

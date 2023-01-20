@@ -9,7 +9,6 @@ import Foundation
 class ForgotPasswordViewModel {
     var apiResponce = ApiResponce()
     static var objectOfVm = ForgotPasswordViewModel()
-    var objectOfForgotPasswordNetwork = ForgotPasswordNetwork()
     
     func forgotPassewordApiCall(emailToSend: String, passwordToSend: String, completion: @escaping((Bool) -> ())) {
         guard let url = URL(string:"https://four-square-three.vercel.app/api/forgotPassword") else{ return }

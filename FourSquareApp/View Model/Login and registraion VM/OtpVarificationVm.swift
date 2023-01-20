@@ -11,7 +11,6 @@ class OtpvarificationViewModel {
     
     var apiResponce = ApiResponce()
     static var objectOfVc = OtpvarificationViewModel()
-    var objectOfOtpVarificationNetwork = OtpVarificationNetwork()
     
     func sendOtpApiCall(emailToSend: String, completion: @escaping((Bool) -> ())) {
         guard let url = URL(string:"https://four-square-three.vercel.app/api/sendOtp") else{ return }
