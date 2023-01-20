@@ -9,8 +9,8 @@ import UIKit
 
 class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var getTheToken_Shared = GetToken._Shared
-    var photoViewModel_Shared = PhotoViewModel._Shared
+    var getTheToken_shared = GetToken._shared
+    var photoViewModel_shared = PhotoViewModel._shared
     
     var nameIs = ""
     var placeId = ""
@@ -28,11 +28,11 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let call = getTheToken_Shared.getToken()
+        let call = getTheToken_shared.getToken()
         if call != ""{
-            photoViewModel_Shared.getAllPhotosApicall(tokenToSend: call, placeIdToSend: placeId){status in
+            photoViewModel_shared.getAllPhotosApicall(tokenToSend: call, placeIdToSend: placeId){status in
                 if status == true{
-                    if self.photoViewModel_Shared.AllPhotosDetails.last?.imageIs != ""{
+                    if self.photoViewModel_shared.AllPhotosDetails.last?.imageIs != ""{
                         self.collectionView01.reloadData()
                     }
                 }else{
@@ -64,12 +64,12 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoViewModel_Shared.AllPhotosDetails.count
+        return photoViewModel_shared.AllPhotosDetails.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView01.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionCell
-        var imageIs = photoViewModel_Shared.AllPhotosDetails[indexPath.row].imageIs
+        var imageIs = photoViewModel_shared.AllPhotosDetails[indexPath.row].imageIs
         imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
         cell.imageIs.image = getImage(urlString: imageIs)
         return cell
@@ -79,7 +79,7 @@ class PhotoVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         let showVc = self.storyboard?.instantiateViewController(withIdentifier: "ShowPhotoVc") as? ShowPhotoVc
         if let vc = showVc{
             vc.placeName = nameIs
-            vc.details = photoViewModel_Shared.AllPhotosDetails[indexPath.row]
+            vc.details = photoViewModel_shared.AllPhotosDetails[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

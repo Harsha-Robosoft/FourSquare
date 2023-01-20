@@ -12,11 +12,10 @@ protocol showHomePage1 {
 
 class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource, reloadTable{
     
-    var searchViewModel_Shared = SearchViewModel._Shared
-    var getTheToken_Shared = GetToken._Shared
-    var favouiretViewModel_Shared = FavoriteViewModel._Shared
-    var homeViewModel_Shared = HomeViewModel._Shared
-    
+    var searchViewModel_shared = SearchViewModel._shared
+    var getTheToken_shared = GetToken._shared
+    var favouiretViewModel_shared = FavoriteViewModel._shared
+    var homeViewModel_shared = HomeViewModel._shared
     
     var poplular_Distance_RatingButton = ""
     var rateStatus = 0
@@ -64,17 +63,17 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         favouiretTableView.register(UINib(nibName: "favCell", bundle: nil), forCellReuseIdentifier: "cellFave")
         
         
-        let tokenIs = getTheToken_Shared.getToken()
+        let tokenIs = getTheToken_shared.getToken()
         
         if tokenIs != ""{
             var dictionaryIs = [String: Any]()
             if didload == 1 {
                 var latitudeIs = ""
                 var longitudeIs = ""
-                if let latitude = homeViewModel_Shared.userLocation.last?.latitude {
+                if let latitude = homeViewModel_shared.userLocation.last?.latitude {
                     latitudeIs = latitude
                 }
-                if let longitude = homeViewModel_Shared.userLocation.last?.longitude{
+                if let longitude = homeViewModel_shared.userLocation.last?.longitude{
                     longitudeIs = longitude
                 }
                 dictionaryIs["latitude"] = latitudeIs
@@ -84,7 +83,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
             
             
-            favouiretViewModel_Shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+            favouiretViewModel_shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
                 if status == true{
                     self.noDatFoundView.isHidden = true
                     self.favouiretTableView.isHidden = false
@@ -117,15 +116,15 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     func reloadTheTable() {
         
-        let tokenIs = getTheToken_Shared.getToken()
+        let tokenIs = getTheToken_shared.getToken()
         var dictionaryIs = [String: Any]()
         
         var latitudeIs = ""
         var longitudeIs = ""
-        if let latitude = homeViewModel_Shared.userLocation.last?.latitude {
+        if let latitude = homeViewModel_shared.userLocation.last?.latitude {
             latitudeIs = latitude
         }
-        if let longitude = homeViewModel_Shared.userLocation.last?.longitude{
+        if let longitude = homeViewModel_shared.userLocation.last?.longitude{
             longitudeIs = longitude
         }
         dictionaryIs["latitude"] = latitudeIs
@@ -133,7 +132,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         dictionaryIs["text"] = ""
         
         
-        favouiretViewModel_Shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+        favouiretViewModel_shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
             if status == true{
                 self.noDatFoundView.isHidden = true
                 self.favouiretTableView.isHidden = false
@@ -155,7 +154,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     @IBAction func backtapped(_ sender: UIButton) {
         homeDelegate1?.homePage1()
-        searchViewModel_Shared.userFilterChoice.removeAll()
+        searchViewModel_shared.userFilterChoice.removeAll()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -164,15 +163,15 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         if filterTapped != 1{
             
-            let tokenIs = getTheToken_Shared.getToken()
+            let tokenIs = getTheToken_shared.getToken()
             var dictionaryIs = [String: Any]()
             if didload == 1 {
                 var latitudeIs = ""
                 var longitudeIs = ""
-                if let latitude = homeViewModel_Shared.userLocation.last?.latitude {
+                if let latitude = homeViewModel_shared.userLocation.last?.latitude {
                     latitudeIs = latitude
                 }
-                if let longitude = homeViewModel_Shared.userLocation.last?.longitude{
+                if let longitude = homeViewModel_shared.userLocation.last?.longitude{
                     longitudeIs = longitude
                 }
                 dictionaryIs["latitude"] = latitudeIs
@@ -180,7 +179,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 dictionaryIs["text"] = searchField.text
             }
             
-            favouiretViewModel_Shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+            favouiretViewModel_shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
                 if status == true{
                     self.noDatFoundView.isHidden = true
                     self.favouiretTableView.isHidden = false
@@ -200,7 +199,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     @IBAction func filterButtonTapped(_ sender: UIButton) {
-        let tokenIs = getTheToken_Shared.getToken()
+        let tokenIs = getTheToken_shared.getToken()
         filterTapped = 1
         filterTableToShow = 1
         filterButtonTable.delegate = self
@@ -216,10 +215,10 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
             }else{
                 var latitudeIs = ""
                 var longitudeIs = ""
-                if let latitude = homeViewModel_Shared.userLocation.last?.latitude {
+                if let latitude = homeViewModel_shared.userLocation.last?.latitude {
                     latitudeIs = latitude
                 }
-                if let longitude = homeViewModel_Shared.userLocation.last?.longitude{
+                if let longitude = homeViewModel_shared.userLocation.last?.longitude{
                     longitudeIs = longitude
                 }
                 
@@ -241,34 +240,34 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 if rateStatus != 0{
                     dictionaryIs["price"] = rateStatus
                 }
-                if searchViewModel_Shared.userFilterChoice.contains("Accepts creadit card"){
+                if searchViewModel_shared.userFilterChoice.contains("Accepts creadit card"){
                     dictionaryIs["acceptedCredit"] = true
                 }
-                if searchViewModel_Shared.userFilterChoice.contains("Delivary"){
+                if searchViewModel_shared.userFilterChoice.contains("Delivary"){
                     dictionaryIs["delivery"] = true
                 }
-                if searchViewModel_Shared.userFilterChoice.contains("Dog friendly"){
+                if searchViewModel_shared.userFilterChoice.contains("Dog friendly"){
                     dictionaryIs["dogFriendly"] = true
                 }
-                if searchViewModel_Shared.userFilterChoice.contains("Family-friendly place"){
+                if searchViewModel_shared.userFilterChoice.contains("Family-friendly place"){
                     dictionaryIs["familyFriendly"] = true
                 }
-                if searchViewModel_Shared.userFilterChoice.contains("In walking distance"){
+                if searchViewModel_shared.userFilterChoice.contains("In walking distance"){
                     dictionaryIs["inWalkingDistance"] = true
                 }
-                if searchViewModel_Shared.userFilterChoice.contains("Outdoor seating"){
+                if searchViewModel_shared.userFilterChoice.contains("Outdoor seating"){
                     dictionaryIs["outdoorDining"] = true
                 }
-                if searchViewModel_Shared.userFilterChoice.contains("Parking"){
+                if searchViewModel_shared.userFilterChoice.contains("Parking"){
                     dictionaryIs["parking"] = true
                 }
-                if searchViewModel_Shared.userFilterChoice.contains("Wi-fi"){
+                if searchViewModel_shared.userFilterChoice.contains("Wi-fi"){
                     dictionaryIs["wifi"] = true
                 }
                 
             print("dictionary is : \(dictionaryIs)")
                 
-                favouiretViewModel_Shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/favFilter", paramsDictionary: dictionaryIs){ [self] status in
+                favouiretViewModel_shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/favFilter", paramsDictionary: dictionaryIs){ [self] status in
                     DispatchQueue.main.async {
                         if status == true{
                             filterTableToShow = 0
@@ -279,7 +278,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                             favouiretFilter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
                             favouiretTableView.reloadData()
                             searchField.text = ""
-                            searchViewModel_Shared.userFilterChoice.removeAll()
+                            searchViewModel_shared.userFilterChoice.removeAll()
 
                         }else{
                             noDatFoundView.isHidden = false
@@ -288,7 +287,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                             favouiretFilter.setTitle(nil, for: .normal)
                             favouiretFilter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
                             searchField.text = ""
-                            searchViewModel_Shared.userFilterChoice.removeAll()
+                            searchViewModel_shared.userFilterChoice.removeAll()
 
                         }
                     }
@@ -455,7 +454,7 @@ extension FavoritetVc{
         if filterTableToShow == 1{
             return filterElement.count
         }
-        return favouiretViewModel_Shared.favSearchDetails.count
+        return favouiretViewModel_shared.favSearchDetails.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -470,26 +469,26 @@ extension FavoritetVc{
         }
         
         let cell = favouiretTableView.dequeueReusableCell(withIdentifier: "cellFave") as! FavTableCell
-        var imageIs = favouiretViewModel_Shared.favSearchDetails[indexPath.row].placeImage
+        var imageIs = favouiretViewModel_shared.favSearchDetails[indexPath.row].placeImage
         imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
         cell.imageIs.image = getImage(urlString: imageIs)
-        cell.addresIs.text = "\(favouiretViewModel_Shared.favSearchDetails[indexPath.row].address),\(favouiretViewModel_Shared.favSearchDetails[indexPath.row].city)"
-        cell.distanceIs.text = "\(favouiretViewModel_Shared.favSearchDetails[indexPath.row].distance)km"
-        cell.nameIs.text = favouiretViewModel_Shared.favSearchDetails[indexPath.row].placeName
-        cell.nationalityIs.text = favouiretViewModel_Shared.favSearchDetails[indexPath.row].category
-        cell.ratingIs.text = favouiretViewModel_Shared.favSearchDetails[indexPath.row].rating
-        if favouiretViewModel_Shared.favSearchDetails[indexPath.row].priceRange == "1"{
+        cell.addresIs.text = "\(favouiretViewModel_shared.favSearchDetails[indexPath.row].address),\(favouiretViewModel_shared.favSearchDetails[indexPath.row].city)"
+        cell.distanceIs.text = "\(favouiretViewModel_shared.favSearchDetails[indexPath.row].distance)km"
+        cell.nameIs.text = favouiretViewModel_shared.favSearchDetails[indexPath.row].placeName
+        cell.nationalityIs.text = favouiretViewModel_shared.favSearchDetails[indexPath.row].category
+        cell.ratingIs.text = favouiretViewModel_shared.favSearchDetails[indexPath.row].rating
+        if favouiretViewModel_shared.favSearchDetails[indexPath.row].priceRange == "1"{
             cell.rateIs.text = "₹"
-        }else if favouiretViewModel_Shared.favSearchDetails[indexPath.row].priceRange == "2"{
+        }else if favouiretViewModel_shared.favSearchDetails[indexPath.row].priceRange == "2"{
             cell.rateIs.text = "₹₹"
-        }else if favouiretViewModel_Shared.favSearchDetails[indexPath.row].priceRange == "3"{
+        }else if favouiretViewModel_shared.favSearchDetails[indexPath.row].priceRange == "3"{
             cell.rateIs.text = "₹₹₹"
-        }else if favouiretViewModel_Shared.favSearchDetails[indexPath.row].priceRange == "4"{
+        }else if favouiretViewModel_shared.favSearchDetails[indexPath.row].priceRange == "4"{
             cell.rateIs.text = "₹₹₹₹"
-        }else if favouiretViewModel_Shared.favSearchDetails[indexPath.row].priceRange == "5"{
+        }else if favouiretViewModel_shared.favSearchDetails[indexPath.row].priceRange == "5"{
             cell.rateIs.text = "₹₹₹₹₹"
         }
-        cell.placeId = favouiretViewModel_Shared.favSearchDetails[indexPath.row]._id
+        cell.placeId = favouiretViewModel_shared.favSearchDetails[indexPath.row]._id
         cell.delegateCell = self
         cell.setShadow()
         return cell
@@ -498,10 +497,10 @@ extension FavoritetVc{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if filterTableToShow == 1{
             let cell = filterButtonTable.cellForRow(at: indexPath) as! FilterButtonTableCell
-            if searchViewModel_Shared.userFilterChoice.contains(filterElement[indexPath.row]){
-                searchViewModel_Shared.userFilterChoice = searchViewModel_Shared.userFilterChoice.filter { $0 != filterElement[indexPath.row] }
+            if searchViewModel_shared.userFilterChoice.contains(filterElement[indexPath.row]){
+                searchViewModel_shared.userFilterChoice = searchViewModel_shared.userFilterChoice.filter { $0 != filterElement[indexPath.row] }
             }else{
-                searchViewModel_Shared.userFilterChoice.append(filterElement[indexPath.row])
+                searchViewModel_shared.userFilterChoice.append(filterElement[indexPath.row])
             }
             cell.changeTheStatus(filterItem: filterElement[indexPath.row])
             print("0909",filterElement[indexPath.row])

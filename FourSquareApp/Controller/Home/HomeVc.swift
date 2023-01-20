@@ -10,11 +10,11 @@ import UIKit
 
 class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate,sendingIndex, showHomePage1, showHomePage2, showHomePage3 {
 
-    var homeViewModel_Shared = HomeViewModel._Shared
+    var homeViewModel_shared = HomeViewModel._shared
     
-    var getTheToken_Shared = GetToken._Shared
-    var userDefaults_Shared = UserDefaults()
-    var keyChain_Shared = KeyChain()
+    var getTheToken_shared = GetToken._shared
+    var userDefaults_shared = UserDefaults()
+    var keyChain_shared = KeyChain()
     
     @IBOutlet weak var proFileEditButton: UIButton!
     @IBOutlet weak var userProfileImage: UIImageView!
@@ -39,7 +39,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var collectionItem = ["Near you","Toppic","Popular","Lunch","Coffee"]
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tokenIs = getTheToken_Shared.getToken()
+        let tokenIs = getTheToken_shared.getToken()
         
         print("user token is : \(tokenIs)")
         
@@ -83,23 +83,23 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             bottom.constant = 50
             menuOut = true
             
-            let call = getTheToken_Shared.getToken()
+            let call = getTheToken_shared.getToken()
             
             if call != ""{
                 
                 proFileEditButton.isEnabled = true
                 
-                homeViewModel_Shared.userDetailsApiCall(tokenToSend: call){ status in
+                homeViewModel_shared.userDetailsApiCall(tokenToSend: call){ status in
                     if status == true{
                         var imageIs = ""
                         
-                        if let imageIsIS = self.homeViewModel_Shared.userDetails.last?.userProfileImage{
+                        if let imageIsIS = self.homeViewModel_shared.userDetails.last?.userProfileImage{
                             imageIs = imageIsIS
                         }
                         imageIs.insert("s", at: imageIs.index(imageIs.startIndex , offsetBy: 4) )
                         self.userProfileImage.image = self.getImage(urlString: imageIs)
                         self.name_Loginbutton.isEnabled = false
-                        self.name_Loginbutton.setTitle(self.homeViewModel_Shared.userDetails.last?.userName.capitalized, for: .normal)
+                        self.name_Loginbutton.setTitle(self.homeViewModel_shared.userDetails.last?.userName.capitalized, for: .normal)
                         
                         
                     }else{
@@ -136,7 +136,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBAction func burgerLogOutButtonTapped(_ sender: UIButton) {
         
-        let call = getTheToken_Shared.getToken()
+        let call = getTheToken_shared.getToken()
         
         if call != ""{
             
@@ -145,21 +145,21 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
                 
                 let loader =   self.loader()
-                self.homeViewModel_Shared.signOutApiCall(tokenToSend: call){ status in
+                self.homeViewModel_shared.signOutApiCall(tokenToSend: call){ status in
                     print("9900",status)
                     DispatchQueue.main.async() {
                         self.stopLoader(loader: loader)
                         if status == true{
                             DispatchQueue.main.async {
                                 var id = ""
-                                if let idIs =  self.userDefaults_Shared.value(forKey: "userId") as? String{
+                                if let idIs =  self.userDefaults_shared.value(forKey: "userId") as? String{
                                     id = idIs
                                     print("user id is : \(idIs)")
                                 }
                                 print("user id is1 : \(id)")
-                                self.keyChain_Shared.deletePassword(userId: id)
-                                self.userDefaults_Shared.set("", forKey: "userId")
-                                self.userDefaults_Shared.setValue(1, forKey: "SignOut")
+                                self.keyChain_shared.deletePassword(userId: id)
+                                self.userDefaults_shared.set("", forKey: "userId")
+                                self.userDefaults_shared.setValue(1, forKey: "SignOut")
                                 self.navigationController?.popToRootViewController(animated: true)
                             }
                             
@@ -274,7 +274,7 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBAction func editProfileButtonTapped(_ sender: UIButton) {
         
-        let call = getTheToken_Shared.getToken()
+        let call = getTheToken_shared.getToken()
         
         if call != ""{
             let refreshAlert = UIAlertController(title: "ALERT", message: "Do you want to update your profile image?", preferredStyle: UIAlertController.Style.alert)
@@ -320,11 +320,11 @@ class HomeVc: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func uploadPhoto(imageIsIs: UIImage) {
-        let call = getTheToken_Shared.getToken()
+        let call = getTheToken_shared.getToken()
         
         print("image is : \(imageIsIs)")
         
-        homeViewModel_Shared.userProfilePhotoUpdateApiCall(token: call, imageTosend: imageIsIs){ status in
+        homeViewModel_shared.userProfilePhotoUpdateApiCall(token: call, imageTosend: imageIsIs){ status in
             if status == true{
                 self.alertMessage(message: "Profile photo is been updated")
                 self.userProfileImage.image = imageIsIs

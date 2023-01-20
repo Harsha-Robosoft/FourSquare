@@ -15,8 +15,8 @@ protocol sendingIndex {
 
 class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, reloadHomeTable {
     
-    var getTheToken_Shared = GetToken._Shared
-    var homeViewModel_Shared = HomeViewModel._Shared
+    var getTheToken_shared = GetToken._shared
+    var homeViewModel_shared = HomeViewModel._shared
 
     var index = 0
     var manager = CLLocationManager()
@@ -33,9 +33,9 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         tableView01.delegate = self
         tableView01.dataSource = self
         tableView01.register(UINib(nibName: "mapFile", bundle: nil), forCellReuseIdentifier: "cell")
-        let call = getTheToken_Shared.getToken()
+        let call = getTheToken_shared.getToken()
         if call != ""{
-            homeViewModel_Shared.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
+            homeViewModel_shared.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                 if status == true{
                     self.tableView01.reloadData()
                     print("fav id list received")
@@ -78,7 +78,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func callIndexApi(endPoint: String) {
         let loader =   self.loader()
-        homeViewModel_Shared.apiCallForData(endPoint: endPoint, latToSend: String(homeViewModel_Shared.userLocation.last?.latitude ?? "13.379162"), longToSend: String(homeViewModel_Shared.userLocation.last?.longitude ?? "74.740373")){ status in
+        homeViewModel_shared.apiCallForData(endPoint: endPoint, latToSend: String(homeViewModel_shared.userLocation.last?.latitude ?? "13.379162"), longToSend: String(homeViewModel_shared.userLocation.last?.longitude ?? "74.740373")){ status in
             DispatchQueue.main.async() {
                 self.stopLoader(loader: loader)
                 if status == true{
@@ -103,7 +103,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            homeViewModel_Shared.updateUserLocation(lat: String(location.coordinate.latitude), long: String(location.coordinate.longitude))
+            homeViewModel_shared.updateUserLocation(lat: String(location.coordinate.latitude), long: String(location.coordinate.longitude))
             manager.stopUpdatingLocation()
             render(location: location)
         }
@@ -124,8 +124,8 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if homeViewModel_Shared.homeDetails.count != 0{
-            return homeViewModel_Shared.homeDetails.count
+        if homeViewModel_shared.homeDetails.count != 0{
+            return homeViewModel_shared.homeDetails.count
         }
         return 0
     }
@@ -138,28 +138,28 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             mapHeight.constant = 0
         }
         let cell = tableView01.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
-        var imageIs = homeViewModel_Shared.homeDetails[indexPath.row].placeImage
+        var imageIs = homeViewModel_shared.homeDetails[indexPath.row].placeImage
         imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
         cell.imageIs.image = getImage(urlString: imageIs)
-        cell.addresIs.text = "\(homeViewModel_Shared.homeDetails[indexPath.row].address), \(homeViewModel_Shared.homeDetails[indexPath.row].city)"
-        cell.distanceIs.text = "\(homeViewModel_Shared.homeDetails[indexPath.row].distance)km"
-        cell.nameIs.text = homeViewModel_Shared.homeDetails[indexPath.row].placeName
-        cell.nationalityIs.text = homeViewModel_Shared.homeDetails[indexPath.row].category
-        cell.ratingIs.text = homeViewModel_Shared.homeDetails[indexPath.row].rating
-        if homeViewModel_Shared.homeDetails[indexPath.row].priceRange == "1"{
+        cell.addresIs.text = "\(homeViewModel_shared.homeDetails[indexPath.row].address), \(homeViewModel_shared.homeDetails[indexPath.row].city)"
+        cell.distanceIs.text = "\(homeViewModel_shared.homeDetails[indexPath.row].distance)km"
+        cell.nameIs.text = homeViewModel_shared.homeDetails[indexPath.row].placeName
+        cell.nationalityIs.text = homeViewModel_shared.homeDetails[indexPath.row].category
+        cell.ratingIs.text = homeViewModel_shared.homeDetails[indexPath.row].rating
+        if homeViewModel_shared.homeDetails[indexPath.row].priceRange == "1"{
             cell.rateIs.text = "₹"
-        }else if homeViewModel_Shared.homeDetails[indexPath.row].priceRange == "2"{
+        }else if homeViewModel_shared.homeDetails[indexPath.row].priceRange == "2"{
             cell.rateIs.text = "₹₹"
-        }else if homeViewModel_Shared.homeDetails[indexPath.row].priceRange == "3"{
+        }else if homeViewModel_shared.homeDetails[indexPath.row].priceRange == "3"{
             cell.rateIs.text = "₹₹₹"
-        }else if homeViewModel_Shared.homeDetails[indexPath.row].priceRange == "4"{
+        }else if homeViewModel_shared.homeDetails[indexPath.row].priceRange == "4"{
             cell.rateIs.text = "₹₹₹₹"
-        }else if homeViewModel_Shared.homeDetails[indexPath.row].priceRange == "5"{
+        }else if homeViewModel_shared.homeDetails[indexPath.row].priceRange == "5"{
             cell.rateIs.text = "₹₹₹₹₹"
         }
         cell.setShadow()
-        cell._Id = homeViewModel_Shared.homeDetails[indexPath.row]._id
-        cell.buttonStatus(id: homeViewModel_Shared.homeDetails[indexPath.row]._id)
+        cell._Id = homeViewModel_shared.homeDetails[indexPath.row]._id
+        cell.buttonStatus(id: homeViewModel_shared.homeDetails[indexPath.row]._id)
         cell.delegateHomeCell = self
         return cell
     }
@@ -172,7 +172,7 @@ class HomePageVc: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
         if let vc = Details{
-            vc.placeId = homeViewModel_Shared.homeDetails[indexPath.row]._id
+            vc.placeId = homeViewModel_shared.homeDetails[indexPath.row]._id
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

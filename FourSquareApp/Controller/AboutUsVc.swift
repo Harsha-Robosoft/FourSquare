@@ -12,15 +12,15 @@ protocol showHomePage2 {
 
 class AboutUsVc: UIViewController {
     
-    var aboutUsViewModel_Shared = AboutUsViewModel._Shared
+    var aboutUsViewModel_shared = AboutUsViewModel._shared
     
     var homeDelegate2: showHomePage2?
     @IBOutlet weak var labelField: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        aboutUsViewModel_Shared.ApiCallForAboutUs(){ status in
+        aboutUsViewModel_shared.ApiCallForAboutUs(){ status in
             if status == true{
-                self.labelField.text = self.aboutUsViewModel_Shared.aboutDataIsIS
+                self.labelField.text = self.aboutUsViewModel_shared.aboutDataIsIS
             }else{}
         }
     }

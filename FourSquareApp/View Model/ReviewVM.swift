@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 class ReviewViewModel {
-    var apiResponce_Shared = ApiResponce()
-    static var _Shared = ReviewViewModel()
+    var apiResponce_shared = ApiResponce()
+    static var _shared = ReviewViewModel()
     
     var allReviewdata = [ReviewDetails]()
     
@@ -25,7 +25,7 @@ class ReviewViewModel {
             "_id": placeIdToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -85,7 +85,7 @@ class ReviewViewModel {
             "review": reviewToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -124,7 +124,7 @@ class ReviewViewModel {
             data.append("\r\n".data(using: .utf8) ?? data as Data)
             data.append("--\(boundary)--\r\n".data(using: .utf8) ?? data as Data)
             request.httpBody = data as Data
-        apiResponce_Shared.postFormdatApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postFormdatApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)

@@ -9,8 +9,8 @@ import Foundation
 
 class OtpvarificationViewModel {
     
-    var apiResponce = ApiResponce()
-    static var objectOfVc = OtpvarificationViewModel()
+    var apiResponce_shared = ApiResponce()
+    static var _shared = OtpvarificationViewModel()
     
     func sendOtpApiCall(emailToSend: String, completion: @escaping((Bool) -> ())) {
         guard let url = URL(string:"https://four-square-three.vercel.app/api/sendOtp") else{ return }
@@ -21,7 +21,7 @@ class OtpvarificationViewModel {
             "email": emailToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -43,7 +43,7 @@ class OtpvarificationViewModel {
             "otp": otpToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -65,7 +65,7 @@ class OtpvarificationViewModel {
             "email": emailToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)

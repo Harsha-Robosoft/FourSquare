@@ -9,8 +9,8 @@ import UIKit
 
 class RegisterVc: UIViewController {
     
-    var registerViewModel_Shared = RegisterViewModel.objectOfVm
-    var otpvarificationViewModel_Shared = OtpvarificationViewModel.objectOfVc
+    var registerViewModel_Shared = RegisterViewModel._shared
+    var otpvarificationViewModel_Shared = OtpvarificationViewModel._shared
     
     @IBOutlet weak var emailField: TextFieldBorder!
     @IBOutlet weak var mobileNUmberFiewld: TextFieldBorder!

@@ -8,8 +8,8 @@
 import Foundation
 class PlaceDetailsViewModel {
     
-    var apiResponce_Shared = ApiResponce()
-    static var _Shared = PlaceDetailsViewModel()
+    var apiResponce_shared = ApiResponce()
+    static var _shared = PlaceDetailsViewModel()
     
     var perticularPlaceDetails = [PlaceDetails]()
     
@@ -23,7 +23,7 @@ class PlaceDetailsViewModel {
             "_id": placeId
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -103,7 +103,7 @@ class PlaceDetailsViewModel {
             "rating": ratingToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)

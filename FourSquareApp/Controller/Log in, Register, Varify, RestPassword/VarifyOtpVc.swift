@@ -9,7 +9,7 @@ import UIKit
 
 class VarifyOtpVc: UIViewController {
     
-    var otpvarificationViewModel_Shared = OtpvarificationViewModel.objectOfVc
+    var otpvarificationViewModel_Shared = OtpvarificationViewModel._shared
     
     var emailId = ""
     var forgotPassword = 0

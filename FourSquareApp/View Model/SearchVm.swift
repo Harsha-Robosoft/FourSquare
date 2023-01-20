@@ -8,8 +8,8 @@
 import Foundation
 class SearchViewModel {
 
-    var apiResponce_Shared = ApiResponce()
-    static var _Shared = SearchViewModel()    
+    var apiResponce_shared = ApiResponce()
+    static var _shared = SearchViewModel()    
     
     var userFilterChoice = [String]()
     var filterSearchDetails = [HomeData]()
@@ -27,7 +27,7 @@ class SearchViewModel {
             "longitude": longToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -72,7 +72,7 @@ class SearchViewModel {
             "text": textToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -100,7 +100,7 @@ class SearchViewModel {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let parameter: [String:Any] = parameterDictionary
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)

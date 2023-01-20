@@ -7,8 +7,8 @@
 
 import Foundation
 class PhotoViewModel {
-    var apiResponce_Shared = ApiResponce()
-    static var _Shared = PhotoViewModel()
+    var apiResponce_shared = ApiResponce()
+    static var _shared = PhotoViewModel()
     
     var AllPhotosDetails = [PhotosDetails]()
     
@@ -23,7 +23,7 @@ class PhotoViewModel {
             "_id": placeIdToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 
                 if error != nil && status != true{

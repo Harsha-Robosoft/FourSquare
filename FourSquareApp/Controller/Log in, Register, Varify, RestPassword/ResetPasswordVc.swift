@@ -9,7 +9,7 @@ import UIKit
 
 class ResetPasswordVc: UIViewController {
     
-    var forgotPasswordViewModel_Shared = ForgotPasswordViewModel.objectOfVm
+    var forgotPasswordViewModel_Shared = ForgotPasswordViewModel._shared
     
     var mailIdToSend = ""
     

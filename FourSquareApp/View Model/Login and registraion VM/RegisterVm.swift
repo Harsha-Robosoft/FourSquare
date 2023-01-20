@@ -9,7 +9,7 @@ import Foundation
 
 class RegisterViewModel {
     var apiResponce = ApiResponce()
-    static var objectOfVm = RegisterViewModel()
+    static var _shared = RegisterViewModel()
     
     func apiCallForUserRegistration(emailToSend: String, mobileNumberToSend: String, passwordToSend: String, completion: @escaping((String, Bool) -> ())) {
         

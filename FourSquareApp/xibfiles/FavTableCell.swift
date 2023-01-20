@@ -13,8 +13,8 @@ protocol reloadTable {
 
 class FavTableCell: UITableViewCell {
 
-    var objectOfHomeViewModel = HomeViewModel._Shared
-    var objectOfAddToFavouiretViewModel = AddToFavoriteViewModel.addToFavoriteViewModel_Shared
+    var objectOfHomeViewModel = HomeViewModel._shared
+    var objectOfAddToFavouiretViewModel = AddToFavoriteViewModel.addToFavoriteViewModel_shared
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
     

@@ -9,7 +9,7 @@ import UIKit
 
 class EmailValidationVc: UIViewController {
     
-    var otpvarificationViewModel_Shared = OtpvarificationViewModel.objectOfVc
+    var otpvarificationViewModel_Shared = OtpvarificationViewModel._shared
     
     @IBOutlet weak var emailField: TextFieldBorder!
     @IBOutlet weak var varifyOtpButton: LoginButton!

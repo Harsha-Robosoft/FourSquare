@@ -8,8 +8,8 @@
 import Foundation
 class FavoriteViewModel {
     
-    var apiResponce_Shared = ApiResponce()
-    static var _Shared = FavoriteViewModel()
+    var apiResponce_shared = ApiResponce()
+    static var _shared = FavoriteViewModel()
     
     var favSearchDetails = [HomeData]()
     
@@ -22,7 +22,7 @@ class FavoriteViewModel {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let parameter: [String:Any] = paramsDictionary
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 self.favSearchDetails.removeAll()
                 if error != nil && status != true{

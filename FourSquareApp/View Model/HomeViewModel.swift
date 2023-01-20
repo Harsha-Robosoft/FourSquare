@@ -10,8 +10,8 @@ import UIKit
 
 class HomeViewModel {
     
-    var apiResponce_Shared = ApiResponce()
-    static var _Shared = HomeViewModel()
+    var apiResponce_shared = ApiResponce()
+    static var _shared = HomeViewModel()
     
     var userFavouiretListArray = [String]()
 
@@ -30,7 +30,7 @@ class HomeViewModel {
             "longitude": longToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -58,7 +58,7 @@ class HomeViewModel {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(tokenToSend)", forHTTPHeaderField: "Authorization")
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -77,7 +77,7 @@ class HomeViewModel {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(tokenToSend)", forHTTPHeaderField: "Authorization")
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -111,7 +111,7 @@ class HomeViewModel {
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
         
-        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -129,7 +129,7 @@ class HomeViewModel {
         request.httpMethod = "GET"
         request.setValue("Bearer \(tokenTosend)", forHTTPHeaderField: "Authorization")
         
-        apiResponce_Shared.getApiResonce(request: request){ data, status, error in
+        apiResponce_shared.getApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -178,7 +178,7 @@ class HomeViewModel {
         data.append("--\(boundary)--\r\n".data(using: .utf8) ?? data as Data)
         request.httpBody = data as Data
         
-        apiResponce_Shared.postFormdatApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postFormdatApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)

@@ -9,7 +9,7 @@ import UIKit
 
 class FilterButtonTableCell: UITableViewCell {
 
-    var shared = SearchViewModel._Shared
+    var shared = SearchViewModel._shared
     
     
     @IBOutlet weak var updateLable: FilterTableLabel!

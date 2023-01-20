@@ -9,9 +9,9 @@ import Foundation
 
 class LoginViewModel {
     
-    var apiResponce = ApiResponce()
-    var objectOfUserDefaults = UserDefaults()
-    static var objectOfVm = LoginViewModel()
+    var apiResponce_shared = ApiResponce()
+    var userDefaults_shared = UserDefaults()
+    static var _shared = LoginViewModel()
     
     func apiCallForUserLogin(emailToSend: String, passwordToSend: String, completion: @escaping((String,Bool) -> ())) {
         
@@ -24,7 +24,7 @@ class LoginViewModel {
             "password": passwordToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion("Error while login pleace check again your Email or Password and try again. If you are new here pleace register first.",false)
@@ -41,9 +41,9 @@ class LoginViewModel {
                     }
                     let objectOfKeyChain = KeyChain()
                     objectOfKeyChain.saveData(userId: userIdIs, data: tokenInfo)
-                    self.objectOfUserDefaults.setValue(userIdIs, forKeyPath: "userId")
-                    self.objectOfUserDefaults.setValue(1, forKey: "SignIn")
-                    self.objectOfUserDefaults.setValue(4, forKey: "SkipStatus")
+                    self.userDefaults_shared.setValue(userIdIs, forKeyPath: "userId")
+                    self.userDefaults_shared.setValue(1, forKey: "SignIn")
+                    self.userDefaults_shared.setValue(4, forKey: "SkipStatus")
                     if (parsing1["message"] as? String) != nil{
                         completion("Success", true)
                     }

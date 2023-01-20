@@ -10,7 +10,7 @@ import UIKit
 class LogInVc: UIViewController {
     
     var userDefaults_Shared = UserDefaults()
-    var loginViewModel_Shared = LoginViewModel.objectOfVm
+    var loginViewModel_Shared = LoginViewModel._shared
     
     @IBOutlet weak var emailField: TextFieldBorder!
     @IBOutlet weak var passwordField: TextFieldBorder!

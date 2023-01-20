@@ -10,7 +10,7 @@ import UIKit
 
 class GetToken {
     
-    static var _Shared = GetToken()
+    static var _shared = GetToken()
     var userDefaults_Shared = UserDefaults()
     var keyChain_Shared = KeyChain()
     
