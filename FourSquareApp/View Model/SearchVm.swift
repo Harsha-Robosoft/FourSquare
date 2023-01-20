@@ -7,16 +7,11 @@
 
 import Foundation
 class SearchViewModel {
-    
-    
-    
-    var apiResponce = ApiResponce()
-    static var objectOfViewModel = SearchViewModel()
-    var objectOfSearchNetworkManager = SearchNetworkManager()
+
+    var apiResponce_Shared = ApiResponce()
+    static var _Shared = SearchViewModel()    
     
     var userFilterChoice = [String]()
-    
-    var commonVm = CommonVm()
     var filterSearchDetails = [HomeData]()
     var searchDetaisl = [HomeData]()
     var nearCityData = [NearCity]()
@@ -32,7 +27,7 @@ class SearchViewModel {
             "longitude": longToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -77,7 +72,7 @@ class SearchViewModel {
             "text": textToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -98,8 +93,6 @@ class SearchViewModel {
     }
     
     func searchWithFilterApiCall(tokenToSend: String, parameterDictionary: [String:Any], completion: @escaping((Bool) -> ())) {
-        
-        
         guard let url = URL(string:"https://four-square-three.vercel.app/api/filterSearch") else{ return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -107,7 +100,7 @@ class SearchViewModel {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let parameter: [String:Any] = parameterDictionary
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)

@@ -10,11 +10,8 @@ import UIKit
 
 class HomeViewModel {
     
-    var apiResponce = ApiResponce()
-    var commonVm = CommonVm()
-    static var objectOfViewModel = HomeViewModel()
-    var objectOfHomeNetwork = HomeNetwork()
-    
+    var apiResponce_Shared = ApiResponce()
+    static var _Shared = HomeViewModel()
     
     var userFavouiretListArray = [String]()
 
@@ -33,7 +30,7 @@ class HomeViewModel {
             "longitude": longToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -41,7 +38,7 @@ class HomeViewModel {
                 }
                 if let dataToSend = data as? [[String: Any]]{
                     self.homeDetails.removeAll()
-                    self.homeDetails = self.commonVm.commonParsing(parsingdata: dataToSend)
+                    self.homeDetails = self.commonParsing(parsingdata: dataToSend)
                     completion(true)
                 }
             }
@@ -61,7 +58,7 @@ class HomeViewModel {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(tokenToSend)", forHTTPHeaderField: "Authorization")
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -80,7 +77,7 @@ class HomeViewModel {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("Bearer \(tokenToSend)", forHTTPHeaderField: "Authorization")
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -114,7 +111,7 @@ class HomeViewModel {
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
         
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -132,7 +129,7 @@ class HomeViewModel {
         request.httpMethod = "GET"
         request.setValue("Bearer \(tokenTosend)", forHTTPHeaderField: "Authorization")
         
-        apiResponce.getApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.getApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -181,7 +178,7 @@ class HomeViewModel {
         data.append("--\(boundary)--\r\n".data(using: .utf8) ?? data as Data)
         request.httpBody = data as Data
         
-        apiResponce.postFormdatApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postFormdatApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true {
                     completion(false)
@@ -190,5 +187,66 @@ class HomeViewModel {
                 }
             }
         }
+    }
+    
+    func commonParsing(parsingdata: [[String: Any]]) -> [HomeData] {
+        var arrayToSend = [HomeData]()
+        var imageUrl = ""
+        var placeId = ""
+        var placeName = ""
+        var ratingIs = ""
+        var priceRange = ""
+        var category = ""
+        var distance = ""
+        var address = ""
+        var cityName = ""
+        var lati = 0.0
+        var longi = 0.0
+        
+        arrayToSend.removeAll()
+        for i in parsingdata{
+            if let parsing01 = i["_id"] as? String{
+                placeId = parsing01
+            }
+            if let parsing02 = i["placeName"] as? String{
+                placeName = parsing02
+            }
+            if let parsing03 = i["placeImage"] as? String{
+                imageUrl = parsing03
+            }
+            if let parsing04 = i["address"] as? String{
+                address = parsing04
+            }
+            if let parsing05 = i["city"] as? String{
+                cityName = parsing05
+            }
+            if let parsing06 = i["category"] as? String{
+                category = parsing06
+            }
+            if let parsing07 = i["priceRange"] as? Int{
+                priceRange = String(parsing07)
+            }
+            if let parsing08 = i["rating"] as? Double{
+                let number = Double(parsing08)
+                ratingIs = String(format: "%.1f", number)
+            }
+            if let parsing09 = i["distance"] as? [String: Any]{
+                if let parsing10 = parsing09["calculated"] as? Double{
+                    let number = Float(Float(parsing10) / 1609)
+                    distance = String(format: "%.1f", number)
+                }
+            }
+            
+            if let parsing10 = i["location"] as? [String: Any]{
+                if let parsing11 = parsing10["coordinates"] as? [Double]{
+                    lati = parsing11[1]
+                    longi = parsing11[0]
+                }
+            }
+            
+            let details = HomeData(_id: placeId, placeName: placeName, placeImage: imageUrl, address: address, city: cityName, category: category, priceRange: priceRange, rating: ratingIs, distance: distance, latitude: lati , longitude:longi)
+            arrayToSend.append(details)
+        }
+        return arrayToSend
     }
 }

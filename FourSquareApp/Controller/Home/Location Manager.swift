@@ -8,7 +8,6 @@
 import CoreLocation
 import Foundation
 class LocationManager: NSObject,CLLocationManagerDelegate {
-
     static let shared = LocationManager()
     let manager = CLLocationManager()
     var completion: ((CLLocation) -> Void)?

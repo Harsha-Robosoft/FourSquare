@@ -9,7 +9,7 @@ import UIKit
 
 class ResetPasswordVc: UIViewController {
     
-    var objectOfForgotPasswordViewModel = ForgotPasswordViewModel.objectOfVm
+    var forgotPasswordViewModel_Shared = ForgotPasswordViewModel.objectOfVm
     
     var mailIdToSend = ""
     
@@ -47,7 +47,7 @@ class ResetPasswordVc: UIViewController {
                 
                 let loader =   self.loader()
 
-                objectOfForgotPasswordViewModel.forgotPassewordApiCall(emailToSend: mailIdToSend, passwordToSend: passwordToSend){ status in
+                forgotPasswordViewModel_Shared.forgotPassewordApiCall(emailToSend: mailIdToSend, passwordToSend: passwordToSend){ status in
                     DispatchQueue.main.async() {
                         self.stopLoader(loader: loader)
                     if status == true{

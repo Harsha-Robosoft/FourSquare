@@ -8,9 +8,8 @@
 import Foundation
 import UIKit
 class ReviewViewModel {
-    var apiResponce = ApiResponce()
-    static var objectOfViewModel = ReviewViewModel()
-    var objectOfReviewNetworkManager = ReviewNetworkManager()
+    var apiResponce_Shared = ApiResponce()
+    static var _Shared = ReviewViewModel()
     
     var allReviewdata = [ReviewDetails]()
     
@@ -26,7 +25,7 @@ class ReviewViewModel {
             "_id": placeIdToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -71,57 +70,6 @@ class ReviewViewModel {
                 }
             }
         }
-        
-        
-/*        objectOfReviewNetworkManager.Allreviews(token: tokenToSend, placeId: placeIdToSend){reviewData, reviewStatus, reviewError in
-            DispatchQueue.main.async {
-                if reviewError == nil{
-                    if reviewStatus == true{
-                        if let parsing0 = reviewData{
-                            if parsing0.isEmpty{
-                                completion(false)
-                            }else{
-                                if let parsing1 = parsing0["reviewText"] as? [[String: Any]]{
-                                    var reviewerId = ""
-                                    var reviewBy = ""
-                                    var review = ""
-                                    var reviewerImage = ""
-                                    var reviewDate = ""
-                                    var _id = ""
-                                    for i in parsing1{
-                                        if let parsing01 = i["reviewerId"] as? String{
-                                            reviewerId = parsing01
-                                        }
-                                        if let parsing02 = i["reviewBy"] as? String{
-                                            reviewBy = parsing02
-                                        }
-                                        if let parsing03 = i["review"] as? String{
-                                            review = parsing03
-                                        }
-                                        if let parsing04 = i["reviewerImage"] as? String{
-                                            reviewerImage = parsing04
-                                        }
-                                        if let parsing05 = i["reviewDate"] as? String{
-                                            reviewDate = parsing05
-                                        }
-                                        if let parsing06 = i["_id"] as? String{
-                                            _id = parsing06
-                                        }
-                                        let review0101 = ReviewDetails(reviewerId: reviewerId, reviewBy: reviewBy, review: review, reviewerImage: reviewerImage, reviewDate: reviewDate, _id: _id)
-                                        self.allReviewdata.append(review0101)
-                                    }
-                                }
-                                completion(true)
-                            }
-                        }
-                    }else{
-                        completion(false)
-                    }
-                }else{
-                    completion(false)
-                }
-            }
-        } */
     }
     
     func textReviewSubmitApiCall(tokenToSend: String, restaturantId: String, reviewToSend: String, completion: @escaping((Bool) -> ())) {
@@ -137,7 +85,7 @@ class ReviewViewModel {
             "review": reviewToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -146,21 +94,6 @@ class ReviewViewModel {
                 }
             }
         }
-        
-        
-  /*      objectOfReviewNetworkManager.textReviewSubmit(token: tokenToSend, restaturantId: restaturantId, review: reviewToSend){ textStatus, textError in
-            DispatchQueue.main.async {
-                if textError == nil{
-                    if textStatus == true{
-                        completion(true)
-                    }else{
-                        completion(false)
-                    }
-                }else{
-                    completion(false)
-                }
-            }
-        }*/
     }
     
     func photoReviewSubmitApiCall(tokenToSend: String, placeIdToSend: String, images: [UIImage], completion: @escaping((Bool) -> ())) {
@@ -191,7 +124,7 @@ class ReviewViewModel {
             data.append("\r\n".data(using: .utf8) ?? data as Data)
             data.append("--\(boundary)--\r\n".data(using: .utf8) ?? data as Data)
             request.httpBody = data as Data
-        apiResponce.postFormdatApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postFormdatApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -200,22 +133,5 @@ class ReviewViewModel {
                 }
             }
         }
-       
-        
-        
-        
-/*        objectOfReviewNetworkManager.photoReviewSubmit(token: tokenToSend, placeId: placeIdToSend, image: images){ photoStatus, photoError in
-            DispatchQueue.main.async {
-                if photoError == nil{
-                    if photoStatus == true{
-                        completion(true)
-                    }else{
-                        completion(false)
-                    }
-                }else{
-                    completion(false)
-                }
-            }
-        }*/
     }
 }

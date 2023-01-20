@@ -11,12 +11,12 @@ import CoreLocation
 
 class DetailsVc: UIViewController, CLLocationManagerDelegate {
     
-    var objectOfAddToFavouiretViewModel = AddToFavoriteViewModel.objectOfAddToFavoriteViewModel
-    var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
-    var objectOfPlaceDetailsViewModel = PlaceDetailsViewModel.objectOfviewModel
-    var getTheToken = GetToken.getTheUserToken
-    var manager = CLLocationManager()
+    var addToFavouiretViewModel_Shared = AddToFavoriteViewModel.addToFavoriteViewModel_Shared
+    var homeViewModel_Shared = HomeViewModel._Shared
+    var placeDetailsViewModel_Shared = PlaceDetailsViewModel._Shared
+    var getTheToken_Shared = GetToken._Shared
     
+    var manager = CLLocationManager()
     var placeName = ""
     var placeId = ""
     var givenRating = 0
@@ -57,7 +57,7 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
         
         ratingBackView.isHidden = true
         ratingView.isHidden = true
-        objectOfPlaceDetailsViewModel.perticularPlaceDetailsApiCall(placeId: placeId){ status in
+        placeDetailsViewModel_Shared.perticularPlaceDetailsApiCall(placeId: placeId){ status in
             if status == true{
                 self.didLoadFunction()
             }else{}
@@ -76,45 +76,45 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
         var categotyIs = ""
         var ratingIs = 0.0
         var placeIdIs = ""
-        if let lat = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.latitude{
+        if let lat = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.latitude{
             latTOsend = lat
         }
-        if let long = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.longitude{
+        if let long = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.longitude{
             longTosend = long
         }
-        if let nameIs = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.placeName {
+        if let nameIs = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.placeName {
             self.placeName = nameIs
             name = nameIs
         }
-        if let over = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.overview {
+        if let over = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.overview {
             overView = over
         }
-        if let addressIs = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.address {
+        if let addressIs = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.address {
             address = addressIs
         }
-        if let city = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.city {
+        if let city = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.city {
             cityname = city
         }
-        if let num = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.phoneNumber {
+        if let num = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.phoneNumber {
             numberIs = num
         }
-        if let cate = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.category {
+        if let cate = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.category {
             categotyIs = cate
         }
-        if let rating = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.rating{
+        if let rating = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.rating{
             self.ratingISIS = rating
             ratingIs = Double(rating)
         }
-        if let placeId = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.placeId{
+        if let placeId = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.placeId{
             placeIdIs = placeId
         }
-        if let image00 = self.objectOfPlaceDetailsViewModel.perticularPlaceDetails.last?.placeImage{
+        if let image00 = self.placeDetailsViewModel_Shared.perticularPlaceDetails.last?.placeImage{
             imageIs = image00
         }
         imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
         numberIs.insert(" ", at: numberIs.index(numberIs.startIndex, offsetBy: 5))
         
-        if self.objectOfHomeViewModel.userFavouiretListArray.contains(placeIdIs){
+        if self.homeViewModel_Shared.userFavouiretListArray.contains(placeIdIs){
             self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_selected"), for: .normal)
         }else{
             self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_unselected"), for: .normal)
@@ -180,9 +180,9 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
     
     
     @IBAction func ratingSubmitButtonTapped(_ sender: UIButton) {
-        let call = getTheToken.getToken()
+        let call = getTheToken_Shared.getToken()
         if call != ""{
-            objectOfPlaceDetailsViewModel.addRatingApiCall(tokenTosend: call, placeId: placeId, ratingToSend: givenRating){status in
+            placeDetailsViewModel_Shared.addRatingApiCall(tokenTosend: call, placeId: placeId, ratingToSend: givenRating){status in
                 if status == true{
                     self.ratingBackView.isHidden = true
                     self.ratingView.isHidden = true
@@ -284,14 +284,14 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
         }
     }
     @IBAction func likeButtonTapped(_ sender: UIButton) {
-        let call = getTheToken.getToken()
+        let call = getTheToken_Shared.getToken()
         if call != ""{
             if sender.currentImage == #imageLiteral(resourceName: "rating_icon_selected"){
-                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: placeId){ status in
+                addToFavouiretViewModel_Shared.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: placeId){ status in
                     if status == true{
-                        self.objectOfHomeViewModel.userFavouiretListArray = self.objectOfHomeViewModel.userFavouiretListArray.filter { $0 != self.placeId}
+                        self.homeViewModel_Shared.userFavouiretListArray = self.homeViewModel_Shared.userFavouiretListArray.filter { $0 != self.placeId}
                         self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_unselected"), for: .normal)
-                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
+                        self.homeViewModel_Shared.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                             if status == true{
                                 print("fav id list received")
                             }else{
@@ -301,12 +301,12 @@ class DetailsVc: UIViewController, CLLocationManagerDelegate {
                     }else{}
                 }
             }else{
-                objectOfAddToFavouiretViewModel.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: placeId){ status in
+                addToFavouiretViewModel_Shared.addPlaceToFavouiretList(tokenTosend: call, placeIdToSend: placeId){ status in
                     if status == true{
                         self.starLikeBuyyon.setImage(#imageLiteral(resourceName: "rating_icon_selected"), for: .normal)
-                        self.objectOfHomeViewModel.userFavouiretListArray.append(self.placeId)
-                        self.objectOfHomeViewModel.userFavouiretListArray.append(self.placeId)
-                        self.objectOfHomeViewModel.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
+                        self.homeViewModel_Shared.userFavouiretListArray.append(self.placeId)
+                        self.homeViewModel_Shared.userFavouiretListArray.append(self.placeId)
+                        self.homeViewModel_Shared.AllFavouiretPlaceIdApiCall(tokenTosend: call){ status in
                             if status == true{
                                 print("fav id list received")
                             }else{

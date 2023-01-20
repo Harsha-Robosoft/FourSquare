@@ -9,7 +9,7 @@ import UIKit
 
 class VarifyOtpVc: UIViewController {
     
-    var objectOfOtpvarificationViewModel = OtpvarificationViewModel.objectOfVc
+    var otpvarificationViewModel_Shared = OtpvarificationViewModel.objectOfVc
     
     var emailId = ""
     var forgotPassword = 0
@@ -27,7 +27,7 @@ class VarifyOtpVc: UIViewController {
         
         let loader =   self.loader()
 
-        objectOfOtpvarificationViewModel.sendOtpApiCall(emailToSend: emailId){ status in
+        otpvarificationViewModel_Shared.sendOtpApiCall(emailToSend: emailId){ status in
             DispatchQueue.main.async() {
                 self.stopLoader(loader: loader)
             if status == true{
@@ -59,7 +59,7 @@ class VarifyOtpVc: UIViewController {
             }
             let loader =   self.loader()
 
-            objectOfOtpvarificationViewModel.varifyOtpApicall(otpToSend: otpToSend){ status in
+            otpvarificationViewModel_Shared.varifyOtpApicall(otpToSend: otpToSend){ status in
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                 if status == true{
@@ -98,7 +98,7 @@ class VarifyOtpVc: UIViewController {
             let createPasswordVc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordVc") as? ResetPasswordVc
             
             let loader =   self.loader()
-            objectOfOtpvarificationViewModel.varifyOtpApicall(otpToSend: otpToSend){ status in
+            otpvarificationViewModel_Shared.varifyOtpApicall(otpToSend: otpToSend){ status in
                     self.stopLoader(loader: loader)
                 if status == true{
                     DispatchQueue.main.async {

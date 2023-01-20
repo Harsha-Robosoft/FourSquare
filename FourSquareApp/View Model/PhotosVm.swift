@@ -7,9 +7,8 @@
 
 import Foundation
 class PhotoViewModel {
-    var apiResponce = ApiResponce()
-    static var objectOfViewModel = PhotoViewModel()
-    var objectOfPhotoNetworkModel = PhotoNetworkModel()
+    var apiResponce_Shared = ApiResponce()
+    static var _Shared = PhotoViewModel()
     
     var AllPhotosDetails = [PhotosDetails]()
     
@@ -19,115 +18,60 @@ class PhotoViewModel {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(tokenToSend)", forHTTPHeaderField: "Authorization")
-
+        
         let parameter: [String:Any] = [
             "_id": placeIdToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
-
-            if error != nil && status != true{
-                completion(false)
-            }
-            
-            if let parsing0 = data as? [String: Any]{
-                if parsing0.isEmpty{
+                
+                if error != nil && status != true{
                     completion(false)
-                }else{
-                    if let parsing1 = parsing0["reviewImage"] as? [[String: Any]]{
-                        var reviewerId = ""
-                        var reviewBy = ""
-                        var reviewerImage = ""
-                        var reviewDate = ""
-                        var _id = ""
-                        var image = ""
-                        
-                        for i in parsing1{
-                            
-                            if let parsing01 = i["reviewerId"] as? String{
-                                reviewerId = parsing01
-                            }
-                            if let parsing02 = i["reviewBy"] as? String{
-                                reviewBy = parsing02
-                            }
-                            if let parsing03 = i["reviewerImage"] as? String{
-                                reviewerImage = parsing03
-                            }
-                            if let parsing04 = i["reviewDate"] as? String{
-                                reviewDate = parsing04
-                            }
-                            if let parsing05 = i["_id"] as? String{
-                                _id = parsing05
-                            }
-                            if let parsing06 = i["image"] as? [String]{
-                                for i in parsing06{
-                                    image = i
-                                }
-                            }
-                            let photosIs = PhotosDetails(reviewerId: reviewerId, reviewBy: reviewBy, reviewerImage: reviewerImage, reviewDate: reviewDate, _id: _id, imageIs: image)
-                            self.AllPhotosDetails.append(photosIs)
-                        }
-                        completion(true)
-                    }
                 }
-            }
-        }
-        }
-        
-/*        objectOfPhotoNetworkModel.getAllPhotos(token: tokenToSend, placeId: placeIdToSend){ photodata, photoStatus, photoError in
-            DispatchQueue.main.async {
-                self.AllPhotosDetails.removeAll()
-                if photoError == nil{
-                    if photoStatus == true{
-                        if let parsing0 = photodata{
-                            if parsing0.isEmpty{
-                                completion(false)
-                            }else{
-                                if let parsing1 = parsing0["reviewImage"] as? [[String: Any]]{
-                                    var reviewerId = ""
-                                    var reviewBy = ""
-                                    var reviewerImage = ""
-                                    var reviewDate = ""
-                                    var _id = ""
-                                    var image = ""
-                                    
-                                    for i in parsing1{
-                                        
-                                        if let parsing01 = i["reviewerId"] as? String{
-                                            reviewerId = parsing01
-                                        }
-                                        if let parsing02 = i["reviewBy"] as? String{
-                                            reviewBy = parsing02
-                                        }
-                                        if let parsing03 = i["reviewerImage"] as? String{
-                                            reviewerImage = parsing03
-                                        }
-                                        if let parsing04 = i["reviewDate"] as? String{
-                                            reviewDate = parsing04
-                                        }
-                                        if let parsing05 = i["_id"] as? String{
-                                            _id = parsing05
-                                        }
-                                        if let parsing06 = i["image"] as? [String]{
-                                            for i in parsing06{
-                                                image = i
-                                            }
-                                        }
-                                        let photosIs = PhotosDetails(reviewerId: reviewerId, reviewBy: reviewBy, reviewerImage: reviewerImage, reviewDate: reviewDate, _id: _id, imageIs: image)
-                                        self.AllPhotosDetails.append(photosIs)
-                                    }
-                                    completion(true)
-                                }
-                            }
-                        }
-                    }else{
+                
+                if let parsing0 = data as? [String: Any]{
+                    if parsing0.isEmpty{
                         completion(false)
+                    }else{
+                        if let parsing1 = parsing0["reviewImage"] as? [[String: Any]]{
+                            var reviewerId = ""
+                            var reviewBy = ""
+                            var reviewerImage = ""
+                            var reviewDate = ""
+                            var _id = ""
+                            var image = ""
+                            
+                            for i in parsing1{
+                                
+                                if let parsing01 = i["reviewerId"] as? String{
+                                    reviewerId = parsing01
+                                }
+                                if let parsing02 = i["reviewBy"] as? String{
+                                    reviewBy = parsing02
+                                }
+                                if let parsing03 = i["reviewerImage"] as? String{
+                                    reviewerImage = parsing03
+                                }
+                                if let parsing04 = i["reviewDate"] as? String{
+                                    reviewDate = parsing04
+                                }
+                                if let parsing05 = i["_id"] as? String{
+                                    _id = parsing05
+                                }
+                                if let parsing06 = i["image"] as? [String]{
+                                    for i in parsing06{
+                                        image = i
+                                    }
+                                }
+                                let photosIs = PhotosDetails(reviewerId: reviewerId, reviewBy: reviewBy, reviewerImage: reviewerImage, reviewDate: reviewDate, _id: _id, imageIs: image)
+                                self.AllPhotosDetails.append(photosIs)
+                            }
+                            completion(true)
+                        }
                     }
-                }else{
-                    completion(false)
                 }
             }
-        } */
+        }
     }
 }

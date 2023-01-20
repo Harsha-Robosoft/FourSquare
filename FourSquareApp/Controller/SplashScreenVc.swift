@@ -8,8 +8,8 @@
 import UIKit
 
 class SplashScreenVc: UIViewController {
-    var objectOfUserDefaults = UserDefaults()
-    var objectOfKeyChain = KeyChain()
+    var userDefaults_Shared = UserDefaults()
+    var keyChain_Shared = KeyChain()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,16 +17,16 @@ class SplashScreenVc: UIViewController {
 
         var skipStatus = 0
         var signInStatus = 0
-        if let status = objectOfUserDefaults.value(forKey: "SkipStatus") as? Int{
+        if let status = userDefaults_Shared.value(forKey: "SkipStatus") as? Int{
             skipStatus = status
         }
         
-        if let signIn = objectOfUserDefaults.value(forKey: "SignIn") as? Int {
+        if let signIn = userDefaults_Shared.value(forKey: "SignIn") as? Int {
             signInStatus = signIn
         }
         
         var id = ""
-       let userIdIs = objectOfUserDefaults.value(forKey: "userId")
+       let userIdIs = userDefaults_Shared.value(forKey: "userId")
         
         if let idIs = userIdIs as? String{
             
@@ -38,7 +38,7 @@ class SplashScreenVc: UIViewController {
         
         var receivedTokenIs = ""
         
-        if let receivedTokenData = objectOfKeyChain.loadData(userId: id){
+        if let receivedTokenData = keyChain_Shared.loadData(userId: id){
             
             if let receivedToken = String(data: receivedTokenData, encoding: .utf8){
                 
@@ -68,11 +68,11 @@ class SplashScreenVc: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         var signOutStatus = 0
         var skipStatus = 0
-        if let status = objectOfUserDefaults.value(forKey: "SignOut") as? Int{
+        if let status = userDefaults_Shared.value(forKey: "SignOut") as? Int{
             signOutStatus = status
         }
         
-        if let status = objectOfUserDefaults.value(forKey: "SkipStatus") as? Int{
+        if let status = userDefaults_Shared.value(forKey: "SkipStatus") as? Int{
             skipStatus = status
         }
         

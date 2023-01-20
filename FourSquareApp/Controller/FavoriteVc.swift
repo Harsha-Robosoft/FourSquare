@@ -12,9 +12,10 @@ protocol showHomePage1 {
 
 class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource, reloadTable{
     
-    var getTheToken = GetToken.getTheUserToken
-    var objectOfFavouiretViewModel = FavoriteViewModel.objectOfViewModel
-    var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
+    var searchViewModel_Shared = SearchViewModel._Shared
+    var getTheToken_Shared = GetToken._Shared
+    var favouiretViewModel_Shared = FavoriteViewModel._Shared
+    var homeViewModel_Shared = HomeViewModel._Shared
     
     
     var poplular_Distance_RatingButton = ""
@@ -28,6 +29,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var distanceStatus = 0
     var popRatingStatus = 0
     
+    var filterElement = ["Accepts creadit card","Delivary","Dog friendly","Family-friendly place","In walking distance","Outdoor seating","Parking","Wi-fi"]
     var homeDelegate1: showHomePage1?
     
     @IBOutlet weak var searchField: UITextField!
@@ -37,58 +39,19 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var favouiretFilter: UIButton!
     @IBOutlet weak var favouritSearchFielf: UITextField!
     
-    
+    @IBOutlet weak var filterButtonTable: UITableView!
     @IBOutlet weak var popularButton: SearchScreenButton!
     @IBOutlet weak var distanceButton: SearchScreenButton!
     @IBOutlet weak var ratingButton: SearchScreenButton!
-    
     @IBOutlet weak var setRadiousField: TextFieldBorder!
-    
     @IBOutlet weak var rupeesOne: SearchScreenButton!
     @IBOutlet weak var rupeesTwo: SearchScreenButton!
     @IBOutlet weak var rupeesThree: SearchScreenButton!
     @IBOutlet weak var rupeesFour: SearchScreenButton!
     
-    @IBOutlet weak var acceptCreaditcardButton: FilterByButtons!
-    
-    @IBOutlet weak var delivaryButton: FilterByButtons!
-    @IBOutlet weak var dogFriendlyButton: FilterByButtons!
-    @IBOutlet weak var familyFriendlyPlace: FilterByButtons!
-    @IBOutlet weak var inWalkingDistance: FilterByButtons!
-    @IBOutlet weak var outDoorSeating: FilterByButtons!
-    @IBOutlet weak var parkingbutton: FilterByButtons!
-    @IBOutlet weak var wifiButton: FilterByButtons!
-    
-    @IBOutlet weak var cardImage: UIImageView!
-    @IBOutlet weak var delivaryIMage: UIImageView!
-    @IBOutlet weak var dogFriendlyImage: UIImageView!
-    @IBOutlet weak var familyFriendlyImage: UIImageView!
-    @IBOutlet weak var inwalkingImage: UIImageView!
-    @IBOutlet weak var outdoorImage: UIImageView!
-    @IBOutlet weak var parkingImage: UIImageView!
-    @IBOutlet weak var wifiimage: UIImageView!
-    
-    @IBOutlet weak var acceptCardLabel: FilterLabel!
-    @IBOutlet weak var delivaryLabel: FilterLabel!
-    @IBOutlet weak var dogFriendlyLabel: FilterLabel!
-    @IBOutlet weak var familyFriendlyLabel: FilterLabel!
-    @IBOutlet weak var inWalkingDistanceLabel: FilterLabel!
-    @IBOutlet weak var outdoorLabel: FilterLabel!
-    @IBOutlet weak var parkingLabel: FilterLabel!
-    @IBOutlet weak var wiFiLabel: FilterLabel!
-    
-    var acceptCard = true
-    var delivary = true
-    var dogFriendly = true
-    var familyFriendly = true
-    var inWalkingDistanceNum = true
-    var outDoorSeatingNum = true
-    var parkingNum = true
-    var wifiNum = true
-    
     var didload = 0
     var filterTapped = 0
-    
+    var filterTableToShow = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         addingPading()
@@ -100,17 +63,18 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         favouiretTableView.dataSource = self
         favouiretTableView.register(UINib(nibName: "favCell", bundle: nil), forCellReuseIdentifier: "cellFave")
         
-        let tokenIs = getTheToken.getToken()
+        
+        let tokenIs = getTheToken_Shared.getToken()
         
         if tokenIs != ""{
             var dictionaryIs = [String: Any]()
             if didload == 1 {
                 var latitudeIs = ""
                 var longitudeIs = ""
-                if let latitude = objectOfHomeViewModel.userLocation.last?.latitude {
+                if let latitude = homeViewModel_Shared.userLocation.last?.latitude {
                     latitudeIs = latitude
                 }
-                if let longitude = objectOfHomeViewModel.userLocation.last?.longitude{
+                if let longitude = homeViewModel_Shared.userLocation.last?.longitude{
                     longitudeIs = longitude
                 }
                 dictionaryIs["latitude"] = latitudeIs
@@ -120,7 +84,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
             
             
-            objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+            favouiretViewModel_Shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
                 if status == true{
                     self.noDatFoundView.isHidden = true
                     self.favouiretTableView.isHidden = false
@@ -152,17 +116,16 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
     func reloadTheTable() {
-        print("hello ")
         
-        let tokenIs = getTheToken.getToken()
+        let tokenIs = getTheToken_Shared.getToken()
         var dictionaryIs = [String: Any]()
         
         var latitudeIs = ""
         var longitudeIs = ""
-        if let latitude = objectOfHomeViewModel.userLocation.last?.latitude {
+        if let latitude = homeViewModel_Shared.userLocation.last?.latitude {
             latitudeIs = latitude
         }
-        if let longitude = objectOfHomeViewModel.userLocation.last?.longitude{
+        if let longitude = homeViewModel_Shared.userLocation.last?.longitude{
             longitudeIs = longitude
         }
         dictionaryIs["latitude"] = latitudeIs
@@ -170,7 +133,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         dictionaryIs["text"] = ""
         
         
-        objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+        favouiretViewModel_Shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
             if status == true{
                 self.noDatFoundView.isHidden = true
                 self.favouiretTableView.isHidden = false
@@ -192,6 +155,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     @IBAction func backtapped(_ sender: UIButton) {
         homeDelegate1?.homePage1()
+        searchViewModel_Shared.userFilterChoice.removeAll()
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -200,15 +164,15 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         if filterTapped != 1{
             
-            let tokenIs = getTheToken.getToken()
+            let tokenIs = getTheToken_Shared.getToken()
             var dictionaryIs = [String: Any]()
             if didload == 1 {
                 var latitudeIs = ""
                 var longitudeIs = ""
-                if let latitude = objectOfHomeViewModel.userLocation.last?.latitude {
+                if let latitude = homeViewModel_Shared.userLocation.last?.latitude {
                     latitudeIs = latitude
                 }
-                if let longitude = objectOfHomeViewModel.userLocation.last?.longitude{
+                if let longitude = homeViewModel_Shared.userLocation.last?.longitude{
                     longitudeIs = longitude
                 }
                 dictionaryIs["latitude"] = latitudeIs
@@ -216,7 +180,7 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 dictionaryIs["text"] = searchField.text
             }
             
-            objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
+            favouiretViewModel_Shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/searchFavourite", paramsDictionary: dictionaryIs){ status in
                 if status == true{
                     self.noDatFoundView.isHidden = true
                     self.favouiretTableView.isHidden = false
@@ -236,8 +200,12 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     
     @IBAction func filterButtonTapped(_ sender: UIButton) {
-        let tokenIs = getTheToken.getToken()
+        let tokenIs = getTheToken_Shared.getToken()
         filterTapped = 1
+        filterTableToShow = 1
+        filterButtonTable.delegate = self
+        filterButtonTable.dataSource = self
+        filterButtonTable.reloadData()
         if tokenIs != ""{
             
             if sender.currentTitle == nil{
@@ -248,10 +216,10 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
             }else{
                 var latitudeIs = ""
                 var longitudeIs = ""
-                if let latitude = objectOfHomeViewModel.userLocation.last?.latitude {
+                if let latitude = homeViewModel_Shared.userLocation.last?.latitude {
                     latitudeIs = latitude
                 }
-                if let longitude = objectOfHomeViewModel.userLocation.last?.longitude{
+                if let longitude = homeViewModel_Shared.userLocation.last?.longitude{
                     longitudeIs = longitude
                 }
                 
@@ -273,50 +241,57 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 if rateStatus != 0{
                     dictionaryIs["price"] = rateStatus
                 }
-                if acceptCard == false{
+                if searchViewModel_Shared.userFilterChoice.contains("Accepts creadit card"){
                     dictionaryIs["acceptedCredit"] = true
                 }
-                if delivary == false{
+                if searchViewModel_Shared.userFilterChoice.contains("Delivary"){
                     dictionaryIs["delivery"] = true
                 }
-                if dogFriendly == false{
+                if searchViewModel_Shared.userFilterChoice.contains("Dog friendly"){
                     dictionaryIs["dogFriendly"] = true
                 }
-                if familyFriendly == false{
+                if searchViewModel_Shared.userFilterChoice.contains("Family-friendly place"){
                     dictionaryIs["familyFriendly"] = true
                 }
-                if inWalkingDistanceNum == false{
+                if searchViewModel_Shared.userFilterChoice.contains("In walking distance"){
                     dictionaryIs["inWalkingDistance"] = true
                 }
-                if outDoorSeatingNum == false{
+                if searchViewModel_Shared.userFilterChoice.contains("Outdoor seating"){
                     dictionaryIs["outdoorDining"] = true
                 }
-                if parkingNum == false{
+                if searchViewModel_Shared.userFilterChoice.contains("Parking"){
                     dictionaryIs["parking"] = true
                 }
-                if wifiNum == false{
+                if searchViewModel_Shared.userFilterChoice.contains("Wi-fi"){
                     dictionaryIs["wifi"] = true
                 }
                 
+            print("dictionary is : \(dictionaryIs)")
                 
-                objectOfFavouiretViewModel.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/favFilter", paramsDictionary: dictionaryIs){ [self] status in
-                    if status == true{
-                        self.noDatFoundView.isHidden = true
-                        self.favouiretTableView.isHidden = false
-                        self.filterView.isHidden = true
-                        self.favouiretFilter.setTitle(nil, for: .normal)
-                        self.favouiretFilter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
-                        self.favouiretTableView.reloadData()
-                        self.searchField.text = ""
-                    }else{
-                        self.noDatFoundView.isHidden = false
-                        self.favouiretTableView.isHidden = true
-                        self.filterView.isHidden = true
-                        self.favouiretFilter.setTitle(nil, for: .normal)
-                        self.favouiretFilter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
-                        self.searchField.text = ""
+                favouiretViewModel_Shared.userFavouriteplacesListAndSearch(tokenToSend: tokenIs, endpointToSend: "/favFilter", paramsDictionary: dictionaryIs){ [self] status in
+                    DispatchQueue.main.async {
+                        if status == true{
+                            filterTableToShow = 0
+                            noDatFoundView.isHidden = true
+                            favouiretTableView.isHidden = false
+                            filterView.isHidden = true
+                            favouiretFilter.setTitle(nil, for: .normal)
+                            favouiretFilter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
+                            favouiretTableView.reloadData()
+                            searchField.text = ""
+                            searchViewModel_Shared.userFilterChoice.removeAll()
+
+                        }else{
+                            noDatFoundView.isHidden = false
+                            favouiretTableView.isHidden = true
+                            filterView.isHidden = true
+                            favouiretFilter.setTitle(nil, for: .normal)
+                            favouiretFilter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
+                            searchField.text = ""
+                            searchViewModel_Shared.userFilterChoice.removeAll()
+
+                        }
                     }
-                    
                 }
                 
             }
@@ -339,100 +314,10 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
     }
     
-    @IBAction func filterByButton(_ sender: UIButton) {
-        
-        if sender.currentTitle == "Accepts creadit card"{
-            
-            if acceptCard {
-                acceptCardLabel.addChanges()
-                cardImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                acceptCard = false
-            }else{
-                acceptCardLabel.noChange()
-                cardImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                acceptCard = true
-            }
-        }else if sender.currentTitle == "Delivary"{
-            if delivary {
-                delivaryLabel.addChanges()
-                delivaryIMage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                delivary = false
-            }else{
-                delivaryLabel.noChange()
-                delivaryIMage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                delivary = true
-            }
-        }else if sender.currentTitle == "Dog friendly"{
-            if dogFriendly  {
-                dogFriendlyLabel.addChanges()
-                dogFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                dogFriendly = false
-            }else{
-                dogFriendlyLabel.noChange()
-                dogFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                dogFriendly = true
-            }
-        }else if sender.currentTitle == "Family-friendly place"{
-            if familyFriendly  {
-                familyFriendlyLabel.addChanges()
-                familyFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                familyFriendly = false
-            }else{
-                familyFriendlyLabel.noChange()
-                familyFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                familyFriendly = true
-            }
-        }else if sender.currentTitle == "In walking distance"{
-            if inWalkingDistanceNum  {
-                inWalkingDistanceLabel.addChanges()
-                inwalkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                inWalkingDistanceNum = false
-            }else{
-                inWalkingDistanceLabel.noChange()
-                inwalkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                inWalkingDistanceNum = true
-            }
-        }else if sender.currentTitle == "Outdoor seating"{
-            if outDoorSeatingNum  {
-                outdoorLabel.addChanges()
-                outdoorImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                outDoorSeatingNum = false
-            }else{
-                outdoorLabel.noChange()
-                outdoorImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                outDoorSeatingNum = true
-            }
-        }else if sender.currentTitle == "Parking"{
-            if parkingNum {
-                parkingLabel.addChanges()
-                parkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                parkingNum = false
-            }else{
-                parkingLabel.noChange()
-                parkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                parkingNum = true
-            }
-        }else {
-            if wifiNum  {
-                wiFiLabel.addChanges()
-                wifiimage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                wifiNum = false
-            }else{
-                wiFiLabel.noChange()
-                wifiimage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                wifiNum = true
-            }
-        }
-        
-    }
-    
     
     @IBAction func priceRangeButtonsTapped(_ sender: UIButton) {
-        
-        
-        
+ 
         if sender.currentTitle == "₹"{
-            
             if rupeesOneStatus == 0{
                 rupeesOne.showColour()
                 rupeesTwo.dontShowColour()
@@ -559,38 +444,69 @@ class FavoritetVc: UIViewController, UITableViewDelegate, UITableViewDataSource,
 }
 
 extension FavoritetVc{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+         if filterTableToShow == 1{
+            return 42.6
+        }
+        return 135
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objectOfFavouiretViewModel.favSearchDetails.count
+        if filterTableToShow == 1{
+            return filterElement.count
+        }
+        return favouiretViewModel_Shared.favSearchDetails.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = favouiretTableView.dequeueReusableCell(withIdentifier: "cellFave") as! FavTableCell
-        var imageIs = objectOfFavouiretViewModel.favSearchDetails[indexPath.row].placeImage
-        imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
-        cell.imageIs.image = getImage(urlString: imageIs)
-        cell.addresIs.text = "\(objectOfFavouiretViewModel.favSearchDetails[indexPath.row].address),\(objectOfFavouiretViewModel.favSearchDetails[indexPath.row].city)"
-        cell.distanceIs.text = "\(objectOfFavouiretViewModel.favSearchDetails[indexPath.row].distance)km"
-        cell.nameIs.text = objectOfFavouiretViewModel.favSearchDetails[indexPath.row].placeName
-        cell.nationalityIs.text = objectOfFavouiretViewModel.favSearchDetails[indexPath.row].category
-        cell.ratingIs.text = objectOfFavouiretViewModel.favSearchDetails[indexPath.row].rating
-        if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "1"{
-            cell.rateIs.text = "₹"
-        }else if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "2"{
-            cell.rateIs.text = "₹₹"
-        }else if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "3"{
-            cell.rateIs.text = "₹₹₹"
-        }else if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "4"{
-            cell.rateIs.text = "₹₹₹₹"
-        }else if objectOfFavouiretViewModel.favSearchDetails[indexPath.row].priceRange == "5"{
-            cell.rateIs.text = "₹₹₹₹₹"
+        
+        if filterTableToShow == 1{
+            let cell = filterButtonTable.dequeueReusableCell(withIdentifier: "buttonCell") as! FilterButtonTableCell
+            cell.selectionStyle = .none
+            cell.updateLable.text = filterElement[indexPath.row]
+            cell.updateImage.noChanges()
+            cell.updateLable.noChanges()
+            return cell
         }
         
-        print("koli : \(objectOfFavouiretViewModel.favSearchDetails[indexPath.row]._id)")
-        
-        cell.placeId = objectOfFavouiretViewModel.favSearchDetails[indexPath.row]._id
+        let cell = favouiretTableView.dequeueReusableCell(withIdentifier: "cellFave") as! FavTableCell
+        var imageIs = favouiretViewModel_Shared.favSearchDetails[indexPath.row].placeImage
+        imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
+        cell.imageIs.image = getImage(urlString: imageIs)
+        cell.addresIs.text = "\(favouiretViewModel_Shared.favSearchDetails[indexPath.row].address),\(favouiretViewModel_Shared.favSearchDetails[indexPath.row].city)"
+        cell.distanceIs.text = "\(favouiretViewModel_Shared.favSearchDetails[indexPath.row].distance)km"
+        cell.nameIs.text = favouiretViewModel_Shared.favSearchDetails[indexPath.row].placeName
+        cell.nationalityIs.text = favouiretViewModel_Shared.favSearchDetails[indexPath.row].category
+        cell.ratingIs.text = favouiretViewModel_Shared.favSearchDetails[indexPath.row].rating
+        if favouiretViewModel_Shared.favSearchDetails[indexPath.row].priceRange == "1"{
+            cell.rateIs.text = "₹"
+        }else if favouiretViewModel_Shared.favSearchDetails[indexPath.row].priceRange == "2"{
+            cell.rateIs.text = "₹₹"
+        }else if favouiretViewModel_Shared.favSearchDetails[indexPath.row].priceRange == "3"{
+            cell.rateIs.text = "₹₹₹"
+        }else if favouiretViewModel_Shared.favSearchDetails[indexPath.row].priceRange == "4"{
+            cell.rateIs.text = "₹₹₹₹"
+        }else if favouiretViewModel_Shared.favSearchDetails[indexPath.row].priceRange == "5"{
+            cell.rateIs.text = "₹₹₹₹₹"
+        }
+        cell.placeId = favouiretViewModel_Shared.favSearchDetails[indexPath.row]._id
         cell.delegateCell = self
         cell.setShadow()
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if filterTableToShow == 1{
+            let cell = filterButtonTable.cellForRow(at: indexPath) as! FilterButtonTableCell
+            if searchViewModel_Shared.userFilterChoice.contains(filterElement[indexPath.row]){
+                searchViewModel_Shared.userFilterChoice = searchViewModel_Shared.userFilterChoice.filter { $0 != filterElement[indexPath.row] }
+            }else{
+                searchViewModel_Shared.userFilterChoice.append(filterElement[indexPath.row])
+            }
+            cell.changeTheStatus(filterItem: filterElement[indexPath.row])
+            print("0909",filterElement[indexPath.row])
+            
+        }
     }
 }
 

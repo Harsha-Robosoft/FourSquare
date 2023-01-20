@@ -8,16 +8,15 @@
 import Foundation
 class AboutUsViewModel {
     
-    var ApiResponceObject = ApiResponce()
-    static var objectOfViewModel = AboutUsViewModel()
-    var objectOfAboutUsNetwork = AboutUsNetwork()
+    var apiResponce_Shared = ApiResponce()
+    static var _Shared = AboutUsViewModel()
     
     var aboutDataIsIS = ""
     func ApiCallForAboutUs(completion: @escaping((Bool) -> ())) {
         guard let url = URL(string:"https://four-square-three.vercel.app/api/getAboutUs") else{ return}
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        ApiResponceObject.getApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.getApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)

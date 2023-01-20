@@ -9,8 +9,8 @@ import UIKit
 
 class LogInVc: UIViewController {
     
-    var objectOfUserDefaults = UserDefaults()
-    var objectOfLoginViewModel = LoginViewModel.objectOfVm
+    var userDefaults_Shared = UserDefaults()
+    var loginViewModel_Shared = LoginViewModel.objectOfVm
     
     @IBOutlet weak var emailField: TextFieldBorder!
     @IBOutlet weak var passwordField: TextFieldBorder!
@@ -23,7 +23,7 @@ class LogInVc: UIViewController {
     @IBAction func skipButtonTapped(_ sender: UIButton) {
         let homeVc = self.storyboard?.instantiateViewController(identifier: "HomeVc") as? HomeVc
         if let vc = homeVc {
-            objectOfUserDefaults.setValue(1, forKey: "SkipStatus")
+            userDefaults_Shared.setValue(1, forKey: "SkipStatus")
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -39,7 +39,7 @@ class LogInVc: UIViewController {
                 passwordToSend = password
             }
             let loader =   self.loader()
-            objectOfLoginViewModel.apiCallForUserLogin(emailToSend: emailToSend, passwordToSend: passwordToSend){ message, status in
+            loginViewModel_Shared.apiCallForUserLogin(emailToSend: emailToSend, passwordToSend: passwordToSend){ message, status in
                 DispatchQueue.main.async() {
                     self.stopLoader(loader: loader)
                     if status == true{

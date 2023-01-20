@@ -14,8 +14,8 @@ class HomeTableViewCell: UITableViewCell {
     
     var objectOfUserDefaults = UserDefaults()
     var objectOfKeyChain = KeyChain()
-    var objectOfAddToFavouiretViewModel = AddToFavoriteViewModel.objectOfAddToFavoriteViewModel
-    var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
+    var objectOfAddToFavouiretViewModel = AddToFavoriteViewModel.addToFavoriteViewModel_Shared
+    var objectOfHomeViewModel = HomeViewModel._Shared
     
     var delegateHomeCell: reloadHomeTable?
         

@@ -9,8 +9,8 @@ import UIKit
 
 class RegisterVc: UIViewController {
     
-    var objectOfRegisterViewModel = RegisterViewModel.objectOfVm
-    var objectOfOtpvarificationViewModel = OtpvarificationViewModel.objectOfVc
+    var registerViewModel_Shared = RegisterViewModel.objectOfVm
+    var otpvarificationViewModel_Shared = OtpvarificationViewModel.objectOfVc
     
     @IBOutlet weak var emailField: TextFieldBorder!
     @IBOutlet weak var mobileNUmberFiewld: TextFieldBorder!
@@ -57,14 +57,14 @@ class RegisterVc: UIViewController {
             print("email : \(mailIdToSend)\npassword : \(passwordToSend)\nmobilenumber : \(mobilNumberToSend)")
             if mailIdToSend != "" && passwordToSend != "" && mobilNumberToSend != "" {
                 let loader =   self.loader()
-                objectOfRegisterViewModel.apiCallForUserRegistration(emailToSend: mailIdToSend.lowercased(), mobileNumberToSend: mobilNumberToSend, passwordToSend: passwordToSend){ messgage , status in
+                registerViewModel_Shared.apiCallForUserRegistration(emailToSend: mailIdToSend.lowercased(), mobileNumberToSend: mobilNumberToSend, passwordToSend: passwordToSend){ messgage , status in
                     DispatchQueue.main.async() {
                         self.stopLoader(loader: loader)
                         if status == true{
                             let otpVc = self.storyboard?.instantiateViewController(withIdentifier: "VarifyOtpVc") as? VarifyOtpVc
                             if let vc = otpVc{
                                 vc.emailId = mailIdToSend
-                                self.objectOfOtpvarificationViewModel.sendOtpApiCall(emailToSend: mailIdToSend) { status in
+                                self.otpvarificationViewModel_Shared.sendOtpApiCall(emailToSend: mailIdToSend) { status in
                                     if status == true{
                                         self.navigationController?.pushViewController(vc, animated: true)
                                     }else{

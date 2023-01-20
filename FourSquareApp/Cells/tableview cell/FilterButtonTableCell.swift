@@ -9,7 +9,7 @@ import UIKit
 
 class FilterButtonTableCell: UITableViewCell {
 
-    var shared = SearchViewModel.objectOfViewModel
+    var shared = SearchViewModel._Shared
     
     
     @IBOutlet weak var updateLable: FilterTableLabel!
@@ -17,13 +17,10 @@ class FilterButtonTableCell: UITableViewCell {
     
     
     func changeTheStatus(filterItem: String) {
-        print("1")
         if shared.userFilterChoice.contains(filterItem){
-            print(2)
             updateImage.changes()
             updateLable.changes()
         }else{
-            print(3)
             updateImage.noChanges()
             updateLable.noChanges()
         }

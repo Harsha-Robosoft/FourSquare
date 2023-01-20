@@ -9,8 +9,8 @@ import UIKit
 
 class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var objectOfReviewViewModel = ReviewViewModel.objectOfViewModel
-    var getTheToken = GetToken.getTheUserToken
+    var reviewViewModel_Shared = ReviewViewModel._Shared
+    var getTheToken_Shared = GetToken._Shared
 
     var nameIs = ""
     var placeId = ""
@@ -25,10 +25,10 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let call = getTheToken.getToken()
+        let call = getTheToken_Shared.getToken()
         if call != ""{
             print("place id for All review : \(placeId)")
-            objectOfReviewViewModel.getAllReviewDataApiCall(tokenToSend: call, placeIdToSend: placeId ){ status in
+            reviewViewModel_Shared.getAllReviewDataApiCall(tokenToSend: call, placeIdToSend: placeId ){ status in
                 if status == true{
                     self.tableView01.reloadData()
                 }else{
@@ -48,7 +48,7 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBAction func addReviewButtonTapped(_ sender: UIButton){
         
-        let call = getTheToken.getToken()
+        let call = getTheToken_Shared.getToken()
         
         if call != ""{
             let addReviewVc = self.storyboard?.instantiateViewController(withIdentifier: "AddReviewVc") as? AddReviewVc
@@ -71,17 +71,17 @@ class ReviewVc: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objectOfReviewViewModel.allReviewdata.count
+        return reviewViewModel_Shared.allReviewdata.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView01.dequeueReusableCell(withIdentifier: "tableCell") as! ReviewCell
-        var imageIs = objectOfReviewViewModel.allReviewdata[indexPath.row].reviewerImage
+        var imageIs = reviewViewModel_Shared.allReviewdata[indexPath.row].reviewerImage
         imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
         cell.imageIs.image = getImage(urlString: imageIs)
-        cell.nameIs.text = objectOfReviewViewModel.allReviewdata[indexPath.row].reviewBy
-        cell.reviewIs.text = objectOfReviewViewModel.allReviewdata[indexPath.row].review
-        cell.dateAndTime.text = getDate(date: objectOfReviewViewModel.allReviewdata[indexPath.row].reviewDate)
+        cell.nameIs.text = reviewViewModel_Shared.allReviewdata[indexPath.row].reviewBy
+        cell.reviewIs.text = reviewViewModel_Shared.allReviewdata[indexPath.row].review
+        cell.dateAndTime.text = getDate(date: reviewViewModel_Shared.allReviewdata[indexPath.row].reviewDate)
         return cell
     }
 }

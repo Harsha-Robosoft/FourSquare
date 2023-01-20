@@ -12,8 +12,8 @@ protocol showHomePage3 {
 
 class FeedbackVc: UIViewController {
     
-    var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
-    var getTheToken = GetToken.getTheUserToken
+    var homeViewModel_Shared = HomeViewModel._Shared
+    var getTheToken_Shared = GetToken._Shared
     
     var homeDelegate3: showHomePage3?
     @IBOutlet weak var feddbackSubmitButton: UIButton!
@@ -37,12 +37,12 @@ class FeedbackVc: UIViewController {
     
     
     @IBAction func feedbackSubmitButton(_ sender: UIButton) {
-        let call = getTheToken.getToken()
+        let call = getTheToken_Shared.getToken()
         if call != ""{
             if feedBackField.text != ""{
                 guard let feddback = feedBackField.text else{ print("Feedback error")
                     return}
-                objectOfHomeViewModel.feedBackApiCall(tokenToSend: call, feedbackToSend: feddback){status in
+                homeViewModel_Shared.feedBackApiCall(tokenToSend: call, feedbackToSend: feddback){status in
                     if status == true{
                         self.feddbackSubmitButton.isEnabled = false
                         self.feddbackSubmitButton.alpha = 0.5

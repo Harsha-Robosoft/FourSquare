@@ -9,20 +9,18 @@ import UIKit
 
 class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-
+    var reviewViewModel_Shared = ReviewViewModel._Shared
+    var getTheToken_Shared = GetToken._Shared
+    
+    var addonlyPhoto = 0
+    var placeIsIs = ""
+    var photoArray = [UIImage]()
     
     @IBOutlet weak var addYourPhots: UILabel!
     @IBOutlet weak var reviewFieldHeight: NSLayoutConstraint!
     @IBOutlet weak var writereviewHeight: NSLayoutConstraint!
     @IBOutlet weak var addRevie_AddPhotoFiewld: UILabel!
-    var addonlyPhoto = 0
-    
-    var objectOfReviewViewModel = ReviewViewModel.objectOfViewModel
-    var getTheToken = GetToken.getTheUserToken
 
-    var placeIsIs = ""
-    var photoArray = [UIImage]()
-    
     @IBOutlet weak var reviewField: FeedbackFieldBackgroundColour!
     
     @IBOutlet weak var view_1: UIView!
@@ -161,14 +159,14 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     @IBAction func submitfeddBackButtonTapped(_ sender: UIButton) {
         
-        let call = getTheToken.getToken()
+        let call = getTheToken_Shared.getToken()
         if call != ""{
             if reviewField.text != ""{
                 var reviewToSend = ""
                 if let review00 = reviewField.text{
                     reviewToSend = review00
                 }
-                objectOfReviewViewModel.textReviewSubmitApiCall(tokenToSend: call, restaturantId: placeIsIs, reviewToSend: reviewToSend){ status in
+                reviewViewModel_Shared.textReviewSubmitApiCall(tokenToSend: call, restaturantId: placeIsIs, reviewToSend: reviewToSend){ status in
                     if status == true{
                         self.submitButton.isEnabled = false
                         self.submitButton.alpha = 0.5
@@ -187,7 +185,7 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
             }
             if addonlyPhoto == 0{
                 if buttonw1 == 0{
-                    objectOfReviewViewModel.photoReviewSubmitApiCall(tokenToSend: call, placeIdToSend: placeIsIs, images: photoArray){ status in
+                    reviewViewModel_Shared.photoReviewSubmitApiCall(tokenToSend: call, placeIdToSend: placeIsIs, images: photoArray){ status in
                         if status == true{
                             self.reviewFieldHeight.constant = 200
                             self.writereviewHeight.constant = 33
@@ -205,7 +203,7 @@ class AddReviewVc: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 }
             }else{
                 if buttonw1 == 0{
-                    objectOfReviewViewModel.photoReviewSubmitApiCall(tokenToSend: call, placeIdToSend: placeIsIs, images: photoArray){ status in
+                    reviewViewModel_Shared.photoReviewSubmitApiCall(tokenToSend: call, placeIdToSend: placeIsIs, images: photoArray){ status in
                         if status == true{
                             self.view_2.isHidden = true
                             self.view_3.isHidden = true

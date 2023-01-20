@@ -9,7 +9,7 @@ import UIKit
 
 class EmailValidationVc: UIViewController {
     
-    var objectOfOtpvarificationViewModel = OtpvarificationViewModel.objectOfVc
+    var otpvarificationViewModel_Shared = OtpvarificationViewModel.objectOfVc
     
     @IBOutlet weak var emailField: TextFieldBorder!
     @IBOutlet weak var varifyOtpButton: LoginButton!
@@ -29,7 +29,7 @@ class EmailValidationVc: UIViewController {
         }
         let loader =   self.loader()
 
-        objectOfOtpvarificationViewModel.chekMailIdIsValidApiCall(emailToSend: emailIS.lowercased()){ status in
+        otpvarificationViewModel_Shared.chekMailIdIsValidApiCall(emailToSend: emailIS.lowercased()){ status in
             
             DispatchQueue.main.async() {
                 self.stopLoader(loader: loader)
@@ -40,7 +40,7 @@ class EmailValidationVc: UIViewController {
                 if let vc = otpVc {
                     vc.emailId = emailIS
                     vc.forgotPassword = 1
-                    self.objectOfOtpvarificationViewModel.sendOtpApiCall(emailToSend: emailIS) { status in
+                    self.otpvarificationViewModel_Shared.sendOtpApiCall(emailToSend: emailIS) { status in
                         
                         DispatchQueue.main.async {
                             if status == true{

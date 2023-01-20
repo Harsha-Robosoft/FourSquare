@@ -11,16 +11,10 @@ import CoreLocation
 
 class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, reloadHomeTable, reloadHomeTable2 {
     //   OBJECT CREATION ---------------------------------
-    var objectOfSearchViewModel = SearchViewModel.objectOfViewModel
-    var getTheToken = GetToken.getTheUserToken
-
+    var searchViewModel_Shared = SearchViewModel._Shared
+    var getTheToken_Shared = GetToken._Shared
     //    VARIABLES DECLARATION -----------------------------
-    
     var filterElement = ["Accepts creadit card","Delivary","Dog friendly","Family-friendly place","In walking distance","Outdoor seating","Parking","Wi-fi"]
-    
-    
-    var cell00: FilterButtonTableCell?
-    
     var test = false
     var nearYou = 0
     var filterTapped = 0
@@ -50,10 +44,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     @IBOutlet weak var filterScreen: UIView!
     @IBOutlet weak var whiteView: UIView!
     //    FILTER SCREEN FIRELD -------------------------------------------
-    
     @IBOutlet weak var filterButtonTable: UITableView!
-    
-    
     @IBOutlet weak var popularButton: SearchScreenButton!
     @IBOutlet weak var distanceButton: SearchScreenButton!
     @IBOutlet weak var ratingButton: SearchScreenButton!
@@ -62,40 +53,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     @IBOutlet weak var rupeesTwo: SearchScreenButton!
     @IBOutlet weak var rupeesThree: SearchScreenButton!
     @IBOutlet weak var rupeesFour: SearchScreenButton!
-    @IBOutlet weak var acceptCreaditcardButton: FilterByButtons!
-    @IBOutlet weak var delivaryButton: FilterByButtons!
-    @IBOutlet weak var dogFriendlyButton: FilterByButtons!
-    @IBOutlet weak var familyFriendlyPlace: FilterByButtons!
-    @IBOutlet weak var inWalkingDistance: FilterByButtons!
-    @IBOutlet weak var outDoorSeating: FilterByButtons!
-    @IBOutlet weak var parkingbutton: FilterByButtons!
-    @IBOutlet weak var wifiButton: FilterByButtons!
-    @IBOutlet weak var cardImage: UIImageView!
-    @IBOutlet weak var delivaryIMage: UIImageView!
-    @IBOutlet weak var dogFriendlyImage: UIImageView!
-    @IBOutlet weak var familyFriendlyImage: UIImageView!
-    @IBOutlet weak var inwalkingImage: UIImageView!
-    @IBOutlet weak var outdoorImage: UIImageView!
-    @IBOutlet weak var parkingImage: UIImageView!
-    @IBOutlet weak var wifiimage: UIImageView!
-    @IBOutlet weak var acceptCardLabel: FilterLabel!
-    @IBOutlet weak var delivaryLabel: FilterLabel!
-    @IBOutlet weak var dogFriendlyLabel: FilterLabel!
-    @IBOutlet weak var familyFriendlyLabel: FilterLabel!
-    @IBOutlet weak var inWalkingDistanceLabel: FilterLabel!
-    @IBOutlet weak var outdoorLabel: FilterLabel!
-    @IBOutlet weak var parkingLabel: FilterLabel!
-    @IBOutlet weak var wiFiLabel: FilterLabel!
-    var acceptCard = true
-    var delivary = true
-    var dogFriendly = true
-    var familyFriendly = true
-    var inWalkingDistanceNum = true
-    var outDoorSeatingNum = true
-    var parkingNum = true
-    var wifiNum = true
     //    MAP & COLLECTION VIEW FIELD ----------------------------------------
-    var objectOfHomeViewModel = HomeViewModel.objectOfViewModel
+    var objectOfHomeViewModel = HomeViewModel._Shared
     var manager = CLLocationManager()
     @IBOutlet weak var mapAndColectionView: MKMapView!
     @IBOutlet weak var listViewButton: UIButton!
@@ -115,7 +74,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     @IBOutlet weak var mapButton_TableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if showFilterScreen == 1{
+        if showFilterScreen == 1 && filterTableToShow == 1{
             nearMeView.isHidden = true
             tableViewAndViewMap.isHidden = true
             mapAndCollectionView.isHidden = true
@@ -124,6 +83,9 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             whiteView.isHidden = true
             filter.setTitle("Done", for: .normal)
             filter.setImage(nil, for: .normal)
+            filterButtonTable.delegate = self
+            filterButtonTable.dataSource = self
+            filterButtonTable.reloadData()
         }else{
             nearMeView.isHidden = true
             tableViewAndViewMap.isHidden = true
@@ -136,7 +98,6 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         nearMe.delegate = self
         addingPading()
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -171,8 +132,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         whiteView.isHidden = true
                         filter.setTitle(nil, for: .normal)
                         filter.setImage( #imageLiteral(resourceName: "filter_icon"), for: .normal)
-                        if objectOfSearchViewModel.nearCityData.count == 0{
-                            objectOfSearchViewModel.getNearCityDetailsApiCall(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
+                        if searchViewModel_Shared.nearCityData.count == 0{
+                            searchViewModel_Shared.getNearCityDetailsApiCall(latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373")){ status in
                                 if status == true{
                                     self.nearMeTableViewHeightconstraints.constant = 180
                                     UIView.animate(withDuration: 0.3 , animations: {
@@ -189,6 +150,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                             self.nearMeTableView.reloadData()
                         }
                     }else{
+                        searchViewModel_Shared.userFilterChoice.removeAll()
                         manager.desiredAccuracy = kCLLocationAccuracyBest
                         manager.delegate = self
                         manager.requestWhenInUseAuthorization()
@@ -209,6 +171,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         whiteView.isHidden = true
                     }
                 }else{
+                    searchViewModel_Shared.userFilterChoice.removeAll()
                     nearYou = 0
                     nearMeView.isHidden = true
                     tableViewAndViewMap.isHidden = false
@@ -220,6 +183,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 }
             }else{
                 if name != "Search"{
+                    searchViewModel_Shared.userFilterChoice.removeAll()
                     manager.desiredAccuracy = kCLLocationAccuracyBest
                     manager.delegate = self
                     manager.requestWhenInUseAuthorization()
@@ -241,7 +205,6 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             }
         }
     }
-    
     func addingPading() {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 35, height: search.frame.height))
         search.leftView = paddingView
@@ -251,13 +214,12 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         nearMe.leftView = paddingView1
         nearMe.leftViewMode = .always
     }
-    
     @IBAction func searchFieldUsing(_ sender: Any) {
-        let tokenIs = getTheToken.getToken()
+        let tokenIs = getTheToken_Shared.getToken()
         if tokenIs != ""{
             if filterTapped == 0 && showFilterScreen == 0{
                 if search.text?.count ?? 0 >= 3{
-                    objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: search.text ?? ""){ status in
+                    searchViewModel_Shared.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: search.text ?? ""){ status in
                         if status == true{
                             self.searching = 1
                             self.nearYou = 0
@@ -297,13 +259,12 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             present(refreshAlert, animated: true, completion: nil)
         }
     }
-    
     @IBAction func nearMeFieldUsing(_ sender: Any) {
-        let tokenIs = getTheToken.getToken()
+        let tokenIs = getTheToken_Shared.getToken()
         if tokenIs != ""{
             if filterTapped == 0{
                 if search.text?.count ?? 0 >= 3{
-                    objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: search.text ?? ""){ status in
+                    searchViewModel_Shared.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: search.text ?? ""){ status in
                         if status == true{
                             self.nearMeView.isHidden = true
                             self.tableViewAndViewMap.isHidden = false
@@ -335,10 +296,11 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
     }
 
     @IBAction func backButtonTapped(_ sender: UIButton) {
+        searchViewModel_Shared.userFilterChoice.removeAll()
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func filterButtonTapped(_ sender: UIButton) {
-        let tokenIs = getTheToken.getToken()
+        let tokenIs = getTheToken_Shared.getToken()
         if tokenIs != ""{
             if sender.currentTitle == nil{
                 filterTapped = 1
@@ -369,34 +331,32 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                 if rateStatus != 0{
                     dictionaryIs["price"] = rateStatus
                 }
-                if objectOfSearchViewModel.userFilterChoice.contains("Accepts creadit card"){
+                if searchViewModel_Shared.userFilterChoice.contains("Accepts creadit card"){
                     dictionaryIs["acceptedCredit"] = true
                 }
-                if objectOfSearchViewModel.userFilterChoice.contains("Delivary"){
+                if searchViewModel_Shared.userFilterChoice.contains("Delivary"){
                     dictionaryIs["delivery"] = true
                 }
-                if objectOfSearchViewModel.userFilterChoice.contains("Dog friendly"){
+                if searchViewModel_Shared.userFilterChoice.contains("Dog friendly"){
                     dictionaryIs["dogFriendly"] = true
                 }
-                if objectOfSearchViewModel.userFilterChoice.contains("Family-friendly place"){
+                if searchViewModel_Shared.userFilterChoice.contains("Family-friendly place"){
                     dictionaryIs["familyFriendly"] = true
                 }
-                if objectOfSearchViewModel.userFilterChoice.contains("In walking distance"){
+                if searchViewModel_Shared.userFilterChoice.contains("In walking distance"){
                     dictionaryIs["inWalkingDistance"] = true
                 }
-                if objectOfSearchViewModel.userFilterChoice.contains("Outdoor seating"){
+                if searchViewModel_Shared.userFilterChoice.contains("Outdoor seating"){
                     dictionaryIs["outdoorDining"] = true
                 }
-                if objectOfSearchViewModel.userFilterChoice.contains("Parking"){
+                if searchViewModel_Shared.userFilterChoice.contains("Parking"){
                     dictionaryIs["parking"] = true
                 }
-                if objectOfSearchViewModel.userFilterChoice.contains("Wi-fi"){
+                if searchViewModel_Shared.userFilterChoice.contains("Wi-fi"){
                     dictionaryIs["wifi"] = true
                 }
-                
-                print("dic",dictionaryIs)
-                
-                objectOfSearchViewModel.searchWithFilterApiCall(tokenToSend: tokenIs, parameterDictionary: dictionaryIs){ status in
+                                
+                searchViewModel_Shared.searchWithFilterApiCall(tokenToSend: tokenIs, parameterDictionary: dictionaryIs){ status in
                     if status == true{
                         self.searching = 0
                         self.nearYou = 0
@@ -412,7 +372,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         self.filter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
                         self.search.text = ""
                         self.mapButton_TableView.reloadData()
-                        self.objectOfSearchViewModel.userFilterChoice.removeAll()
+                        self.searchViewModel_Shared.userFilterChoice.removeAll()
                     }else{
                         self.nearMeView.isHidden = true
                         self.tableViewAndViewMap.isHidden = true
@@ -423,6 +383,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
                         self.filter.setTitle(nil, for: .normal)
                         self.filter.setImage(#imageLiteral(resourceName: "filter_icon"), for: .normal)
                         self.search.text = ""
+                        self.searchViewModel_Shared.userFilterChoice.removeAll()
+
                     }
                 }
             }
@@ -435,6 +397,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             }))
             present(refreshAlert, animated: true, completion: nil)
         }
+        searchViewModel_Shared.userFilterChoice.removeAll()
+
     }
     @IBAction func popular_Distance_rating_ButtonTapped(_ sender: UIButton) {
         poplular_Distance_RatingButton = sender.currentTitle ?? ""
@@ -546,92 +510,8 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
         }
     }
     
-    @IBAction func filterByButton(_ sender: UIButton) {
-        if sender.currentTitle == "Accepts creadit card"{
-            if acceptCard {
-                acceptCardLabel.addChanges()
-                cardImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                acceptCard = false
-            }else{
-                acceptCardLabel.noChange()
-                cardImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                acceptCard = true
-            }
-        }else if sender.currentTitle == "Delivary"{
-            if delivary {
-                delivaryLabel.addChanges()
-                delivaryIMage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                delivary = false
-            }else{
-                delivaryLabel.noChange()
-                delivaryIMage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                delivary = true
-            }
-        }else if sender.currentTitle == "Dog friendly"{
-            if dogFriendly  {
-                dogFriendlyLabel.addChanges()
-                dogFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                dogFriendly = false
-            }else{
-                dogFriendlyLabel.noChange()
-                dogFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                dogFriendly = true
-            }
-        }else if sender.currentTitle == "Family-friendly place"{
-            if familyFriendly  {
-                familyFriendlyLabel.addChanges()
-                familyFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                familyFriendly = false
-            }else{
-                familyFriendlyLabel.noChange()
-                familyFriendlyImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                familyFriendly = true
-            }
-        }else if sender.currentTitle == "In walking distance"{
-            if inWalkingDistanceNum  {
-                inWalkingDistanceLabel.addChanges()
-                inwalkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                inWalkingDistanceNum = false
-            }else{
-                inWalkingDistanceLabel.noChange()
-                inwalkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                inWalkingDistanceNum = true
-            }
-        }else if sender.currentTitle == "Outdoor seating"{
-            if outDoorSeatingNum  {
-                outdoorLabel.addChanges()
-                outdoorImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                outDoorSeatingNum = false
-            }else{
-                outdoorLabel.noChange()
-                outdoorImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                outDoorSeatingNum = true
-            }
-        }else if sender.currentTitle == "Parking"{
-            if parkingNum {
-                parkingLabel.addChanges()
-                parkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                parkingNum = false
-            }else{
-                parkingLabel.noChange()
-                parkingImage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                parkingNum = true
-            }
-        }else {
-            if wifiNum  {
-                wiFiLabel.addChanges()
-                wifiimage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.26.22 AM")
-                wifiNum = false
-            }else{
-                wiFiLabel.noChange()
-                wifiimage.image = #imageLiteral(resourceName: "Screenshot 2023-01-05 at 10.29.44 AM")
-                wifiNum = true
-            }
-        }
-    }
-    
     @IBAction func useMyCurrentLocationButtonTapped(_ sender: UIButton) {
-        let tokenIs = getTheToken.getToken()
+        let tokenIs = getTheToken_Shared.getToken()
         if tokenIs != ""{
             nearYou = 0
             nearMeView.isHidden = true
@@ -640,7 +520,7 @@ class SearchVc: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate
             nearYouAndSuggestion.isHidden = true
             filterScreen.isHidden = true
             whiteView.isHidden = true
-            objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: ""){ status in
+            searchViewModel_Shared.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: ""){ status in
                 if status == true{
                     self.searching = 1
                     self.nearYou = 0
@@ -785,11 +665,11 @@ extension SearchVc{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if nearYou == 1{
-            return objectOfSearchViewModel.nearCityData.count
+            return searchViewModel_Shared.nearCityData.count
         } else if searching == 1{
-            return objectOfSearchViewModel.searchDetaisl.count
+            return searchViewModel_Shared.searchDetaisl.count
         }else if filterSearchIs == 1{
-            return objectOfSearchViewModel.filterSearchDetails.count
+            return searchViewModel_Shared.filterSearchDetails.count
         }else if filterTableToShow == 1{
             return filterElement.capacity
         }
@@ -811,30 +691,30 @@ extension SearchVc{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if nearYou == 1{
             guard let cell = nearMeTableView.dequeueReusableCell(withIdentifier: "cell") as? SearchBodyCell else{ return UITableViewCell()}
-            cell.name.text = objectOfSearchViewModel.nearCityData[indexPath.row].cityName.capitalized
-            var imageIs = objectOfSearchViewModel.nearCityData[indexPath.row].cityImage
+            cell.name.text = searchViewModel_Shared.nearCityData[indexPath.row].cityName.capitalized
+            var imageIs = searchViewModel_Shared.nearCityData[indexPath.row].cityImage
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
             cell.imageIs.image = getImage(urlString: imageIs)
             return cell
         }else if searching == 1{
             let cell = mapButton_TableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
-            var imageIs = objectOfSearchViewModel.searchDetaisl[indexPath.row].placeImage
+            var imageIs = searchViewModel_Shared.searchDetaisl[indexPath.row].placeImage
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
             cell.imageIs.image = getImage(urlString: imageIs)
-            cell.addresIs.text = "\(objectOfSearchViewModel.searchDetaisl[indexPath.row].address),\(objectOfSearchViewModel.searchDetaisl[indexPath.row].city)"
-            cell.distanceIs.text = "\(objectOfSearchViewModel.searchDetaisl[indexPath.row].distance)km"
-            cell.nameIs.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].placeName
-            cell.nationalityIs.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].category
-            cell.ratingIs.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].rating
-            if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "1"{
+            cell.addresIs.text = "\(searchViewModel_Shared.searchDetaisl[indexPath.row].address),\(searchViewModel_Shared.searchDetaisl[indexPath.row].city)"
+            cell.distanceIs.text = "\(searchViewModel_Shared.searchDetaisl[indexPath.row].distance)km"
+            cell.nameIs.text = searchViewModel_Shared.searchDetaisl[indexPath.row].placeName
+            cell.nationalityIs.text = searchViewModel_Shared.searchDetaisl[indexPath.row].category
+            cell.ratingIs.text = searchViewModel_Shared.searchDetaisl[indexPath.row].rating
+            if searchViewModel_Shared.searchDetaisl[indexPath.row].priceRange == "1"{
                 cell.rateIs.text = "₹"
-            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "2"{
+            }else if searchViewModel_Shared.searchDetaisl[indexPath.row].priceRange == "2"{
                 cell.rateIs.text = "₹₹"
-            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "3"{
+            }else if searchViewModel_Shared.searchDetaisl[indexPath.row].priceRange == "3"{
                 cell.rateIs.text = "₹₹₹"
-            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "4"{
+            }else if searchViewModel_Shared.searchDetaisl[indexPath.row].priceRange == "4"{
                 cell.rateIs.text = "₹₹₹₹"
-            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "5"{
+            }else if searchViewModel_Shared.searchDetaisl[indexPath.row].priceRange == "5"{
                 cell.rateIs.text = "₹₹₹₹₹"
             }
             cell._Id = objectOfHomeViewModel.homeDetails[indexPath.row]._id
@@ -845,35 +725,35 @@ extension SearchVc{
             
         }else if filterSearchIs == 1{
             let cell = mapButton_TableView.dequeueReusableCell(withIdentifier: "cell") as! HomeTableViewCell
-            var imageIs = objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeImage
+            var imageIs = searchViewModel_Shared.filterSearchDetails[indexPath.row].placeImage
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
             cell.imageIs.image = getImage(urlString: imageIs)
-            cell.addresIs.text = "\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].address),\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].city)"
-            cell.distanceIs.text = "\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].distance)km"
-            cell.nameIs.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeName
-            cell.nationalityIs.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].category
-            cell.ratingIs.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].rating
-            if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "1"{
+            cell.addresIs.text = "\(searchViewModel_Shared.filterSearchDetails[indexPath.row].address),\(searchViewModel_Shared.filterSearchDetails[indexPath.row].city)"
+            cell.distanceIs.text = "\(searchViewModel_Shared.filterSearchDetails[indexPath.row].distance)km"
+            cell.nameIs.text = searchViewModel_Shared.filterSearchDetails[indexPath.row].placeName
+            cell.nationalityIs.text = searchViewModel_Shared.filterSearchDetails[indexPath.row].category
+            cell.ratingIs.text = searchViewModel_Shared.filterSearchDetails[indexPath.row].rating
+            if searchViewModel_Shared.filterSearchDetails[indexPath.row].priceRange == "1"{
                 cell.rateIs.text = "₹"
-            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "2"{
+            }else if searchViewModel_Shared.filterSearchDetails[indexPath.row].priceRange == "2"{
                 cell.rateIs.text = "₹₹"
-            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "3"{
+            }else if searchViewModel_Shared.filterSearchDetails[indexPath.row].priceRange == "3"{
                 cell.rateIs.text = "₹₹₹"
-            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "4"{
+            }else if searchViewModel_Shared.filterSearchDetails[indexPath.row].priceRange == "4"{
                 cell.rateIs.text = "₹₹₹₹"
-            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "5"{
+            }else if searchViewModel_Shared.filterSearchDetails[indexPath.row].priceRange == "5"{
                 cell.rateIs.text = "₹₹₹₹₹"
             }
-            cell._Id = objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id
-            cell.buttonStatus(id: objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id)
+            cell._Id = searchViewModel_Shared.filterSearchDetails[indexPath.row]._id
+            cell.buttonStatus(id: searchViewModel_Shared.filterSearchDetails[indexPath.row]._id)
             cell.setShadow()
             cell.delegateHomeCell = self
             return cell
         } else if filterTableToShow == 1{
             let cell = filterButtonTable.dequeueReusableCell(withIdentifier: "buttonCell") as! FilterButtonTableCell
             cell.selectionStyle = .none
-            cell00 = cell
             cell.updateLable.text = filterElement[indexPath.row]
+            cell.updateLable.noChanges()
             cell.updateImage.noChanges()
             return cell
         }
@@ -923,7 +803,7 @@ extension SearchVc{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if nearYou == 1{
-            let tokenIs = getTheToken.getToken()
+            let tokenIs = getTheToken_Shared.getToken()
             if tokenIs != ""{
                 nearYou = 0
                 nearMeView.isHidden = true
@@ -932,7 +812,7 @@ extension SearchVc{
                 nearYouAndSuggestion.isHidden = true
                 filterScreen.isHidden = true
                 whiteView.isHidden = true
-                objectOfSearchViewModel.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: objectOfSearchViewModel.nearCityData[indexPath.row].cityName){ status in
+                searchViewModel_Shared.search(tokenToSend: tokenIs, latToSend: String(objectOfHomeViewModel.userLocation.last?.latitude ?? "13.379162"), longToSend: String(objectOfHomeViewModel.userLocation.last?.longitude ?? "74.740373"), textToSend: searchViewModel_Shared.nearCityData[indexPath.row].cityName){ status in
                     if status == true{
                         self.searching = 1
                         self.nearYou = 0
@@ -957,28 +837,23 @@ extension SearchVc{
         }else if searching == 1{
             let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
             if let vc = Details{
-                vc.placeId = objectOfSearchViewModel.searchDetaisl[indexPath.row]._id
+                vc.placeId = searchViewModel_Shared.searchDetaisl[indexPath.row]._id
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }else if filterSearchIs == 1{
             let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
             if let vc = Details{
-                vc.placeId = objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id
+                vc.placeId = searchViewModel_Shared.filterSearchDetails[indexPath.row]._id
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }else if filterTableToShow == 1{
             let cell = filterButtonTable.cellForRow(at: indexPath) as! FilterButtonTableCell
-            if objectOfSearchViewModel.userFilterChoice.contains(filterElement[indexPath.row]){
-                objectOfSearchViewModel.userFilterChoice = objectOfSearchViewModel.userFilterChoice.filter { $0 != filterElement[indexPath.row] }
+            if searchViewModel_Shared.userFilterChoice.contains(filterElement[indexPath.row]){
+                searchViewModel_Shared.userFilterChoice = searchViewModel_Shared.userFilterChoice.filter { $0 != filterElement[indexPath.row] }
             }else{
-                objectOfSearchViewModel.userFilterChoice.append(filterElement[indexPath.row])
+                searchViewModel_Shared.userFilterChoice.append(filterElement[indexPath.row])
             }
-            
-            
-            
             cell.changeTheStatus(filterItem: filterElement[indexPath.row])
-            print("0909",filterElement[indexPath.row])
-            
             
         }else{
             let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
@@ -994,9 +869,9 @@ extension SearchVc{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching == 1{
-            return objectOfSearchViewModel.searchDetaisl.count
+            return searchViewModel_Shared.searchDetaisl.count
         } else if filterSearchIs == 1{
-            return objectOfSearchViewModel.filterSearchDetails.count
+            return searchViewModel_Shared.filterSearchDetails.count
         }
         return objectOfHomeViewModel.homeDetails.count
     }
@@ -1004,58 +879,58 @@ extension SearchVc{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if searching == 1{
             let cell = map_CollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchCollectionView
-            var imageIs = objectOfSearchViewModel.searchDetaisl[indexPath.row].placeImage
+            var imageIs = searchViewModel_Shared.searchDetaisl[indexPath.row].placeImage
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
             cell.imageIs.image = getImage(urlString: imageIs)
-            cell.address.text = "\(objectOfSearchViewModel.searchDetaisl[indexPath.row].address),\(objectOfSearchViewModel.searchDetaisl[indexPath.row].city)"
-            cell.distance.text = "\(objectOfSearchViewModel.searchDetaisl[indexPath.row].distance)km"
-            cell.name.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].placeName
-            cell.category.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].category
-            cell.rating.text = objectOfSearchViewModel.searchDetaisl[indexPath.row].rating
-            if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "1"{
+            cell.address.text = "\(searchViewModel_Shared.searchDetaisl[indexPath.row].address),\(searchViewModel_Shared.searchDetaisl[indexPath.row].city)"
+            cell.distance.text = "\(searchViewModel_Shared.searchDetaisl[indexPath.row].distance)km"
+            cell.name.text = searchViewModel_Shared.searchDetaisl[indexPath.row].placeName
+            cell.category.text = searchViewModel_Shared.searchDetaisl[indexPath.row].category
+            cell.rating.text = searchViewModel_Shared.searchDetaisl[indexPath.row].rating
+            if searchViewModel_Shared.searchDetaisl[indexPath.row].priceRange == "1"{
                 cell.rate.text = "₹"
-            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "2"{
+            }else if searchViewModel_Shared.searchDetaisl[indexPath.row].priceRange == "2"{
                 cell.rate.text = "₹₹"
-            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "3"{
+            }else if searchViewModel_Shared.searchDetaisl[indexPath.row].priceRange == "3"{
                 cell.rate.text = "₹₹₹"
-            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "4"{
+            }else if searchViewModel_Shared.searchDetaisl[indexPath.row].priceRange == "4"{
                 cell.rate.text = "₹₹₹₹"
-            }else if objectOfSearchViewModel.searchDetaisl[indexPath.row].priceRange == "5"{
+            }else if searchViewModel_Shared.searchDetaisl[indexPath.row].priceRange == "5"{
                 cell.rate.text = "₹₹₹₹₹"
             }
-            annotation.append(["title":objectOfSearchViewModel.searchDetaisl[indexPath.row].placeName,"latitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].latitude,"longitude": objectOfSearchViewModel.searchDetaisl[indexPath.row].longitude])
+            annotation.append(["title":searchViewModel_Shared.searchDetaisl[indexPath.row].placeName,"latitude": searchViewModel_Shared.searchDetaisl[indexPath.row].latitude,"longitude": searchViewModel_Shared.searchDetaisl[indexPath.row].longitude])
             setAnnotation(locations: annotation)
-            cell._Id = objectOfSearchViewModel.searchDetaisl[indexPath.row]._id
-            cell.buttonTatus(id: objectOfSearchViewModel.searchDetaisl[indexPath.row]._id)
+            cell._Id = searchViewModel_Shared.searchDetaisl[indexPath.row]._id
+            cell.buttonTatus(id: searchViewModel_Shared.searchDetaisl[indexPath.row]._id)
             cell.collectionDelegate = self
             cell.setShadow()
             return cell
         }else if filterSearchIs == 1{
             
             let cell = map_CollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! SearchCollectionView
-            var imageIs = objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeImage
+            var imageIs = searchViewModel_Shared.filterSearchDetails[indexPath.row].placeImage
             imageIs.insert("s", at: imageIs.index(imageIs.startIndex, offsetBy: 4))
             cell.imageIs.image = getImage(urlString: imageIs)
-            cell.address.text = "\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].address),\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].city)"
-            cell.distance.text = "\(objectOfSearchViewModel.filterSearchDetails[indexPath.row].distance)km"
-            cell.name.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeName
-            cell.category.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].category
-            cell.rating.text = objectOfSearchViewModel.filterSearchDetails[indexPath.row].rating
-            if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "1"{
+            cell.address.text = "\(searchViewModel_Shared.filterSearchDetails[indexPath.row].address),\(searchViewModel_Shared.filterSearchDetails[indexPath.row].city)"
+            cell.distance.text = "\(searchViewModel_Shared.filterSearchDetails[indexPath.row].distance)km"
+            cell.name.text = searchViewModel_Shared.filterSearchDetails[indexPath.row].placeName
+            cell.category.text = searchViewModel_Shared.filterSearchDetails[indexPath.row].category
+            cell.rating.text = searchViewModel_Shared.filterSearchDetails[indexPath.row].rating
+            if searchViewModel_Shared.filterSearchDetails[indexPath.row].priceRange == "1"{
                 cell.rate.text = "₹"
-            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "2"{
+            }else if searchViewModel_Shared.filterSearchDetails[indexPath.row].priceRange == "2"{
                 cell.rate.text = "₹₹"
-            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "3"{
+            }else if searchViewModel_Shared.filterSearchDetails[indexPath.row].priceRange == "3"{
                 cell.rate.text = "₹₹₹"
-            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "4"{
+            }else if searchViewModel_Shared.filterSearchDetails[indexPath.row].priceRange == "4"{
                 cell.rate.text = "₹₹₹₹"
-            }else if objectOfSearchViewModel.filterSearchDetails[indexPath.row].priceRange == "5"{
+            }else if searchViewModel_Shared.filterSearchDetails[indexPath.row].priceRange == "5"{
                 cell.rate.text = "₹₹₹₹₹"
             }
-            annotation.append(["title":objectOfSearchViewModel.filterSearchDetails[indexPath.row].placeName,"latitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude,"longitude": objectOfSearchViewModel.filterSearchDetails[indexPath.row].longitude])
+            annotation.append(["title":searchViewModel_Shared.filterSearchDetails[indexPath.row].placeName,"latitude": searchViewModel_Shared.filterSearchDetails[indexPath.row].longitude,"longitude": searchViewModel_Shared.filterSearchDetails[indexPath.row].longitude])
             setAnnotation(locations: annotation)
-            cell._Id = objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id
-            cell.buttonTatus(id: objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id)
+            cell._Id = searchViewModel_Shared.filterSearchDetails[indexPath.row]._id
+            cell.buttonTatus(id: searchViewModel_Shared.filterSearchDetails[indexPath.row]._id)
             cell.collectionDelegate = self
             cell.setShadow()
             return cell
@@ -1095,13 +970,13 @@ extension SearchVc{
         if searching == 1{
             let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
             if let vc = Details{
-                vc.placeId = objectOfSearchViewModel.searchDetaisl[indexPath.row]._id
+                vc.placeId = searchViewModel_Shared.searchDetaisl[indexPath.row]._id
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }else if filterSearchIs == 1{
             let Details = self.storyboard?.instantiateViewController(withIdentifier: "DetailsVc") as? DetailsVc
             if let vc = Details{
-                vc.placeId = objectOfSearchViewModel.filterSearchDetails[indexPath.row]._id
+                vc.placeId = searchViewModel_Shared.filterSearchDetails[indexPath.row]._id
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }else{

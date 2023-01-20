@@ -7,9 +7,8 @@
 
 import Foundation
 class AddToFavoriteViewModel {
-    var apiResponce = ApiResponce()
-    static var objectOfAddToFavoriteViewModel = AddToFavoriteViewModel()
-    var objectOfAddFavoriteNetworkManager = AddFavoriteNetworkManager()
+    var apiResponce_Shared = ApiResponce()
+    static var addToFavoriteViewModel_Shared = AddToFavoriteViewModel()
     
     func addPlaceToFavouiretList(tokenTosend: String, placeIdToSend: String, completion: @escaping((Bool) -> ())) {
         guard let url = URL(string:"https://four-square-three.vercel.app/api/addFavourite") else{ return }
@@ -21,7 +20,7 @@ class AddToFavoriteViewModel {
             "_id": placeIdToSend
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: .fragmentsAllowed)
-        apiResponce.postApiResonce(request: request){ data, status, error in
+        apiResponce_Shared.postApiResonce(request: request){ data, status, error in
             DispatchQueue.main.async {
                 if error != nil && status != true{
                     completion(false)
@@ -30,19 +29,5 @@ class AddToFavoriteViewModel {
                 }
             }
         }
-        
-/*        objectOfAddFavoriteNetworkManager.addFavouiretPlace(token: tokenTosend, placeid: placeIdToSend){favStatus, favError in
-            DispatchQueue.main.async {
-                if favError == nil{
-                    if favStatus == true{
-                        completion(true)
-                    }else{
-                        completion(false)
-                    }
-                }else{
-                    completion(false)
-                }
-            }
-        }*/
     }
 }
